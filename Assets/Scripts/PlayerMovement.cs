@@ -8,23 +8,34 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //component GETS
-    Rigidbody2D rb;
-    [SerializeField] GameObject groundCheck;
-    public LayerMask groundLayer;
-    [SerializeField] Transform bulletSpawn;
+    // script Gets
     PlatformBullet platformBullet;
-    // value SETS
-    [SerializeField] private float horizontal, speed, jumpingPower, dashPower;
+
+    // component Gets
+    Rigidbody2D rb;
+    public LayerMask groundLayer;
+    [SerializeField] GameObject groundCheck;
+    [SerializeField] Transform bulletSpawn;
+
+    //movement values
+    [SerializeField] private float horizontal, speed, jumpingPower;
     public bool isFacingRight = true;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
+    bool shrunk;
+    private bool canDash = true, isDashing;
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
+    private float coyoteTime = 0.2f, coyoteTimeCounter;
+
+    // firing values
+    bool bulletPlatformJustSpawned;
+    
+
+   
+    
+
+    
+ 
     [SerializeField] TrailRenderer tr;
-    bool bulletPlatformJustSpawned, shrunk, canDash = true, isDashing;
-
-
-
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,41 +43,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        if(IsGrounded()) { coyoteTimeCounter = coyoteTime; }
+        else { coyoteTimeCounter -= Time.deltaTime; }
         if (isDashing) { return; }
-        DashBegin();
         FlipPlayer();
+        CheckForDash();
     }
-
-    // WASD Methods
-
-
-    private void FlipPlayer()
-    {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if (!isFacingRight && horizontal > 0f)
-        {
-            Flip();
-        }
-        else if (isFacingRight && horizontal < 0f)
-        {
-            Flip();
-        }
-    }
-
-    private void Flip()
-    {
-        isFacingRight = !isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
-    }
-    public void Move(InputAction.CallbackContext context)
-    {
-        horizontal = context.ReadValue<Vector2>().x;
-    }
-
-    /////////////////////////////////////DASH METHODS//////////////////////////////
-    private void DashBegin()
+    // Dash Methods
+    private void CheckForDash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
@@ -79,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower , 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime); tr.emitting = false;
         rb.gravityScale = originalGravity;
@@ -88,13 +72,36 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
 
     }
+    // wasd methods
 
-    /// ///////////////////Movement Methods//// //////////////////
+    private void FlipPlayer()
+    {
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (!isFacingRight && horizontal > 0f)
+        {
+            Flip();
+        }
+        else if (isFacingRight && horizontal < 0f)
+        {
+            Flip();
 
-
+        }
+    }
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
+    }
+    public void Move(InputAction.CallbackContext context)
+    {
+        horizontal = context.ReadValue<Vector2>().x;
+    }
+    // movement methods
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.performed && IsGrounded())
+        if(context.performed && coyoteTimeCounter > 0)
         {
             if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
@@ -102,13 +109,16 @@ public class PlayerMovement : MonoBehaviour
         if(context.canceled && rb.velocity.y> 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteTimeCounter = 0f;
         }
     }
 
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundLayer);
-    }  
+    }
+   
+    
     
 
     public void Crouch(InputAction.CallbackContext context)
@@ -127,10 +137,7 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-
-
-    /// //////////////////////////////////////Shooting Methods //////////////////////////////////
-   
+    // firing methods
     public void FirePlatform(InputAction.CallbackContext context)
     {
         if (!bulletPlatformJustSpawned)
@@ -146,12 +153,11 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(3);
         bulletPlatformJustSpawned = false;
     }
-
     public void Fire(InputAction.CallbackContext context)
     {
 
 
 
 
-    }            // to implement shooting
+    }
 }
