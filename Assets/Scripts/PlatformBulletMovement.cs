@@ -14,7 +14,7 @@ public class PlatformBulletMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();       
-     playerMovement = FindObjectOfType<PlayerMovement>();
+         playerMovement = FindObjectOfType<PlayerMovement>();
         platformBullet= FindObjectOfType<PlatformBullet>();
         if (playerMovement.isFacingRight)
         {
@@ -26,11 +26,11 @@ public class PlatformBulletMovement : MonoBehaviour
         }
      
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) // on collision with platform bullet
     {
         if (collision.transform.CompareTag("Wall"))
         {
-            Instantiate(platformBullet.wallFloor, this.transform.position, transform.rotation);
+            Instantiate(platformBullet.wallFloor, this.transform.position, transform.rotation); // this collides with the player, need a solution
             
             
             Destroy(this.gameObject);

@@ -8,19 +8,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //component GETS
     Rigidbody2D rb;
     [SerializeField] GameObject groundCheck;
     public LayerMask groundLayer;
-
-    [SerializeField] private float horizontal, speed, jumpingPower;
-    public bool isFacingRight = true;
-    [Range(1f, 2f)] [SerializeField] float shrunkJumpingPower;
-    PlatformBullet platformBullet;
     [SerializeField] Transform bulletSpawn;
+    PlatformBullet platformBullet;
+    // value SETS
+    [SerializeField] private float horizontal, speed, jumpingPower, dashPower;
+    public bool isFacingRight = true;
+    [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
+    [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
+    [SerializeField] TrailRenderer tr;
+    bool bulletPlatformJustSpawned, shrunk, canDash = true, isDashing;
 
-    bool bulletJustSpawned;
-    bool shrunk;
-    
+
+
 
     private void Start()
     {
@@ -29,18 +32,66 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if(!isFacingRight && horizontal > 0f)
-        {
-            Flip();
-        }
-        else if(isFacingRight && horizontal< 0f)
-        {
-            Flip();
-            
-        }
-       
+        if (isDashing) { return; }
+        DashBegin();
+        FlipPlayer();
     }
+
+    // WASD Methods
+
+
+    private void FlipPlayer()
+    {
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (!isFacingRight && horizontal > 0f)
+        {
+            Flip();
+        }
+        else if (isFacingRight && horizontal < 0f)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
+    }
+    public void Move(InputAction.CallbackContext context)
+    {
+        horizontal = context.ReadValue<Vector2>().x;
+    }
+
+    /////////////////////////////////////DASH METHODS//////////////////////////////
+    private void DashBegin()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+    public IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime); tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+
+    }
+
+    /// ///////////////////Movement Methods//// //////////////////
+
+
     public void Jump(InputAction.CallbackContext context)
     {
         if(context.performed && IsGrounded())
@@ -57,50 +108,50 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundLayer);
-    }
-    private void Flip()
-    {
-        isFacingRight = !isFacingRight;
-        Vector3 localScale= transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale= localScale;
-    }
-    public void Move(InputAction.CallbackContext context) 
-    {
-        horizontal = context.ReadValue<Vector2>().x;
-    }
-    public void Fire(InputAction.CallbackContext context)
-    {
-        
-        if (!bulletJustSpawned)
-        {
-            Instantiate(platformBullet.bullet, bulletSpawn.position, transform.rotation);
-            bulletJustSpawned = true;
-            StartCoroutine(ResetBullet());
-            
-        }
-        
-        
-   }
-    IEnumerator ResetBullet()
-    {
-        yield return new WaitForSeconds(3);
-        bulletJustSpawned= false;
-    }
+    }  
+    
 
     public void Crouch(InputAction.CallbackContext context)
     {
         
         if(context.started)
         {
-            transform.DOScaleY(0.5f, 0.2f).SetEase(Ease.InSine);
+            transform.DOScaleY(0.5f, 0.1f).SetEase(Ease.InSine);
             shrunk = true;
         }
         if(context.canceled)
         {
-            transform.DOScaleY(1, .5f);
+            transform.DOScaleY(1, .2f);
             shrunk= false;
         }
        
     }
+
+
+
+    /// //////////////////////////////////////Shooting Methods //////////////////////////////////
+   
+    public void FirePlatform(InputAction.CallbackContext context)
+    {
+        if (!bulletPlatformJustSpawned)
+        {
+            Instantiate(platformBullet.bullet, bulletSpawn.position, transform.rotation);
+            bulletPlatformJustSpawned = true;
+            StartCoroutine(ResetPlatformBullet());
+
+        }
+    }
+    IEnumerator ResetPlatformBullet()
+    {
+        yield return new WaitForSeconds(3);
+        bulletPlatformJustSpawned = false;
+    }
+
+    public void Fire(InputAction.CallbackContext context)
+    {
+
+
+
+
+    }            // to implement shooting
 }
