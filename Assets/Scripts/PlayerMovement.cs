@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
     bool shrunk;
     private bool canDash = true, isDashing;
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
-    private float coyoteTime = 0.2f, coyoteTimeCounter;
+    private float coyoteTime = 0.25f, coyoteTimeCounter;
+  [SerializeField]  bool hasDoubleJumped;
+    
 
     // firing values
     bool bulletPlatformJustSpawned;
@@ -43,11 +45,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if(IsGrounded()) { coyoteTimeCounter = coyoteTime; }
+        if(IsGrounded()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
         else { coyoteTimeCounter -= Time.deltaTime; }
         if (isDashing) { return; }
         FlipPlayer();
         CheckForDash();
+       
     }
     // Dash Methods
     private void CheckForDash()
@@ -101,10 +104,12 @@ public class PlayerMovement : MonoBehaviour
     // movement methods
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.performed && coyoteTimeCounter > 0)
+        if(context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false)
         {
+            
             if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
+            hasDoubleJumped = !hasDoubleJumped;
         }
         if(context.canceled && rb.velocity.y> 0f)
         {
