@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
     private float coyoteTime = 0.25f, coyoteTimeCounter;
   [SerializeField]  bool hasDoubleJumped;
+  [SerializeField]  private bool canWallJump = false;
     
 
     // firing values
@@ -110,6 +112,8 @@ public class PlayerMovement : MonoBehaviour
             if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
             hasDoubleJumped = !hasDoubleJumped;
+            
+        
         }
         if(context.canceled && rb.velocity.y> 0f)
         {
@@ -164,5 +168,23 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) // allows walljump
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            Vector2 position = this.transform.position;
+            if(position.y +.2 < collision.transform.position.y) // .5 is offset so slapping it from side does not destroy it
+            {
+                Destroy(collision.gameObject);
+               
+            }
+        }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            if (canWallJump) { hasDoubleJumped = false; }
+           
+        }
     }
 }
