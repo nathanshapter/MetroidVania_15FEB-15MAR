@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // script Gets
     PlatformBullet platformBullet;
+    Health health;
 
     // component Gets
     Rigidbody2D rb;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTime = 0.25f, coyoteTimeCounter;
   [SerializeField]  bool hasDoubleJumped;
   [SerializeField]  private bool canWallJump = false;
+    bool isDead = false;
     
 
     // firing values
@@ -44,15 +46,21 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
+        health = GetComponent<Health>();
     }
     private void Update()
     {
+        if (isDead) return; // to remove later
         if(IsGrounded()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
         else { coyoteTimeCounter -= Time.deltaTime; }
         if (isDashing) { return; }
         FlipPlayer();
         CheckForDash();
-       
+       if(health.playerHealth <= 0)
+        {
+            isDead= true;
+            //Death();
+        }
     }
     // Dash Methods
     private void CheckForDash()
