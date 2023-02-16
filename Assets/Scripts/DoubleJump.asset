@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48301287a81220d4895ac22e281c060f, type: 3}
-  m_Name: Standard Mob
+  m_Script: {fileID: 11500000, guid: 6f467fece6e38424788fab302ca37b07, type: 3}
+  m_Name: DoubleJump
   m_EditorClassIdentifier: 
-  gameObjectName: Standard
-  description: 
-  health: 50
-  attackDamage: 1
+  gameObjectName: double jump
+  description: this allows you to double jump
+  upgradeNumber: 1
