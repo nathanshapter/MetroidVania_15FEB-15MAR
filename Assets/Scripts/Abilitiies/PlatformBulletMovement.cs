@@ -28,7 +28,7 @@ public class PlatformBulletMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision) // on collision with platform bullet
     {
-        if (collision.transform.CompareTag("Wall"))
+        if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Floor"))
         {
             Instantiate(platformBullet.wallFloor, this.transform.position, transform.rotation); // this collides with the player, need a solution
             

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     // component Gets
     Rigidbody2D rb;
     public LayerMask groundLayer;
+    public LayerMask wallLayer;
     [SerializeField] GameObject groundCheck;
     [SerializeField] Transform bulletSpawn;
 
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (isDead) return; // to remove later
-        if(IsGrounded()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
+        if(IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
         else { coyoteTimeCounter -= Time.deltaTime; }
         if (isDashing) { return; }
         FlipPlayer();
@@ -139,6 +140,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundLayer);
+    }
+
+    private bool OnWall()
+    {
+        if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
+        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, wallLayer);
     }
    
     
