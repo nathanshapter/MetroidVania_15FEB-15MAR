@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     // script Gets
     PlatformBullet platformBullet;
     Health health;
+    ProgressionManager progressionManager;
 
     // component Gets
     Rigidbody2D rb;
@@ -24,11 +25,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
     bool shrunk;
+    
     private bool canDash = true, isDashing;
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
     private float coyoteTime = 0.25f, coyoteTimeCounter;
   [SerializeField]  bool hasDoubleJumped;
-  [SerializeField]  private bool canWallJump = false;
+  
     bool isDead = false;
     
 
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
+        progressionManager= FindObjectOfType<ProgressionManager>();
     }
     private void Update()
     {
@@ -65,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     // Dash Methods
     private void CheckForDash()
     {
+        if (!progressionManager.progression[2]) { return; }
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
@@ -119,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
             
             if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
+            
             hasDoubleJumped = !hasDoubleJumped;
             
         
@@ -132,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
+        if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundLayer);
     }
    
@@ -140,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch(InputAction.CallbackContext context)
     {
-        
+        if (!progressionManager.progression[0]) { return; }
         if(context.started)
         {
             transform.DOScaleY(0.5f, 0.1f).SetEase(Ease.InSine);
@@ -157,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
     // firing methods
     public void FirePlatform(InputAction.CallbackContext context)
     {
+        if (!progressionManager.progression[3]) { return; }
         if (!bulletPlatformJustSpawned)
         {
             Instantiate(platformBullet.bullet, bulletSpawn.position, transform.rotation);
@@ -170,15 +177,9 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(3);
         bulletPlatformJustSpawned = false;
     }
-    public void Fire(InputAction.CallbackContext context)
-    {
 
 
-
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) // allows walljump
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
@@ -189,9 +190,15 @@ public class PlayerMovement : MonoBehaviour
                
             }
         }
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (canWallJump) { hasDoubleJumped = false; }
+            health.TakeDamage(collision.gameObject.GetComponent<EnemyController>().attackdamage);
+            health.CheckIfAlive();
+        }
+        if (collision.gameObject.CompareTag("Wall"))// allows walljump
+        {
+            if (!progressionManager.progression[4]) { return; }
+             hasDoubleJumped = false; 
            
         }
     }
