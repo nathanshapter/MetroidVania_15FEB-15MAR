@@ -36,7 +36,7 @@ public class EnemyAggro : MonoBehaviour
             awake= false;
             StopChasingPlayer();
         }
-        print(distanceToPlayer);
+       
         
       
         
