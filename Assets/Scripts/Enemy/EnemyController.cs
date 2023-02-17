@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public EnemyValues enemyValues;
+    
 
-    private int health;
-    public int attackdamage;
+   
+    
     Rigidbody2D rb;
     float moveSpeed = 5;
     const string LEFT = "left";
@@ -16,33 +16,28 @@ public class EnemyController : MonoBehaviour
     Vector3 baseScale;
   [SerializeField]  float baseCastDist;
   [SerializeField]  Transform castPos;
-    
+
+    private bool doesSimplePatrol, doesChasePlayer;
+
+    // standard patrol info
     private void Start()
     {
         baseScale= transform.localScale;
         
         facingDirection = RIGHT;
-       health = enemyValues.health;
-        attackdamage = enemyValues.attackDamage;
+       
         rb = GetComponent<Rigidbody2D>();
+
+        
        
     }
-    public void TakeDamage(int damage)
-    {
-        
-        
-        health -= damage;
-        if(health <= 0)
-        {
-            Die();
-        }
-    }
-    private void Die()
-    {
-        Destroy(gameObject);
-    }
+  
     private void FixedUpdate()
     {
+        if(doesChasePlayer )
+        {
+            return;
+        }
         float vX = moveSpeed;
         if(facingDirection== LEFT)
         {
@@ -120,4 +115,11 @@ public class EnemyController : MonoBehaviour
 
         return val;
     }
+
+
+    ///////////////////////////////////////// chasing player logic ///////////////////////////////////////////////
+    ///
+
+
+    
 }

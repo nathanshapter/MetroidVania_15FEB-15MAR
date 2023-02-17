@@ -199,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            health.TakeDamage(collision.gameObject.GetComponent<EnemyController>().attackdamage);
+            health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
             health.CheckIfAlive();
         }
         if (collision.gameObject.CompareTag("Wall"))// allows walljump

@@ -33,7 +33,7 @@ public class PlayerCombat : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<EnemyController>().TakeDamage(damage);
+                enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
             }
             timeBetweenAttack = startTimeBetweenAttack;
         }

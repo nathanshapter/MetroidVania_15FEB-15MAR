@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48301287a81220d4895ac22e281c060f, type: 3}
-  m_Name: Standard Mob
+  m_Name: StandardChasingMob
   m_EditorClassIdentifier: 
   gameObjectName: Standard
   description: 
-  health: 50
+  health: 60
   attackDamage: 1
   doesSimplePatrol: 1
-  doesChasePlayer: 0
+  doesChasePlayer: 1
