@@ -35,6 +35,16 @@ public class PlatformBulletMovement : MonoBehaviour
             
             Destroy(this.gameObject);
         }
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+            // do stuff
+        }
+        if (collision.transform.CompareTag("Player"))
+        {
+            // do nothing
+        }
+        else { Destroy(this.gameObject); }
         
     }
 

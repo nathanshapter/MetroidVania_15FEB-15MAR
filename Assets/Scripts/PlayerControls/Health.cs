@@ -11,6 +11,12 @@ public class Health : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
   [SerializeField]  DeathManager deathManager;
     [SerializeField] RespawnManager respawnManager;
+   [SerializeField] PlayerShader playerShader;
+
+    private void Start()
+    {
+        
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
@@ -29,6 +35,7 @@ public class Health : MonoBehaviour
     public int TakeDamage(int damage)
     {
         if(invincibleTimer > 0) { return playerHealth; }
+        playerShader.PlayShaderDamage();
         playerHealth -= damage;
         invincibleTimer = invincibleTimerOriginal;
         return playerHealth;
