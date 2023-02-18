@@ -167,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    // firing methods
+    // firing methods // this should have its own script but oh well
     public void FirePlatform(InputAction.CallbackContext context)
     {
         if (!progressionManager.progression[3]) { return; }

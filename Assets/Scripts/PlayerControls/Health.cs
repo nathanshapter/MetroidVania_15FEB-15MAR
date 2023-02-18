@@ -7,19 +7,17 @@ public class Health : MonoBehaviour
     [SerializeField] public int playerHealth, amountOfLives = 5;
     [SerializeField] int spikeDamage;
     [SerializeField] float invincibleTimer = 1f, invincibleTimerOriginal =1f;
-    
+    public bool fallDamage = false;
+
+    // script gets
     [SerializeField] GameObject playerPrefab;
   [SerializeField]  DeathManager deathManager;
     [SerializeField] RespawnManager respawnManager;
    [SerializeField] PlayerShader playerShader;
     [SerializeField] CheckpointsManager cpManager;
 
- public   bool fallDamage = false;
 
-    private void Start()
-    {
-        
-    }
+  
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
@@ -27,8 +25,7 @@ public class Health : MonoBehaviour
              fallDamage = true;
             TakeDamage(spikeDamage);
             deathManager.fallRespawn = true;
-            if (!CheckIfAlive()) { deathManager.ProcessDeath();  } // add death screen
-            
+            if (!CheckIfAlive()) { deathManager.ProcessDeath();  } // add death screen            
         }
     }
 
@@ -47,13 +44,11 @@ public class Health : MonoBehaviour
         return playerHealth;
     }
     public bool CheckIfAlive()
-    {
-        
+    {        
         if(playerHealth <= 0) { respawnManager.RespawnPlayer();cpManager.lastCheckPointPos = null;  return false; } // temp solution , need to stop it from being called again
 
         if (fallDamage && playerHealth < amountOfLives){ StartCoroutine(deathManager.InitiateRespawn()); fallDamage = false;  return true; }    
-        else { fallDamage = false; return true; }     // it is here
-       
+        else { fallDamage = false; return true; }         
 
     }
     

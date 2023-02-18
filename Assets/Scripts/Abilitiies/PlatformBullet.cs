@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class PlatformBullet : MonoBehaviour
 {
-    [SerializeField] public GameObject bullet, wallFloor;
-
-    
+    [SerializeField] public GameObject bullet, wallFloor;    
 }

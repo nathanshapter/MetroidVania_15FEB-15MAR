@@ -18,28 +18,26 @@ public class EnemyAggro : MonoBehaviour
 
     private void Update()
     {
-        
+        ProcessPlayerChase();
+    }
 
-
+    private void ProcessPlayerChase()
+    {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if(distanceToPlayer < aggroRange)
+        if (distanceToPlayer < aggroRange)
         {
-            awake= true;
+            awake = true;
             ChasePlayer();
         }
-        else if(distanceToPlayer < aggroAwakeRange && awake == true)
+        else if (distanceToPlayer < aggroAwakeRange && awake == true)
         {
             ChasePlayer();
         }
-        else if( distanceToPlayer > aggroAwakeRange)
+        else if (distanceToPlayer > aggroAwakeRange)
         {
-            awake= false;
+            awake = false;
             StopChasingPlayer();
         }
-       
-        
-      
-        
     }
 
     private void StopChasingPlayer()
@@ -57,7 +55,5 @@ public class EnemyAggro : MonoBehaviour
         else { rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             transform.localScale = new Vector2(-1, 1);
         }
-
-
     }
 }

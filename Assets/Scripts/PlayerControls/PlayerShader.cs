@@ -11,17 +11,13 @@ public class PlayerShader : MonoBehaviour
 
    [SerializeField] SpriteRenderer sr;
 
-    private void Start()
-    {
-        
+    private void Start() // currently all this does is change one material to another on damage, needs to play damage visual effect
+    {        
         fadeValue = 0f;
 
          fadePropertyID = Shader.PropertyToID("_AddColorFade");
     }
-    private void Update()
-    {
-        
-    }
+ 
    
 
     public void PlayShaderDamage()

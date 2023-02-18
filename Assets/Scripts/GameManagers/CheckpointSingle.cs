@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class CheckpointSingle : MonoBehaviour
 {
-
-    CheckpointsManager cpManager;
-   
+    CheckpointsManager cpManager;   
 
     private void Start()
     {
@@ -14,12 +12,10 @@ public class CheckpointSingle : MonoBehaviour
        
     }
     private void OnTriggerEnter2D(Collider2D other)
-    {
-        
-        print(other.gameObject.tag);
-        if (other.gameObject.CompareTag("Player"))
-        {
-           
+    {        
+       
+        if (other.gameObject.CompareTag("Player")) // sets checkpoint respawn position to this one
+        {           
             cpManager.lastCheckPointPos = this.transform;
         }
     }

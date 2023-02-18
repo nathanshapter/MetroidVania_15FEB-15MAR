@@ -15,8 +15,6 @@ public class PlayerCombat : MonoBehaviour
 
     private bool swordUp, swordDown, swordOriginal = true;
 
-
-
     //damage values
     public int damage;
 
@@ -29,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (timeBetweenAttack <= 0)
         {
-            if(swordUp) 
+            if(swordUp)  /// these need to do something other than print
             {
                 print("attacked up");
             }
@@ -46,6 +44,7 @@ public class PlayerCombat : MonoBehaviour
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
+                print(ProcessAttack());
             }
             timeBetweenAttack = startTimeBetweenAttack;
         }
@@ -69,12 +68,13 @@ public class PlayerCombat : MonoBehaviour
         
         
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected() 
     {
         Gizmos.color = Color.red;    
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        Gizmos.DrawWireSphere(ProcessAttack(), attackRange);
+        
     }
-    private Vector2 ProcessAttack()
+    private Vector2 ProcessAttack() // returns attack position
     {
         if (swordUp)
         {

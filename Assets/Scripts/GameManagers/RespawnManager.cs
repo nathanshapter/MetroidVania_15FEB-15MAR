@@ -6,8 +6,7 @@ public class RespawnManager : MonoBehaviour
 {
     private static RespawnManager instance;
   [SerializeField]  CheckpointsManager cpManager;
-    [SerializeField] Health health;
-    
+    [SerializeField] Health health;    
     [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0
     DeathCounter deathCounter;
 
@@ -21,7 +20,6 @@ public class RespawnManager : MonoBehaviour
     public void RespawnPlayer()
     {
         deathCounter.totalDeaths++;
-
         print(" hades brought you back");
         health.playerHealth = health.amountOfLives;
         health.transform.position = spawnPositions[0].transform.position;

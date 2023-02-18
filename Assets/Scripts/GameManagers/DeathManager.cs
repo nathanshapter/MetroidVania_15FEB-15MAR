@@ -8,12 +8,11 @@ public class DeathManager : MonoBehaviour
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] GameObject player;
     public bool fallRespawn;
+  
 
     public void ProcessDeath()
     {
-        totalDeaths++;
-
-        //   Destroy(gameObject); 
+        totalDeaths++;     
        
     }
     private void RespawnPlayer(Transform respawnPosition)

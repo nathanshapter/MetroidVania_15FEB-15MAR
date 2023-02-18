@@ -3,38 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
-{
-    
+{ 
 
-   
-    
     Rigidbody2D rb;
     float moveSpeed = 5;
     const string LEFT = "left";
     const string RIGHT = "right";
     string facingDirection;
     Vector3 baseScale;
-  [SerializeField]  float baseCastDist;
-  [SerializeField]  Transform castPos;
+    [SerializeField]  float baseCastDist;
+    [SerializeField]  Transform castPos;
 
-    private bool doesSimplePatrol, doesChasePlayer;
+    private bool doesChasePlayer;
 
     // standard patrol info
     private void Start()
     {
-        baseScale= transform.localScale;
-        
-        facingDirection = RIGHT;
-       
-        rb = GetComponent<Rigidbody2D>();
-
-        
+        baseScale= transform.localScale;        
+        facingDirection = RIGHT;       
+        rb = GetComponent<Rigidbody2D>();       
        
     }
   
     private void FixedUpdate()
     {
-        if(doesChasePlayer )
+        if(doesChasePlayer ) // i think i can remove this 
         {
             return;
         }
@@ -54,10 +47,8 @@ public class EnemyController : MonoBehaviour
             else if(facingDirection == RIGHT)
             {
                 ChangeFacingDirection(LEFT);
-            }
-           
-        }
-        
+            }           
+        }        
     }
 
     void ChangeFacingDirection(string newDirection)
@@ -90,17 +81,12 @@ public class EnemyController : MonoBehaviour
             val = true;
         }
         else { val= false; }
-
-
         return val;
     }
     bool isNearEdge()
     {
         bool val = true;
-
-        float castDist = baseCastDist;
-       
-
+        float castDist = baseCastDist;       
         Vector3 targetPos = castPos.position;
         targetPos.y -= castDist;
         Debug.DrawLine(castPos.position, targetPos, Color.red);
@@ -111,15 +97,11 @@ public class EnemyController : MonoBehaviour
         }
         else { val = true; }
 
-
-
         return val;
     }
 
 
-    ///////////////////////////////////////// chasing player logic ///////////////////////////////////////////////
-    ///
-
+    
 
     
 }

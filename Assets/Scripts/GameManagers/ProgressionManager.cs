@@ -12,8 +12,5 @@ public class ProgressionManager : MonoBehaviour
     // 3 = platform bullet
     // 4 = wall jump
 
-    private void Start()
-    {
-        
-    }
+ 
 }

@@ -10,11 +10,7 @@ public class EnemyStaticShooter : MonoBehaviour
     bool awake = false;
 
     private void Update()
-    {
-
-
-
-        
+    {       
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
       // print(distanceToPlayer);

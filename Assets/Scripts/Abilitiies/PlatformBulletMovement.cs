@@ -30,8 +30,7 @@ public class PlatformBulletMovement : MonoBehaviour
     {
         if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Floor"))
         {
-            Instantiate(platformBullet.wallFloor, this.transform.position, transform.rotation); // this collides with the player, need a solution
-            
+            Instantiate(platformBullet.wallFloor, this.transform.position, transform.rotation); 
             
             Destroy(this.gameObject);
         }
@@ -44,8 +43,13 @@ public class PlatformBulletMovement : MonoBehaviour
         {
             // do nothing
         }
-        else { Destroy(this.gameObject); }
+        else 
+        { 
+            Destroy(this.gameObject);
+        }      
+
         
     }
+   
 
 }

@@ -6,7 +6,5 @@ public class CheckpointsManager : MonoBehaviour
 {
     public Transform lastCheckPointPos; // used to respawn to a checkpoint
     [SerializeField] Transform[] checkPointPositions;
- 
-
    
 }

@@ -9,8 +9,7 @@ public class EnemyValues : ScriptableObject
    
     public int health;
     public int attackDamage;
-
-   public bool doesSimplePatrol; // ie walks back and forth avoiding ledges and wall
+   public bool doesSimplePatrol; // ie walks back and forth avoiding ledges and wall // i think both these bools can be removed
     public bool doesChasePlayer;
 
 }
