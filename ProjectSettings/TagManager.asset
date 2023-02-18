@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Spike
   - WeakWall
+  - Scene
   layers:
   - Default
   - TransparentFX
