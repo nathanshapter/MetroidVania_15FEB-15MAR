@@ -202,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
             health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
             health.CheckIfAlive();
         }
-        if (collision.gameObject.CompareTag("Wall"))// allows walljump
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
             if (!progressionManager.progression[4]) { return; }
              hasDoubleJumped = false; 

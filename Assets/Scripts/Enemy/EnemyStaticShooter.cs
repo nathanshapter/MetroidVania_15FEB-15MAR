@@ -17,7 +17,7 @@ public class EnemyStaticShooter : MonoBehaviour
         
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        print(distanceToPlayer);
+      // print(distanceToPlayer);
         if (distanceToPlayer < aggroRange)
         {
             awake = true;

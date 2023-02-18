@@ -12,6 +12,9 @@ public class Health : MonoBehaviour
   [SerializeField]  DeathManager deathManager;
     [SerializeField] RespawnManager respawnManager;
    [SerializeField] PlayerShader playerShader;
+    [SerializeField] CheckpointsManager cpManager;
+
+ public   bool fallDamage = false;
 
     private void Start()
     {
@@ -21,6 +24,7 @@ public class Health : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
+             fallDamage = true;
             TakeDamage(spikeDamage);
             deathManager.fallRespawn = true;
             if (!CheckIfAlive()) { deathManager.ProcessDeath();  } // add death screen
@@ -38,13 +42,17 @@ public class Health : MonoBehaviour
         playerShader.PlayShaderDamage();
         playerHealth -= damage;
         invincibleTimer = invincibleTimerOriginal;
+        CheckIfAlive();
+        
         return playerHealth;
     }
     public bool CheckIfAlive()
     {
-        if(playerHealth <= 0) { respawnManager.RespawnPlayer(); return false; }
-       
-        else { StartCoroutine(deathManager.InitiateRespawn()); return true; }     
+        
+        if(playerHealth <= 0) { respawnManager.RespawnPlayer();cpManager.lastCheckPointPos = null;  return false; } // temp solution , need to stop it from being called again
+
+        if (fallDamage && playerHealth < amountOfLives){ StartCoroutine(deathManager.InitiateRespawn()); fallDamage = false;  return true; }    
+        else { fallDamage = false; return true; }     // it is here
        
 
     }
