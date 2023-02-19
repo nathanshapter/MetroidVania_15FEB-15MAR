@@ -29,6 +29,7 @@ public class AreaSingle : MonoBehaviour
 
             if (isTransitioning)
             {
+                print(other.gameObject);
                 am.movePlayer(other); // this also needs to wait }
                 other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 
