@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
-            if (!progressionManager.progression[4]) { return; }
+            if (!progressionManager.progression[5]) { return; }
              hasDoubleJumped = false; 
            
         }

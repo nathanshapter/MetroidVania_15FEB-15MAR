@@ -10,7 +10,8 @@ public class ProgressionManager : MonoBehaviour
     // 1 = double jump
     // 2 = dash
     // 3 = platform bullet
-    // 4 = wall jump
+    // new 4 = ledge climb
+    // 5 = wall jump
 
  
 }
