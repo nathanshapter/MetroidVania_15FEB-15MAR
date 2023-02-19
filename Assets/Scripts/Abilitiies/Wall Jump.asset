@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectName: Wall Jump
   description: this allows you to wall jump
-  upgradeNumber: 4
+  upgradeNumber: 5
