@@ -20,4 +20,8 @@ public class AreaManager : MonoBehaviour
          player.transform.position = placeToMoveTo.transform.position;
         area.gameObject.SetActive(false);
     }
+    public void SetAreaTrue()
+    {
+        area.gameObject.SetActive(true);
+    }
 }

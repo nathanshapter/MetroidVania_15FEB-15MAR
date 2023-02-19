@@ -8,6 +8,14 @@ public class AreaGodFather : MonoBehaviour
 
     private void Start()
     {
-       
+        DisableAllAreas();
+    }
+  public  void DisableAllAreas()
+    {
+        foreach (GameObject i in area)
+        {
+            i.gameObject.SetActive(false);
+        }
+        area[0].SetActive(true);
     }
 }

@@ -10,18 +10,18 @@ public class AreaSingle : MonoBehaviour
   public  bool isTransitioning = false;
    [SerializeField] Transform other;
 
-    
+    [SerializeField] GameObject nextArea;
   
     private void OnTriggerEnter2D(Collider2D collision)
     {
       
-        print(gameObject);
+        
         StartCoroutine(canvasFade.FadeIn());
         StartCoroutine(WaitToMovePlayer());
     }
     private IEnumerator WaitToMovePlayer()
     {
-       
+      AreaManager  am = GetComponentInParent<AreaManager>();
         {
             isTransitioning = true;
             yield return new WaitForSeconds(.8f);
@@ -29,15 +29,23 @@ public class AreaSingle : MonoBehaviour
 
             if (isTransitioning)
             {
-                GetComponentInParent<AreaManager>().movePlayer(other); // this also needs to wait }
+                am.movePlayer(other); // this also needs to wait }
                 other.gameObject.SetActive(false); // and then come back
-                                                   // isTransitioning= false;
-                yield return new WaitForSeconds(3);
-                other.gameObject.SetActive(true);
+                FindObjectOfType<AreaGodFather>().DisableAllAreas();
+                nextArea.SetActive(true);
+                // isTransitioning= false;
+                StartCoroutine(TurnOtherBackOn());
+
             }                 
 
         }
       
+    }
+    IEnumerator TurnOtherBackOn()
+    {
+        yield return new WaitForSeconds(1);
+        print("HELLO");
+        other.gameObject.SetActive(true);
     }
 
 }
