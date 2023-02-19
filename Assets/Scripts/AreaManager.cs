@@ -6,7 +6,7 @@ public class AreaManager : MonoBehaviour
 {
     // [SerializeField] BoxCollider2D[] scenePoints; // places to change the scene
     // need to add a starting point, and an end point
-    [SerializeField] public Transform areaInLeft, areaInRight;
+   
     [SerializeField] GameObject player;
     [SerializeField] GameObject area;
     private void Start()
@@ -19,9 +19,7 @@ public class AreaManager : MonoBehaviour
 
          player.transform.position = placeToMoveTo.transform.position;
         area.gameObject.SetActive(false);
+    
     }
-    public void SetAreaTrue()
-    {
-        area.gameObject.SetActive(true);
-    }
+   
 }

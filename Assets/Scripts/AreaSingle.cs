@@ -30,22 +30,25 @@ public class AreaSingle : MonoBehaviour
             if (isTransitioning)
             {
                 am.movePlayer(other); // this also needs to wait }
-                other.gameObject.SetActive(false); // and then come back
-                FindObjectOfType<AreaGodFather>().DisableAllAreas();
+                other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                
                 nextArea.SetActive(true);
                 // isTransitioning= false;
                 StartCoroutine(TurnOtherBackOn());
 
-            }                 
+            }
+            else { FindObjectOfType<AreaGodFather>().DisableAllAreas(); }
 
         }
       
     }
     IEnumerator TurnOtherBackOn()
     {
+        AreaManager am = GetComponentInParent<AreaManager>();
         yield return new WaitForSeconds(1);
         print("HELLO");
-        other.gameObject.SetActive(true);
+       
+        other.gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 
 }
