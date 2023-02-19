@@ -10,7 +10,9 @@ public class AreaSingle : MonoBehaviour
   public  bool isTransitioning = false;
    [SerializeField] Transform other;
 
-    [SerializeField] GameObject nextArea;
+    [SerializeField] GameObject nextArea, nextAreaObjects;
+    [SerializeField] bool isOut;
+    [SerializeField] GameObject prevArea;
   
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,9 +36,10 @@ public class AreaSingle : MonoBehaviour
                 other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 
                 nextArea.SetActive(true);
+                nextAreaObjects.SetActive(true);
                 // isTransitioning= false;
                 StartCoroutine(TurnOtherBackOn());
-
+             
             }
             else { FindObjectOfType<AreaGodFather>().DisableAllAreas(); }
 

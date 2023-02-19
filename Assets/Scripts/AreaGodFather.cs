@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AreaGodFather : MonoBehaviour
 {
-  [SerializeField]  GameObject[] area;
+  [SerializeField] GameObject[] area;
+    [SerializeField] GameObject spawnArea;
+   
 
     private void Start()
     {
@@ -15,7 +17,9 @@ public class AreaGodFather : MonoBehaviour
         foreach (GameObject i in area)
         {
             i.gameObject.SetActive(false);
+           
         }
         area[0].SetActive(true);
+        spawnArea.SetActive(true);
     }
 }
