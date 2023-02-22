@@ -9,7 +9,7 @@ public class RespawnManager : MonoBehaviour
     [SerializeField] Health health;    
     [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0
     DeathCounter deathCounter;
-    [SerializeField] AreaGodFather agf;
+   
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class RespawnManager : MonoBehaviour
         health.playerHealth = health.amountOfLives;
         health.transform.position = spawnPositions[0].transform.position;
         // restart zone to level 1
-        agf.DisableAllAreasButFirst();
+        
 
     }
 

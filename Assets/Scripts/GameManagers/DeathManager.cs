@@ -8,7 +8,7 @@ public class DeathManager : MonoBehaviour
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] GameObject player;
     public bool fallRespawn;
-    [SerializeField] AreaGodFather agf;
+  
   
 
     public void ProcessDeath()
@@ -21,7 +21,7 @@ public class DeathManager : MonoBehaviour
         if (respawnPosition == null)
         {
             player.transform.position = RespawnManager.spawnPositions[0].transform.position;
-            agf.DisableAllAreasButFirst();
+           
             return;
         }  
         if(fallRespawn) { player.transform.position = respawnPosition.transform.position; }
