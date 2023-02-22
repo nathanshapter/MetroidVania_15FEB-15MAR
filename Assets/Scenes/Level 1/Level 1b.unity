@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: 154549933}
   - component: {fileID: 154549935}
   - component: {fileID: 154549934}
-  - component: {fileID: 154549936}
   m_Layer: 6
   m_Name: GroundTiles
   m_TagString: Floor
@@ -465,22 +464,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!19719996 &154549936
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154549932}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4b751be8fc038944b8fff18789ee45b7, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
 --- !u!1 &715214341
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,8 +474,6 @@ GameObject:
   m_Component:
   - component: {fileID: 715214343}
   - component: {fileID: 715214342}
-  - component: {fileID: 715214345}
-  - component: {fileID: 715214344}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -567,45 +548,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &715214344
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 715214341}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &715214345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 715214341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5320428afa3c2a84ebc0f2ac125184e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Level 1b
 --- !u!1 &727257681
 GameObject:
   m_ObjectHideFlags: 0

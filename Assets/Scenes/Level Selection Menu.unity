@@ -180,18 +180,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e005dea8931be47951a3ebf3de6ad3, type: 3}
---- !u!1 &41321539 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8720520919750708527, guid: b7e005dea8931be47951a3ebf3de6ad3, type: 3}
+--- !u!114 &41321540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 41321540, guid: b7e005dea8931be47951a3ebf3de6ad3, type: 3}
   m_PrefabInstance: {fileID: 41321538}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &41321540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41321539}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 287fa1cd6589ece428e1f6181251b977, type: 3}
@@ -1823,7 +1817,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level 1
+          m_StringArgument: Level 1a
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1299494505
