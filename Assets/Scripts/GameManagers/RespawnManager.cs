@@ -9,10 +9,13 @@ public class RespawnManager : MonoBehaviour
     [SerializeField] Health health;    
     [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0
     DeathCounter deathCounter;
+
    
 
     private void Awake()
     {
+
+        
         if(instance == null) { instance= this; DontDestroyOnLoad(this); }
         else { Destroy(gameObject); }
         deathCounter = FindObjectOfType<DeathCounter>();

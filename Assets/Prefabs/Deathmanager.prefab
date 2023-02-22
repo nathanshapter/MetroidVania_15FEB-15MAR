@@ -94,4 +94,3 @@ MonoBehaviour:
   RespawnManager: {fileID: 0}
   player: {fileID: 0}
   fallRespawn: 0
-  agf: {fileID: 0}

@@ -8,9 +8,20 @@ public class DeathManager : MonoBehaviour
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] GameObject player;
     public bool fallRespawn;
-  
-  
 
+
+    public static DeathManager Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else { Destroy(gameObject); }
+
+    }
     public void ProcessDeath()
     {
         totalDeaths++;     

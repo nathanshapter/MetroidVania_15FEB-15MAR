@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class SceneManagement : MonoBehaviour
 {
 
-
+    [SerializeField] private GameObject player;
   //  [SerializeField] private GameObject loaderCanvas;
   //  [SerializeField] private Image progressBar;
     public static SceneManagement Instance;
     private float target;
+   
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class SceneManagement : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
+       
     }
     public async void LoadScene(string sceneName)
     {
@@ -38,7 +40,9 @@ public class SceneManagement : MonoBehaviour
           //      } while (scene.progress < 0.9f);
         
         scene.allowSceneActivation = true;
-     //   loaderCanvas.SetActive(false);
+        //   loaderCanvas.SetActive(false);
+
+      
     }
 
     private void Update()

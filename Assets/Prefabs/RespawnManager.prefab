@@ -253,4 +253,3 @@ MonoBehaviour:
   health: {fileID: 0}
   spawnPositions:
   - {fileID: 5559947535467012827}
-  agf: {fileID: 0}

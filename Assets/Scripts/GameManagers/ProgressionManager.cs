@@ -13,5 +13,14 @@ public class ProgressionManager : MonoBehaviour
     // new 4 = ledge climb
     // 5 = wall jump
 
- 
+    public static ProgressionManager instance;
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else { Destroy(gameObject); }
+    }
 }

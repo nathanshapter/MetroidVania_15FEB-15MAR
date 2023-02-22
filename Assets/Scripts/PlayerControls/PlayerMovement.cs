@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     PlatformBullet platformBullet;
     Health health;
     ProgressionManager progressionManager;
+    RespawnManager respawnManager;
 
     // component Gets
     Rigidbody2D rb;
@@ -37,13 +38,13 @@ public class PlayerMovement : MonoBehaviour
 
     // firing values
     bool bulletPlatformJustSpawned;
+
+
+
     
 
    
-    
 
-    
- 
     [SerializeField] TrailRenderer tr;
     private void Start()
     {

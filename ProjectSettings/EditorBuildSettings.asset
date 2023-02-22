@@ -12,51 +12,81 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Selection Menu.unity
     guid: 2df600f22ea560a4e8b00fc40281ba25
   - enabled: 1
-    path: Assets/Scenes/OverWorld.unity
-    guid: 2d58bc2699b492f448fa8fb6d8886ff4
-  - enabled: 1
     path: Assets/Scenes/Level 1/Level 1a.unity
     guid: 47781c616d69d134d97ad182088977d7
   - enabled: 1
     path: Assets/Scenes/Level 1/Level 1b.unity
-    guid: 42c94947c218f3e429b7d1912cae3d2f
+    guid: d610592806466cf4fb110232a02202a4
   - enabled: 1
-    path: Assets/Scenes/BossFight 1.unity
-    guid: c9a6b440afa6ae34080e19a58256ea20
+    path: Assets/Scenes/Level 1/Level 1c.unity
+    guid: 970b0bbe18d0b4b4d89dbb6d5162b83c
   - enabled: 1
-    path: Assets/Scenes/Level 2/Level 2.unity
-    guid: 854aaba98d849ec4e8e741cee60d7908
+    path: Assets/Scenes/Level 1/Level 1d.unity
+    guid: af71f709cbc7eb14c9bce2894166ba7a
   - enabled: 1
-    path: Assets/Scenes/BossFight 2.unity
-    guid: 36506fe102d02bf48b25f0ff8b89184e
+    path: Assets/Scenes/Level 1/Level 1e.unity
+    guid: 5765ef44d633d9d49b9f101c652220e3
   - enabled: 1
-    path: Assets/Scenes/Level 3/Level 3.unity
-    guid: 98fe31988e8a33246b41942a68e5279c
+    path: Assets/Scenes/Level 1/Level 1f.unity
+    guid: c671de520fc34be40951e260a9dc202e
   - enabled: 1
-    path: Assets/Scenes/BossFight 3.unity
-    guid: 035bb1cffcbe9b742a180f149c81a3a2
+    path: Assets/Scenes/Level 1/Level 1g.unity
+    guid: 730b1ebec9c3e1d4e8aae585830ecd66
   - enabled: 1
-    path: Assets/Scenes/DeathScene-HadesHouse.unity
-    guid: 108697d3556cda64f9f55d4af9903c0b
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Death Level.unity
-    guid: e5a5e2503945f024f86c9d3c6cc0d9b8
+    path: Assets/Scenes/Level 1/Level 1h.unity
+    guid: de5a005b5d8fa85438cae1b53ed3fd19
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1i.unity
+    guid: 132a3273dbfcad648a9e0704de786357
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1j.unity
+    guid: b5c31e871c104e144921226962c8e47d
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1k.unity
+    guid: 590dc1cedb78e6645b35de2965f8aedb
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1l.unity
+    guid: d26bfbbcd23a4ab43a3959e7ed66cf96
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1m.unity
+    guid: db0f1487280b220429c7daf2c1b1dd9d
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1n.unity
+    guid: 9a1a79637fd9bce468e70eae15e1c720
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1o.unity
+    guid: 22e3da8973ebeca43b909fadac6fdaed
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1p.unity
+    guid: 59216a6eaae89c949add9c9acaa12454
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1q.unity
+    guid: 5d16d1c0498803f4a90f0a0b11e1528c
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1r.unity
+    guid: a29da099ec0a6304b9e4c54e3ef7a854
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1s.unity
+    guid: ac2ec72361379c84a8a0a4e76d41534f
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1t.unity
+    guid: 4531e96c7889d3744ba6f2040e3e996b
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1u.unity
+    guid: a64e26f861da3d24486d98611aa98dd5
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1v.unity
+    guid: c188b8a46c3985d4a8bfcdfc35a85ad3
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1w.unity
+    guid: 480b1cf67c216ce41949eae828875664
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1x.unity
+    guid: 5cfa3749ee8c06b49af3e5411f66ea2b
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1y.unity
+    guid: 0c02090a5da9742428287e74efa2171c
+  - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1z.unity
+    guid: ecbda6714cad7bf4a93c39f2f07e5225
   m_configObjects: {}
