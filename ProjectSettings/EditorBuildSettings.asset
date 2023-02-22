@@ -9,27 +9,51 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Level Selection Menu.unity
+    guid: 2df600f22ea560a4e8b00fc40281ba25
+  - enabled: 1
     path: Assets/Scenes/OverWorld.unity
     guid: 2d58bc2699b492f448fa8fb6d8886ff4
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
-    guid: ee1586b0d78e61e46b334c6f41be68b3
-  - enabled: 1
-    path: Assets/Scenes/Level 2.unity
-    guid: 7bfd5b7572c78db43a42ebbb2ea21732
-  - enabled: 1
-    path: Assets/Scenes/Level 3.unity
-    guid: 0f3b1f46f7162bd4e860a01a3182c089
+    guid: 47781c616d69d134d97ad182088977d7
   - enabled: 1
     path: Assets/Scenes/BossFight 1.unity
-    guid: d4838464c483875428ce912fe06b8567
+    guid: c9a6b440afa6ae34080e19a58256ea20
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: 854aaba98d849ec4e8e741cee60d7908
   - enabled: 1
     path: Assets/Scenes/BossFight 2.unity
-    guid: 79d1bd67e98b5924eaefa11a5d9edeb2
+    guid: 36506fe102d02bf48b25f0ff8b89184e
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 98fe31988e8a33246b41942a68e5279c
   - enabled: 1
     path: Assets/Scenes/BossFight 3.unity
-    guid: c04265f6cf4ef3447a05f064fe739001
+    guid: 035bb1cffcbe9b742a180f149c81a3a2
   - enabled: 1
+    path: Assets/Scenes/DeathScene-HadesHouse.unity
+    guid: 108697d3556cda64f9f55d4af9903c0b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/Death Level.unity
     guid: e5a5e2503945f024f86c9d3c6cc0d9b8
   m_configObjects: {}

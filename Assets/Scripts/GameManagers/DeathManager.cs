@@ -21,7 +21,7 @@ public class DeathManager : MonoBehaviour
         if (respawnPosition == null)
         {
             player.transform.position = RespawnManager.spawnPositions[0].transform.position;
-            agf.DisableAllAreas();
+            agf.DisableAllAreasButFirst();
             return;
         }  
         if(fallRespawn) { player.transform.position = respawnPosition.transform.position; }

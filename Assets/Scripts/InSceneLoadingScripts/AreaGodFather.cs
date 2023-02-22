@@ -6,13 +6,13 @@ public class AreaGodFather : MonoBehaviour
 {
   [SerializeField] GameObject[] area;
     [SerializeField] GameObject spawnArea;
-   
+    
 
     private void Start()
     {
-        DisableAllAreas();
+        DisableAllAreasButFirst();
     }
-  public  void DisableAllAreas()
+  public  void DisableAllAreasButFirst()
     {
         foreach (GameObject i in area)
         {
@@ -22,4 +22,6 @@ public class AreaGodFather : MonoBehaviour
         area[0].SetActive(true);
         spawnArea.SetActive(true);
     }
+
+   
 }

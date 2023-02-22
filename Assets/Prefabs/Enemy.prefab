@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4416056383619363284}
   - component: {fileID: 6038904425233309829}
   - component: {fileID: 4416056383619363273}
-  - component: {fileID: 4995626883178904054}
+  - component: {fileID: -5553329536874906381}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c49f9cf35df8f34bb214a48bf3b057f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyValues: {fileID: 11400000, guid: dfaa5f34d62a5cb4c9256f487c1ba63c, type: 2}
+  attackdamage: 0
 --- !u!114 &4416056383619363273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,11 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633d2314490e64c44b79d6fb91cdd6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyValues: {fileID: 11400000, guid: dfaa5f34d62a5cb4c9256f487c1ba63c, type: 2}
-  attackdamage: 0
   baseCastDist: 0.2
   castPos: {fileID: 2066093570}
---- !u!114 &4995626883178904054
+--- !u!114 &-5553329536874906381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,9 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4416056383619363285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d195a6b2261c3e8469bd907f905b5113, type: 3}
+  m_Script: {fileID: 11500000, guid: 34f58325c0ca0074b9d97662ead4f19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  area: {fileID: 0}
 --- !u!1 &4416056384359771743
 GameObject:
   m_ObjectHideFlags: 0

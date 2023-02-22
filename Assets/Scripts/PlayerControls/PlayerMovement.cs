@@ -190,10 +190,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
+            IsGrounded();
             Vector2 position = this.transform.position;
-            if(position.y +.2 < collision.transform.position.y) // .5 is offset so slapping it from side does not destroy it
+          //  if(position.y +.2 < collision.transform.position.y) // .5 is offset so slapping it from side does not destroy it
             {
-                Destroy(collision.gameObject);
+           //     Destroy(collision.gameObject); not working with tilemap need to change values
                
             }
         }

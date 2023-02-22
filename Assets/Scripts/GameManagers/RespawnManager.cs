@@ -26,7 +26,7 @@ public class RespawnManager : MonoBehaviour
         health.playerHealth = health.amountOfLives;
         health.transform.position = spawnPositions[0].transform.position;
         // restart zone to level 1
-        agf.DisableAllAreas();
+        agf.DisableAllAreasButFirst();
 
     }
 

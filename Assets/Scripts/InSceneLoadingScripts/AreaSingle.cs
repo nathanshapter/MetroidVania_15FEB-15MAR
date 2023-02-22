@@ -11,29 +11,44 @@ public class AreaSingle : MonoBehaviour
    [SerializeField] Transform other;
 
     [SerializeField] GameObject nextArea, nextAreaObjects;
-    [SerializeField] bool isOut;
+   
     [SerializeField] GameObject prevArea;
-  
+    [SerializeField] AreaGodFather agf;
+    [SerializeField] bool outputLeft, outputRight, outputTop, outputBottom;
+   
+    
+
+
+    private void Start()
+    {
+        
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
-        
-        StartCoroutine(canvasFade.FadeIn());
-        StartCoroutine(WaitToMovePlayer());
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (isTransitioning) { return; }
+            isTransitioning = true;
+            StartCoroutine(canvasFade.FadeIn());
+            StartCoroutine(WaitToMovePlayer());
+        }
+       
     }
+   
     private IEnumerator WaitToMovePlayer()
     {
       AreaManager  am = GetComponentInParent<AreaManager>();
         {
-            isTransitioning = true;
+            
             yield return new WaitForSeconds(.8f);
 
 
             if (isTransitioning)
             {
+                other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 print(other.gameObject);
                 am.movePlayer(other); // this also needs to wait }
-                other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
                 
                 nextArea.SetActive(true);
                 nextAreaObjects.SetActive(true);
@@ -41,18 +56,19 @@ public class AreaSingle : MonoBehaviour
                 StartCoroutine(TurnOtherBackOn());
              
             }
-            else { FindObjectOfType<AreaGodFather>().DisableAllAreas(); }
-
+            else { FindObjectOfType<AreaGodFather>().DisableAllAreasButFirst(); }
+            isTransitioning= false;
         }
       
     }
     IEnumerator TurnOtherBackOn()
     {
         AreaManager am = GetComponentInParent<AreaManager>();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         print("HELLO");
-       
+        
         other.gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
-
+   
+   
 }
