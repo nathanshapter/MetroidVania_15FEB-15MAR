@@ -1288,6 +1288,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1029845293760300063, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.53
+      objectReference: {fileID: 0}
     - target: {fileID: 2514539382535438602, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1335,6 +1339,22 @@ PrefabInstance:
     - target: {fileID: 2514539382535438605, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_Name
       value: LevelChangers
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603917307849593119, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_Name
+      value: Spawn Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603917308525737377, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_Name
+      value: Spawn Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891689219199161633, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891689219883692447, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}

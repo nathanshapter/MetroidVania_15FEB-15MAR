@@ -42,7 +42,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 488509443384233152, guid: f18fa700c7e1f6d43a47b82dc8d98d82, type: 3}
       propertyPath: m_Name
-      value: To 1b
+      value: Spawn Point
       objectReference: {fileID: 0}
     - target: {fileID: 3220019756312189376, guid: f18fa700c7e1f6d43a47b82dc8d98d82, type: 3}
       propertyPath: m_RootOrder
@@ -116,7 +116,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 488509443384233152, guid: f18fa700c7e1f6d43a47b82dc8d98d82, type: 3}
       propertyPath: m_Name
-      value: To 1b
+      value: Spawn Point
       objectReference: {fileID: 0}
     - target: {fileID: 3220019756312189376, guid: f18fa700c7e1f6d43a47b82dc8d98d82, type: 3}
       propertyPath: m_RootOrder
