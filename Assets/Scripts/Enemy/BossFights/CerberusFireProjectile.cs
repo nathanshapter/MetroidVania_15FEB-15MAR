@@ -14,7 +14,7 @@ public class CerberusFireProjectile : MonoBehaviour
     {
         target = FindObjectOfType<Health>();
         rb= GetComponent<Rigidbody2D>();
-        moveDirection = (target.transform.position - transform.position).normalized * moveSpeed;
+        moveDirection = (new Vector3(target.transform.position.x * Random.Range(1,2.5f), target.transform.position.y * Random.Range(1, 2.5f))  - transform.position).normalized * moveSpeed;
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
         cerberus = FindObjectOfType<Cerberus>() ;
     }
@@ -25,6 +25,7 @@ public class CerberusFireProjectile : MonoBehaviour
         {
             cerberus.fireballHits++;
         }
+
         Destroy(gameObject);
     }
 }
