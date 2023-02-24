@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // script Gets
     PlatformBullet platformBullet;
-    Health health;
+   Health health;
     ProgressionManager progressionManager;
     RespawnManager respawnManager;
 
@@ -201,8 +201,22 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if(collision.gameObject.GetComponent<EnemyHealth>() == null)
+            {
+              health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().attackdamage);
+            }
+            else
+            {
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
+            }
+            
+            health.CheckIfAlive();
+        }
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
             health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
             health.CheckIfAlive();
+            print("hit by " + collision.gameObject);
         }
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {

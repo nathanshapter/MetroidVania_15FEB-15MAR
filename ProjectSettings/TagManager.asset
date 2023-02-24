@@ -10,6 +10,7 @@ TagManager:
   - Spike
   - WeakWall
   - Scene
+  - Projectile
   layers:
   - Default
   - TransparentFX

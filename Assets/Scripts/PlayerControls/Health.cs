@@ -35,9 +35,11 @@ public class Health : MonoBehaviour
     }
     public int TakeDamage(int damage)
     {
+        
         if(invincibleTimer > 0) { return playerHealth; }
         playerShader.PlayShaderDamage();
         playerHealth -= damage;
+        print(playerHealth);
         invincibleTimer = invincibleTimerOriginal;
         CheckIfAlive();
         
