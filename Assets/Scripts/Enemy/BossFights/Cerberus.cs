@@ -7,6 +7,9 @@ public class Cerberus : MonoBehaviour
     [SerializeField] GameObject body, headTop, headMiddle, headBottom;
     [SerializeField] GameObject fireball;
     [SerializeField] Transform fireballSpawn;
+    [SerializeField] int amountOfFireballsToSpawn;
+    [SerializeField] float timeBetweenLastWave, timeBetweenSpawns;
+    public int fireballHits;
 
 
     private void Start()
@@ -17,5 +20,6 @@ public class Cerberus : MonoBehaviour
     {
         Instantiate(fireball, fireballSpawn.position ,fireballSpawn.transform.rotation);
     }
-
+    
+    
 }

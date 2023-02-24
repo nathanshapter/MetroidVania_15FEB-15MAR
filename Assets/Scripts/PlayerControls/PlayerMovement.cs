@@ -201,9 +201,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(collision.gameObject.GetComponent<EnemyHealth>() == null)
+            if(collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
               health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().attackdamage);
+                
             }
             else
             {
@@ -212,12 +213,7 @@ public class PlayerMovement : MonoBehaviour
             
             health.CheckIfAlive();
         }
-        if (collision.gameObject.CompareTag("Projectile"))
-        {
-            health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
-            health.CheckIfAlive();
-            print("hit by " + collision.gameObject);
-        }
+       
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
             if (!progressionManager.progression[5]) { return; }
