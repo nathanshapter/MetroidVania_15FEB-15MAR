@@ -25,6 +25,10 @@ public class CerberusFireProjectile : MonoBehaviour
         {
             cerberus.fireballHits++;
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            cerberus.selfHit++;
+        }
 
         Destroy(gameObject);
     }
