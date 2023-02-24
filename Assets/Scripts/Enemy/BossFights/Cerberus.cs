@@ -17,6 +17,7 @@ public class Cerberus : MonoBehaviour
     int amountOfBallsSpawned =0;
 
   [SerializeField]  bool waveInProgress = false;
+    
 
     private void Start()
     {

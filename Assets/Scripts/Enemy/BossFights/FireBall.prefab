@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   target: {fileID: 0}
+  cerberus: {fileID: 0}
 --- !u!114 &4402745907527001962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyValues: {fileID: 11400000, guid: f93a352db0d97814f821fcefcd3d84cc, type: 2}
+  health: 1
   attackdamage: 1
 --- !u!50 &8476285218671561562
 Rigidbody2D:

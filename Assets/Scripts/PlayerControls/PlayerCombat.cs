@@ -43,7 +43,15 @@ public class PlayerCombat : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
+                if (enemiesToDamage[i].GetComponent<EnemyHealth>() == null) // for cerberus heards // body
+                {
+                    enemiesToDamage[i].GetComponentInParent<EnemyHealth>().TakeDamage(damage);
+                }
+                else
+                {
+                    enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
+                }
+                
                 print(ProcessAttack());
             }
             timeBetweenAttack = startTimeBetweenAttack;
