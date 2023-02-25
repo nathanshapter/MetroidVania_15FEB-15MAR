@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Cerberus : MonoBehaviour
 {
-    [SerializeField] GameObject body, headTop, headMiddle, headBottom;
+    [SerializeField] GameObject[] heads;
     [SerializeField] GameObject fireball;
+    [SerializeField] Transform playerTransform;
     [SerializeField] Transform fireballSpawn;
 
     [SerializeField] float timeBetweenWaveSpawns = 5;
@@ -18,8 +19,14 @@ public class Cerberus : MonoBehaviour
 
     [SerializeField] bool waveInProgress = false;
 
-
+   
     public int selfHit = 0;
+  
+
+    private void Start()
+    {
+     
+    }
     IEnumerator SpawnFireballs() // middle head logic
     {
 
@@ -49,6 +56,7 @@ public class Cerberus : MonoBehaviour
     private void Update()
     {
 
+
         timeBetweenLastWave += Time.deltaTime;
         if (timeBetweenLastWave > timeBetweenWaveSpawns && !waveInProgress)
         {
@@ -56,6 +64,10 @@ public class Cerberus : MonoBehaviour
             StartCoroutine(SpawnFireballs());
             selfHit = 0;
         }
+
+       
     }
+ 
+ 
 
 }
