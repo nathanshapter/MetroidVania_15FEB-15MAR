@@ -232,7 +232,7 @@ PrefabInstance:
     - target: {fileID: 1029845293921198240, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: connection
       value: 
-      objectReference: {fileID: 11400000, guid: 1e880cc9036cbc94bb1c859024208356, type: 2}
+      objectReference: {fileID: 11400000, guid: c77377e6ec1df044982ab897d9c778f7, type: 2}
     - target: {fileID: 1029845293921198240, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: targetSceneName
       value: Level 1j
@@ -299,15 +299,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3891689219199161633, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.13
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891689219199161633, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 3891689219883692447, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.81
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: 3891689219883692447, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: -1.99
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
@@ -2330,6 +2334,10 @@ PrefabInstance:
     - target: {fileID: 7615274272964211065, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615274273242361257, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.776463
       objectReference: {fileID: 0}
     - target: {fileID: 7615274273242361257, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_LocalPosition.y
