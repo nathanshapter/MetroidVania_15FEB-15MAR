@@ -1157,11 +1157,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 5f9afe13728575a4b8e760b6c88772b2, type: 2}
     - target: {fileID: 1029845293760300063, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: 15.31
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293760300063, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.82
+      value: -7.77
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198240, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: targetSceneName
@@ -1169,11 +1169,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198241, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.48
+      value: -1.95
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198241, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.14
+      value: -6.78
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198243, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_Name
@@ -1229,11 +1229,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3891689219199161633, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.14
+      value: -3.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891689219199161633, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 3891689219883692447, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.94
+      value: 2.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}

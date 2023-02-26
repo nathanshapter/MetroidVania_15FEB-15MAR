@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d8ed7f8a3639f48966061bb989221b, type: 3}
-  m_Name: CerberusStage4
+  m_Script: {fileID: 11500000, guid: 0d6b14585b5082c46840b35f2a7992ab, type: 3}
+  m_Name: Level1e-1d
   m_EditorClassIdentifier: 
-  spikesToSpawn: 10
-  timeBetweenSpikeWave: 1
-  spawnAmount: 7
-  timeBetweenWaveSpawns: 3
-  timeBetweenFireballSpawn: 0.25
-  amountOfBallsToSpawn: 25
