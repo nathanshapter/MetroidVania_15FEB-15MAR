@@ -119,6 +119,8 @@ MonoBehaviour:
   moveSpeed: 20
   target: {fileID: 0}
   cerberus: {fileID: 0}
+  angleVarianceClose: 1
+  angleVarianceFar: 2.5
 --- !u!114 &4402745907527001962
 MonoBehaviour:
   m_ObjectHideFlags: 0

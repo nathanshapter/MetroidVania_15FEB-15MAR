@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Cerberus : MonoBehaviour
 {
-    [SerializeField] GameObject[] heads;
+    [SerializeField] public GameObject[] heads;
     [SerializeField] GameObject fireball;
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform fireballSpawn;
@@ -26,6 +26,9 @@ public class Cerberus : MonoBehaviour
 
     private int health;
 
+    float distanceBetweenPlayer;
+
+    [SerializeField] CerberusFireProjectile projectile;
     private void Start()
     {
 
@@ -84,6 +87,7 @@ public class Cerberus : MonoBehaviour
 
         GetStageValues();
 
+        distanceBetweenPlayer = Vector3.Distance(playerTransform.position, heads[2].transform.position); // how close is he to bottom head
         
     }
     private CerberusStages returnStage()
