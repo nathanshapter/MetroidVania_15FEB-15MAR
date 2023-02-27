@@ -20,8 +20,8 @@ public class CerberusStages : ScriptableObject
     public float timeBetweenFireballSpawn;
     public int amountOfBallsToSpawn;
 
-   
-
+    [Header("Both Values")]
+    public int amountOfDropsInWave; 
 
 
 

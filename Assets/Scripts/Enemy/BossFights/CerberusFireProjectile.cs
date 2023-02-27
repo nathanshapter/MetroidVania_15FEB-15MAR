@@ -16,6 +16,7 @@ public class CerberusFireProjectile : MonoBehaviour
     [SerializeField] float angleVarianceFar;
 
     float distanceBetweenPlayer;
+    
     private void Start()
     {
         
@@ -50,9 +51,6 @@ public class CerberusFireProjectile : MonoBehaviour
 
         Destroy(gameObject);
     }
-    private void Update()
-    {
-        print(distanceBetweenPlayer);
-    }
+    
 
 }

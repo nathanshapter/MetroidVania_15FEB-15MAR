@@ -58,8 +58,7 @@ public class SpikeSpawner : MonoBehaviour
             SpawnSpikes();
         }
         GetStageValues();
-        print(health);
-        print(returnStage());
+       
     }
     private CerberusStages returnStage()
     {
