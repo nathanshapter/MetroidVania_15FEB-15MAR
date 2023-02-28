@@ -66,6 +66,8 @@ MonoBehaviour:
   bulletSpeed: 25
   playerMovement: {fileID: 0}
   platformBullet: {fileID: 0}
+  leftOffset: 1.5
+  rightOffset: -1.5
 --- !u!50 &3218236948630229779
 Rigidbody2D:
   serializedVersion: 4

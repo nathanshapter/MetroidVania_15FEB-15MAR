@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool canDash = true, isDashing;
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
-    private float coyoteTime = 0.25f, coyoteTimeCounter;
+    private float coyoteTime = 0.5f, coyoteTimeCounter;
   [SerializeField]  bool hasDoubleJumped;
   
     bool isDead = false;
@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     // firing values
     bool bulletPlatformJustSpawned;
+   [SerializeField] float timeBetweenBullets;
 
 
 
@@ -126,9 +127,13 @@ public class PlayerMovement : MonoBehaviour
             if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
             
-            hasDoubleJumped = !hasDoubleJumped;
-            
-        
+            if(coyoteTime > coyoteTimeCounter)
+            {
+                hasDoubleJumped = !hasDoubleJumped; // THIS IS THE ONLY PLACE THAT SETS HAS DOUBLE JUMPED TO TRUE! NEED TO ADD A TIMER TO ALLOW COYOTE TIMER TO AAPLY
+
+            }
+
+
         }
         if(context.canceled && rb.velocity.y> 0f)
         {
@@ -140,13 +145,13 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
-        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, groundLayer);
     }
 
     private bool OnWall()
     {
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
-        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.2f, wallLayer);
+        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, wallLayer);
     }
    
     
@@ -182,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator ResetPlatformBullet()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(timeBetweenBullets);
         bulletPlatformJustSpawned = false;
     }
 

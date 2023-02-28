@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlatformBulletMovement : MonoBehaviour
@@ -9,8 +10,10 @@ public class PlatformBulletMovement : MonoBehaviour
     Rigidbody2D rb;
    [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlatformBullet platformBullet;
-    
 
+    private Transform otherPosition;
+
+    [SerializeField] float leftOffset, rightOffset;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();       
@@ -26,20 +29,21 @@ public class PlatformBulletMovement : MonoBehaviour
         }
      
     }
-    private void OnCollisionEnter2D(Collision2D collision) // on collision with platform bullet
+    private void OnCollisionEnter2D(Collision2D other) // on collision with platform bullet
     {
-        if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Floor"))
+        otherPosition = other.transform;
+        if (other.transform.CompareTag("Wall") || other.transform.CompareTag("Floor"))
         {
-            Instantiate(platformBullet.wallFloor, this.transform.position, transform.rotation); 
+            Instantiate(platformBullet.wallFloor, ReturnPosition(), transform.rotation); 
             
             Destroy(this.gameObject);
         }
-        if (collision.transform.CompareTag("Enemy"))
+        if (other.transform.CompareTag("Enemy"))
         {
             Destroy(this.gameObject);
             // do stuff
         }
-        if (collision.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Player"))
         {
             // do nothing
         }
@@ -50,6 +54,18 @@ public class PlatformBulletMovement : MonoBehaviour
 
         
     }
-   
+  private Vector2 ReturnPosition()
+    {
+
+        if(otherPosition.position.x > this.transform.position.x)
+        {
+            return this.transform.position + new Vector3(leftOffset,0);
+        }
+        else
+        {
+            return this.transform.position + new Vector3(rightOffset, 0);
+        }
+        
+    }
 
 }

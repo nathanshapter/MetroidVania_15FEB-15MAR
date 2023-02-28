@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: CerberusStage4
   m_EditorClassIdentifier: 
   spikesToSpawn: 10
-  timeBetweenSpikeWave: 1
+  timeBetweenSpikeWave: 2
   spawnAmount: 7
   timeBetweenWaveSpawns: 3
   timeBetweenFireballSpawn: 0.25
   amountOfBallsToSpawn: 25
+  amountOfDropsInWave: 0
