@@ -10,9 +10,14 @@ public class Cerberus : MonoBehaviour
 
     [SerializeField] public GameObject[] heads;
     [SerializeField] Transform playerTransform;
+    [SerializeField] HeadScript[] headScript;
     public CerberusStages[] cerberusStage;
     private int health;
     [SerializeField] Health target; // this is to locate the player
+    public bool isSleeping = false;
+
+    [SerializeField] float timeUntilFluteSleep;
+    [SerializeField] float lengthOfFluteSleep;
 
     [Header("TopHead Logic")]
 
@@ -52,7 +57,7 @@ public class Cerberus : MonoBehaviour
     float distanceBetweenPlayer;
     public bool isBiting;
     private bool canBite = true;
-
+    
 
 
 
@@ -67,7 +72,7 @@ public class Cerberus : MonoBehaviour
         amountOfBallsToSpawn = cerberusStage[0].amountOfBallsToSpawn;
         amountOfDropsInWave = cerberusStage[0].amountOfDropsInWave;
 
-        StartCoroutine(SpawnFireballs());
+     //   StartCoroutine(SpawnFireballs());
 
 
      bottomHeadOriginalPosition = heads[2].transform.position.normalized;
@@ -90,6 +95,7 @@ public class Cerberus : MonoBehaviour
         {
             for (amountOfBallsSpawned = 0; amountOfBallsSpawned < amountOfBallsToSpawn; amountOfBallsSpawned++)
             {
+                if (isSleeping == true) { print("fireballs have stopped"); waveInProgress = false; yield break; }
                 if (selfHit <= 5)
                 {
                     yield return new WaitForSeconds(timeBetweenFireballSpawn);
@@ -107,32 +113,36 @@ public class Cerberus : MonoBehaviour
 
     private void Update()
     {
-
-        if (heads[2].transform.position.x <= 18 || heads[2].transform.position.y >= 2)
+        if (!isSleeping)
         {
-            canBite = false;
-            print("here");
+            if (heads[2].transform.position.x <= 18 || heads[2].transform.position.y >= 2)
+            {
+                canBite = false;
+
+            }
+            else
+            {
+                canBite = true;
+
+
+            }
+
+            health = GetComponent<EnemyHealth>().health; // to locate player
+            timeBetweenLastFireballWave += Time.deltaTime;
+            BeginNewFireballWave();
+            GetStageValues();
+
+            distanceBetweenPlayer = Vector3.Distance(target.transform.position, transform.position); // update distance in real time
+
+            ProcessBite();
+
+            foreach(HeadScript h in headScript)
+            {
+                h.LookAtPlayer();
+            }
+
         }
-        else
-        {
-            canBite= true;
-           
-            
-        }
-
-        health = GetComponent<EnemyHealth>().health; // to locate player
-        timeBetweenLastFireballWave += Time.deltaTime;
-        BeginNewFireballWave();
-        GetStageValues();
-        print(transform.position);
-        distanceBetweenPlayer = Vector3.Distance(target.transform.position, transform.position); // update distance in real time
-
-        ProcessBite();
-
-     
-
     }
-
     
 
     private void BeginNewFireballWave()
@@ -178,7 +188,7 @@ public class Cerberus : MonoBehaviour
         moveDirection = (new Vector3(targetPosition.x, targetPosition.y) - heads[2].transform.position).normalized * biteSpeed;
        
         isBiting = true;
-        print("hello"); // bite the player
+         // bite the player
         
         yield return new WaitForSeconds(1);
         
@@ -208,15 +218,26 @@ public class Cerberus : MonoBehaviour
 
         if (isBiting)
         {
-            print("isBiting");
+            
             bottomHeadrb.velocity = new Vector2(moveDirection.x, moveDirection.y).normalized * 50;
         }
         else
         {
-            print("is returning");
+            
             bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized * 15;
         }
     }
  
-
+    public IEnumerator SetSleepCerberus()
+    {
+        Health playerHealth = FindObjectOfType<Health>();
+        if (playerHealth.justTookDamage) { print("FLUTE STOP"); yield break; }
+        yield return new WaitForSeconds(timeUntilFluteSleep); // if player took damage, return
+        if (playerHealth.justTookDamage) { print("FLUTE STOP"); yield break; }
+        isSleeping= true;
+        yield return new WaitForSeconds(lengthOfFluteSleep);
+        isSleeping= false;
+       
+        
+    }
 }

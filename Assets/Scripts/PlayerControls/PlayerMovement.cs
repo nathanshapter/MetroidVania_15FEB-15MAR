@@ -42,8 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    
 
+  public  bool fluteIsPlaying;
+    [SerializeField] float fluteCooldown;
    
 
     [SerializeField] TrailRenderer tr;
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckForDash()
     {
         if (!progressionManager.progression[2]) { return; }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.C) && canDash)
         {
             StartCoroutine(Dash());
         }
@@ -153,9 +154,29 @@ public class PlayerMovement : MonoBehaviour
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, wallLayer);
     }
-   
-    
-    
+
+
+    public void PlayFlute(InputAction.CallbackContext context)
+    {
+        if (fluteIsPlaying) { return; }
+        fluteIsPlaying= true;
+        print("flute started");
+        Cerberus cerberus = FindObjectOfType<Cerberus>();
+        if(cerberus != null)
+        {
+            StartCoroutine(FindObjectOfType<Cerberus>().SetSleepCerberus());
+
+        }
+       StartCoroutine(ResetFlute());
+
+    }
+    private IEnumerator ResetFlute()
+    {
+        
+        yield return new WaitForSeconds(fluteCooldown);
+        print("flute timer over");
+        fluteIsPlaying = false;
+    }
 
     public void Crouch(InputAction.CallbackContext context)
     {

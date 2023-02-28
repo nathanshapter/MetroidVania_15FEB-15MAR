@@ -9,12 +9,14 @@ public class FallingSpike : MonoBehaviour
         Destroy(this.gameObject);
 
 
-        if (collision.gameObject.GetComponent<PlatformScript>().enabled == true)
+        if(collision.gameObject.GetComponent<PlatformScript>() != null)
         {
-            print("floor crumbled");
+           
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
+
+     
 
            
         

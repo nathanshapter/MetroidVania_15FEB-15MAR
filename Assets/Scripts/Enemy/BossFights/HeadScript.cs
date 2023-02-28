@@ -13,10 +13,14 @@ public class HeadScript : MonoBehaviour
 
     private void Update()
     {
+     
+
+    }
+
+    public void LookAtPlayer()
+    {
         var dir = target.position - this.transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + rotationOffset;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
     }
-    
 }

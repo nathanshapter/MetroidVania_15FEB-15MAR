@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PlayFlute",
+                    "type": "Button",
+                    "id": "6f245d06-e879-4f26-ba6f-ed7dd9c34448",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -287,7 +296,7 @@
                 {
                     "name": "",
                     "id": "5a7416d6-8f01-402a-85ee-a3073eb91a62",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -325,6 +334,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwordDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "059f9068-7793-4849-937c-23a603b06a49",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayFlute",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

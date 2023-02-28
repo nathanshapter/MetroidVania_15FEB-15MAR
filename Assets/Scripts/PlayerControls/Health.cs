@@ -16,7 +16,8 @@ public class Health : MonoBehaviour
    [SerializeField] PlayerShader playerShader;
     [SerializeField] CheckpointsManager cpManager;
 
-
+    public bool justTookDamage;
+    [SerializeField] float justTookDamageTime;
   
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -35,14 +36,14 @@ public class Health : MonoBehaviour
     }
     public int TakeDamage(int damage)
     {
-        
+        justTookDamage= true;
         if(invincibleTimer > 0) { return playerHealth; }
         playerShader.PlayShaderDamage();
         playerHealth -= damage;
         print(playerHealth);
         invincibleTimer = invincibleTimerOriginal;
         CheckIfAlive();
-        
+        StartCoroutine(resetDamageBool());
         return playerHealth;
     }
     public bool CheckIfAlive()
@@ -53,5 +54,9 @@ public class Health : MonoBehaviour
         else { fallDamage = false; return true; }         
 
     }
-    
+    private IEnumerator resetDamageBool()
+    {
+        yield return new WaitForSeconds(justTookDamageTime);
+        justTookDamage= false;
+    }
 }
