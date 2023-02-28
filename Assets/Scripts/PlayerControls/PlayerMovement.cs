@@ -158,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayFlute(InputAction.CallbackContext context)
     {
+        if (!progressionManager.progression[6]) {  return; }
         if (fluteIsPlaying) { return; }
         fluteIsPlaying= true;
         print("flute started");

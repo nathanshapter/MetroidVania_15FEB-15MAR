@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
 {
-    public bool[] progression = new bool[6];
+    public bool[] progression = new bool[10];
 
     // 0 == crouch
     // 1 = double jump
     // 2 = dash
     // 3 = platform bullet
-    // new 4 = ledge climb
+    // 4 = ledge climb      // not yet implemented
     // 5 = wall jump
+    // 6 play the flute    // coding done, music and item to be added
+    // 7 place a torch to see dark areas     // not yet implemented
+    // 8 wall vision to see through certain tiles // not yet implement
+    // 9 bow and arrow weapon // to be implemented for lvl 2
+
+
+
+    // corrupted abilities
+    // 1 = ghost mode, invincibility for 3 seconds every 30 seconds
+    // 2 = fire ball, shoot a weak fireball at the enemy
+    
 
     public static ProgressionManager instance;
     private void Awake()

@@ -18,6 +18,10 @@ public class Cerberus : MonoBehaviour
 
     [SerializeField] float timeUntilFluteSleep;
     [SerializeField] float lengthOfFluteSleep;
+    [SerializeField] int healthTo2ndStage, healthTo3rdStage, healthTo4thStage, healthToSecretStage;
+
+    [SerializeField] Sprite spriteOpenMouth, spriteClosedMouth, spriteAsleep;
+    [SerializeField] SpriteRenderer[] headSprites;
 
     [Header("TopHead Logic")]
 
@@ -76,6 +80,8 @@ public class Cerberus : MonoBehaviour
 
 
      bottomHeadOriginalPosition = heads[2].transform.position.normalized;
+
+      
     }
     public void GetStageValues()
     {
@@ -90,12 +96,12 @@ public class Cerberus : MonoBehaviour
     {
 
         waveInProgress = true;
-
+        headSprites[1].sprite = spriteOpenMouth;
         if (amountOfBallsSpawned < amountOfBallsToSpawn)
         {
             for (amountOfBallsSpawned = 0; amountOfBallsSpawned < amountOfBallsToSpawn; amountOfBallsSpawned++)
             {
-                if (isSleeping == true) { print("fireballs have stopped"); waveInProgress = false; yield break; }
+                if (isSleeping == true) { print("fireballs have stopped"); waveInProgress = false; headSprites[1].sprite = spriteAsleep; yield break; }
                 if (selfHit <= 5)
                 {
                     yield return new WaitForSeconds(timeBetweenFireballSpawn);
@@ -107,6 +113,7 @@ public class Cerberus : MonoBehaviour
         }
         amountOfBallsSpawned = 0;
         timeBetweenLastFireballWave = 0;
+        headSprites[1].sprite = spriteClosedMouth;
         waveInProgress = false;
     }
 
@@ -142,6 +149,7 @@ public class Cerberus : MonoBehaviour
             }
 
         }
+      
     }
     
 
@@ -154,18 +162,18 @@ public class Cerberus : MonoBehaviour
             selfHit = 0;
         }
     }
-
+   
     private CerberusStages returnStage()
     {
-        if(health <= 100)
+        if(health <= healthTo4thStage)
         {
             return cerberusStage[3];
         }
-        if(health<= 200)
+        if(health<= healthTo3rdStage)
         {
             return cerberusStage[2];
         }
-        if(health <= 300)
+        if(health <= healthTo2ndStage)
         {
             return cerberusStage[1];
         }
@@ -183,6 +191,7 @@ public class Cerberus : MonoBehaviour
     public IEnumerator Bite()
     {
         canBite= false;
+        headSprites[2].sprite = spriteOpenMouth;
         float biteSpeed = 100;
         Vector2 targetPosition = target.transform.position;
         moveDirection = (new Vector3(targetPosition.x, targetPosition.y) - heads[2].transform.position).normalized * biteSpeed;
@@ -199,6 +208,7 @@ public class Cerberus : MonoBehaviour
 
 
         yield return new WaitForSeconds(timeInBetweenBites);
+        headSprites[2].sprite = spriteClosedMouth;
         canBite = true;
         print(canBite);
 
@@ -206,7 +216,7 @@ public class Cerberus : MonoBehaviour
     private void ProcessBite()
     {
         if (!canBite) { bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized; return; }
-
+       
         if (distanceBetweenPlayer >= distanceBeforeAttack)
         {
             // do nothing as of yet
@@ -226,6 +236,7 @@ public class Cerberus : MonoBehaviour
             
             bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized * 15;
         }
+        
     }
  
     public IEnumerator SetSleepCerberus()
@@ -234,10 +245,19 @@ public class Cerberus : MonoBehaviour
         if (playerHealth.justTookDamage) { print("FLUTE STOP"); yield break; }
         yield return new WaitForSeconds(timeUntilFluteSleep); // if player took damage, return
         if (playerHealth.justTookDamage) { print("FLUTE STOP"); yield break; }
-        isSleeping= true;
+        isSleeping= true;       
+        
+       foreach (SpriteRenderer i in headSprites)
+            {
+                i.sprite = spriteAsleep;
+            }
+       
         yield return new WaitForSeconds(lengthOfFluteSleep);
         isSleeping= false;
-       
-        
+        foreach (SpriteRenderer i in headSprites)
+        {
+            i.sprite = spriteClosedMouth;
+        }
+
     }
 }
