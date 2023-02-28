@@ -15,6 +15,7 @@ MonoBehaviour:
   spikesToSpawn: 10
   timeBetweenSpikeWave: 6
   spawnAmount: 5
-  timeBetweenWaveSpawns: 7.5
-  timeBetweenFireballSpawn: 0.35
+  timeBetweenWaveSpawns: 7
+  timeBetweenFireballSpawn: 0.4
   amountOfBallsToSpawn: 30
+  amountOfDropsInWave: 0

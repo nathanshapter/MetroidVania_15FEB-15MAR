@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectName: Cerberus
   description: 
-  health: 400
+  health: 600
   attackDamage: 2
   doesSimplePatrol: 0
   doesChasePlayer: 0

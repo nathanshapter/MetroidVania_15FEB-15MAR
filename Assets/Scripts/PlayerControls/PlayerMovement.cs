@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
    
 
     [SerializeField] TrailRenderer tr;
+
+    [SerializeField] float knockBackX, knockBackY;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -57,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+       
         if (isDead) return; // to remove later
         if(IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
         else { coyoteTimeCounter -= Time.deltaTime; }
@@ -219,18 +222,21 @@ public class PlayerMovement : MonoBehaviour
         {
             IsGrounded();
             Vector2 position = this.transform.position;
-          //  if(position.y +.2 < collision.transform.position.y) // .5 is offset so slapping it from side does not destroy it
-            {
-           //     Destroy(collision.gameObject); not working with tilemap need to change values
-               
-            }
+         
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if(collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
               health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().attackdamage);
-                
+                if(collision.transform.position.x < this.transform.position.x) 
+                {
+                    
+                }
+                else
+                {
+                   
+                }
             }
             else
             {
