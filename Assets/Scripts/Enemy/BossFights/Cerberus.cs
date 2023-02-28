@@ -5,44 +5,54 @@ using UnityEngine;
 
 public class Cerberus : MonoBehaviour
 {
+
+    [Header("AllHeads Logic")]
+
     [SerializeField] public GameObject[] heads;
-    [SerializeField] GameObject fireball;
     [SerializeField] Transform playerTransform;
-    [SerializeField] Transform fireballSpawn;
-
-     float timeBetweenWaveSpawns = 5;
-     float timeBetweenFireballSpawn = 0.5f;
-    [SerializeField] float timeBetweenLastWave;
-    public int fireballHits;
-    [SerializeField] int amountOfBallsToSpawn = 5;
-    int amountOfBallsSpawned = 0;
-
-    [SerializeField] bool waveInProgress = false;
-
-   
-    public int selfHit = 0;
-
     public CerberusStages[] cerberusStage;
-
     private int health;
+    [SerializeField] Health target; // this is to locate the player
 
-    private int amountOfDropsInWave; // to implement later if necessary, time bewtween waves at the moment they are endless
+    [Header("TopHead Logic")]
 
-    [SerializeField] CircleCollider2D bottomHeadCircleCollider;
+    [Header("MiddleHead Logic")]
 
+    // gets
+    [SerializeField] GameObject fireball;
+    [SerializeField] Transform fireballSpawn;
     [SerializeField] CerberusFireProjectile projectile;
 
-    [SerializeField] LayerMask playerLayer;
+    // inspector sets
+    [SerializeField] int amountOfBallsToSpawn = 5;
 
-    float distanceBetweenPlayer;
+    // variables
+    [SerializeField] float timeBetweenLastFireballWave;
+    [SerializeField] bool waveInProgress = false;
 
-    [SerializeField] Health target;
+    float timeBetweenFireBallWaveSpawns = 5;
+    float timeBetweenFireballSpawn = 0.5f;    
+    public int fireballHits;    
+    int amountOfBallsSpawned = 0;
+    public int selfHit = 0;
+    int amountOfDropsInWave;
 
+    [Header("BottomHead Logic")]
+
+    // gets
     [SerializeField] Rigidbody2D bottomHeadrb;
-
-    Vector2 moveDirection;
-
+    [SerializeField] CircleCollider2D bottomHeadCircleCollider;
     [SerializeField] Vector2 bottomHeadOriginalPosition;
+    [SerializeField] float distanceBeforeAttack = 12;
+    [SerializeField] float timeInBetweenBites;
+
+    // sets
+    Vector2 moveDirection;
+    // variables
+    float distanceBetweenPlayer;
+    public bool isBiting;
+    private bool canBite = true;
+
 
 
 
@@ -52,7 +62,7 @@ public class Cerberus : MonoBehaviour
     {
         canBite = true;
         target = FindObjectOfType<Health>();
-        timeBetweenWaveSpawns = cerberusStage[0].timeBetweenWaveSpawns;
+        timeBetweenFireBallWaveSpawns = cerberusStage[0].timeBetweenWaveSpawns;
         timeBetweenFireballSpawn = cerberusStage[0].timeBetweenFireballSpawn;
         amountOfBallsToSpawn = cerberusStage[0].amountOfBallsToSpawn;
         amountOfDropsInWave = cerberusStage[0].amountOfDropsInWave;
@@ -64,7 +74,7 @@ public class Cerberus : MonoBehaviour
     }
     public void GetStageValues()
     {
-        timeBetweenWaveSpawns = returnStage().timeBetweenWaveSpawns;
+        timeBetweenFireBallWaveSpawns = returnStage().timeBetweenWaveSpawns;
         timeBetweenFireballSpawn = returnStage().timeBetweenFireballSpawn;
         amountOfBallsToSpawn = returnStage().amountOfBallsToSpawn;
         amountOfDropsInWave = returnStage().amountOfDropsInWave;
@@ -87,63 +97,40 @@ public class Cerberus : MonoBehaviour
                     
                 }
 
-
             }
-
         }
         amountOfBallsSpawned = 0;
-        timeBetweenLastWave = 0;
+        timeBetweenLastFireballWave = 0;
         waveInProgress = false;
-
     }
 
 
     private void Update()
     {
-        if (heads[2].transform.position.x < 12)
-        {
-            heads[2].transform.position = bottomHeadOriginalPosition;
-        }
-       
-        health = GetComponent<EnemyHealth>().health;
-        
+        health = GetComponent<EnemyHealth>().health; // to locate player
+        timeBetweenLastFireballWave += Time.deltaTime;
+        BeginNewFireballWave();
+        GetStageValues();
+        distanceBetweenPlayer = Vector3.Distance(target.transform.position, heads[2].transform.position); // update distance in real time
 
-        timeBetweenLastWave += Time.deltaTime;
-        if (timeBetweenLastWave > timeBetweenWaveSpawns && !waveInProgress)
+        ProcessBite();
+
+
+
+    }
+
+    
+
+    private void BeginNewFireballWave()
+    {
+        if (timeBetweenLastFireballWave > timeBetweenFireBallWaveSpawns && !waveInProgress)
         {
-            
+
             StartCoroutine(SpawnFireballs());
             selfHit = 0;
         }
-
-        GetStageValues();
-
-        distanceBetweenPlayer = Vector3.Distance(target.transform.position, heads[2].transform.position);
-
-        if(distanceBetweenPlayer >= 20) {  }
-        else
-        {
-            if (isBiting) { return; }
-            else if(canBite) { StartCoroutine(Bite()); }
-            
-        }
-        
-
-       
-        if(isBiting)
-        {
-            print("isBiting");
-            bottomHeadrb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-        }
-        else
-        {
-            print("is returning");
-            bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized; // I DONT GET WHY ITS NOT WORKING 
-            heads[2].transform.position = bottomHeadOriginalPosition;
-        //    print(bottomHeadOriginalPosition);
-          //  bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x -2, bottomHeadOriginalPosition.y +1);    
-        }
     }
+
     private CerberusStages returnStage()
     {
         if(health <= 100)
@@ -167,8 +154,6 @@ public class Cerberus : MonoBehaviour
 
     // bottom head bite
 
-   public bool isBiting;
-    private bool canBite;
   
 
     public IEnumerator Bite()
@@ -189,12 +174,34 @@ public class Cerberus : MonoBehaviour
 
 
 
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(timeInBetweenBites);
         canBite = true;
         print(canBite);
 
     }
-   
+    private void ProcessBite()
+    {
+        if (distanceBetweenPlayer >= distanceBeforeAttack)
+        {
+            // do nothing as of yet
+        }
+        else if (!isBiting && distanceBetweenPlayer < distanceBeforeAttack)
+        {
+            StartCoroutine(Bite());
+        }
 
-  
+
+        if (isBiting)
+        {
+            print("isBiting");
+            bottomHeadrb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+        }
+        else
+        {
+            print("is returning");
+            bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized;
+        }
+    }
+
+
 }

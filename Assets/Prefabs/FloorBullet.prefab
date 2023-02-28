@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 25
   playerMovement: {fileID: 0}
+  platformBullet: {fileID: 0}
 --- !u!50 &3218236948630229779
 Rigidbody2D:
   serializedVersion: 4
@@ -84,7 +85,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 6
 --- !u!1 &4990075662873599206
 GameObject:
