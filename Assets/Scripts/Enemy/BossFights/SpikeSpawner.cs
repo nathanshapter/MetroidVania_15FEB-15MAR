@@ -15,6 +15,9 @@ public class SpikeSpawner : MonoBehaviour
    [SerializeField] int health;
     [SerializeField] EnemyHealth eh;
 
+    [SerializeField] Cerberus cerberus;
+
+
 
     float timeSinceLastDrop;
 
@@ -37,7 +40,7 @@ public class SpikeSpawner : MonoBehaviour
         {
             if (Random.Range(0, 10) < spawnAmount)
             {
-                
+                if (cerberus.isSleeping) { return; }
                 Instantiate(fallingSpike, i);
                
                
@@ -49,6 +52,8 @@ public class SpikeSpawner : MonoBehaviour
 
     private void Update()
     {
+       
+
         health = eh.health;
 
         timeSinceLastDrop += Time.deltaTime;

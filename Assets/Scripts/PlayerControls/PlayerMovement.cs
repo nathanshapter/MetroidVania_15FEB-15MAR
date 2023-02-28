@@ -161,7 +161,6 @@ public class PlayerMovement : MonoBehaviour
         if (!progressionManager.progression[6]) {  return; }
         if (fluteIsPlaying) { return; }
         fluteIsPlaying= true;
-        print("flute started");
         Cerberus cerberus = FindObjectOfType<Cerberus>();
         if(cerberus != null)
         {
@@ -175,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
     {
         
         yield return new WaitForSeconds(fluteCooldown);
-        print("flute timer over");
+      
         fluteIsPlaying = false;
     }
 

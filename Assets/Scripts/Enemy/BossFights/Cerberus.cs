@@ -101,7 +101,7 @@ public class Cerberus : MonoBehaviour
         {
             for (amountOfBallsSpawned = 0; amountOfBallsSpawned < amountOfBallsToSpawn; amountOfBallsSpawned++)
             {
-                if (isSleeping == true) { print("fireballs have stopped"); waveInProgress = false; headSprites[1].sprite = spriteAsleep; yield break; }
+                if (isSleeping == true) { waveInProgress = false; headSprites[1].sprite = spriteAsleep; yield break; }
                 if (selfHit <= 5)
                 {
                     yield return new WaitForSeconds(timeBetweenFireballSpawn);
@@ -210,7 +210,7 @@ public class Cerberus : MonoBehaviour
         yield return new WaitForSeconds(timeInBetweenBites);
         headSprites[2].sprite = spriteClosedMouth;
         canBite = true;
-        print(canBite);
+       
 
     }
     private void ProcessBite()
@@ -242,9 +242,9 @@ public class Cerberus : MonoBehaviour
     public IEnumerator SetSleepCerberus()
     {
         Health playerHealth = FindObjectOfType<Health>();
-        if (playerHealth.justTookDamage) { print("FLUTE STOP"); yield break; }
+        if (playerHealth.justTookDamage) {  yield break; }
         yield return new WaitForSeconds(timeUntilFluteSleep); // if player took damage, return
-        if (playerHealth.justTookDamage) { print("FLUTE STOP"); yield break; }
+        if (playerHealth.justTookDamage) {  yield break; }
         isSleeping= true;       
         
        foreach (SpriteRenderer i in headSprites)
