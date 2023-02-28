@@ -70,7 +70,7 @@ public class Cerberus : MonoBehaviour
         StartCoroutine(SpawnFireballs());
 
 
-     bottomHeadOriginalPosition = heads[2].transform.position;
+     bottomHeadOriginalPosition = heads[2].transform.position.normalized;
     }
     public void GetStageValues()
     {
@@ -107,15 +107,29 @@ public class Cerberus : MonoBehaviour
 
     private void Update()
     {
+
+        if (heads[2].transform.position.x <= 18 || heads[2].transform.position.y >= 2)
+        {
+            canBite = false;
+            print("here");
+        }
+        else
+        {
+            canBite= true;
+           
+            
+        }
+
         health = GetComponent<EnemyHealth>().health; // to locate player
         timeBetweenLastFireballWave += Time.deltaTime;
         BeginNewFireballWave();
         GetStageValues();
-        distanceBetweenPlayer = Vector3.Distance(target.transform.position, heads[2].transform.position); // update distance in real time
+        print(transform.position);
+        distanceBetweenPlayer = Vector3.Distance(target.transform.position, transform.position); // update distance in real time
 
         ProcessBite();
 
-
+     
 
     }
 
@@ -181,6 +195,8 @@ public class Cerberus : MonoBehaviour
     }
     private void ProcessBite()
     {
+        if (!canBite) { bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized; return; }
+
         if (distanceBetweenPlayer >= distanceBeforeAttack)
         {
             // do nothing as of yet
@@ -190,18 +206,17 @@ public class Cerberus : MonoBehaviour
             StartCoroutine(Bite());
         }
 
-
         if (isBiting)
         {
             print("isBiting");
-            bottomHeadrb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+            bottomHeadrb.velocity = new Vector2(moveDirection.x, moveDirection.y).normalized * 50;
         }
         else
         {
             print("is returning");
-            bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized;
+            bottomHeadrb.velocity = new Vector2(bottomHeadOriginalPosition.x, bottomHeadOriginalPosition.y).normalized * 15;
         }
     }
-
+ 
 
 }
