@@ -6,6 +6,18 @@ public class FallingSpike : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
+
+
+        if (collision.gameObject.GetComponent<PlatformScript>().enabled == true)
+        {
+            print("floor crumbled");
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+
+           
+        
+       
     }
 }
