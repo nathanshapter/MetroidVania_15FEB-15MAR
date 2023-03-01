@@ -6852,22 +6852,10 @@ PrefabInstance:
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 1254931493}
-    - target: {fileID: 2681140007325390684, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: swing
-      value: 
-      objectReference: {fileID: 8300000, guid: 6a4ecda6178ca524895bb0c211a48e0f, type: 3}
     - target: {fileID: 2812504885943489405, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: flute
-      value: 
-      objectReference: {fileID: 8300000, guid: c221bca5223256243903c4241b8f7266, type: 3}
-    - target: {fileID: 7043459401424474944, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 423517676bb2f774b80a5a475ccab1dd, type: 3}
     - target: {fileID: 8760662009401395709, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6912,8 +6900,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7043459401424474944, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
 --- !u!1001 &5559947534811478489
 PrefabInstance:

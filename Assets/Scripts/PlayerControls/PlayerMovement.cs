@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     
     private bool canDash = true, isDashing;
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
-    private float coyoteTime = 0.5f, coyoteTimeCounter;
+    [SerializeField] float coyoteTime = 0.5f, coyoteTimeCounter;
   [SerializeField]  bool hasDoubleJumped;
   
     bool isDead = false;
@@ -141,10 +141,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
-        if(context.canceled && rb.velocity.y> 0f)
+        if(context.canceled && rb.velocity.y> 0f )
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            coyoteTimeCounter = 0f;
+            
+             coyoteTimeCounter = 0f; 
+            
         }
     }
 

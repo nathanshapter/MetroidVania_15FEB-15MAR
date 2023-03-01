@@ -36,7 +36,7 @@ public class Health : MonoBehaviour
     }
     public int TakeDamage(int damage)
     {
-        SoundManager.Instance.StopSound();
+       // SoundManager.Instance.StopSound(); // needs to stop just flute
         justTookDamage= true;
         if(invincibleTimer > 0) { return playerHealth; }
         playerShader.PlayShaderDamage();
