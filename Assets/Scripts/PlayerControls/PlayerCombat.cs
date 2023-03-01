@@ -23,11 +23,16 @@ public class PlayerCombat : MonoBehaviour
        
        timeBetweenAttack -= Time.deltaTime; 
     }
+   [SerializeField] private AudioClip swing;
     public void Attack(InputAction.CallbackContext context)
     {
+
         if (timeBetweenAttack <= 0)
         {
-            if(swordUp)  /// these need to do something other than print
+
+            SoundManager.Instance.PlaySound(swing);
+            print("sound played");
+            if (swordUp)  /// these need to do something other than print
             {
                 print("attacked up");
             }
@@ -51,8 +56,8 @@ public class PlayerCombat : MonoBehaviour
                 {
                     enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
                 }
-                
-                print(ProcessAttack());
+
+              
             }
             timeBetweenAttack = startTimeBetweenAttack;
         }
