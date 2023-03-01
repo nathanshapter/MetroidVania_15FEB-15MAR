@@ -7,7 +7,9 @@ public class SoundManager : MonoBehaviour
    
     public static SoundManager Instance { get; private set; }
 
-    private AudioSource source;
+    private AudioSource musicSource;
+    private AudioSource enemyAttackSounds;
+    private AudioSource playerAttackSounds;
     [SerializeField] bool isLoadingScreen;
     [SerializeField] AudioClip loadingScreenMusic;
     
@@ -20,7 +22,7 @@ public class SoundManager : MonoBehaviour
         }
         else { Destroy(gameObject); }
 
-        source= GetComponent<AudioSource>();
+        musicSource= GetComponent<AudioSource>();
         if(isLoadingScreen)
         {
             PlaySound(loadingScreenMusic);
@@ -31,15 +33,15 @@ public class SoundManager : MonoBehaviour
   
     public void PlaySound(AudioClip sound)
     {
-        source.PlayOneShot(sound);
+        musicSource.PlayOneShot(sound);
     }
     public void PauseSound()
     {
-        source.Pause();
+        musicSource.Pause();
     }
     public void StopSound()
     {
-        source.Stop();
+        musicSource.Stop();
     }
 }
 

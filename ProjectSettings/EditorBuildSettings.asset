@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/TestScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Level Selection Menu.unity
     guid: 2df600f22ea560a4e8b00fc40281ba25
@@ -26,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1/Level 1c.unity
     guid: 32fddf873bacf7c4abf0781d1f806d78
-  - enabled: 1
-    path: Assets/Scenes/Level 1/Level 1r.unity
-    guid: 867d227b38931554591cdbde97cc67fa
   - enabled: 1
     path: Assets/Scenes/Level 1/Level 1d.unity
     guid: ed29544529a4c0a4593ecf501d0fbf2f
@@ -63,15 +57,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 1/Level 1n.unity
     guid: 9d8f687e0e7c72f4f8261677e2c3b2b5
   - enabled: 1
+    path: Assets/Scenes/Level 1/Level 1o.unity
+    guid: d3497fdd8365f4640af1cfad0b021f44
+  - enabled: 1
     path: Assets/Scenes/Level 1/Level 1p.unity
     guid: 59106b1788d0f164aa37839111fcae34
   - enabled: 1
     path: Assets/Scenes/Level 1/Level 1q.unity
     guid: 5229d40b80eda9a458169d49cc363ceb
   - enabled: 1
-    path: Assets/Scenes/Level 1/Level 1o.unity
-    guid: d3497fdd8365f4640af1cfad0b021f44
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/Level 1/Level 1r.unity
+    guid: 867d227b38931554591cdbde97cc67fa
+  - enabled: 1
+    path: Assets/Scenes/BossFight 1.unity
+    guid: c9a6b440afa6ae34080e19a58256ea20
   m_configObjects: {}
