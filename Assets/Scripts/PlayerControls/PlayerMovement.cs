@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool OnWall()
     {
-        if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
+        if (!progressionManager.progression[1]) { hasDoubleJumped = true; } // im not sure this does anything
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, wallLayer);
     }
 
@@ -255,7 +255,12 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
             if (!progressionManager.progression[5]) { return; }
-             hasDoubleJumped = false; 
+             hasDoubleJumped = false;
+            if (progressionManager.progression[10])
+            {
+                coyoteTimeCounter = 1;
+                print(" yes");
+            }
            
         }
     }

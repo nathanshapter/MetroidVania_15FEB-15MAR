@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
 {
-    public bool[] progression = new bool[10];
+    public bool[] progression = new bool[20];
 
     // 0 == crouch
     // 1 = double jump
@@ -16,6 +16,7 @@ public class ProgressionManager : MonoBehaviour
     // 7 place a torch to see dark areas     // not yet implemented
     // 8 wall vision to see through certain tiles // not yet implement
     // 9 bow and arrow weapon // to be implemented for lvl 2
+    //10 double jump off wall
 
 
 
