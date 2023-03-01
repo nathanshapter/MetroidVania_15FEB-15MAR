@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] TrailRenderer tr;
 
     [SerializeField] float knockBackX, knockBackY;
+
+    [SerializeField] AudioClip flute;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -162,8 +164,10 @@ public class PlayerMovement : MonoBehaviour
     public void PlayFlute(InputAction.CallbackContext context)
     {
         if (!progressionManager.progression[6]) {  return; }
+        
         if (fluteIsPlaying) { return; }
-        fluteIsPlaying= true;
+        SoundManager.Instance.PlaySound(flute);
+        fluteIsPlaying = true;
         Cerberus cerberus = FindObjectOfType<Cerberus>();
         if(cerberus != null)
         {

@@ -29,7 +29,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (timeBetweenAttack <= 0)
         {
-
+            SoundManager.Instance.StopSound();
             SoundManager.Instance.PlaySound(swing);
             print("sound played");
             if (swordUp)  /// these need to do something other than print

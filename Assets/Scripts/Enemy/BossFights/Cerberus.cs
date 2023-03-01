@@ -23,6 +23,8 @@ public class Cerberus : MonoBehaviour
     [SerializeField] Sprite spriteOpenMouth, spriteClosedMouth, spriteAsleep;
     [SerializeField] SpriteRenderer[] headSprites;
 
+    [SerializeField] private AudioClip growl;
+
     [Header("TopHead Logic")]
 
     [Header("MiddleHead Logic")]
@@ -251,9 +253,12 @@ public class Cerberus : MonoBehaviour
             {
                 i.sprite = spriteAsleep;
             }
-       
-        yield return new WaitForSeconds(lengthOfFluteSleep);
-        isSleeping= false;
+        
+
+        yield return new WaitForSeconds(lengthOfFluteSleep -1);
+        SoundManager.Instance.PlaySound(growl);
+        yield return new WaitForSeconds(1);
+        isSleeping = false;
         foreach (SpriteRenderer i in headSprites)
         {
             i.sprite = spriteClosedMouth;

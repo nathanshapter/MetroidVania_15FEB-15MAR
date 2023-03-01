@@ -36,6 +36,7 @@ public class Health : MonoBehaviour
     }
     public int TakeDamage(int damage)
     {
+        SoundManager.Instance.StopSound();
         justTookDamage= true;
         if(invincibleTimer > 0) { return playerHealth; }
         playerShader.PlayShaderDamage();

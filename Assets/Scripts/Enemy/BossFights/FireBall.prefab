@@ -121,6 +121,7 @@ MonoBehaviour:
   cerberus: {fileID: 0}
   angleVarianceClose: 1
   angleVarianceFar: 2.5
+  fireBall: {fileID: 8300000, guid: 1f5d64baca4e01848bf616dac522a191, type: 3}
 --- !u!114 &4402745907527001962
 MonoBehaviour:
   m_ObjectHideFlags: 0

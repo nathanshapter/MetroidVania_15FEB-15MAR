@@ -16,16 +16,18 @@ public class CerberusFireProjectile : MonoBehaviour
     [SerializeField] float angleVarianceFar;
 
     float distanceBetweenPlayer;
-    
+
+    [SerializeField] private AudioClip fireBall;
     private void Start()
     {
-        
+        SoundManager.Instance.PlaySound(fireBall);
         target = FindObjectOfType<Health>();
         rb= GetComponent<Rigidbody2D>();
         cerberus = FindObjectOfType<Cerberus>();
         distanceBetweenPlayer = Vector3.Distance(target.transform.position, cerberus.heads[2].transform.position);
         if (distanceBetweenPlayer >= 20)
         {
+
             moveDirection = (new Vector3(target.transform.position.x * Random.Range(1, angleVarianceFar), target.transform.position.y * Random.Range(1, angleVarianceFar)) - transform.position).normalized * moveSpeed;
         }
         else
