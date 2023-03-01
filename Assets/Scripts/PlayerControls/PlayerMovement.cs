@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float knockBackX, knockBackY;
 
     [SerializeField] AudioClip flute;
+
+    bool allowDoubleWallJump = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -127,13 +129,14 @@ public class PlayerMovement : MonoBehaviour
     // movement methods
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false)
+        if(context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump )
         {
+            
             
             if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
             
-            if(coyoteTime > coyoteTimeCounter)
+            if(coyoteTime > coyoteTimeCounter )
             {
                 hasDoubleJumped = !hasDoubleJumped; // THIS IS THE ONLY PLACE THAT SETS HAS DOUBLE JUMPED TO TRUE! NEED TO ADD A TIMER TO ALLOW COYOTE TIMER TO AAPLY
 
@@ -258,10 +261,21 @@ public class PlayerMovement : MonoBehaviour
              hasDoubleJumped = false;
             if (progressionManager.progression[10])
             {
-                coyoteTimeCounter = 1;
-                print(" yes");
+
+                StartCoroutine(AllowDoubleWallJump());
+                
             }
            
         }
+    }
+    private IEnumerator AllowDoubleWallJump()
+    {
+        allowDoubleWallJump= true;
+       
+        yield return new WaitForSeconds(2);
+  allowDoubleWallJump= false;
+
+
+
     }
 }
