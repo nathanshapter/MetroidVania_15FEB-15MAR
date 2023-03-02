@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float levelSizeCamera = 19.78f;
     private void Start()
     {
+        playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera;
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-       
+       // playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera; // this is just for debugging, to be removed
         if (isDead) return; // to remove later
         if(IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
         else { coyoteTimeCounter -= Time.deltaTime; }

@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!60 &170579606 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3772916798118484426, guid: 9e49e34e17f4d42458625d250d2e72db, type: 3}
+  m_PrefabInstance: {fileID: 770062928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &172389005
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,6 +5179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: levelSizeCamera
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8760662009401395709, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5299,7 +5308,7 @@ PrefabInstance:
     - target: {fileID: 459467150, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 170579606}
     - target: {fileID: 7615274272964211064, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5348,18 +5357,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 7615274273242361174, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
+      propertyPath: orthographic size
+      value: 19.78
+      objectReference: {fileID: 0}
     - target: {fileID: 7615274273242361257, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.776463
+      value: -13.702887
       objectReference: {fileID: 0}
     - target: {fileID: 7615274273242361257, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.365454
+      value: 19.590862
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615274273648635910, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
+      propertyPath: m_DeadZoneWidth
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615274273648635910, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
+      propertyPath: m_DeadZoneHeight
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 7615274274231118888, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1163885335}
+    - target: {fileID: 7615274274231118888, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 19.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 7615274274231118891, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.776463
+      objectReference: {fileID: 0}
     - target: {fileID: 7615274274231118891, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_LocalPosition.y
       value: 23.365454
