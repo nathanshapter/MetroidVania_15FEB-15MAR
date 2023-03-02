@@ -24,6 +24,7 @@ public class SpikeSpawner : MonoBehaviour
     private int spikesToSpawn;
     private int timeBetweenSpikeWave;
     private int spawnAmount;
+    public bool canStart;
     private void Start()
     {
         health = eh.health;
@@ -52,7 +53,7 @@ public class SpikeSpawner : MonoBehaviour
 
     private void Update()
     {
-       
+        if (!canStart) return;
 
         health = eh.health;
 
