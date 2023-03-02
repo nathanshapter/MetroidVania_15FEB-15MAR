@@ -860,6 +860,8 @@ MonoBehaviour:
   knockBackX: 0
   knockBackY: 0
   flute: {fileID: 8300000, guid: c221bca5223256243903c4241b8f7266, type: 3}
+  playerVirtualCamera: {fileID: 0}
+  levelSizeCamera: 19.78
 --- !u!114 &2681140007325390684
 MonoBehaviour:
   m_ObjectHideFlags: 0
