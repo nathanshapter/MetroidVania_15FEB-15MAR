@@ -1,3 +1,4 @@
+using Cinemachine;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,8 +55,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip flute;
 
     bool allowDoubleWallJump = false;
+
+    [SerializeField] CinemachineVirtualCamera playerVirtualCamera;
+    [SerializeField] float levelSizeCamera = 19.78f;
     private void Start()
     {
+        playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera;
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
