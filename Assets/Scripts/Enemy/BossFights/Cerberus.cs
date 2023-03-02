@@ -25,6 +25,8 @@ public class Cerberus : MonoBehaviour
 
     [SerializeField] private AudioClip growl;
 
+    public bool canStart = false;
+
     [Header("TopHead Logic")]
 
     [Header("MiddleHead Logic")]
@@ -71,6 +73,12 @@ public class Cerberus : MonoBehaviour
 
     private void Start()
     {
+
+        foreach (SpriteRenderer i in headSprites)
+        {
+            i.sprite = spriteAsleep;
+        }
+
         canBite = true;
         target = FindObjectOfType<Health>();
         timeBetweenFireBallWaveSpawns = cerberusStage[0].timeBetweenWaveSpawns;
@@ -118,10 +126,23 @@ public class Cerberus : MonoBehaviour
         headSprites[1].sprite = spriteClosedMouth;
         waveInProgress = false;
     }
+    bool activated = false;
+    void ActivateDogs() // called one time to open their eyes and start shooting fire right away
+    {
 
+       
 
+        foreach (SpriteRenderer i in headSprites)
+            {
+                i.sprite = spriteClosedMouth;
+            }
+            activated= true;
+        StartCoroutine(SpawnFireballs());
+    }
     private void Update()
     {
+        if(!canStart) return;
+        if (!activated) { ActivateDogs(); }
         if (!isSleeping)
         {
             if (heads[2].transform.position.x <= 18 || heads[2].transform.position.y >= 2)
