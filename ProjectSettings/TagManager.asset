@@ -11,6 +11,7 @@ TagManager:
   - WeakWall
   - Scene
   - Projectile
+  - Bridge
   layers:
   - Default
   - TransparentFX
