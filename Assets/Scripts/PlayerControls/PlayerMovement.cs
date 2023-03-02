@@ -152,10 +152,11 @@ public class PlayerMovement : MonoBehaviour
             
         }
     }
-
+    bool isTouchingBridge;
     private bool IsGrounded()
     {
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
+        if (isTouchingBridge) { return true; }
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, groundLayer);
     }
 
@@ -267,6 +268,12 @@ public class PlayerMovement : MonoBehaviour
             }
            
         }
+        if (collision.gameObject.CompareTag("Bridge"))
+        {
+            isTouchingBridge= true;
+            StartCoroutine(StopBridge());
+        }
+        else { isTouchingBridge= false; }
     }
     private IEnumerator AllowDoubleWallJump()
     {
@@ -277,5 +284,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    }
+    private IEnumerator StopBridge()
+    {
+        yield return new WaitForSeconds(.1f);
+        
+        isTouchingBridge= false;
     }
 }
