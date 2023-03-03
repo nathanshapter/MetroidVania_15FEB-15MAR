@@ -12,6 +12,7 @@ TagManager:
   - Scene
   - Projectile
   - Bridge
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
