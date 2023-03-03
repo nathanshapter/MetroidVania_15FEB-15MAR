@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform bulletSpawn;
 
     //movement values
-    [SerializeField] private float horizontal, speed, jumpingPower;
+    [SerializeField] private float horizontal, speed, jumpingPower, platformSpeed, originalMovementSpeed;
     public bool isFacingRight = true;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
     bool shrunk;
@@ -239,8 +239,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
+<<<<<<< HEAD
             lastParent= collision.gameObject;
             transform.SetParent(collision.transform);
+=======
+            if(transform.position.y >= collision.transform.position.y)
+            {
+                transform.SetParent(collision.transform);
+            }
+            
+>>>>>>> Workingversion
             IsGrounded();
             Vector2 position = this.transform.position;
          
@@ -279,6 +287,7 @@ public class PlayerMovement : MonoBehaviour
             }
            
         }
+        
         if (collision.gameObject.CompareTag("Bridge"))
         {
             isTouchingBridge= true;
@@ -288,7 +297,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
+<<<<<<< HEAD
         transform.SetParent(null);
+=======
+       
+        this.transform.parent = null;
+>>>>>>> Workingversion
     }
     private IEnumerator AllowDoubleWallJump()
     {
