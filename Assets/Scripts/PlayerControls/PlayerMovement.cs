@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // script Gets
     PlatformBullet platformBullet;
-   Health health;
+    Health health;
     ProgressionManager progressionManager;
     RespawnManager respawnManager;
 
@@ -28,25 +28,25 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
     bool shrunk;
-    
+
     private bool canDash = true, isDashing;
     [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
     [SerializeField] float coyoteTime = 0.5f, coyoteTimeCounter;
-  [SerializeField]  bool hasDoubleJumped;
-  
+    [SerializeField] bool hasDoubleJumped;
+
     bool isDead = false;
-    
+
 
     // firing values
     bool bulletPlatformJustSpawned;
-   [SerializeField] float timeBetweenBullets;
+    [SerializeField] float timeBetweenBullets;
 
 
 
 
-  public  bool fluteIsPlaying;
+    public bool fluteIsPlaying;
     [SerializeField] float fluteCooldown;
-   
+
 
     [SerializeField] TrailRenderer tr;
 
@@ -65,20 +65,20 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
-        progressionManager= FindObjectOfType<ProgressionManager>();
+        progressionManager = FindObjectOfType<ProgressionManager>();
     }
     private void Update()
     {
-       // playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera; // this is just for debugging, to be removed
+        // playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera; // this is just for debugging, to be removed
         if (isDead) return; // to remove later
-        if(IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
+        if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
         else { coyoteTimeCounter -= Time.deltaTime; }
         if (isDashing) { return; }
         FlipPlayer();
         CheckForDash();
-       if(health.playerHealth <= 0)
+        if (health.playerHealth <= 0)
         {
-            isDead= true;
+            isDead = true;
             //Death();
         }
     }
@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower , 0f);
+        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime); tr.emitting = false;
         rb.gravityScale = originalGravity;
@@ -131,21 +131,23 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
-       if(context.performed) { transform.SetParent(null); }
-       if(context.canceled && IsGrounded()) { transform.SetParent(lastParent.transform); }
+        if (context.performed) { transform.SetParent(null); }
+        if (lastParent != null && context.canceled && IsGrounded()) { transform.SetParent(lastParent.transform); }
+
+        
 
     }
     // movement methods
     public void Jump(InputAction.CallbackContext context)
     {
-        if(context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump )
+        if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
-            
-            
-            if(shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower /shrunkJumpingPower ); }
-            else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower ); }
-            
-            if(coyoteTime > coyoteTimeCounter )
+
+
+            if (shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower / shrunkJumpingPower); }
+            else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower); }
+
+            if (coyoteTime > coyoteTimeCounter)
             {
                 hasDoubleJumped = !hasDoubleJumped; // THIS IS THE ONLY PLACE THAT SETS HAS DOUBLE JUMPED TO TRUE! NEED TO ADD A TIMER TO ALLOW COYOTE TIMER TO AAPLY
 
@@ -153,12 +155,12 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
-        if(context.canceled && rb.velocity.y> 0f )
+        if (context.canceled && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            
-             coyoteTimeCounter = 0f; 
-            
+
+            coyoteTimeCounter = 0f;
+
         }
     }
     bool isTouchingBridge;
@@ -178,42 +180,42 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayFlute(InputAction.CallbackContext context)
     {
-        if (!progressionManager.progression[6]) {  return; }
-        
+        if (!progressionManager.progression[6]) { return; }
+
         if (fluteIsPlaying) { return; }
         SoundManager.Instance.PlaySound(flute);
         fluteIsPlaying = true;
         Cerberus cerberus = FindObjectOfType<Cerberus>();
-        if(cerberus != null)
+        if (cerberus != null)
         {
             StartCoroutine(FindObjectOfType<Cerberus>().SetSleepCerberus());
 
         }
-       StartCoroutine(ResetFlute());
+        StartCoroutine(ResetFlute());
 
     }
     private IEnumerator ResetFlute()
     {
-        
+
         yield return new WaitForSeconds(fluteCooldown);
-      
+
         fluteIsPlaying = false;
     }
 
     public void Crouch(InputAction.CallbackContext context)
     {
         if (!progressionManager.progression[0]) { return; }
-        if(context.started)
+        if (context.started)
         {
             transform.DOScaleY(0.5f, 0.1f).SetEase(Ease.InSine);
             shrunk = true;
         }
-        if(context.canceled)
+        if (context.canceled)
         {
             transform.DOScaleY(1, .2f);
-            shrunk= false;
+            shrunk = false;
         }
-       
+
     }
 
     // firing methods // this should have its own script but oh well
@@ -235,81 +237,73 @@ public class PlayerMovement : MonoBehaviour
     }
 
     GameObject lastParent;
-    private void OnCollisionEnter2D(Collision2D collision) 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-<<<<<<< HEAD
-            lastParent= collision.gameObject;
-            transform.SetParent(collision.transform);
-=======
-            if(transform.position.y >= collision.transform.position.y)
-            {
-                transform.SetParent(collision.transform);
-            }
+
+            lastParent = collision.gameObject;
+            transform.SetParent(collision.transform);           
             
->>>>>>> Workingversion
+
             IsGrounded();
             Vector2 position = this.transform.position;
-         
+
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
+            if (collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
-              health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().attackdamage);
-                if(collision.transform.position.x < this.transform.position.x) 
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().attackdamage);
+                if (collision.transform.position.x < this.transform.position.x)
                 {
-                    
+
                 }
                 else
                 {
-                   
+
                 }
             }
             else
             {
                 health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
             }
-            
+
             health.CheckIfAlive();
         }
-       
+
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
             if (!progressionManager.progression[5]) { return; }
-             hasDoubleJumped = false;
+            hasDoubleJumped = false;
             if (progressionManager.progression[10])
             {
 
                 StartCoroutine(AllowDoubleWallJump());
-                
+
             }
-           
+
         }
-        
+
         if (collision.gameObject.CompareTag("Bridge"))
         {
-            isTouchingBridge= true;
+            isTouchingBridge = true;
             StartCoroutine(StopBridge());
         }
-        else { isTouchingBridge= false; }
+        else { isTouchingBridge = false; }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-<<<<<<< HEAD
+
         transform.SetParent(null);
-=======
-       
-        this.transform.parent = null;
->>>>>>> Workingversion
+
     }
     private IEnumerator AllowDoubleWallJump()
     {
-        allowDoubleWallJump= true;
-       
+        allowDoubleWallJump = true;
+
         yield return new WaitForSeconds(2);
-  allowDoubleWallJump= false;
+        allowDoubleWallJump = false;
 
 
 
@@ -317,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator StopBridge()
     {
         yield return new WaitForSeconds(.1f);
-        
-        isTouchingBridge= false;
+
+        isTouchingBridge = false;
     }
 }

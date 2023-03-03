@@ -8,11 +8,11 @@ public class OscillatingPlatform : MonoBehaviour
 
     [Header("Straight Movement")]
     Vector2 startingPosition;
-   [SerializeField] Vector2 movementVector;
-    [SerializeField][Range(0,1)] float movementFactor;
-    [SerializeField] float period =2f;
+    [SerializeField] Vector2 movementVector;
+    [SerializeField][Range(0, 1)] float movementFactor;
+    [SerializeField] float period = 2f;
 
-    
+
 
     [Header("Circle Movement")]
     [SerializeField] bool isCircle;
@@ -20,6 +20,10 @@ public class OscillatingPlatform : MonoBehaviour
     [SerializeField] Transform rotationCentre;
     [SerializeField] float rotationRadius = 2f, angularSpeed = 2f;
     float posX, posY, angle = 0f;
+
+
+  
+
     private void Start()
     {
         startingPosition= transform.position;
@@ -48,6 +52,7 @@ public class OscillatingPlatform : MonoBehaviour
             if (angle >= 360f)
                 angle = 0f;
         }
+
        
     }
 }   
