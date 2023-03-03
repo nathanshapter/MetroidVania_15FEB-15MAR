@@ -131,6 +131,9 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
+       if(context.performed) { transform.SetParent(null); }
+       if(context.canceled && IsGrounded()) { transform.SetParent(lastParent.transform); }
+
     }
     // movement methods
     public void Jump(InputAction.CallbackContext context)
@@ -231,11 +234,13 @@ public class PlayerMovement : MonoBehaviour
         bulletPlatformJustSpawned = false;
     }
 
-
+    GameObject lastParent;
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
+            lastParent= collision.gameObject;
+            transform.SetParent(collision.transform);
             IsGrounded();
             Vector2 position = this.transform.position;
          
@@ -280,6 +285,10 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(StopBridge());
         }
         else { isTouchingBridge= false; }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        transform.SetParent(null);
     }
     private IEnumerator AllowDoubleWallJump()
     {
