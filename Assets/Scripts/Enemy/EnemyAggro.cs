@@ -11,8 +11,11 @@ public class EnemyAggro : MonoBehaviour
 
     Rigidbody2D rb;
    [SerializeField] bool awake = false;
+
+    Vector2 startPos;
     private void Start()
     {
+        startPos= transform.position;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -33,7 +36,7 @@ public class EnemyAggro : MonoBehaviour
         {
             ChasePlayer();
         }
-        else if (distanceToPlayer > aggroAwakeRange)
+        else if (distanceToPlayer  +10 > aggroAwakeRange)
         {
             awake = false;
             StopChasingPlayer();
@@ -43,6 +46,7 @@ public class EnemyAggro : MonoBehaviour
     private void StopChasingPlayer()
     {
         rb.velocity = Vector2.zero;
+        transform.position = startPos;
     }
 
     private void ChasePlayer()

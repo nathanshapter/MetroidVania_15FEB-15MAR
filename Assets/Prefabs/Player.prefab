@@ -851,7 +851,7 @@ MonoBehaviour:
   shrunkJumpingPower: 1.32
   dashingPower: 140
   dashingTime: 0.05
-  dashingCooldown: 0
+  dashingCooldown: 0.25
   coyoteTime: 5
   coyoteTimeCounter: 0
   hasDoubleJumped: 0
