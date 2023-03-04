@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
             isDead = true;
             //Death();
         }
+        print(IsGrounded());
     }
     // Dash Methods
     private void CheckForDash()
