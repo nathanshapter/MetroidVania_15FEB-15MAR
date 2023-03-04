@@ -14,7 +14,7 @@ public class EnemyAggro : MonoBehaviour
 
     Vector2 startPos;
 
-    public  float ballspeed;
+    
     private void Start()
     {
         startPos= transform.position;
