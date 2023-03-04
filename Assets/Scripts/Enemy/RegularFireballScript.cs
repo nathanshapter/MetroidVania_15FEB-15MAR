@@ -13,6 +13,7 @@ public class RegularFireballScript : MonoBehaviour
 
     private void Start()
     {
+       
         // add sound to fireball
         target = FindObjectOfType<Health>();
         rb = GetComponent<Rigidbody2D>();

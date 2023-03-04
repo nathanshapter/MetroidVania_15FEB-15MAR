@@ -23,6 +23,8 @@ public class EnemyStaticShooter : MonoBehaviour
    [SerializeField] float timeSinceLastWave;
     [SerializeField] float timeBetweenWaves = 5f;
     bool waveInProgress = false;
+
+    public float ballspeed;
     private void Awake()
     {
         target = FindObjectOfType<Health>().gameObject.transform;

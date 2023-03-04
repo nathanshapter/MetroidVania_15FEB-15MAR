@@ -13,6 +13,8 @@ public class EnemyAggro : MonoBehaviour
    [SerializeField] bool awake = false;
 
     Vector2 startPos;
+
+    public  float ballspeed;
     private void Start()
     {
         startPos= transform.position;
