@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4416056383619363273}
   - component: {fileID: -5553329536874906381}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Mindless Patrol
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyValues: {fileID: 11400000, guid: dfaa5f34d62a5cb4c9256f487c1ba63c, type: 2}
+  health: 0
   attackdamage: 0
 --- !u!114 &4416056383619363273
 MonoBehaviour:
