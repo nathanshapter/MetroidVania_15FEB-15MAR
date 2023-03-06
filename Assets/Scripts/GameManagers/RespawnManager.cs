@@ -16,10 +16,19 @@ public class RespawnManager : MonoBehaviour
     {
 
         
-        if(instance == null) { instance= this; DontDestroyOnLoad(this); }
-        else { Destroy(gameObject); }
+      //  if(instance == null) { instance= this; DontDestroyOnLoad(this); }
+      //  else { Destroy(gameObject); }
         deathCounter = FindObjectOfType<DeathCounter>();
         
+    }
+    private void Update()
+    {
+        // to remove once better checks are put in place
+
+        if(health.transform.position.y <= -500)
+        {
+            RespawnPlayer();
+        }
     }
 
     public void RespawnPlayer()

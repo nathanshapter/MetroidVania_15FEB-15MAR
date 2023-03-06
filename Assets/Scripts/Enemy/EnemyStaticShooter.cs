@@ -37,7 +37,7 @@ public class EnemyStaticShooter : MonoBehaviour
     {
         
         distanceBetweenPlayer = Vector3.Distance(target.transform.position, transform.position);
-        print(distanceBetweenPlayer);
+        
         LookAtPlayer();
         if (!waveInProgress)
         {
