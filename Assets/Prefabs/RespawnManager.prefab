@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastCheckPointPos: {fileID: 0}
   checkPointPositions:
-  - {fileID: 0}
+  - {fileID: 5559947535593672938}
 --- !u!1 &5559947535467012824
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,16 @@ public class Health : MonoBehaviour
         }
     }
 
+    public static Health instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else { Destroy(gameObject); }
+    }
     private void Update()
     {
         invincibleTimer -= Time.deltaTime;
