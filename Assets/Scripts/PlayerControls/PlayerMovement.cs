@@ -208,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         if (!progressionManager.progression[0]) { return; }
         if (context.started)
         {
-            transform.DOScaleY(0.5f, 0.1f).SetEase(Ease.InSine);
+            transform.DOScaleY(0.35f, 0.1f).SetEase(Ease.InSine);
             shrunk = true;
         }
         if (context.canceled)
