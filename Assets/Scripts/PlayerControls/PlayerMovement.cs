@@ -255,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
-                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().attackdamage);
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage);
                 if (collision.transform.position.x < this.transform.position.x)
                 {
 
@@ -267,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().attackdamage);
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage);
             }
 
             health.CheckIfAlive();

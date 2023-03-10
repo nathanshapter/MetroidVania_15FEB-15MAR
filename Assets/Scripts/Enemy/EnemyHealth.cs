@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public EnemyValues enemyValues;
-  [SerializeField]  public int health;
-    public int attackdamage;
+  [HideInInspector] public int health;
+    public int contactDamage;
     private void Start()
     {
         health = enemyValues.health;
-        attackdamage = enemyValues.attackDamage;
+        contactDamage = enemyValues.contactDamage;
     }
 
     public void TakeDamage(int damage)

@@ -22,7 +22,7 @@ public class MeleeEnemy : MonoBehaviour
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
         anim = GetComponent<Animator>();
         eh = GetComponent<EnemyHealth>();
-        damage = eh.attackdamage;
+        damage = eh.contactDamage;
         boxCollider = GetComponent<BoxCollider2D>();
     }
     private void Update()

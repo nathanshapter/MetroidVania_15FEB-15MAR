@@ -4,23 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikeSpawner : MonoBehaviour
-{
+{                                               // to change these valeus needs to be done in cerberusstage scriptable object
     [SerializeField] Transform[] spawnPositions;
-
     [SerializeField] GameObject fallingSpike;
-
-
     public CerberusStages[] cerberusStage;
-
    [SerializeField] int health;
     [SerializeField] EnemyHealth eh;
-
     [SerializeField] Cerberus cerberus;
-
-
-
     float timeSinceLastDrop;
-
     private int spikesToSpawn;
     private int timeBetweenSpikeWave;
     private int spawnAmount;

@@ -11,10 +11,10 @@ public class EnemyController : MonoBehaviour
     const string RIGHT = "right";
     string facingDirection;
     Vector3 baseScale;
-    [SerializeField]  float baseCastDist;
-    [SerializeField]  Transform castPos;
+    float wallDistance;
+    [SerializeField]  Transform castPosition;
 
-    private bool doesChasePlayer;
+    
 
     // standard patrol info
     private void Start()
@@ -27,10 +27,7 @@ public class EnemyController : MonoBehaviour
   
     private void FixedUpdate()
     {
-        if(doesChasePlayer ) // i think i can remove this 
-        {
-            return;
-        }
+        
         float vX = moveSpeed;
         if(facingDirection== LEFT)
         {
@@ -66,17 +63,17 @@ public class EnemyController : MonoBehaviour
     {
         bool val = false;
 
-        float castDist = baseCastDist;
+        float castDist = wallDistance;
         if(facingDirection == LEFT)
         {
-            castDist = -baseCastDist;
+            castDist = -wallDistance;
         }
-        else { castDist= baseCastDist;}
+        else { castDist= wallDistance;}
 
-        Vector3 targetPos = castPos.position;
+        Vector3 targetPos = castPosition.position;
         targetPos.x += castDist;
-        Debug.DrawLine(castPos.position, targetPos, Color.blue);
-        if (Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Floor")) || Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Player")))
+        Debug.DrawLine(castPosition.position, targetPos, Color.blue);
+        if (Physics2D.Linecast(castPosition.position, targetPos, 1 << LayerMask.NameToLayer("Floor")) || Physics2D.Linecast(castPosition.position, targetPos, 1 << LayerMask.NameToLayer("Player")))
         {
             val = true;
         }
@@ -86,12 +83,12 @@ public class EnemyController : MonoBehaviour
     bool isNearEdge()
     {
         bool val = true;
-        float castDist = baseCastDist;       
-        Vector3 targetPos = castPos.position;
+        float castDist = wallDistance;       
+        Vector3 targetPos = castPosition.position;
         targetPos.y -= castDist;
-        Debug.DrawLine(castPos.position, targetPos, Color.red);
+        Debug.DrawLine(castPosition.position, targetPos, Color.red);
 
-        if (Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Floor")))
+        if (Physics2D.Linecast(castPosition.position, targetPos, 1 << LayerMask.NameToLayer("Floor")))
         {
             val = false;
         }

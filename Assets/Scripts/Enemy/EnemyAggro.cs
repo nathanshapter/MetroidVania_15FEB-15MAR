@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class EnemyAggro : MonoBehaviour
 {
-    [SerializeField] Transform player;
-    [SerializeField] float aggroRange, aggroAwakeRange;
+    [Header("==========Variables To Set==========")]
+    [Space(20)]
+    [SerializeField] float aggroAwakeRange;
+    [SerializeField] float aggroRange;
+    [SerializeField] float returnHomeRange;
     [SerializeField] float moveSpeed;
+    [SerializeField] Transform player;
+    
 
     Rigidbody2D rb;
-   [SerializeField] bool awake = false;
+    bool awake = false;
 
     Vector2 startPos;
 
@@ -38,7 +43,7 @@ public class EnemyAggro : MonoBehaviour
         {
             ChasePlayer();
         }
-        else if (distanceToPlayer  +10 > aggroAwakeRange)
+        else if (distanceToPlayer   > returnHomeRange)
         {
             awake = false;
             StopChasingPlayer();
@@ -61,5 +66,14 @@ public class EnemyAggro : MonoBehaviour
         else { rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             transform.localScale = new Vector2(-1, 1);
         }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, aggroRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, aggroAwakeRange);        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, returnHomeRange);
     }
 }
