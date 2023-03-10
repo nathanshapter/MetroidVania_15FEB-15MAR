@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4990075662736159722}
-  - component: {fileID: 4990075662736159717}
   - component: {fileID: 1466169737}
+  - component: {fileID: 4990075662736159717}
   - component: {fileID: 3218236948630229779}
   m_Layer: 0
   m_Name: FloorBullet
@@ -35,6 +35,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1466169737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4990075662736159716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5140235b96e7d43bc3076555e0db5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 25
+  leftOffset: 1.5
+  rightOffset: -1.5
+  playerMovement: {fileID: 0}
+  platformBullet: {fileID: 0}
 --- !u!58 &4990075662736159717
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -51,23 +68,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14421216
---- !u!114 &1466169737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4990075662736159716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee5140235b96e7d43bc3076555e0db5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 25
-  playerMovement: {fileID: 0}
-  platformBullet: {fileID: 0}
-  leftOffset: 1.5
-  rightOffset: -1.5
 --- !u!50 &3218236948630229779
 Rigidbody2D:
   serializedVersion: 4

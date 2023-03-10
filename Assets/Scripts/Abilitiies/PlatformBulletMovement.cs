@@ -5,20 +5,34 @@ using UnityEngine;
 
 public class PlatformBulletMovement : MonoBehaviour
 {
+
+    [Header("==========Bullet Variables===========")]
+    [Space(20)]
     [SerializeField] float bulletSpeed;
-  
-    Rigidbody2D rb;
-   [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] float leftOffset, rightOffset;
+    [Space(20)]
+
+    [Header("Bullet Gets(Automatic)")]
+    [Space(20)]
+    [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlatformBullet platformBullet;
 
+
+    Rigidbody2D rb;
     private Transform otherPosition;
 
-    [SerializeField] float leftOffset, rightOffset;
+    
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();       
-         playerMovement = FindObjectOfType<PlayerMovement>();
-        platformBullet= FindObjectOfType<PlatformBullet>();
+        rb = GetComponent<Rigidbody2D>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        platformBullet = FindObjectOfType<PlatformBullet>();
+        GetDirection();
+
+    }
+
+    private void GetDirection()
+    {
         if (playerMovement.isFacingRight)
         {
             rb.velocity = new Vector2(bulletSpeed, rb.velocity.y);
@@ -27,8 +41,8 @@ public class PlatformBulletMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(-bulletSpeed, rb.velocity.y);
         }
-     
     }
+
     private void OnCollisionEnter2D(Collision2D other) // on collision with platform bullet
     {
         otherPosition = other.transform;
@@ -41,7 +55,7 @@ public class PlatformBulletMovement : MonoBehaviour
         if (other.transform.CompareTag("Enemy"))
         {
             Destroy(this.gameObject);
-            // do stuff
+            // cause knockback, but no damage
         }
         if (other.transform.CompareTag("Player"))
         {
@@ -54,9 +68,8 @@ public class PlatformBulletMovement : MonoBehaviour
 
         
     }
-  private Vector2 ReturnPosition()
+  private Vector2 ReturnPosition() // gets where the bullet lands to return how to spawn the floor
     {
-
         if(otherPosition.position.x > this.transform.position.x)
         {
             return this.transform.position + new Vector3(leftOffset,0);
@@ -64,8 +77,7 @@ public class PlatformBulletMovement : MonoBehaviour
         else
         {
             return this.transform.position + new Vector3(rightOffset, 0);
-        }
-        
+        }        
     }
 
 }
