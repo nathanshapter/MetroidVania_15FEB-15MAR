@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 1163885336}
   - component: {fileID: 1163885343}
   - component: {fileID: 1163885345}
+  - component: {fileID: 1163885338}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -851,7 +852,7 @@ MonoBehaviour:
   shrunkJumpingPower: 1.32
   dashingPower: 140
   dashingTime: 0.05
-  dashingCooldown: 0.25
+  dashingCooldown: 1
   coyoteTime: 5
   coyoteTimeCounter: 0
   hasDoubleJumped: 0
@@ -1106,12 +1107,32 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 5.5, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1163885338
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812504885943489405}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db49758d304fbd040b12eda4c79937b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7243738466720308861
 GameObject:
   m_ObjectHideFlags: 0

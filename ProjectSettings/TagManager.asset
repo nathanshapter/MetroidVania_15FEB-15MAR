@@ -13,6 +13,7 @@ TagManager:
   - Projectile
   - Bridge
   - MovingPlatform
+  - Upgrade
   layers:
   - Default
   - TransparentFX

@@ -40802,26 +40802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7a78e5bae0b63469b5be3fce923f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1163885338
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163885329}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: db49758d304fbd040b12eda4c79937b9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1254931493 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5559947535997699580, guid: 76aea440c94eea048b53ead45d542bba, type: 3}
@@ -41197,6 +41177,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[5]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[6]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
+      propertyPath: progression.Array.data[7]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 64135963382016421, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -41517,25 +41529,9 @@ PrefabInstance:
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 1254931493}
-    - target: {fileID: 1163885345, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: m_Size.x
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1163885345, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: m_Size.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1163885345, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2812504885943489405, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: dashingCooldown
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: playerVirtualCamera
