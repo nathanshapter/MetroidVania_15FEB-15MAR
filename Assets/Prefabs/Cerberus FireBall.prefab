@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4402745907527001963}
-  - component: {fileID: 4402745907527001957}
+  - component: {fileID: -1331847912705120031}
   - component: {fileID: 4402745907527001962}
   - component: {fileID: 4402745907527001960}
   - component: {fileID: 4402745907527001961}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4402745907527001957
+--- !u!114 &-1331847912705120031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,15 +45,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4402745907527001966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bc469737b3ccc428cc6c76b038225f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d99d4765e0901f44a50f5db6176b407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 7
   target: {fileID: 0}
-  cerberus: {fileID: 0}
-  angleVarianceClose: 1
-  angleVarianceFar: 2.5
-  fireBall: {fileID: 8300000, guid: 1f5d64baca4e01848bf616dac522a191, type: 3}
+  fireBall: {fileID: 0}
 --- !u!114 &4402745907527001962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyValues: {fileID: 11400000, guid: f93a352db0d97814f821fcefcd3d84cc, type: 2}
   health: 1
-  attackdamage: 1
+  contactDamage: 0
 --- !u!212 &4402745907527001960
 SpriteRenderer:
   m_ObjectHideFlags: 0

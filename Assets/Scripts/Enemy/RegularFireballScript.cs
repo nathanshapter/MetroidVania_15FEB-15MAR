@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class RegularFireballScript : MonoBehaviour
 {
+    [Header("============Variables To Set ==========")]
     [SerializeField] float moveSpeed;
-    [SerializeField] Health target; // to target player
+     Health target; // to target player
     Rigidbody2D rb;
     Vector2 moveDirection;
     [SerializeField] private AudioClip fireBall;

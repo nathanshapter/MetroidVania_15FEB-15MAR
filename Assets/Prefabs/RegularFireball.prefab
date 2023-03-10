@@ -55,26 +55,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: RegularFireball
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4402745907527001957, guid: b600a838907eb85448d4afa108aa1806, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b600a838907eb85448d4afa108aa1806, type: 3}
---- !u!1 &8976950158448476323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4402745907527001966, guid: b600a838907eb85448d4afa108aa1806, type: 3}
-  m_PrefabInstance: {fileID: 4723495940219398093}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-1331847912705120031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976950158448476323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d99d4765e0901f44a50f5db6176b407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 7
-  target: {fileID: 0}
-  fireBall: {fileID: 0}
