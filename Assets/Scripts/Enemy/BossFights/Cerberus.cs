@@ -6,56 +6,63 @@ using UnityEngine;
 public class Cerberus : MonoBehaviour
 {
 
-    [Header("AllHeads Logic")]
-
-    [SerializeField] public GameObject[] heads;
-    [SerializeField] Transform playerTransform;
+    [Header("==========AllHeads Logic==========")]
+    [Space(20)]
+    //gets
+    [SerializeField] public GameObject[] heads;    
     [SerializeField] HeadScript[] headScript;
     public CerberusStages[] cerberusStage;
-    private int health;
-    [SerializeField] Health target; // this is to locate the player
-    public bool isSleeping = false;
-
-    [SerializeField] float timeUntilFluteSleep;
-    [SerializeField] float lengthOfFluteSleep;
-    [SerializeField] int healthTo2ndStage, healthTo3rdStage, healthTo4thStage, healthToSecretStage;
-
-    [SerializeField] Sprite spriteOpenMouth, spriteClosedMouth, spriteAsleep;
     [SerializeField] SpriteRenderer[] headSprites;
+
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Health target; // this is to locate the player
+
+   [HideInInspector] public bool isSleeping = false;   
+    
+    [SerializeField] Sprite spriteOpenMouth, spriteClosedMouth, spriteAsleep;
+    
 
     [SerializeField] private AudioClip growl;
 
-    public bool canStart = false;
+    [HideInInspector] public bool canStart = false;
 
-    [Header("TopHead Logic")]
+    [Header("Variables To Set")]
+    [SerializeField] float timeUntilFluteSleep;
+    [SerializeField] float lengthOfFluteSleep;
+    private int health;
+    [SerializeField] int healthTo2ndStage, healthTo3rdStage, healthTo4thStage, healthToSecretStage;
 
-    [Header("MiddleHead Logic")]
-
+    [Header("===========TopHead Logic==========")]
+    [Space(20)]
+    [Header("==========MiddleHead Logic==========")]
+    [Space(20)]
     // gets
     [SerializeField] GameObject fireball;
     [SerializeField] Transform fireballSpawn;
     [SerializeField] CerberusFireProjectile projectile;
 
-    // inspector sets
-    [SerializeField] int amountOfBallsToSpawn = 5;
+   
+    
+     int amountOfBallsToSpawn = 5;
 
     // variables
     [SerializeField] float timeBetweenLastFireballWave;
-    [SerializeField] bool waveInProgress = false;
+     bool waveInProgress = false;
 
     float timeBetweenFireBallWaveSpawns = 5;
     float timeBetweenFireballSpawn = 0.5f;    
-    public int fireballHits;    
+  [HideInInspector]  public int fireballHits;    // how many times the player is hit
     int amountOfBallsSpawned = 0;
-    public int selfHit = 0;
+   [HideInInspector] public int selfHit = 0; // how many times cerberus hits itself
     int amountOfDropsInWave;
 
-    [Header("BottomHead Logic")]
-
+    [Header("==========BottomHead Logic==========")]
+    [Space(20)]
     // gets
     [SerializeField] Rigidbody2D bottomHeadrb;
     [SerializeField] CircleCollider2D bottomHeadCircleCollider;
     [SerializeField] Vector2 bottomHeadOriginalPosition;
+    [Header("Variables To Set")]
     [SerializeField] float distanceBeforeAttack = 12;
     [SerializeField] float timeInBetweenBites;
 
@@ -63,7 +70,7 @@ public class Cerberus : MonoBehaviour
     Vector2 moveDirection;
     // variables
     float distanceBetweenPlayer;
-    public bool isBiting;
+    [HideInInspector] public bool isBiting;
     private bool canBite = true;
     
 
@@ -73,20 +80,16 @@ public class Cerberus : MonoBehaviour
 
     private void Start()
     {
-
         foreach (SpriteRenderer i in headSprites)
         {
             i.sprite = spriteAsleep;
         }
-
         canBite = true;
         target = FindObjectOfType<Health>();
         timeBetweenFireBallWaveSpawns = cerberusStage[0].timeBetweenWaveSpawns;
         timeBetweenFireballSpawn = cerberusStage[0].timeBetweenFireballSpawn;
         amountOfBallsToSpawn = cerberusStage[0].amountOfBallsToSpawn;
-        amountOfDropsInWave = cerberusStage[0].amountOfDropsInWave;
-
-     //   StartCoroutine(SpawnFireballs());
+        amountOfDropsInWave = cerberusStage[0].amountOfDropsInWave;    
 
 
      bottomHeadOriginalPosition = heads[2].transform.position.normalized;
@@ -102,9 +105,8 @@ public class Cerberus : MonoBehaviour
 
     }
   
-    IEnumerator SpawnFireballs() // middle head logic
+    IEnumerator SpawnFireballs() // middle head logic to spawn fire
     {
-
         waveInProgress = true;
         headSprites[1].sprite = spriteOpenMouth;
         if (amountOfBallsSpawned < amountOfBallsToSpawn)

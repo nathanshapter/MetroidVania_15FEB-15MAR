@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class CerberusFireProjectile : MonoBehaviour
 {
-  [SerializeField]  float moveSpeed;
-    [SerializeField] Health target; // to target player
-    Rigidbody2D rb;
-    Vector2 moveDirection;
-
-  [SerializeField]  Cerberus cerberus;
-    
-
+    [Header("==========Variables To Set==========")]
+    [Space(20)]
+    [SerializeField] float moveSpeed;
     [SerializeField] float angleVarianceClose;
     [SerializeField] float angleVarianceFar;
+    [SerializeField] private AudioClip fireBall;
 
+    // variables to get
+    Health target; // to target player
+    Rigidbody2D rb;
+    Vector2 moveDirection;
+    Cerberus cerberus;
     float distanceBetweenPlayer;
 
-    [SerializeField] private AudioClip fireBall;
+
+
+
+
+   
     private void Start()
     {
-        SoundManager.Instance.PlaySound(fireBall);
-        target = FindObjectOfType<Health>();
-        rb= GetComponent<Rigidbody2D>();
+        target = FindObjectOfType<Health>(); // later on this needs to be found in the parent ofbject so it is not just running off findobject of type
+        rb = GetComponent<Rigidbody2D>();
         cerberus = FindObjectOfType<Cerberus>();
+
+        SoundManager.Instance.PlaySound(fireBall);
+
+        CalculateAngleVariance();
+
+        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+       
+    }
+
+    private void CalculateAngleVariance()
+    {
         distanceBetweenPlayer = Vector3.Distance(target.transform.position, cerberus.heads[2].transform.position);
         if (distanceBetweenPlayer >= 20)
         {
@@ -34,10 +49,6 @@ public class CerberusFireProjectile : MonoBehaviour
         {
             moveDirection = (new Vector3(target.transform.position.x * Random.Range(1, angleVarianceClose), target.transform.position.y * Random.Range(1, angleVarianceClose)) - transform.position).normalized * moveSpeed;
         }
-       
-        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-        
-        // how close is he to bottom head
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // player detects the damage, do not need to here

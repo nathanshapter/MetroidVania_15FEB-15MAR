@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4402745907527001963}
-  - component: {fileID: 4402745907527001960}
-  - component: {fileID: 4402745907527001961}
   - component: {fileID: 4402745907527001957}
   - component: {fileID: 4402745907527001962}
+  - component: {fileID: 4402745907527001960}
+  - component: {fileID: 4402745907527001961}
   - component: {fileID: 8476285218671561562}
   m_Layer: 9
   m_Name: Cerberus FireBall
@@ -36,6 +36,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4402745907527001957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402745907527001966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8bc469737b3ccc428cc6c76b038225f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 20
+  target: {fileID: 0}
+  cerberus: {fileID: 0}
+  angleVarianceClose: 1
+  angleVarianceFar: 2.5
+  fireBall: {fileID: 8300000, guid: 1f5d64baca4e01848bf616dac522a191, type: 3}
+--- !u!114 &4402745907527001962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402745907527001966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c49f9cf35df8f34bb214a48bf3b057f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyValues: {fileID: 11400000, guid: f93a352db0d97814f821fcefcd3d84cc, type: 2}
+  health: 1
+  attackdamage: 1
 --- !u!212 &4402745907527001960
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -104,39 +137,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4402745907527001957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4402745907527001966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bc469737b3ccc428cc6c76b038225f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 20
-  target: {fileID: 0}
-  cerberus: {fileID: 0}
-  angleVarianceClose: 1
-  angleVarianceFar: 2.5
-  fireBall: {fileID: 8300000, guid: 1f5d64baca4e01848bf616dac522a191, type: 3}
---- !u!114 &4402745907527001962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4402745907527001966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c49f9cf35df8f34bb214a48bf3b057f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyValues: {fileID: 11400000, guid: f93a352db0d97814f821fcefcd3d84cc, type: 2}
-  health: 1
-  attackdamage: 1
 --- !u!50 &8476285218671561562
 Rigidbody2D:
   serializedVersion: 4

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlatformScript : MonoBehaviour
 {
-    [SerializeField] float timeBeforeDestroy = 10f;
-    // Start is called before the first frame update
+    [Header("==========Platform Variables==========")]
+    [Space(20)]
+    [SerializeField] float timeBeforeSelfDestruct = 10f;
+    
     void Start()
     {
         StartCoroutine(DestroyPlatform());
     }
 
    IEnumerator DestroyPlatform()
-    {
-        yield return new WaitForSeconds(timeBeforeDestroy);
+    { // this will crumble rather than just destroy
+        yield return new WaitForSeconds(timeBeforeSelfDestruct);
         Destroy(gameObject);
     }
 }

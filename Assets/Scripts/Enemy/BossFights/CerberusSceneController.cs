@@ -9,30 +9,27 @@ using UnityEngine;
 
 public class CerberusSceneController : MonoBehaviour
 {
+    [Header("==========Variables To Set==========")]
+    [Space(20)]
+    [SerializeField] float cameraActualValue;
+    [SerializeField] float fullZoomValue;
+    [SerializeField] float zoomDurationIn;
+    [SerializeField] float zoomDurationOut;
+    [SerializeField] float cameraReturnValue;
+    [Space(20)]
+
     [SerializeField] GameObject player;
     [SerializeField] CinemachineVirtualCamera playerCamera;
     [SerializeField] Camera cam;
-  [SerializeField]  BridgeScript bridge;
+
     bool firstSequence = true;
+
     [SerializeField] BoxCollider2D playerCollider;
-
-    [SerializeField] float cameraActualValue, fullZoomValue, zoomDurationIn, zoomDurationOut, cameraReturnValue;
-
-
-
+    [SerializeField] BridgeScript bridge;
     [SerializeField] Cerberus cerberus;
     [SerializeField] SpikeSpawner spikeSpawner;
-    private void Start()
-    {
-      
-
-    }
-
-    private void ZoomOut()
-    {
-       
-    }
-    private void ZoomIn()
+  
+    private void ZoomIn() // zooms in when falling
     {
         DOTween.To(() => cameraActualValue, x => cameraActualValue = x, fullZoomValue, zoomDurationIn);
     }
@@ -59,6 +56,8 @@ public class CerberusSceneController : MonoBehaviour
            
             
         }
+        if (cameraActualValue == cameraReturnValue) // dont need the object after camera value is in correct palce can remove if need it
+            Destroy(gameObject);
     }
 
     private IEnumerator StartFall()

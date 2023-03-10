@@ -41179,23 +41179,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: progression.Array.data[0]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: progression.Array.data[1]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: progression.Array.data[2]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: progression.Array.data[3]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: progression.Array.data[4]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 64135963382016420, guid: e7dcf4abd12618c4fb27fc0fb1d2acad, type: 3}
       propertyPath: progression.Array.data[5]
