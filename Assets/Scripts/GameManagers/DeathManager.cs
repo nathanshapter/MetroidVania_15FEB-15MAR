@@ -7,7 +7,7 @@ public class DeathManager : MonoBehaviour
     [SerializeField] int totalDeaths;
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] GameObject player;
-    public bool fallRespawn;
+   [HideInInspector] public bool fallRespawn;
 
 
     public static DeathManager Instance;

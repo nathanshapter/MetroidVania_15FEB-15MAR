@@ -11,10 +11,10 @@ public class EnemyController : MonoBehaviour
     const string RIGHT = "right";
     string facingDirection;
     Vector3 baseScale;
-    float wallDistance;
-    [SerializeField]  Transform castPosition;
+    [SerializeField]  float baseCastDist;
+    [SerializeField]  Transform castPos;
 
-    
+    private bool doesChasePlayer;
 
     // standard patrol info
     private void Start()
@@ -27,7 +27,10 @@ public class EnemyController : MonoBehaviour
   
     private void FixedUpdate()
     {
-        
+        if(doesChasePlayer ) // i think i can remove this 
+        {
+            return;
+        }
         float vX = moveSpeed;
         if(facingDirection== LEFT)
         {
@@ -45,7 +48,8 @@ public class EnemyController : MonoBehaviour
             {
                 ChangeFacingDirection(LEFT);
             }           
-        }        
+        }
+        print(isHittingWall());
     }
 
     void ChangeFacingDirection(string newDirection)
@@ -63,17 +67,17 @@ public class EnemyController : MonoBehaviour
     {
         bool val = false;
 
-        float castDist = wallDistance;
+        float castDist = baseCastDist;
         if(facingDirection == LEFT)
         {
-            castDist = -wallDistance;
+            castDist = -baseCastDist;
         }
-        else { castDist= wallDistance;}
+        else { castDist= baseCastDist;}
 
-        Vector3 targetPos = castPosition.position;
+        Vector3 targetPos = castPos.position;
         targetPos.x += castDist;
-        Debug.DrawLine(castPosition.position, targetPos, Color.blue);
-        if (Physics2D.Linecast(castPosition.position, targetPos, 1 << LayerMask.NameToLayer("Floor")) || Physics2D.Linecast(castPosition.position, targetPos, 1 << LayerMask.NameToLayer("Player")))
+        Debug.DrawLine(castPos.position, targetPos, Color.blue);
+        if (Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Floor")) || Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Player")))
         {
             val = true;
         }
@@ -83,12 +87,12 @@ public class EnemyController : MonoBehaviour
     bool isNearEdge()
     {
         bool val = true;
-        float castDist = wallDistance;       
-        Vector3 targetPos = castPosition.position;
+        float castDist = baseCastDist;       
+        Vector3 targetPos = castPos.position;
         targetPos.y -= castDist;
-        Debug.DrawLine(castPosition.position, targetPos, Color.red);
+        Debug.DrawLine(castPos.position, targetPos, Color.red);
 
-        if (Physics2D.Linecast(castPosition.position, targetPos, 1 << LayerMask.NameToLayer("Floor")))
+        if (Physics2D.Linecast(castPos.position, targetPos, 1 << LayerMask.NameToLayer("Floor")))
         {
             val = false;
         }

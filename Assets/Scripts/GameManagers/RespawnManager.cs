@@ -11,13 +11,11 @@ public class RespawnManager : MonoBehaviour
     DeathCounter deathCounter;
 
    
-
+    // this script needs to identify the starting position and spawn them at the correct one, not just position [0]
     private void Awake()
     {
 
-        
-      //  if(instance == null) { instance= this; DontDestroyOnLoad(this); }
-      //  else { Destroy(gameObject); }
+       
         deathCounter = FindObjectOfType<DeathCounter>();
         
     }
@@ -25,7 +23,7 @@ public class RespawnManager : MonoBehaviour
     {
         // to remove once better checks are put in place
 
-        if(health.transform.position.y <= -500)
+        if(health.transform.position.y <= -100)
         {
             RespawnPlayer();
         }
