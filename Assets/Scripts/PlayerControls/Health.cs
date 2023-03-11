@@ -51,7 +51,8 @@ public class Health : MonoBehaviour
         if(invincibleTimer > 0) { return playerHealth; }
         playerShader.PlayShaderDamage();
         playerHealth -= damage;
-        print(playerHealth);
+        print(damage);
+        
         invincibleTimer = invincibleTimerOriginal;
         CheckIfAlive();
         StartCoroutine(resetDamageBool());

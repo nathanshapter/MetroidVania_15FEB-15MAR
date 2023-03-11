@@ -95,7 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633d2314490e64c44b79d6fb91cdd6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castPosition: {fileID: 2066093570}
+  baseCastDist: 0
+  castPos: {fileID: 2066093570}
 --- !u!70 &4416056383619363287
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
