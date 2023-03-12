@@ -73,7 +73,7 @@ public class CerberusSceneController : MonoBehaviour
         print("hello");
         DOTween.To(() => cameraActualValue, x => cameraActualValue = x, cameraReturnValue, zoomDurationOut).SetEase(Ease.InOutSine).OnUpdate(() =>
         {
-            Debug.Log(cameraActualValue);
+           
             if(cameraActualValue >= 19.7) { cerberus.canStart = true; spikeSpawner.canStart = true; }
         });
         

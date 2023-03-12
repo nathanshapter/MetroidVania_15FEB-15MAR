@@ -18,4 +18,4 @@ MonoBehaviour:
   timeBetweenWaveSpawns: 7.5
   timeBetweenFireballSpawn: 0.45
   amountOfBallsToSpawn: 20
-  amountOfDropsInWave: 0
+  amountOfDropsInWave: 10

@@ -143,7 +143,8 @@ public class Cerberus : MonoBehaviour
     }
     private void Update()
     {
-        if(!canStart) return;
+        GetStageValues();
+        if (!canStart) return;
         if (!activated) { ActivateDogs(); }
         if (!isSleeping)
         {
@@ -162,7 +163,7 @@ public class Cerberus : MonoBehaviour
             health = GetComponent<EnemyHealth>().health; // to locate player
             timeBetweenLastFireballWave += Time.deltaTime;
             BeginNewFireballWave();
-            GetStageValues();
+            
 
             distanceBetweenPlayer = Vector3.Distance(target.transform.position, transform.position); // update distance in real time
 
@@ -192,19 +193,22 @@ public class Cerberus : MonoBehaviour
     {
         if(health <= healthTo4thStage)
         {
+            print("stage is " + cerberusStage  + "4");
             return cerberusStage[3];
         }
         if(health<= healthTo3rdStage)
         {
+            print("stage is " + cerberusStage + "3");
             return cerberusStage[2];
         }
         if(health <= healthTo2ndStage)
         {
+            print("stage is " + cerberusStage + "2");
             return cerberusStage[1];
         }
         else
         {
-            return cerberusStage[0];
+            print("stage is " + cerberusStage + "1"); return cerberusStage[0];
         }
     }
 
