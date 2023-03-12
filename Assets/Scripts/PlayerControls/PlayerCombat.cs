@@ -18,6 +18,13 @@ public class PlayerCombat : MonoBehaviour
     //damage values
     public int damage;
 
+    Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Update()
     {
        
@@ -26,9 +33,11 @@ public class PlayerCombat : MonoBehaviour
    [SerializeField] private AudioClip swing;
     public void Attack(InputAction.CallbackContext context)
     {
-
+       
+        
         if (timeBetweenAttack <= 0)
         {
+            anim.SetTrigger("Attack");
             SoundManager.Instance.StopSound();
             SoundManager.Instance.PlaySound(swing);
             print("sound played");

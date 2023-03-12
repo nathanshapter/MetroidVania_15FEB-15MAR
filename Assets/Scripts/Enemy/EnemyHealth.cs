@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public EnemyValues enemyValues;
-  [HideInInspector] public int health;
+   public int health;
     public int contactDamage;
     private void Start()
     {

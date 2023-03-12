@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4402745907527001960}
   - component: {fileID: 4402745907527001961}
   - component: {fileID: 8476285218671561562}
+  - component: {fileID: 1345012882422877048}
   m_Layer: 9
   m_Name: Cerberus FireBall
   m_TagString: Enemy
@@ -43,13 +44,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402745907527001966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d99d4765e0901f44a50f5db6176b407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  target: {fileID: 0}
   fireBall: {fileID: 0}
 --- !u!114 &4402745907527001962
 MonoBehaviour:
@@ -155,3 +155,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1345012882422877048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402745907527001966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8bc469737b3ccc428cc6c76b038225f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 15
+  angleVarianceClose: 1
+  angleVarianceFar: 1
+  fireBall: {fileID: 0}

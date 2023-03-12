@@ -15,6 +15,6 @@ MonoBehaviour:
   gameObjectName: Cerberus
   description: 
   health: 600
-  attackDamage: 2
+  contactDamage: 1
   doesSimplePatrol: 0
   doesChasePlayer: 0

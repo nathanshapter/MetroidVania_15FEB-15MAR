@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
                 ChangeFacingDirection(LEFT);
             }           
         }
-        print(isHittingWall());
+       
     }
 
     void ChangeFacingDirection(string newDirection)

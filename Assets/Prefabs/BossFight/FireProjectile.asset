@@ -15,6 +15,6 @@ MonoBehaviour:
   gameObjectName: CerberusFireProjectile
   description: 
   health: 20
-  attackDamage: 1
+  contactDamage: 1
   doesSimplePatrol: 0
   doesChasePlayer: 0

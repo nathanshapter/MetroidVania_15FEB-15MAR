@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
   
     public void PlaySound(AudioClip sound)
     {
-        musicSource.PlayOneShot(sound);
+     //   musicSource.PlayOneShot(sound);
     }
     public void PauseSound()
     {

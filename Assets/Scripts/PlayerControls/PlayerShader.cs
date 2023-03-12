@@ -22,7 +22,7 @@ public class PlayerShader : MonoBehaviour
 
     public void PlayShaderDamage()
     {
-        sr.material = damageMat;
+       // sr.material = damageMat;
         Debug.Log("playershaderdamage should work");
         fadeValue = 1f; // takes to full
         damageMat.SetFloat(fadePropertyID, fadeValue);

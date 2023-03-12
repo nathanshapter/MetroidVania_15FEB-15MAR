@@ -17,6 +17,7 @@ public class RespawnManager : MonoBehaviour
 
        
         deathCounter = FindObjectOfType<DeathCounter>();
+        health = FindObjectOfType<Health>();
         
     }
     private void Update()
