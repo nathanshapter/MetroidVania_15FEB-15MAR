@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    float timeBetweenAttack;
-    public float startTimeBetweenAttack;
+   [SerializeField] float timeBetweenAttack;
+   
 
     public Transform attackPos, attackUpPos, attackDownPos;
     public float attackRange;
@@ -22,36 +22,44 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
        
-       timeBetweenAttack -= Time.deltaTime; 
+       timeBetweenAttack += Time.deltaTime; 
     }
    [SerializeField] private AudioClip swing;
+    bool hasAttackedTwice = false;
     public void Attack(InputAction.CallbackContext context)
     {
-       
-        
-        if (timeBetweenAttack <= 0)
+     if(timeBetweenAttack < 1 && timeBetweenAttack > 0.4f)
         {
-            anim.SetTrigger("Attack");
-            SoundManager.Instance.StopSound();
-            SoundManager.Instance.PlaySound(swing);
-            print("sound played");
+
+            if (hasAttackedTwice) { return; }
+            else { print("hi"); hasAttackedTwice = true; anim.SetTrigger("Attack2"); }
+            
+        }  
+        
+        if (timeBetweenAttack > 1)
+        {
+            hasAttackedTwice = false;
+            anim.SetTrigger("Attack1");
+          //  SoundManager.Instance.StopSound();
+          //  SoundManager.Instance.PlaySound(swing);
+           
             if (swordUp)  /// these need to do something other than print
             {
-                print("attacked up");
+               
             }
             if (swordDown) 
             { 
-                print("attacked down");
+               
             }
             if(swordOriginal) 
             { 
-                print("attacked");
+               
             }
             
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
@@ -68,7 +76,7 @@ public class PlayerCombat : MonoBehaviour
 
               
             }
-            timeBetweenAttack = startTimeBetweenAttack;
+            timeBetweenAttack = 0;
         }
         
     }
