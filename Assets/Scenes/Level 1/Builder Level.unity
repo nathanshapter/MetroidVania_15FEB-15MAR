@@ -202,6 +202,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf6e51390d588e479a4c861880eed43, type: 3}
+--- !u!1 &228534312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 228534312, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+  m_PrefabInstance: {fileID: 592024997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &228534316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228534312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d1862dcff8ffe4b9e0204b4eff4bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RunStopDust: {fileID: 7310271610845027193, guid: 39afca3c109b26049a80bc07593eb271, type: 3}
+  JumpDust: {fileID: 8935918012585647707, guid: 4a4123fbc8b39d441868897a71d2b2b1, type: 3}
+  LandingDust: {fileID: 9076098953984712191, guid: 0b745be9abb3a6d4dadd8705950196d1, type: 3}
+  DodgeDust: {fileID: 8590431080485398814, guid: da52102717e04414e812836f28ae21bb, type: 3}
+  WallSlideDust: {fileID: 5762863905650480404, guid: a63019ff0940b5f4487fe87a3d3fc0af, type: 3}
+  WallJumpDust: {fileID: 7972526843131001964, guid: 2a6283ef7fbba594caf7888f051f4a2b, type: 3}
+  AirSlamDust: {fileID: 2943720192077617830, guid: 27cb532070b8c2b4e97001c33cf37429, type: 3}
+  ParryEffect: {fileID: 3569397387010719113, guid: 9300fb4b08a7c0f448a15475613f22d5, type: 3}
 --- !u!1001 &550948369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338,10 +363,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1163885338, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1d4af8c325522f144a3ebdefb8d089f1, type: 2}
     - target: {fileID: 2812504885943489405, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_Name
       value: Player

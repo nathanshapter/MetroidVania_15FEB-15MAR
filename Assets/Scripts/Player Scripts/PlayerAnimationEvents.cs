@@ -16,13 +16,17 @@ public class PlayerAnimationEvents : MonoBehaviour
     public GameObject ParryEffect;
 
     private PlayerMovement player;
-  //  private AudioManager_PrototypeHero m_audioManager;
+    private AudioManager_PrototypeHero m_audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponentInParent<PlayerMovement>();
-     //   m_audioManager = AudioManager_PrototypeHero.instance;
+        m_audioManager = AudioManager_PrototypeHero.instance;
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Z)) { JumpUp(); } // this is here because it is not being called from the animation events, cant figure out why
     }
 
     // Animation Events
@@ -53,10 +57,10 @@ public class PlayerAnimationEvents : MonoBehaviour
      //   m_audioManager.PlaySound("Footstep");
     }
 
-    void Jump()
+     void JumpUp() // for some reason this does not get called when jumping
     {
-      //  m_audioManager.PlaySound("Jump");
-
+       m_audioManager.PlaySound("Jump");
+        
         if (!player.IsWallSliding())
         {
             float dustYOffset = 0.078125f;
@@ -66,13 +70,15 @@ public class PlayerAnimationEvents : MonoBehaviour
         {
             player.SpawnDustEffect(WallJumpDust);
         }
+        
     }
 
     void Landing()
     {
-     //   m_audioManager.PlaySound("Landing");
+        m_audioManager.PlaySound("Landing");
         float dustYOffset = 0.078125f;
         player.SpawnDustEffect(LandingDust, 0.0f, dustYOffset);
+        
     }
 
     void AE_Throw()

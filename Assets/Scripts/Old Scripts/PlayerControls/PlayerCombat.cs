@@ -5,19 +5,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-   [SerializeField] float timeBetweenAttack;
-   
+    [Header("==========Sets==========")]
 
+    [SerializeField] float timeBetweenAttack;
+    [SerializeField] AudioClip swing;
     public Transform attackPos, attackUpPos, attackDownPos;
     public float attackRange;
-
     public LayerMask whatIsEnemies;
-
-    private bool swordUp, swordDown, swordOriginal = true;
-
-    //damage values
     public int damage;
 
+    // sets in code
+
+    private bool swordUp, swordDown, swordOriginal = true;
+    bool hasAttackedTwice = false;
     Animator anim;
 
     private void Start()
@@ -26,20 +26,16 @@ public class PlayerCombat : MonoBehaviour
     }
 
     private void Update()
-    {
-       
+    {       
        timeBetweenAttack += Time.deltaTime; 
-    }
-   [SerializeField] private AudioClip swing;
-    bool hasAttackedTwice = false;
+    }  
+    
     public void Attack(InputAction.CallbackContext context)
     {
-     if(timeBetweenAttack < 1 && timeBetweenAttack > 0.4f)
+     if(timeBetweenAttack < 1 && timeBetweenAttack > 0.4f) // logic to allow combo
         {
-
             if (hasAttackedTwice) { return; }
-            else { print("hi"); hasAttackedTwice = true; anim.SetTrigger("Attack2"); }
-            
+            else { print("hi"); hasAttackedTwice = true; anim.SetTrigger("Attack2"); }            
         }  
         
         if (timeBetweenAttack > 1)
@@ -98,7 +94,7 @@ public class PlayerCombat : MonoBehaviour
         
         
     }
-    private void OnDrawGizmosSelected() 
+    private void OnDrawGizmos() 
     {
         Gizmos.color = Color.red;    
         Gizmos.DrawWireSphere(ProcessAttack(), attackRange);
