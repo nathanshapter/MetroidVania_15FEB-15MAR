@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
         progressionManager = FindObjectOfType<ProgressionManager>();
-        animator= GetComponent<Animator>();
+        animator= GetComponentInChildren<Animator>();
     }
     private void Update()
     {
@@ -327,5 +327,44 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.1f);
 
         isTouchingBridge = false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    bool dodging = false;
+    bool wallSlide = false;
+
+    public void ResetDodging()
+    {
+        dodging = false;
+    }
+
+    public void SpawnDustEffect(GameObject dust, float dustXOffset = 0, float dustYOffset = 0)
+    {
+        if (dust != null)
+        {
+            // Set dust spawn position
+            Vector3 dustSpawnPosition = transform.position + new Vector3(dustXOffset * getFacingDirection(), dustYOffset, 0.0f);
+            GameObject newDust = Instantiate(dust, dustSpawnPosition, Quaternion.identity) as GameObject;
+            // Turn dust in correct X direction
+            newDust.transform.localScale = newDust.transform.localScale.x * new Vector3(getFacingDirection(), 1, 1);
+        }
+    }
+    private float getFacingDirection()
+    {
+        if(isFacingRight) { return 1; }
+        else { return -1; }
+    }
+    public bool IsWallSliding()
+    {
+        return wallSlide;
     }
 }
