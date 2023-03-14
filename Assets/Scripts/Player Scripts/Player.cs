@@ -1,45 +1,46 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class PrototypeHero : MonoBehaviour {
+public class Player : MonoBehaviour
+{
+    public float runSpeed = 4.5f;
+    public float walkSpeed = 2.0f;
+    public float jumpForce = 7.5f;
+    public float dodgeForce = 8.0f;
+    public float parryKnockbackForce = 4.0f;
+    public bool noBlood = false;
+    public bool hideSword = false;
 
-    public float      runSpeed = 4.5f;
-    public float      walkSpeed = 2.0f;
-    public float      jumpForce = 7.5f;
-    public float      dodgeForce = 8.0f;
-    public float      parryKnockbackForce = 4.0f; 
-    public bool       noBlood = false;
-    public bool       hideSword = false;
-
-    private Animator            animator;
-    private Rigidbody2D         body2d;
-    private SpriteRenderer      SR;
-    private Sensor_Prototype    groundSensor;
-    private Sensor_Prototype    wallSensorR1;
-    private Sensor_Prototype    wallSensorR2;
-    private Sensor_Prototype    wallSensorL1;
-    private Sensor_Prototype    wallSensorL2;
-    private bool                grounded = false;
-    private bool                moving = false;
-    private bool                dead = false;
-    private bool                dodging = false;
-    private bool                wallSlide = false;
-    private bool                ledgeGrab = false;
-    private bool                ledgeClimb = false;
-    private bool                crouching = false;
-    private Vector3             climbPosition;
-    private int                 facingDirection = 1;
-    private float               disableMovementTimer = 0.0f;
-    private float               parryTimer = 0.0f;
-    private float               respawnTimer = 0.0f;
-    private Vector3             respawnPosition = Vector3.zero;
-    private int                 currentAttack = 0;
-    private float               timeSinceAttack = 0.0f;
-    private float               gravity;
-    public float                maxSpeed = 4.5f;
+    private Animator animator;
+    private Rigidbody2D body2d;
+    private SpriteRenderer SR;
+    private Sensor_Prototype groundSensor;
+    private Sensor_Prototype wallSensorR1;
+    private Sensor_Prototype wallSensorR2;
+    private Sensor_Prototype wallSensorL1;
+    private Sensor_Prototype wallSensorL2;
+    private bool grounded = false;
+    private bool moving = false;
+    private bool dead = false;
+    private bool dodging = false;
+    private bool wallSlide = false;
+    private bool ledgeGrab = false;
+    private bool ledgeClimb = false;
+    private bool crouching = false;
+    private Vector3 climbPosition;
+    private int facingDirection = 1;
+    private float disableMovementTimer = 0.0f;
+    private float parryTimer = 0.0f;
+    private float respawnTimer = 0.0f;
+    private Vector3 respawnPosition = Vector3.zero;
+    private int currentAttack = 0;
+    private float timeSinceAttack = 0.0f;
+    private float gravity;
+    public float maxSpeed = 4.5f;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         animator = GetComponentInChildren<Animator>();
         body2d = GetComponent<Rigidbody2D>();
@@ -54,7 +55,7 @@ public class PrototypeHero : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         // Decrease death respawn timer 
         respawnTimer -= Time.deltaTime;
@@ -94,7 +95,7 @@ public class PrototypeHero : MonoBehaviour {
 
         if (disableMovementTimer < 0.0f)
             inputX = Input.GetAxis("Horizontal");
-        
+
 
         // GetAxisRaw returns either -1, 0 or 1
         float inputRaw = Input.GetAxisRaw("Horizontal");
@@ -111,17 +112,17 @@ public class PrototypeHero : MonoBehaviour {
             SR.flipX = false;
             facingDirection = 1;
         }
-            
+
         else if (inputRaw < 0 && !dodging && !wallSlide && !ledgeGrab && !ledgeClimb)
         {
             SR.flipX = true;
             facingDirection = -1;
         }
-     
+
         // SlowDownSpeed helps decelerate the characters when stopping
         float SlowDownSpeed = moving ? 1.0f : 0.5f;
         // Set movement
-        if(!dodging && !ledgeGrab && !ledgeClimb && !crouching && parryTimer < 0.0f)
+        if (!dodging && !ledgeGrab && !ledgeClimb && !crouching && parryTimer < 0.0f)
             body2d.velocity = new Vector2(inputX * maxSpeed * SlowDownSpeed, body2d.velocity.y);
 
         // Set AirSpeed in animator
@@ -143,7 +144,7 @@ public class PrototypeHero : MonoBehaviour {
                 wallSlide = false;
             animator.SetBool("WallSlide", wallSlide);
             //Play wall slide sound
-            if(prevWallSlide && !wallSlide)
+            if (prevWallSlide && !wallSlide)
                 AudioManager_PrototypeHero.instance.StopSound("WallSlide");
 
 
@@ -151,7 +152,7 @@ public class PrototypeHero : MonoBehaviour {
             // True if either bottom right sensor is colliding and top right sensor is not colliding 
             // OR if bottom left sensor is colliding and top left sensor is not colliding 
             bool shouldGrab = !ledgeClimb && !ledgeGrab && ((wallSensorR1.State() && !wallSensorR2.State()) || (wallSensorL1.State() && !wallSensorL2.State()));
-            if(shouldGrab)
+            if (shouldGrab)
             {
                 Vector3 rayStart;
                 if (facingDirection == 1)
@@ -162,7 +163,7 @@ public class PrototypeHero : MonoBehaviour {
                 var hit = Physics2D.Raycast(rayStart, Vector2.down, 1.0f);
 
                 GrabableLedge ledge = null;
-                if(hit)
+                if (hit)
                     ledge = hit.transform.GetComponent<GrabableLedge>();
 
                 if (ledge)
@@ -170,7 +171,7 @@ public class PrototypeHero : MonoBehaviour {
                     ledgeGrab = true;
                     body2d.velocity = Vector2.zero;
                     body2d.gravityScale = 0;
-                    
+
                     climbPosition = ledge.transform.position + new Vector3(ledge.topClimbPosition.x, ledge.topClimbPosition.y, 0);
                     if (facingDirection == 1)
                         transform.position = ledge.transform.position + new Vector3(ledge.leftGrabPosition.x, ledge.leftGrabPosition.y, 0);
@@ -179,7 +180,7 @@ public class PrototypeHero : MonoBehaviour {
                 }
                 animator.SetBool("LedgeGrab", ledgeGrab);
             }
-            
+
         }
 
 
@@ -193,7 +194,7 @@ public class PrototypeHero : MonoBehaviour {
             DisableWallSensors();
             dead = true;
         }
-        
+
         //Hurt
         else if (Input.GetKeyDown("q") && !dodging)
         {
@@ -213,7 +214,7 @@ public class PrototypeHero : MonoBehaviour {
                 animator.SetTrigger("Parry");
                 body2d.velocity = new Vector2(-facingDirection * parryKnockbackForce, body2d.velocity.y);
             }
-                
+
             // Parry Stance
             // Ready to parry in case something hits you
             else
@@ -299,7 +300,7 @@ public class PrototypeHero : MonoBehaviour {
         }
 
         // Throw
-        else if(Input.GetKeyDown("f") && grounded && !dodging && !ledgeGrab && !ledgeClimb)
+        else if (Input.GetKeyDown("f") && grounded && !dodging && !ledgeGrab && !ledgeClimb)
         {
             animator.SetTrigger("Throw");
 
@@ -308,12 +309,12 @@ public class PrototypeHero : MonoBehaviour {
         }
 
         // Ledge Climb
-        else if(Input.GetKeyDown("w") && ledgeGrab)
+        else if (Input.GetKeyDown("w") && ledgeGrab)
         {
             DisableWallSensors();
             ledgeClimb = true;
             body2d.gravityScale = 0;
-            disableMovementTimer = 6.0f/14.0f;
+            disableMovementTimer = 6.0f / 14.0f;
             animator.SetTrigger("LedgeClimb");
         }
 
@@ -327,7 +328,7 @@ public class PrototypeHero : MonoBehaviour {
         else if (Input.GetButtonDown("Jump") && (grounded || wallSlide) && !dodging && !ledgeGrab && !ledgeClimb && !crouching && disableMovementTimer < 0.0f)
         {
             // Check if it's a normal jump or a wall jump
-            if(!wallSlide)
+            if (!wallSlide)
                 body2d.velocity = new Vector2(body2d.velocity.x, jumpForce);
             else
             {
@@ -362,7 +363,7 @@ public class PrototypeHero : MonoBehaviour {
         }
 
         //Run
-        else if(moving)
+        else if (moving)
         {
             animator.SetInteger("AnimState", 1);
             maxSpeed = runSpeed;
@@ -437,4 +438,6 @@ public class PrototypeHero : MonoBehaviour {
         dead = false;
         animator.Rebind();
     }
+
+
 }

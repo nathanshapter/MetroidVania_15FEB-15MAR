@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] CinemachineVirtualCamera playerVirtualCamera;
     [SerializeField] float levelSizeCamera = 19.78f;
+
+    Animator animator;
     private void Start()
     {
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -66,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
         progressionManager = FindObjectOfType<ProgressionManager>();
+        animator= GetComponent<Animator>();
     }
     private void Update()
     {
@@ -80,6 +83,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isDead = true;
             //Death();
+        }
+        if (!IsGrounded())
+        {
+            animator.SetBool("Grounded", false);
         }
      
     }
@@ -135,8 +142,11 @@ public class PlayerMovement : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
         if (context.performed) { transform.SetParent(null); }
         if (lastParent != null && context.canceled && IsGrounded()) { transform.SetParent(lastParent.transform); }
-
-        
+        animator.SetBool("isRunning", true);
+        if (context.canceled)
+        {
+            animator.SetBool("isRunning", false);
+        }
 
     }
     // movement methods
@@ -170,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }
+        animator.SetBool("Grounded", true);
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, groundLayer);
     }
 
