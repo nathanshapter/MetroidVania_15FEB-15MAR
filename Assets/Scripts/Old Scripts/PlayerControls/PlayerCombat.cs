@@ -33,7 +33,7 @@ public class PlayerCombat : MonoBehaviour
        timeBetweenAttack += Time.deltaTime; 
         if(timeBetweenAttack > .75f)
         {
-         //   currentAttack= 0;
+            currentAttack= 0;
         }
     }
     
@@ -83,15 +83,21 @@ public class PlayerCombat : MonoBehaviour
             }
 
         }
-        if (timeBetweenAttack < .55f && timeBetweenAttack > 0.17f && currentAttack ==1) // logic to allow combo
+        else if (timeBetweenAttack < .55f && timeBetweenAttack > 0.17f && currentAttack ==1) // logic to allow combo
         {
           currentAttack++; // this will be used later for a 3rd attack
             
 
                 anim.SetTrigger("Attack2");
-                currentAttack = 0;
+                
             
 
+        }
+       else if(currentAttack ==2 && timeBetweenAttack >= .15f)
+        {
+            anim.SetTrigger("Attack1"); // to be replaced eventually with attack 3
+            currentAttack= 0;
+            print("3rd attack");
         }
         AllSwordAttack();
     }
@@ -113,7 +119,7 @@ public class PlayerCombat : MonoBehaviour
 
         }
 
-     //  if(timeBetweenAttack > .55f) // need to eventually add a fatigue option so cant spam this forever
+       if(currentAttack != 0) // need to eventually add a fatigue option so cant spam this forever
         {
             timeBetweenAttack = 0;
         }
