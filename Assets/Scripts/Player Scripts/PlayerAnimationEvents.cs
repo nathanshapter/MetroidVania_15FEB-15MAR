@@ -46,7 +46,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     void AE_runStop()
     {
-     //   m_audioManager.PlaySound("RunStop");
+        m_audioManager.PlaySound("RunStop");
         float dustXOffset = 0.6f;
         float dustYOffset = 0.078125f;
         player.SpawnDustEffect(RunStopDust, dustXOffset, dustYOffset);
@@ -54,7 +54,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     void AE_footstep()
     {
-     //   m_audioManager.PlaySound("Footstep");
+       m_audioManager.PlaySound("Footstep");
     }
 
      void JumpUp() // for some reason this does not get called when jumping
@@ -125,12 +125,12 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     void AE_SwordAttack()
     {
-     //   m_audioManager.PlaySound("SwordAttack");
+        m_audioManager.PlaySound("SwordAttack");
     }
 
     void AE_SheathSword()
     {
-     //   m_audioManager.PlaySound("SheathSword");
+        m_audioManager.PlaySound("SheathSword");
     }
 
     void AE_Dodge()
@@ -159,5 +159,6 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
        // m_audioManager.PlaySound("RunStop");
     }
+   
 
 }

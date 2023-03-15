@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
     bool isTouchingBridge;
-    private bool IsGrounded()
+   public bool IsGrounded()
     {
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }

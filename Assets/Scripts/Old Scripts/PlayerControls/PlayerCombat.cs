@@ -17,65 +17,113 @@ public class PlayerCombat : MonoBehaviour
     // sets in code
 
     private bool swordUp, swordDown, swordOriginal = true;
-    bool hasAttackedTwice = false;
+   [SerializeField] int currentAttack = 0;
     Animator anim;
+    PlayerMovement playerMovement;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
     {       
        timeBetweenAttack += Time.deltaTime; 
-    }  
+        if(timeBetweenAttack > 0.55f)
+        {
+            currentAttack= 0;
+        }
+    }
     
     public void Attack(InputAction.CallbackContext context)
     {
-     if(timeBetweenAttack < 1 && timeBetweenAttack > 0.4f) // logic to allow combo
+
+        if (!playerMovement.IsGrounded())
         {
-            if (hasAttackedTwice) { return; }
-            else { print("hi"); hasAttackedTwice = true; anim.SetTrigger("Attack2"); }            
-        }  
+            AirAttack();
+            
+            
+        }
+        else if(playerMovement.IsGrounded())
+        {
+            GroundedAttack();
+            
+        } 
         
-        if (timeBetweenAttack > 1)
+      
+    }
+
+    private void AirAttack()
+    {
+        AllSwordAttack();
+        anim.SetTrigger("AirAttack");
+       
+    }
+    private void GroundedAttack()
+    {
+        
+        if (timeBetweenAttack > .55f && currentAttack ==0)
         {
-            hasAttackedTwice = false;
-            anim.SetTrigger("Attack1");
-          //  SoundManager.Instance.StopSound();
-          //  SoundManager.Instance.PlaySound(swing);
-           
+            currentAttack++;
+            anim.SetTrigger("Attack1");           
+
             if (swordUp)  /// these need to do something other than print
             {
-               
-            }
-            if (swordDown) 
-            { 
-               
-            }
-            if(swordOriginal) 
-            { 
-               
-            }
-            
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
-            for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
-                if (enemiesToDamage[i].GetComponent<EnemyHealth>() == null) // for cerberus heards // body
-                {
-                    enemiesToDamage[i].GetComponentInParent<EnemyHealth>().TakeDamage(damage);
-                }
-                else
-                {
-                    enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
-                }
 
-              
             }
+            if (swordDown)
+            {
+
+            }
+            if (swordOriginal)
+            {
+
+            }
+
+        }
+        if (timeBetweenAttack < .55f && timeBetweenAttack > 0.17f && currentAttack ==1) // logic to allow combo
+        {
+          currentAttack++; // this will be used later for a 3rd attack
+            
+
+                anim.SetTrigger("Attack2");
+                currentAttack = 0;
+            
+
+        }
+        AllSwordAttack();
+    }
+
+    private void AllSwordAttack() // all attacks run this
+    {
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
+        for (int i = 0; i < enemiesToDamage.Length; i++)
+        {
+            if (enemiesToDamage[i].GetComponent<EnemyHealth>() == null) // for cerberus heards // body
+            {
+                enemiesToDamage[i].GetComponentInParent<EnemyHealth>().TakeDamage(damage);
+            }
+            else
+            {
+                enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+
+
+        }
+
+       if(timeBetweenAttack > .55f)
+        {
             timeBetweenAttack = 0;
         }
         
+            
+        
+       
     }
+
+
+
     public void SwordUp(InputAction.CallbackContext context)
     {
         swordOriginal= false;
