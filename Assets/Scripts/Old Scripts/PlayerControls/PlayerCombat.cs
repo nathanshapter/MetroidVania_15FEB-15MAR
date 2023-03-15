@@ -20,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
    [SerializeField] int currentAttack = 0;
     Animator anim;
     PlayerMovement playerMovement;
+    float attackSpamPoint; // 
 
     private void Start()
     {
@@ -30,9 +31,9 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {       
        timeBetweenAttack += Time.deltaTime; 
-        if(timeBetweenAttack > 0.55f)
+        if(timeBetweenAttack > .75f)
         {
-            currentAttack= 0;
+         //   currentAttack= 0;
         }
     }
     
@@ -112,7 +113,7 @@ public class PlayerCombat : MonoBehaviour
 
         }
 
-       if(timeBetweenAttack > .55f)
+     //  if(timeBetweenAttack > .55f) // need to eventually add a fatigue option so cant spam this forever
         {
             timeBetweenAttack = 0;
         }
