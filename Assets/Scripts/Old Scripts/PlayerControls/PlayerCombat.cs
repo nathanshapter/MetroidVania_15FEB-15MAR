@@ -23,6 +23,7 @@ public class PlayerCombat : MonoBehaviour
     Animator anim;
     PlayerMovement playerMovement;
     float attackSpamPoint; // 
+    bool canAttackInAir = true;
 
     private void Start()
     {
@@ -37,8 +38,11 @@ public class PlayerCombat : MonoBehaviour
         {
             currentAttack= 0;
         }
-        
 
+        if (playerMovement.IsGrounded()) // this needs to be put somewhere better later
+        {
+            canAttackInAir = true;
+        }
     }
     
     public void Attack(InputAction.CallbackContext context)
@@ -62,8 +66,14 @@ public class PlayerCombat : MonoBehaviour
 
     private void AirAttack()
     {
-        AllSwordAttack();
-        anim.SetTrigger("AirAttack");
+        if (canAttackInAir)
+        {
+            AllSwordAttack();
+            anim.SetTrigger("AirAttack");
+            currentAttack++;
+        }
+          
+        
        
     }
     private void GroundedAttack()
@@ -123,6 +133,13 @@ public class PlayerCombat : MonoBehaviour
 
 
         }
+
+        if (!playerMovement.IsGrounded() && currentAttack != 0)
+        {
+            canAttackInAir = false;
+        }
+        
+
 
        if(currentAttack != 0 && timeBetweenAttack > 0.1f) // need to eventually add a fatigue option so cant spam this forever
         {

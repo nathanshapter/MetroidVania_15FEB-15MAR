@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
     // wasd methods
     public void Walk(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && IsGrounded())
         {
             walk = !walk;
 
@@ -170,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = localScale;
        
     }
-    public void Move(InputAction.CallbackContext context)
+    public void Move(InputAction.CallbackContext context) // while attacking cannot move, but jump should break the lock
     {
         isMoving = true;
         horizontal = context.ReadValue<Vector2>().x;
@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
     bool isTouchingBridge;
    public bool IsGrounded()
     {
-        
+        // if is moving play roll animation in correct direction
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }
         animator.SetBool("Grounded", true);
