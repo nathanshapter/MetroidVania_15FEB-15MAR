@@ -176,6 +176,8 @@ public class PlayerMovement : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
         if (context.performed) { transform.SetParent(null); }
         if (lastParent != null && context.canceled && IsGrounded()) { transform.SetParent(lastParent.transform); }
+
+
       if(walk == true)
         {
             animator.SetBool("walk", true);
@@ -195,11 +197,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
     // movement methods
-    public void Jump(InputAction.CallbackContext context)
+    public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
-
+            animator.SetBool("walk", false);
+            animator.SetBool("isRunning", false);
+            animator.SetTrigger("Jump");
 
             if (shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower / shrunkJumpingPower); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower); }
@@ -224,10 +228,20 @@ public class PlayerMovement : MonoBehaviour
     bool isTouchingBridge;
    public bool IsGrounded()
     {
+        
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }
         animator.SetBool("Grounded", true);
+        if (isMoving && speedActuel == originalSpeed)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else if (isMoving && speedActuel == walkingSpeed)
+        {
+            animator.SetBool("walk", true);
+        }
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, groundLayer);
+
     }
 
     private bool OnWall()
