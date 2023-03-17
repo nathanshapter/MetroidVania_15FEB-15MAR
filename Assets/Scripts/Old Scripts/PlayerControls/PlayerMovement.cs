@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform bulletSpawn;
 
     //movement values
-    [SerializeField] private float horizontal, speedActuel, jumpingPower, platformSpeed, originalMovementSpeed, walkingSpeed;
-    float originalSpeed;
+    [SerializeField] public float horizontal, speedActuel, jumpingPower, platformSpeed,  walkingSpeed;
+    public float originalSpeed;
     public bool isFacingRight = true;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
     bool shrunk;
@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     bool isDead = false;
     bool walk = false;
     bool isMoving = false;
+ 
+    float canMoveTimer;
     // firing values
     bool bulletPlatformJustSpawned;
     [SerializeField] float timeBetweenBullets;
@@ -74,22 +76,27 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        // playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera; // this is just for debugging, to be removed
-        if (isDead) return; // to remove later
-        if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
-        else { coyoteTimeCounter -= Time.deltaTime; }
-        if (isDashing) { return; }
-        FlipPlayer();
-        CheckForDash();
-        if (health.playerHealth <= 0)
-        {
-            isDead = true;
-            //Death();
-        }
-        if (!IsGrounded())
-        {
-            animator.SetBool("Grounded", false);
-        }
+       
+        
+            // playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera; // this is just for debugging, to be removed
+            if (isDead) return; // to remove later
+            if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
+            else { coyoteTimeCounter -= Time.deltaTime; }
+            if (isDashing) { return; }
+            FlipPlayer();
+            CheckForDash();
+            if (health.playerHealth <= 0)
+            {
+                isDead = true;
+                //Death();
+            }
+            if (!IsGrounded())
+            {
+                animator.SetBool("Grounded", false);
+            }
+        
+       
+        
      
     }
     // Dash Methods
@@ -103,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public IEnumerator Dash()
     {
+        animator.SetTrigger("Dodge");
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
@@ -172,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(InputAction.CallbackContext context) // while attacking cannot move, but jump should break the lock
     {
+       
         isMoving = true;
         horizontal = context.ReadValue<Vector2>().x;
         if (context.performed) { transform.SetParent(null); }
@@ -199,6 +208,7 @@ public class PlayerMovement : MonoBehaviour
     // movement methods
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
+        speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
             animator.SetBool("walk", false);

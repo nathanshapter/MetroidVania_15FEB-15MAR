@@ -13,7 +13,8 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange;
     public LayerMask whatIsEnemies;
     public int damage;
-
+    [SerializeField] float attackingSpeed = 1.5f;
+    [SerializeField] float slowDownAfterAttack = 0.75f;
     // sets in code
 
     [SerializeField] float timeBetweenAttack; // hide in inspector when finished with coding it
@@ -43,6 +44,11 @@ public class PlayerCombat : MonoBehaviour
         {
             canAttackInAir = true;
         }
+
+        if(timeBetweenAttack >slowDownAfterAttack  && playerMovement.speedActuel == attackingSpeed)
+        {
+            playerMovement.speedActuel = playerMovement.originalSpeed;
+        }
     }
     
     public void Attack(InputAction.CallbackContext context)
@@ -57,6 +63,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else if(playerMovement.IsGrounded())
         {
+            playerMovement.speedActuel = attackingSpeed;
             GroundedAttack();
             
         } 
@@ -66,15 +73,19 @@ public class PlayerCombat : MonoBehaviour
 
     private void AirAttack()
     {
-        if (canAttackInAir)
+        if(canAttackInAir && swordUp)
         {
-            AllSwordAttack();
-            anim.SetTrigger("AirAttack");
-            currentAttack++;
+            anim.SetTrigger("UpAttack");
         }
-          
-        
-       
+        else if (canAttackInAir && swordOriginal)
+        {
+            
+            anim.SetTrigger("AirAttack");
+            
+        }
+        AllSwordAttack();
+        currentAttack++;
+
     }
     private void GroundedAttack()
     {
@@ -82,23 +93,23 @@ public class PlayerCombat : MonoBehaviour
         if (timeBetweenAttack > .55f && currentAttack ==0)
         {
             currentAttack++;
-            anim.SetTrigger("Attack1");           
+
 
             if (swordUp)  /// these need to do something other than print
             {
-
+                anim.SetTrigger("UpAttack");
             }
-            if (swordDown)
+            else if (swordDown)
             {
 
             }
-            if (swordOriginal)
+            else if (swordOriginal)
             {
-
+                anim.SetTrigger("Attack1");
             }
 
         }
-        else if (timeBetweenAttack < .55f && timeBetweenAttack > 0.17f && currentAttack ==1) // logic to allow combo
+        else if (timeBetweenAttack < .55f && timeBetweenAttack > 0.17f && currentAttack ==1 && swordOriginal) // logic to allow combo
         {
           currentAttack++; // this will be used later for a 3rd attack
             
@@ -108,7 +119,7 @@ public class PlayerCombat : MonoBehaviour
             
 
         }
-       else if(currentAttack ==2 && timeBetweenAttack >= .15f)
+       else if(currentAttack == 2 && timeBetweenAttack >= .15f && swordOriginal)
         {
             anim.SetTrigger("Attack1"); // to be replaced eventually with attack 3
             currentAttack= 0;
@@ -116,6 +127,7 @@ public class PlayerCombat : MonoBehaviour
         }
         AllSwordAttack();
     }
+
 
     private void AllSwordAttack() // all attacks run this
     {
@@ -171,7 +183,7 @@ public class PlayerCombat : MonoBehaviour
         
         
     }
-    private void OnDrawGizmos() 
+    private void OnDrawGizmosSelected() 
     {
         Gizmos.color = Color.red;    
         Gizmos.DrawWireSphere(ProcessAttack(), attackRange);

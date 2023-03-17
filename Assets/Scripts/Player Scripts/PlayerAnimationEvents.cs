@@ -135,7 +135,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     void AE_Dodge()
     {
-     //   m_audioManager.PlaySound("Dodge");
+        m_audioManager.PlaySound("Dodge");
         float dustYOffset = 0.078125f;
         player.SpawnDustEffect(DodgeDust, 0.0f, dustYOffset);
     }
