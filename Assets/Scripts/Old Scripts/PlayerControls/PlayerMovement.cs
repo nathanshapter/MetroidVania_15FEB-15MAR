@@ -24,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform bulletSpawn;
 
     //movement values
-    [SerializeField] private float horizontal, speed, jumpingPower, platformSpeed, originalMovementSpeed;
+    [SerializeField] private float horizontal, speedActuel, jumpingPower, platformSpeed, originalMovementSpeed, walkingSpeed;
+    float originalSpeed;
     public bool isFacingRight = true;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
     bool shrunk;
@@ -35,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool hasDoubleJumped;
 
     bool isDead = false;
-
-
+    bool walk = false;
+    bool isMoving = false;
     // firing values
     bool bulletPlatformJustSpawned;
     [SerializeField] float timeBetweenBullets;
@@ -69,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         health = GetComponent<Health>();
         progressionManager = FindObjectOfType<ProgressionManager>();
         animator= GetComponentInChildren<Animator>();
+        originalSpeed = speedActuel;
     }
     private void Update()
     {
@@ -115,10 +117,41 @@ public class PlayerMovement : MonoBehaviour
 
     }
     // wasd methods
+    public void Walk(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            walk = !walk;
 
+            if(walk == true && isMoving)
+            {
+                speedActuel = walkingSpeed;
+                animator.SetBool("isRunning", false);
+                animator.SetBool("walk", true);
+            }
+            if (walk == false && isMoving)
+            {
+                speedActuel = originalSpeed;
+                animator.SetBool("walk", false);
+                animator.SetBool("isRunning", true);
+            }
+            else if (walk == true)
+            {
+                speedActuel = walkingSpeed;
+            }
+            else if (walk == false)
+            {
+                speedActuel = originalSpeed;
+            }
+        }
+        
+    
+  
+        
+    }
     private void FlipPlayer()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speedActuel, rb.velocity.y);
         if (!isFacingRight && horizontal > 0f)
         {
             Flip();
@@ -139,13 +172,25 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(InputAction.CallbackContext context)
     {
+        isMoving = true;
         horizontal = context.ReadValue<Vector2>().x;
         if (context.performed) { transform.SetParent(null); }
         if (lastParent != null && context.canceled && IsGrounded()) { transform.SetParent(lastParent.transform); }
-        animator.SetBool("isRunning", true);
+      if(walk == true)
+        {
+            animator.SetBool("walk", true);
+        }
+        else
+        {
+            animator.SetBool("walk", false);
+            animator.SetBool("isRunning", true);
+
+        }
         if (context.canceled)
         {
+            animator.SetBool("walk", false);
             animator.SetBool("isRunning", false);
+            isMoving= false;
         }
 
     }
