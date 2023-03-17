@@ -7,7 +7,7 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("==========Sets==========")]
 
-    [SerializeField] float timeBetweenAttack;
+   
     [SerializeField] AudioClip swing;
     public Transform attackPos, attackUpPos, attackDownPos;
     public float attackRange;
@@ -16,6 +16,8 @@ public class PlayerCombat : MonoBehaviour
 
     // sets in code
 
+    [SerializeField] float timeBetweenAttack; // hide in inspector when finished with coding it
+    
     private bool swordUp, swordDown, swordOriginal = true;
    [SerializeField] int currentAttack = 0;
     Animator anim;
@@ -35,10 +37,13 @@ public class PlayerCombat : MonoBehaviour
         {
             currentAttack= 0;
         }
+        
+
     }
     
     public void Attack(InputAction.CallbackContext context)
     {
+        
 
         if (!playerMovement.IsGrounded())
         {
@@ -97,7 +102,7 @@ public class PlayerCombat : MonoBehaviour
         {
             anim.SetTrigger("Attack1"); // to be replaced eventually with attack 3
             currentAttack= 0;
-            print("3rd attack");
+            
         }
         AllSwordAttack();
     }
@@ -119,7 +124,7 @@ public class PlayerCombat : MonoBehaviour
 
         }
 
-       if(currentAttack != 0) // need to eventually add a fatigue option so cant spam this forever
+       if(currentAttack != 0 && timeBetweenAttack > 0.1f) // need to eventually add a fatigue option so cant spam this forever
         {
             timeBetweenAttack = 0;
         }
