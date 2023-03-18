@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     // movement bool
     public bool isCrouching = false;
     [HideInInspector] public bool isFacingRight = true;   
-    private bool canDash = true, isDashing;
+    [HideInInspector] public  bool canDash = true, isDashing;
     bool hasDoubleJumped = true;
     bool isDead = false;
     bool walk = false;

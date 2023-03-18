@@ -86,7 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyValues: {fileID: 11400000, guid: bd04109463b1d3847b0a5d5135a37841, type: 2}
-  attackdamage: 1
+  health: 0
+  contactDamage: 0
 --- !u!114 &4473349449478588940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,9 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377ff94d3e56c7d45bb0b78d0aaa828e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  aggroAwakeRange: 10
   aggroRange: 5
+  returnHomeRange: 15
   moveSpeed: 5
+  player: {fileID: 0}
 --- !u!1 &4473349449955731479
 GameObject:
   m_ObjectHideFlags: 0

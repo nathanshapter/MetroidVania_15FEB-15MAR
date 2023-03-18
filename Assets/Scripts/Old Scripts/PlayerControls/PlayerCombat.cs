@@ -228,4 +228,11 @@ public class PlayerCombat : MonoBehaviour
             return attackPos.position;
         }
     }
+    public void Parry(InputAction.CallbackContext context)
+    {
+        if (context.performed && playerMovement.IsGrounded() && !playerMovement.isDashing &&  !playerMovement.SomethingAbove()) 
+        {
+            anim.SetTrigger("ParryStance");
+        }
+    }
 }
