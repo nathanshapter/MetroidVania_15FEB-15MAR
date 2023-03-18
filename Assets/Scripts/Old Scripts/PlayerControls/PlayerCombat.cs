@@ -176,12 +176,25 @@ public class PlayerCombat : MonoBehaviour
     }
     public void SwordDown(InputAction.CallbackContext context)
     {
+        playerMovement.isCrouching = true;
         swordOriginal = false;
-        if (context.performed) { print("sword down"); }
+        if (context.performed)
+        {
+            
+            anim.SetBool("Crouching", true);
+            print("sword down"); 
+        }
         swordDown = true;       
-        if (context.canceled) { swordDown = false; print("sword returned");swordOriginal = true; }
-        
-        
+        if (context.canceled)
+        {
+            swordDown = false; print("sword returned");swordOriginal = true;
+            anim.SetBool("Crouching", false);
+            playerMovement.isCrouching = false;
+            playerMovement.speedActuel = playerMovement.originalSpeed;
+
+        }
+
+
     }
     private void OnDrawGizmosSelected() 
     {

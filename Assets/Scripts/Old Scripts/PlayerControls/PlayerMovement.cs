@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     bool isDead = false;
     bool walk = false;
     bool isMoving = false;
+    public bool isCrouching = false;
  
     float canMoveTimer;
     // firing values
@@ -94,8 +95,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("Grounded", false);
             }
-        
-       
+
+        if (isCrouching)
+        {
+            speedActuel = walkingSpeed;
+        }
         
      
     }
@@ -217,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isRunning", false);
             animator.SetTrigger("Jump");
 
-            if (shrunk) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower / shrunkJumpingPower); }
+            if (isCrouching) { rb.velocity = new Vector2(rb.velocity.x, jumpingPower / shrunkJumpingPower); }
             else { rb.velocity = new Vector2(rb.velocity.x, jumpingPower); }
 
             if (coyoteTime > coyoteTimeCounter)
