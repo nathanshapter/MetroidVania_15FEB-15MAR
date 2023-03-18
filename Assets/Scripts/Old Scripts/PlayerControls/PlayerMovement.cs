@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
+    // to add, timer in air to determine hard landing
     // movement bool
     public bool isCrouching = false;
     [HideInInspector] public bool isFacingRight = true;   
@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
         
      
     }
+  
     // Dash Methods
     private void CheckForDash()
     {
@@ -230,11 +231,14 @@ public class PlayerMovement : MonoBehaviour
 
     }
     // movement methods
+
+  
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
         speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
+            
             animator.SetBool("walk", false);
             animator.SetBool("isRunning", false);
             animator.SetTrigger("Jump");
@@ -259,9 +263,14 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-    
-   public bool IsGrounded()
+    private void HardLanding()
     {
+
+    }
+    
+    public bool IsGrounded()
+    {
+
         // if is moving play roll animation in correct direction
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }
@@ -311,10 +320,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch(InputAction.CallbackContext context)
     {
-        if (!progressionManager.progression[0]) { return; }
+        if (!progressionManager.progression[0] || !IsGrounded()) { return; }
+
 
         
-
         isCrouching = true;
         playerCombat.swordOriginal = false;
         if (context.performed)
@@ -324,12 +333,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Crouching", true);
             print("sword down");
         }
-        playerCombat.swordDown = true;
+        playerCombat.swordCrouchPosition = true;
         if (context.canceled)
         {
             capsuleCollider.enabled = true;
             boxCollider2D.enabled = false;
-            playerCombat.swordDown = false; print("sword returned"); playerCombat.swordOriginal = true;
+            playerCombat.swordCrouchPosition = false; print("sword returned"); playerCombat.swordOriginal = true;
             animator.SetBool("Crouching", false);
             isCrouching = false;
             speedActuel = originalSpeed;
@@ -346,7 +355,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-
+            
             lastParent = collision.gameObject;
             transform.SetParent(collision.transform);           
             
@@ -400,7 +409,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-
+        
+        
         transform.SetParent(null);
 
     }

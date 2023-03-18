@@ -9,8 +9,9 @@ public class PlayerCombat : MonoBehaviour
 
     public Transform attackPos;
     public Transform attackUpPos;
+    public Transform attackCrouchPos;
     public Transform attackDownPos;
-    public bool swordUp, swordDown, swordOriginal = true;
+    public bool swordUp, swordCrouchPosition, swordOriginal = true, swordDown;
     [Space(20)]
     public float attackRange;
     public int damage;
@@ -27,11 +28,13 @@ public class PlayerCombat : MonoBehaviour
     Animator anim;
     PlayerMovement playerMovement;    
     bool canAttackInAir = true;
+    private AudioManager_PrototypeHero audioManager;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        audioManager = AudioManager_PrototypeHero.instance;
     }
 
     private void Update()
@@ -52,13 +55,15 @@ public class PlayerCombat : MonoBehaviour
             playerMovement.speedActuel = playerMovement.originalSpeed;
         }
     }
-    
+ 
     public void Attack(InputAction.CallbackContext context)
     {        
 
         if (!playerMovement.IsGrounded())
         {
-            AirAttack();           
+            
+            AirAttack();    
+            
             
         }
         else if(playerMovement.IsGrounded())
@@ -78,8 +83,17 @@ public class PlayerCombat : MonoBehaviour
             anim.SetTrigger("UpAttack");
         }
         else if (canAttackInAir && swordOriginal)
-        {            
-            anim.SetTrigger("AirAttack");            
+        {
+            if (timeBetweenAttack > .55f && currentAttack == 0)
+            {
+                anim.SetTrigger("AirAttack");
+                audioManager.PlaySound("SwordAttack");
+            }
+           
+        }
+        else if(canAttackInAir && swordDown)
+        {
+            anim.SetTrigger("AttackAirSlam");
         }
         AllSwordAttack();
         currentAttack++;
@@ -94,9 +108,9 @@ public class PlayerCombat : MonoBehaviour
             {
                 anim.SetTrigger("UpAttack");
             }
-            else if (swordDown) // ie crouched
+            else if (swordCrouchPosition) // ie crouched
             {
-
+               
             }
             else if (swordOriginal)
             {
@@ -126,6 +140,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void AllSwordAttack() // all attacks run this
     {
+        
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
@@ -143,7 +158,7 @@ public class PlayerCombat : MonoBehaviour
         {
             canAttackInAir = false;
         }      
-
+      
 
        if(currentAttack != 0 && timeBetweenAttack > 0.1f) // need to eventually add a fatigue option so cant spam this forever
         {
@@ -154,7 +169,21 @@ public class PlayerCombat : MonoBehaviour
        
     }
 
-
+    public void SwordDown(InputAction.CallbackContext context)
+    {
+        print("hello");
+        if(!playerMovement.IsGrounded())
+        {
+            swordOriginal = false;
+            swordDown= true;
+            attackRange = 2.1f;
+        }
+        if (context.canceled ) // need to set attack range back in IsGrounded
+        {
+            swordDown= false; swordOriginal = true;
+            attackRange = .61f;
+        }
+    }
 
     public void SwordUp(InputAction.CallbackContext context)
     {
@@ -178,7 +207,11 @@ public class PlayerCombat : MonoBehaviour
         {
             return attackUpPos.position;
         }
-        if (swordDown)
+        if (swordCrouchPosition && playerMovement.IsGrounded())
+        {
+            return attackCrouchPos.position;
+        }
+        if (swordDown && !playerMovement.IsGrounded())
         {
             return attackDownPos.position;
         }
