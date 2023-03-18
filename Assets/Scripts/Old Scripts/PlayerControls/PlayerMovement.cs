@@ -22,7 +22,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask wallLayer;
     [SerializeField] GameObject groundCheck;
-    [SerializeField] Transform bulletSpawn;
+    CapsuleCollider2D capsuleCollider;
+    BoxCollider2D boxCollider2D;
+    
+
     Animator animator;
 
     [Header("=========== Movement Floats ==========")]
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float originalSpeed;
     [HideInInspector] public float horizontal;
     float coyoteTime = 0.5f, coyoteTimeCounter;
+    
 
     //jumping
     [SerializeField] float jumpingPower;
@@ -60,12 +64,12 @@ public class PlayerMovement : MonoBehaviour
     bool isTouchingBridge;
 
     [Header("=====Misc=====")]
-    // firing values
+    
     [Space(20)]
-    [SerializeField] float timeBetweenBullets;
+    
     [HideInInspector] public bool fluteIsPlaying;
     [SerializeField] float fluteCooldown;
-    bool bulletPlatformJustSpawned;
+    
     [SerializeField] TrailRenderer tr;
     [SerializeField] AudioClip flute;
 
@@ -88,6 +92,9 @@ public class PlayerMovement : MonoBehaviour
         animator= GetComponentInChildren<Animator>();
         originalSpeed = speedActuel;
         playerCombat = GetComponent<PlayerCombat>();
+    capsuleCollider = GetComponentInChildren<CapsuleCollider2D>();
+        boxCollider2D= GetComponentInChildren<BoxCollider2D>();
+        boxCollider2D.enabled = false;
     }
     private void Update()
     {     
@@ -306,16 +313,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!progressionManager.progression[0]) { return; }
 
+        
+
         isCrouching = true;
         playerCombat.swordOriginal = false;
         if (context.performed)
         {
+            capsuleCollider.enabled= false;
+            boxCollider2D.enabled= true;
             animator.SetBool("Crouching", true);
             print("sword down");
         }
         playerCombat.swordDown = true;
         if (context.canceled)
         {
+            capsuleCollider.enabled = true;
+            boxCollider2D.enabled = false;
             playerCombat.swordDown = false; print("sword returned"); playerCombat.swordOriginal = true;
             animator.SetBool("Crouching", false);
             isCrouching = false;
@@ -325,22 +338,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // firing methods // this should have its own script but oh well
-    public void FirePlatform(InputAction.CallbackContext context) 
-    {
-        if (!progressionManager.progression[3]) { return; }
-        if (!bulletPlatformJustSpawned)
-        {
-            Instantiate(platformBullet.bullet, bulletSpawn.position, transform.rotation);
-            bulletPlatformJustSpawned = true;
-            StartCoroutine(ResetPlatformBullet());
-
-        }
-    }
-    IEnumerator ResetPlatformBullet()
-    {
-        yield return new WaitForSeconds(timeBetweenBullets);
-        bulletPlatformJustSpawned = false;
-    }
+  
+   
 
    
     private void OnCollisionEnter2D(Collision2D collision)

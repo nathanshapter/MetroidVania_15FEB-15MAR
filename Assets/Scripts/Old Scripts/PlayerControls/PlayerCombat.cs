@@ -165,11 +165,7 @@ public class PlayerCombat : MonoBehaviour
 
 
     }
-    public void SwordDown(InputAction.CallbackContext context) // this needs to be changed to movement and changed name to crouch
-    {
-       
-
-    }
+  
     private void OnDrawGizmosSelected() 
     {
         Gizmos.color = Color.red;    
