@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     Health health;
     ProgressionManager progressionManager;
     RespawnManager respawnManager;
+    PlayerCombat playerCombat;
 
     // component Gets
     Rigidbody2D rb;
@@ -86,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         progressionManager = FindObjectOfType<ProgressionManager>();
         animator= GetComponentInChildren<Animator>();
         originalSpeed = speedActuel;
+        playerCombat = GetComponent<PlayerCombat>();
     }
     private void Update()
     {     
@@ -303,17 +305,23 @@ public class PlayerMovement : MonoBehaviour
     public void Crouch(InputAction.CallbackContext context)
     {
         if (!progressionManager.progression[0]) { return; }
-        if (context.started)
+
+        isCrouching = true;
+        playerCombat.swordOriginal = false;
+        if (context.performed)
         {
-            transform.DOScaleY(0.35f, 0.1f).SetEase(Ease.InSine);
-           
+            animator.SetBool("Crouching", true);
+            print("sword down");
         }
+        playerCombat.swordDown = true;
         if (context.canceled)
         {
-            transform.DOScaleY(1, .2f);
-            
-        }
+            playerCombat.swordDown = false; print("sword returned"); playerCombat.swordOriginal = true;
+            animator.SetBool("Crouching", false);
+            isCrouching = false;
+            speedActuel = originalSpeed;
 
+        }
     }
 
     // firing methods // this should have its own script but oh well

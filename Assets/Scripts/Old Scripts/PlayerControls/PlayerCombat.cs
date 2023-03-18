@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPos;
     public Transform attackUpPos;
     public Transform attackDownPos;
-    private bool swordUp, swordDown, swordOriginal = true;
+    public bool swordUp, swordDown, swordOriginal = true;
     [Space(20)]
     public float attackRange;
     public int damage;
@@ -167,22 +167,7 @@ public class PlayerCombat : MonoBehaviour
     }
     public void SwordDown(InputAction.CallbackContext context) // this needs to be changed to movement and changed name to crouch
     {
-        playerMovement.isCrouching = true;
-        swordOriginal = false;
-        if (context.performed)
-        {            
-            anim.SetBool("Crouching", true);
-            print("sword down"); 
-        }
-        swordDown = true;       
-        if (context.canceled)
-        {
-            swordDown = false; print("sword returned");swordOriginal = true;
-            anim.SetBool("Crouching", false);
-            playerMovement.isCrouching = false;
-            playerMovement.speedActuel = playerMovement.originalSpeed;
-
-        }
+       
 
     }
     private void OnDrawGizmosSelected() 

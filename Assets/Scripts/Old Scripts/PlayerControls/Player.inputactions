@@ -261,7 +261,7 @@
                 {
                     "name": "",
                     "id": "69abe410-0c2f-4fe2-a9bd-391fb0c33da1",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -316,7 +316,7 @@
                 {
                     "name": "",
                     "id": "4ab2a4d5-c834-400d-bb62-b1fa5702379e",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/numpadMinus",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
