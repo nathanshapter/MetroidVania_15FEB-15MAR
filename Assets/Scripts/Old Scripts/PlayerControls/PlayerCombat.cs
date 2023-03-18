@@ -5,25 +5,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("==========Sets==========")]
+    [Header("==========Sword Position==========")]
 
-   
-    [SerializeField] AudioClip swing;
-    public Transform attackPos, attackUpPos, attackDownPos;
+    public Transform attackPos;
+    public Transform attackUpPos;
+    public Transform attackDownPos;
+    private bool swordUp, swordDown, swordOriginal = true;
+    [Space(20)]
     public float attackRange;
-    public LayerMask whatIsEnemies;
     public int damage;
     [SerializeField] float attackingSpeed = 1.5f;
+    [SerializeField] float timeBetweenAttack; 
     [SerializeField] float slowDownAfterAttack = 0.75f;
-    // sets in code
-
-    [SerializeField] float timeBetweenAttack; // hide in inspector when finished with coding it
+    [SerializeField] AudioClip swing;
+    [Space(20)]
+    public LayerMask whatIsEnemies;
     
-    private bool swordUp, swordDown, swordOriginal = true;
-   [SerializeField] int currentAttack = 0;
+   
+    // sets in code  
+    int currentAttack = 0;
     Animator anim;
-    PlayerMovement playerMovement;
-    float attackSpamPoint; // 
+    PlayerMovement playerMovement;    
     bool canAttackInAir = true;
 
     private void Start()
@@ -52,13 +54,11 @@ public class PlayerCombat : MonoBehaviour
     }
     
     public void Attack(InputAction.CallbackContext context)
-    {
-        
+    {        
 
         if (!playerMovement.IsGrounded())
         {
-            AirAttack();
-            
+            AirAttack();           
             
         }
         else if(playerMovement.IsGrounded())
@@ -66,8 +66,8 @@ public class PlayerCombat : MonoBehaviour
             playerMovement.speedActuel = attackingSpeed;
             GroundedAttack();
             
-        } 
-        
+        }        
+       
       
     }
 
@@ -78,28 +78,23 @@ public class PlayerCombat : MonoBehaviour
             anim.SetTrigger("UpAttack");
         }
         else if (canAttackInAir && swordOriginal)
-        {
-            
-            anim.SetTrigger("AirAttack");
-            
+        {            
+            anim.SetTrigger("AirAttack");            
         }
         AllSwordAttack();
         currentAttack++;
 
     }
     private void GroundedAttack()
-    {
-        
+    {        
         if (timeBetweenAttack > .55f && currentAttack ==0)
         {
             currentAttack++;
-
-
-            if (swordUp)  /// these need to do something other than print
+            if (swordUp)  
             {
                 anim.SetTrigger("UpAttack");
             }
-            else if (swordDown)
+            else if (swordDown) // ie crouched
             {
 
             }
@@ -119,7 +114,7 @@ public class PlayerCombat : MonoBehaviour
             
 
         }
-       else if(currentAttack == 2 && timeBetweenAttack >= .15f && swordOriginal)
+       else if(currentAttack == 2 && timeBetweenAttack >= .15f && swordOriginal) // logic to allow 3rd swing
         {
             anim.SetTrigger("Attack1"); // to be replaced eventually with attack 3
             currentAttack= 0;
@@ -142,22 +137,18 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
             }
-
-
         }
 
         if (!playerMovement.IsGrounded() && currentAttack != 0)
         {
             canAttackInAir = false;
-        }
-        
+        }      
 
 
        if(currentAttack != 0 && timeBetweenAttack > 0.1f) // need to eventually add a fatigue option so cant spam this forever
         {
             timeBetweenAttack = 0;
-        }
-        
+        }       
             
         
        
@@ -168,19 +159,18 @@ public class PlayerCombat : MonoBehaviour
     public void SwordUp(InputAction.CallbackContext context)
     {
         swordOriginal= false;
-        if (context.performed) { print("sword up"); }
+        if (context.performed) { }
          swordUp = true;
-        if (context.canceled) { swordUp = false; print("sword returned"); swordOriginal = true; }
+        if (context.canceled) { swordUp = false;  swordOriginal = true; }
 
 
     }
-    public void SwordDown(InputAction.CallbackContext context)
+    public void SwordDown(InputAction.CallbackContext context) // this needs to be changed to movement and changed name to crouch
     {
         playerMovement.isCrouching = true;
         swordOriginal = false;
         if (context.performed)
-        {
-            
+        {            
             anim.SetBool("Crouching", true);
             print("sword down"); 
         }
@@ -193,7 +183,6 @@ public class PlayerCombat : MonoBehaviour
             playerMovement.speedActuel = playerMovement.originalSpeed;
 
         }
-
 
     }
     private void OnDrawGizmosSelected() 

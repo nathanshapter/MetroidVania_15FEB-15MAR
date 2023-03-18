@@ -42,52 +42,40 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashingPower;
     [SerializeField] float dashingTime;
     [SerializeField] float dashingCooldown;
-    
-
-
-
     [Space(20)]
-   // movement bool
 
-    [HideInInspector] public bool isFacingRight = true;
-    
-    bool shrunk;
 
+
+
+    // movement bool
+    public bool isCrouching = false;
+    [HideInInspector] public bool isFacingRight = true;   
     private bool canDash = true, isDashing;
-
     bool hasDoubleJumped = true;
-
     bool isDead = false;
     bool walk = false;
     bool isMoving = false;
-    public bool isCrouching = false;
- 
+    bool allowDoubleWallJump = false;
+    bool isTouchingBridge;
 
-    // movement bools
-    float canMoveTimer;
+    [Header("=====Misc=====")]
     // firing values
-    bool bulletPlatformJustSpawned;
+    [Space(20)]
     [SerializeField] float timeBetweenBullets;
-
-
-
-
-    public bool fluteIsPlaying;
+    [HideInInspector] public bool fluteIsPlaying;
     [SerializeField] float fluteCooldown;
-
-
+    bool bulletPlatformJustSpawned;
     [SerializeField] TrailRenderer tr;
-
-    [SerializeField] float knockBackX, knockBackY;
-
     [SerializeField] AudioClip flute;
 
-    bool allowDoubleWallJump = false;
 
+    // camera
     [SerializeField] CinemachineVirtualCamera playerVirtualCamera;
     [SerializeField] float levelSizeCamera = 19.78f;
 
-    
+
+    GameObject lastParent;
+
     private void Start()
     {
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -100,10 +88,7 @@ public class PlayerMovement : MonoBehaviour
         originalSpeed = speedActuel;
     }
     private void Update()
-    {
-       
-        
-            // playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera; // this is just for debugging, to be removed
+    {     
             if (isDead) return; // to remove later
             if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
             else { coyoteTimeCounter -= Time.deltaTime; }
@@ -265,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-    bool isTouchingBridge;
+    
    public bool IsGrounded()
     {
         // if is moving play roll animation in correct direction
@@ -321,18 +306,18 @@ public class PlayerMovement : MonoBehaviour
         if (context.started)
         {
             transform.DOScaleY(0.35f, 0.1f).SetEase(Ease.InSine);
-            shrunk = true;
+           
         }
         if (context.canceled)
         {
             transform.DOScaleY(1, .2f);
-            shrunk = false;
+            
         }
 
     }
 
     // firing methods // this should have its own script but oh well
-    public void FirePlatform(InputAction.CallbackContext context)
+    public void FirePlatform(InputAction.CallbackContext context) 
     {
         if (!progressionManager.progression[3]) { return; }
         if (!bulletPlatformJustSpawned)
@@ -349,7 +334,7 @@ public class PlayerMovement : MonoBehaviour
         bulletPlatformJustSpawned = false;
     }
 
-    GameObject lastParent;
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
