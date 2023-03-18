@@ -22,24 +22,48 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask wallLayer;
     [SerializeField] GameObject groundCheck;
     [SerializeField] Transform bulletSpawn;
+    Animator animator;
 
-    //movement values
-    [SerializeField] public float horizontal, speedActuel, jumpingPower, platformSpeed,  walkingSpeed;
-    public float originalSpeed;
-    public bool isFacingRight = true;
+    [Header("=========== Movement Floats ==========")]
+    [Space(20)]
+    
+    public float speedActuel;
+    public float walkingSpeed;
+    [HideInInspector] public float originalSpeed;
+    [HideInInspector] public float horizontal;
+    float coyoteTime = 0.5f, coyoteTimeCounter;
+
+    //jumping
+    [SerializeField] float jumpingPower;
     [Range(1f, 2f)][SerializeField] float shrunkJumpingPower;
+
+    [Header("=====Dash Values=====")]
+    [Space(20)]
+    [SerializeField] float dashingPower;
+    [SerializeField] float dashingTime;
+    [SerializeField] float dashingCooldown;
+    
+
+
+
+    [Space(20)]
+   // movement bool
+
+    [HideInInspector] public bool isFacingRight = true;
+    
     bool shrunk;
 
     private bool canDash = true, isDashing;
-    [SerializeField] private float dashingPower, dashingTime, dashingCooldown;
-    [SerializeField] float coyoteTime = 0.5f, coyoteTimeCounter;
-    [SerializeField] bool hasDoubleJumped;
+
+    bool hasDoubleJumped = true;
 
     bool isDead = false;
     bool walk = false;
     bool isMoving = false;
     public bool isCrouching = false;
  
+
+    // movement bools
     float canMoveTimer;
     // firing values
     bool bulletPlatformJustSpawned;
@@ -63,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera playerVirtualCamera;
     [SerializeField] float levelSizeCamera = 19.78f;
 
-    Animator animator;
+    
     private void Start()
     {
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
