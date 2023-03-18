@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             speedActuel = walkingSpeed;
            
         }
-        if(!SomethingAbove() && playerCombat.swordOriginal && !isDashing && !walk)
+        if(!SomethingAbove() && playerCombat.swordOriginal && !isDashing && !walk && !playerCombat.isGroundAttacking)
         {
             StandUp();
         }
@@ -343,7 +343,7 @@ public class PlayerMovement : MonoBehaviour
             capsuleCollider.enabled= false;
             boxCollider2D.enabled= true;
             animator.SetBool("Crouching", true);
-            print("sword down");
+           
         }
         playerCombat.swordCrouchPosition = true;
         if (context.canceled && !SomethingAbove())
@@ -359,10 +359,18 @@ public class PlayerMovement : MonoBehaviour
     {
         capsuleCollider.enabled = true;
         boxCollider2D.enabled = false;
-        playerCombat.swordCrouchPosition = false; print("sword returned"); playerCombat.swordOriginal = true;
+        playerCombat.swordCrouchPosition = false;  playerCombat.swordOriginal = true;
         animator.SetBool("Crouching", false);
         isCrouching = false;
+
+
         speedActuel = originalSpeed;
+
+
+    }
+    void ResetSpeed()
+    {
+        
     }
 
    

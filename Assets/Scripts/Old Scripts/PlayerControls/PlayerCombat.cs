@@ -12,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackCrouchPos;
     public Transform attackDownPos;
     public bool swordUp, swordCrouchPosition, swordOriginal = true, swordDown;
+    [HideInInspector] public bool isGroundAttacking = false;
     [Space(20)]
     public float attackRange;
     public int damage;
@@ -68,12 +69,18 @@ public class PlayerCombat : MonoBehaviour
         }
         else if(playerMovement.IsGrounded())
         {
+            isGroundAttacking = true;
             playerMovement.speedActuel = attackingSpeed;
             GroundedAttack();
             
         }        
        
       
+    }
+    private IEnumerator ResetGroundAttacking()
+    {
+        yield return new WaitForSeconds(slowDownAfterAttack);
+        isGroundAttacking = false;
     }
 
     private void AirAttack()
@@ -134,6 +141,7 @@ public class PlayerCombat : MonoBehaviour
             currentAttack= 0;
             
         }
+        StartCoroutine(ResetGroundAttacking());
         AllSwordAttack();
     }
 
@@ -163,15 +171,15 @@ public class PlayerCombat : MonoBehaviour
        if(currentAttack != 0 && timeBetweenAttack > 0.1f) // need to eventually add a fatigue option so cant spam this forever
         {
             timeBetweenAttack = 0;
-        }       
-            
-        
+        }
+
+       
        
     }
 
     public void SwordDown(InputAction.CallbackContext context)
     {
-        print("hello");
+       
         if(!playerMovement.IsGrounded())
         {
             swordOriginal = false;
