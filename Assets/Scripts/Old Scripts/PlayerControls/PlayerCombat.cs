@@ -31,11 +31,14 @@ public class PlayerCombat : MonoBehaviour
     bool canAttackInAir = true;
     private AudioManager_PrototypeHero audioManager;
 
+    Health health;
+
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         audioManager = AudioManager_PrototypeHero.instance;
+        health = GetComponent<Health>();
     }
 
     private void Update()
@@ -233,6 +236,16 @@ public class PlayerCombat : MonoBehaviour
         if (context.performed && playerMovement.IsGrounded() && !playerMovement.isDashing &&  !playerMovement.SomethingAbove()) 
         {
             anim.SetTrigger("ParryStance");
+            health.canTakeDmg = false;
+            Invoke("CanTakeDMG", .5f);
         }
+        if(context.canceled)
+        {
+            health.canTakeDmg = true;   
+        }
+    }
+    void CanTakeDMG()
+    {
+        health.canTakeDmg = true;
     }
 }

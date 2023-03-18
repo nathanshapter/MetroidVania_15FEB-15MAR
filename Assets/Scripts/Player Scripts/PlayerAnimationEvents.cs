@@ -18,11 +18,14 @@ public class PlayerAnimationEvents : MonoBehaviour
     private PlayerMovement player;
     private AudioManager_PrototypeHero m_audioManager;
 
+    Health health;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponentInParent<PlayerMovement>();
         m_audioManager = AudioManager_PrototypeHero.instance;
+        health = FindObjectOfType<Health>();
     }
     private void Update()
     {
@@ -88,16 +91,18 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     void AE_Parry()
     {
-     //   m_audioManager.PlaySound("Parry");
+        m_audioManager.PlaySound("Parry");
         float xOffset = 0.1875f;
         float yOffset = 0.25f;
         player.SpawnDustEffect(ParryEffect, xOffset, yOffset);
        // player.DisableMovement(0.5f);
     }
+    
 
     void AE_ParryStance()
     {
-      //  m_audioManager.PlaySound("DrawSword");
+        m_audioManager.PlaySound("DrawSword");
+
     }
 
     void AE_AttackAirSlam()
