@@ -420,6 +420,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 608334959, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 608334959, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 848974688, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 22
@@ -472,6 +480,14 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[21].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 935487296, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163885336, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: canTakeDmg
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1396250771, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.824
@@ -479,6 +495,10 @@ PrefabInstance:
     - target: {fileID: 1396250771, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064812670, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.76
       objectReference: {fileID: 0}
     - target: {fileID: 2681140007325390684, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: attackRange
@@ -489,12 +509,28 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: dashingTime
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: speedActuel
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: dashingPower
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: walkingSpeed
       value: 3.33333
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: dashingCooldown
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860826939486354205, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
+      propertyPath: hasDoubleJumped
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8760662009401395709, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
       propertyPath: m_RootOrder
