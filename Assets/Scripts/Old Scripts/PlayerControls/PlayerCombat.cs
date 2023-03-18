@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
     private AudioManager_PrototypeHero audioManager;
 
     Health health;
-
+    float ballTimer;
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -42,7 +42,12 @@ public class PlayerCombat : MonoBehaviour
     }
 
     private void Update()
-    {       
+    {      
+        ballTimer +=Time.deltaTime;
+        if(ballTimer > 0.5f)
+        {
+            hasSpawnedFireBall = false;
+        }
        timeBetweenAttack += Time.deltaTime; 
         if(timeBetweenAttack > .75f)
         {
@@ -231,21 +236,38 @@ public class PlayerCombat : MonoBehaviour
             return attackPos.position;
         }
     }
+    public bool isParrying;
     public void Parry(InputAction.CallbackContext context)
     {
         if (context.performed && playerMovement.IsGrounded() && !playerMovement.isDashing &&  !playerMovement.SomethingAbove()) 
         {
-            anim.SetTrigger("ParryStance");
+            anim.SetTrigger("ParryStance"); // eventually to remove cantakeDMG and replace with parrying
             health.canTakeDmg = false;
+            isParrying = true;
             Invoke("CanTakeDMG", .5f);
         }
         if(context.canceled)
         {
-            health.canTakeDmg = true;   
+            health.canTakeDmg = true;
+            isParrying = false;
         }
     }
     void CanTakeDMG()
     {
         health.canTakeDmg = true;
+        isParrying = false;
+    }
+
+    [SerializeField] GameObject fireball;
+    [SerializeField] private GameObject InstantiatePos;
+    bool hasSpawnedFireBall = false;
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Projectile") && isParrying && !hasSpawnedFireBall)
+        {
+            ballTimer = 0;
+            hasSpawnedFireBall=true;
+            Instantiate(fireball, InstantiatePos.transform.position, InstantiatePos.transform.rotation);
+        }
     }
 }

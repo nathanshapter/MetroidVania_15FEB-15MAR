@@ -11,10 +11,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2883464028465336866, guid: b600a838907eb85448d4afa108aa1806, type: 3}
-      propertyPath: fireball
-      value: 
-      objectReference: {fileID: 8976950158448476323, guid: e89df931f7de6f64aa44d64e8b29abab, type: 3}
     - target: {fileID: 4402745907527001963, guid: b600a838907eb85448d4afa108aa1806, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -61,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4402745907527001966, guid: b600a838907eb85448d4afa108aa1806, type: 3}
       propertyPath: m_Name
-      value: RegularFireball
+      value: DeflectedFireball
       objectReference: {fileID: 0}
     - target: {fileID: 4402745907527001966, guid: b600a838907eb85448d4afa108aa1806, type: 3}
       propertyPath: m_TagString
@@ -69,13 +65,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1345012882422877048, guid: b600a838907eb85448d4afa108aa1806, type: 3}
+    - {fileID: 2883464028465336866, guid: b600a838907eb85448d4afa108aa1806, type: 3}
+    - {fileID: -1331847912705120031, guid: b600a838907eb85448d4afa108aa1806, type: 3}
+    - {fileID: 4402745907527001962, guid: b600a838907eb85448d4afa108aa1806, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b600a838907eb85448d4afa108aa1806, type: 3}
 --- !u!1 &8976950158448476323 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4402745907527001966, guid: b600a838907eb85448d4afa108aa1806, type: 3}
   m_PrefabInstance: {fileID: 4723495940219398093}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7567334669712126350
+--- !u!114 &1606714679517747552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,8 +83,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8976950158448476323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4aaaa3f970a7a842ba411052fcf3371, type: 3}
+  m_Script: {fileID: 11500000, guid: cb2b7f27d2a2f4744b66710550cb51bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireball: {fileID: 0}
+  moveSpeed: 7
+  target: {fileID: 0}
+  fireBall: {fileID: 0}
   InstantiatePos: {fileID: 0}
