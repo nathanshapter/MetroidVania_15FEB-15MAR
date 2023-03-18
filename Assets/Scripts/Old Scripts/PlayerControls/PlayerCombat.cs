@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("==========Sword Position==========")]
-
+    [Space(20)]
     public Transform attackPos;
     public Transform attackUpPos;
     public Transform attackCrouchPos;
@@ -14,12 +14,14 @@ public class PlayerCombat : MonoBehaviour
     public bool swordUp, swordCrouchPosition, swordOriginal = true, swordDown;
     [HideInInspector] public bool isGroundAttacking = false;
     [Space(20)]
+    [Header("==========Attack Values==========")]
+    [Space(20)]
     public float attackRange;
     public int damage;
     [SerializeField] float attackingSpeed = 1.5f;
     [SerializeField] float timeBetweenAttack; 
     [SerializeField] float slowDownAfterAttack = 0.75f;
-    [SerializeField] AudioClip swing;
+   
     [Space(20)]
     public LayerMask whatIsEnemies;
     
@@ -33,6 +35,17 @@ public class PlayerCombat : MonoBehaviour
 
     Health health;
     float ballTimer;
+
+
+    //fireball variables
+    [Header("==========Fireball==========")]
+    [Space(20)]
+
+    [SerializeField] GameObject fireball;
+    [SerializeField] private GameObject InstantiatePos;
+    bool hasSpawnedFireBall = false;
+
+
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -44,7 +57,7 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {      
         ballTimer +=Time.deltaTime;
-        if(ballTimer > 0.5f)
+        if(ballTimer > 0.07f)
         {
             hasSpawnedFireBall = false;
         }
@@ -258,16 +271,19 @@ public class PlayerCombat : MonoBehaviour
         isParrying = false;
     }
 
-    [SerializeField] GameObject fireball;
-    [SerializeField] private GameObject InstantiatePos;
-    bool hasSpawnedFireBall = false;
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Projectile") && isParrying && !hasSpawnedFireBall)
         {
+            
+            anim.SetTrigger("Parry"); // might have to change this to a bool
+            
+            Instantiate(fireball, InstantiatePos.transform.position, InstantiatePos.transform.rotation);
+         
             ballTimer = 0;
             hasSpawnedFireBall=true;
-            Instantiate(fireball, InstantiatePos.transform.position, InstantiatePos.transform.rotation);
+            
         }
     }
 }

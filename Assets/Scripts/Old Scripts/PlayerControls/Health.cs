@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public int playerHealth, amountOfLives = 5;
+    [Header("==========Health Values==========")]
+    [Space(20)]
+    public int playerHealth;
+    public int amountOfLives = 5;
+    [Space(20)]
+
+    [Header("==========Damage Values==========")]
+    [Space(20)]
     [SerializeField] int spikeDamage;
     [SerializeField] float invincibleTimer = 1f, invincibleTimerOriginal =1f;
     public bool fallDamage = false;
-
-    // script gets
-    [SerializeField] GameObject playerPrefab;
-  [SerializeField]  DeathManager deathManager;
-    [SerializeField] RespawnManager respawnManager;
-   [SerializeField] PlayerShader playerShader;
-    [SerializeField] CheckpointsManager cpManager;
-
     public bool justTookDamage;
     public bool canTakeDmg = true;
     [SerializeField] float justTookDamageTime;
-  
+
+    [Space(20)]
+    [Header("==========Scripts==========")]
+    [Space(20)]
+
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] DeathManager deathManager;
+    [SerializeField] RespawnManager respawnManager;
+    [SerializeField] PlayerShader playerShader;
+    [SerializeField] CheckpointsManager cpManager;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
