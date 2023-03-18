@@ -13,6 +13,7 @@ public class PlatformBullet : MonoBehaviour
     
     [SerializeField] Transform bulletSpawn;
     [SerializeField] float timeBetweenBullets;
+    [SerializeField] Animator anim;
 
     private void Start()
     {
@@ -21,18 +22,23 @@ public class PlatformBullet : MonoBehaviour
 
     public void FirePlatform(InputAction.CallbackContext context)
     {
-        print("hello");
+
+        
         if (!progressionManager.progression[3]) { return; }
         if (!bulletPlatformJustSpawned)
         {
-            Instantiate(bullet, bulletSpawn.position, transform.rotation);
-            bulletPlatformJustSpawned = true;
             StartCoroutine(ResetPlatformBullet());
 
         }
     }
-    IEnumerator ResetPlatformBullet()
+    IEnumerator ResetPlatformBullet() // this also shoots it with a timer to line up with the animation
     {
+        anim.SetTrigger("Throw");
+        bulletPlatformJustSpawned = true;
+        yield return new WaitForSeconds(0.25f);
+        Instantiate(bullet, bulletSpawn.position, transform.rotation);
+
+
         yield return new WaitForSeconds(timeBetweenBullets);
         bulletPlatformJustSpawned = false;
     }
