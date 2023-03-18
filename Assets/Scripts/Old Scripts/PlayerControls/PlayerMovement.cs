@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask wallLayer;
     [SerializeField] GameObject groundCheck;
+    [SerializeField] GameObject roofCheck;
     CapsuleCollider2D capsuleCollider;
     BoxCollider2D boxCollider2D;
     
@@ -117,9 +118,13 @@ public class PlayerMovement : MonoBehaviour
         if (isCrouching)
         {
             speedActuel = walkingSpeed;
+           
+        }
+        if(!SomethingAbove() && playerCombat.swordOriginal && !isDashing && !walk)
+        {
+            StandUp();
         }
         
-     
     }
   
     // Dash Methods
@@ -133,6 +138,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public IEnumerator Dash()
     {
+        walk = false;
+        capsuleCollider.enabled = false;
+        boxCollider2D.enabled = true;
         health.canTakeDmg = false;
         animator.SetTrigger("Dodge");
         canDash = false;
@@ -142,10 +150,12 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime); tr.emitting = false;
+      
         health.canTakeDmg = true;
         rb.gravityScale = originalGravity;
         isDashing = false;
         yield return new WaitForSeconds(dashingCooldown);
+     
         canDash = true;
 
     }
@@ -263,9 +273,11 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-    private void HardLanding()
+    public bool SomethingAbove()
     {
 
+        return Physics2D.OverlapCircle(roofCheck.transform.position, 0.5f, groundLayer); // needs to be changed to roof layer
+        
     }
     
     public bool IsGrounded()
@@ -334,21 +346,24 @@ public class PlayerMovement : MonoBehaviour
             print("sword down");
         }
         playerCombat.swordCrouchPosition = true;
-        if (context.canceled)
+        if (context.canceled && !SomethingAbove())
         {
-            capsuleCollider.enabled = true;
-            boxCollider2D.enabled = false;
-            playerCombat.swordCrouchPosition = false; print("sword returned"); playerCombat.swordOriginal = true;
-            animator.SetBool("Crouching", false);
-            isCrouching = false;
-            speedActuel = originalSpeed;
-
+            
+            StandUp();
         }
     }
 
-    // firing methods // this should have its own script but oh well
-  
    
+  
+   private void StandUp()
+    {
+        capsuleCollider.enabled = true;
+        boxCollider2D.enabled = false;
+        playerCombat.swordCrouchPosition = false; print("sword returned"); playerCombat.swordOriginal = true;
+        animator.SetBool("Crouching", false);
+        isCrouching = false;
+        speedActuel = originalSpeed;
+    }
 
    
     private void OnCollisionEnter2D(Collision2D collision)
