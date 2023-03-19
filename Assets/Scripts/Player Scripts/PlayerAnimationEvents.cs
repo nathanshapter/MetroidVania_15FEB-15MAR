@@ -107,15 +107,16 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     void AE_AttackAirSlam()
     {
-      //  m_audioManager.PlaySound("DrawSword");
+       m_audioManager.PlaySound("DrawSword");
     }
 
     void AE_AttackAirLanding()
     {
-      //  m_audioManager.PlaySound("AirSlamLanding");
-        float dustYOffset = 0.078125f;
+        m_audioManager.PlaySound("AirSlamLanding");
+        float dustYOffset = -.378125f;
         player.SpawnDustEffect(AirSlamDust, 0.0f, dustYOffset);
-      //  player.DisableMovement(0.5f);
+        player.DisableMovement(0.5f);
+       
     }
 
     void AE_Hurt()

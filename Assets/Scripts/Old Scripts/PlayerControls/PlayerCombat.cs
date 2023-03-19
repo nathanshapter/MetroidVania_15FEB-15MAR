@@ -83,8 +83,8 @@ public class PlayerCombat : MonoBehaviour
     }
  
     public void Attack(InputAction.CallbackContext context)
-    {        
-
+    {
+        if (playerMovement.isFrozen) { return; }
         if (!playerMovement.IsGrounded())
         {
             
@@ -256,8 +256,12 @@ public class PlayerCombat : MonoBehaviour
     public bool isParrying;
     public void Parry(InputAction.CallbackContext context)
     {
+        
+        if (playerMovement.isFrozen) { return; }
         if (context.performed && playerMovement.IsGrounded() && !playerMovement.isDashing &&  !playerMovement.SomethingAbove()) 
         {
+            playerMovement.DisableMovement(0.35f);
+            playerMovement.speedActuel = playerMovement.walkingSpeed;
             animator.SetTrigger("ParryStance"); // eventually to remove cantakeDMG and replace with parrying
             health.canTakeDmg = false;
             isParrying = true;

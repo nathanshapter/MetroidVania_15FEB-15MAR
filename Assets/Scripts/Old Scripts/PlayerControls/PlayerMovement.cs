@@ -1,8 +1,6 @@
 using Cinemachine;
-using DG.Tweening;
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject roofCheck;
     CapsuleCollider2D capsuleCollider;
     BoxCollider2D boxCollider2D;
+    PlayerInput playerInput;
     
 
     Animator animator;
@@ -96,11 +95,15 @@ public class PlayerMovement : MonoBehaviour
     capsuleCollider = GetComponentInChildren<CapsuleCollider2D>();
         boxCollider2D= GetComponentInChildren<BoxCollider2D>();
         boxCollider2D.enabled = false;
+        playerInput =GetComponent<PlayerInput>();   
     }
     private void Update()
     {
-        
-       
+        freezeTimer -= Time.deltaTime;
+        if (freezeTimer < 0) { isFrozen = false; playerInput.enabled = true ; }
+        if (isFrozen) { this.transform.position = frozenPosition; return; }
+
+     
 
         if (isDead) return; // to remove later
             if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
@@ -125,6 +128,20 @@ public class PlayerMovement : MonoBehaviour
             StandUp();
         }
         if (IsGrounded()) { animator.SetBool("Grounded", true); } else { animator.SetBool("Grounded", false); }
+
+       
+    }
+    public bool isFrozen;
+   public float freezeTimer;
+    Vector2 frozenPosition;
+   public void DisableMovement(float freezeTime)
+    {
+       
+        if (freezeTime >0) { isFrozen = true; }
+        freezeTimer = freezeTime;
+        playerInput.enabled = false;
+        frozenPosition = this.transform.position;
+       
     }
   
     // Dash Methods
@@ -138,31 +155,35 @@ public class PlayerMovement : MonoBehaviour
     }
     public IEnumerator Dash()
     {
-        walk = false;
-        capsuleCollider.enabled = false;
-        boxCollider2D.enabled = true;
-        health.canTakeDmg = false;
-        animator.SetTrigger("Dodge");
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime); tr.emitting = false;
-        if (SomethingAbove()) { animator.SetBool("Crouching", true); }
-        health.canTakeDmg = true;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-     
-        canDash = true;
+        if(!isFrozen)
+        {
+            walk = false;
+            capsuleCollider.enabled = false;
+            boxCollider2D.enabled = true;
+            health.canTakeDmg = false;
+            animator.SetTrigger("Dodge");
+            canDash = false;
+            isDashing = true;
+            float originalGravity = rb.gravityScale;
+            rb.gravityScale = 0;
+            rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+            tr.emitting = true;
+            yield return new WaitForSeconds(dashingTime); tr.emitting = false;
+            if (SomethingAbove()) { animator.SetBool("Crouching", true); }
+            health.canTakeDmg = true;
+            rb.gravityScale = originalGravity;
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+
+            canDash = true;
+        }
+      
 
     }
     // wasd methods
     public void Walk(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded())
+        if (context.performed && IsGrounded() && !isFrozen)
         {
             walk = !walk;
 
@@ -215,7 +236,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(InputAction.CallbackContext context) // while attacking cannot move, but jump should break the lock
     {
-       
+     
+       if(isFrozen) { return; }
         isMoving = true;
         horizontal = context.ReadValue<Vector2>().x;
         if (context.performed) { transform.SetParent(null); }
@@ -245,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
   
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
-        
+        if (isFrozen) { return; }
         speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
@@ -335,7 +357,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Crouch(InputAction.CallbackContext context)
     {
-        if (!progressionManager.progression[0] || !IsGrounded()) { return; }
+        if (!progressionManager.progression[0] || !IsGrounded() || isFrozen)  { return; }
 
 
         
