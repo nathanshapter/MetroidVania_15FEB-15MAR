@@ -278,7 +278,7 @@ public class PlayerCombat : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool isFacingProjectile = false;
+        bool isFacingProjectile = false; // only deflects if facing the enemy
         if(playerMovement.isFacingRight && collision.transform.position.x > transform.position.x || !playerMovement.isFacingRight && collision.transform.position.x < transform.position.x)
         {
             isFacingProjectile = true;
@@ -297,11 +297,5 @@ public class PlayerCombat : MonoBehaviour
             
         }
     }
-    bool isFacingProjectile()
-    {
-       
-
-
-        return true;
-    }
+ 
 }

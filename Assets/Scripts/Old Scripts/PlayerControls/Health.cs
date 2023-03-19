@@ -58,6 +58,7 @@ public class Health : MonoBehaviour
     {
         if (canTakeDmg)
         {
+            print(damage);
             // SoundManager.Instance.StopSound(); // needs to stop just flute
             justTookDamage = true;
             if (invincibleTimer > 0) { return playerHealth; }

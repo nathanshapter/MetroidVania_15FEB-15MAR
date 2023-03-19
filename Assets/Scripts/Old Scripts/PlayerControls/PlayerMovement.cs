@@ -409,6 +409,22 @@ public class PlayerMovement : MonoBehaviour
 
             health.CheckIfAlive();
         }
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            if (collision.gameObject.GetComponent<EnemyHealth>() == null) 
+            {
+                if(collision.gameObject.GetComponent<DeflectedFireball>() != null) { return; } // if this is a deflected fireball, then do not applay contact damage
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage);
+              
+            }
+            else
+            {
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage);
+
+            }
+
+            health.CheckIfAlive();
+        }
 
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
