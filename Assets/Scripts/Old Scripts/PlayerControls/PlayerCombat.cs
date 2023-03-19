@@ -28,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
    
     // sets in code  
     int currentAttack = 0;
-    Animator anim;
+    Animator animator;
     PlayerMovement playerMovement;    
     bool canAttackInAir = true;
     private AudioManager_PrototypeHero audioManager;
@@ -48,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         audioManager = AudioManager_PrototypeHero.instance;
         health = GetComponent<Health>();
@@ -78,7 +78,7 @@ public class PlayerCombat : MonoBehaviour
         }
         if (!isParrying)
         {
-            anim.ResetTrigger("Parry");
+            animator.ResetTrigger("Parry");
         }
     }
  
@@ -112,20 +112,20 @@ public class PlayerCombat : MonoBehaviour
     {
         if(canAttackInAir && swordUp)
         {
-            anim.SetTrigger("UpAttack");
+            animator.SetTrigger("UpAttack");
         }
         else if (canAttackInAir && swordOriginal)
         {
             if (timeBetweenAttack > .55f && currentAttack == 0)
             {
-                anim.SetTrigger("AirAttack");
+                animator.SetTrigger("AirAttack");
                 audioManager.PlaySound("SwordAttack");
             }
            
         }
         else if(canAttackInAir && swordDown)
         {
-            anim.SetTrigger("AttackAirSlam");
+            animator.SetTrigger("AttackAirSlam");
         }
         AllSwordAttack();
         currentAttack++;
@@ -138,7 +138,7 @@ public class PlayerCombat : MonoBehaviour
             currentAttack++;
             if (swordUp)  
             {
-                anim.SetTrigger("UpAttack");
+                animator.SetTrigger("UpAttack");
             }
             else if (swordCrouchPosition) // ie crouched
             {
@@ -146,7 +146,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else if (swordOriginal)
             {
-                anim.SetTrigger("Attack1");
+                animator.SetTrigger("Attack1");
             }
 
         }
@@ -155,14 +155,14 @@ public class PlayerCombat : MonoBehaviour
           currentAttack++; // this will be used later for a 3rd attack
             
 
-                anim.SetTrigger("Attack2");
+                animator.SetTrigger("Attack2");
                 
             
 
         }
        else if(currentAttack == 2 && timeBetweenAttack >= .15f && swordOriginal) // logic to allow 3rd swing
         {
-            anim.SetTrigger("Attack1"); // to be replaced eventually with attack 3
+            animator.SetTrigger("Attack1"); // to be replaced eventually with attack 3
             currentAttack= 0;
             
         }
@@ -258,7 +258,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (context.performed && playerMovement.IsGrounded() && !playerMovement.isDashing &&  !playerMovement.SomethingAbove()) 
         {
-            anim.SetTrigger("ParryStance"); // eventually to remove cantakeDMG and replace with parrying
+            animator.SetTrigger("ParryStance"); // eventually to remove cantakeDMG and replace with parrying
             health.canTakeDmg = false;
             isParrying = true;
             Invoke("CanTakeDMG", .5f);
@@ -288,7 +288,7 @@ public class PlayerCombat : MonoBehaviour
         if(collision.gameObject.CompareTag("Projectile") && isParrying && !hasSpawnedFireBall && isFacingProjectile)
         {
             
-            anim.SetTrigger("Parry"); // might have to change this to a bool
+            animator.SetTrigger("Parry"); // might have to change this to a bool
             
             Instantiate(fireball, InstantiatePos.transform.position, InstantiatePos.transform.rotation);
          

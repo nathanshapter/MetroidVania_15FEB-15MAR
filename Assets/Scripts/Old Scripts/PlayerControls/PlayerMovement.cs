@@ -98,8 +98,11 @@ public class PlayerMovement : MonoBehaviour
         boxCollider2D.enabled = false;
     }
     private void Update()
-    {     
-            if (isDead) return; // to remove later
+    {
+        
+       
+
+        if (isDead) return; // to remove later
             if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
             else { coyoteTimeCounter -= Time.deltaTime; }
             if (isDashing) { return; }
@@ -110,10 +113,7 @@ public class PlayerMovement : MonoBehaviour
                 isDead = true;
                 //Death();
             }
-            if (!IsGrounded())
-            {
-                animator.SetBool("Grounded", false);
-            }
+          
 
         if (isCrouching)
         {
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StandUp();
         }
-        
+        if (IsGrounded()) { animator.SetBool("Grounded", true); } else { animator.SetBool("Grounded", false); }
     }
   
     // Dash Methods
@@ -245,10 +245,12 @@ public class PlayerMovement : MonoBehaviour
   
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
+        
         speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
-            
+            animator.SetBool("Grounded", false);
+           
             animator.SetBool("walk", false);
             animator.SetBool("isRunning", false);
             animator.SetTrigger("Jump");
@@ -286,7 +288,7 @@ public class PlayerMovement : MonoBehaviour
         // if is moving play roll animation in correct direction
         if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }
-        animator.SetBool("Grounded", true);
+       
         if (isMoving && speedActuel == originalSpeed)
         {
             animator.SetBool("isRunning", true);
@@ -295,6 +297,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("walk", true);
         }
+        
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, groundLayer);
 
     }
