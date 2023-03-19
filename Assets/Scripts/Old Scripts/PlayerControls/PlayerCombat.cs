@@ -76,6 +76,10 @@ public class PlayerCombat : MonoBehaviour
         {
             playerMovement.speedActuel = playerMovement.originalSpeed;
         }
+        if (!isParrying)
+        {
+            anim.ResetTrigger("Parry");
+        }
     }
  
     public void Attack(InputAction.CallbackContext context)
@@ -274,7 +278,14 @@ public class PlayerCombat : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Projectile") && isParrying && !hasSpawnedFireBall)
+        bool isFacingProjectile = false;
+        if(playerMovement.isFacingRight && collision.transform.position.x > transform.position.x || !playerMovement.isFacingRight && collision.transform.position.x < transform.position.x)
+        {
+            isFacingProjectile = true;
+        }
+
+
+        if(collision.gameObject.CompareTag("Projectile") && isParrying && !hasSpawnedFireBall && isFacingProjectile)
         {
             
             anim.SetTrigger("Parry"); // might have to change this to a bool
@@ -285,5 +296,12 @@ public class PlayerCombat : MonoBehaviour
             hasSpawnedFireBall=true;
             
         }
+    }
+    bool isFacingProjectile()
+    {
+       
+
+
+        return true;
     }
 }

@@ -869,6 +869,8 @@ MonoBehaviour:
   dashingCooldown: 0.6
   isCrouching: 0
   isFacingRight: 1
+  canDash: 1
+  isDashing: 0
   fluteIsPlaying: 0
   fluteCooldown: 20
   tr: {fileID: 1701115253}
@@ -901,10 +903,12 @@ MonoBehaviour:
   attackingSpeed: 1.5
   timeBetweenAttack: 0
   slowDownAfterAttack: 0.75
-  swing: {fileID: 8300000, guid: 6a4ecda6178ca524895bb0c211a48e0f, type: 3}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 512
+  fireball: {fileID: 0}
+  InstantiatePos: {fileID: 0}
+  isParrying: 0
 --- !u!114 &848974692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,14 +944,14 @@ MonoBehaviour:
   invincibleTimer: 0.25
   invincibleTimerOriginal: 0.25
   fallDamage: 0
+  justTookDamage: 0
+  canTakeDmg: 1
+  justTookDamageTime: 4
   playerPrefab: {fileID: 2812504885943489405}
   deathManager: {fileID: 0}
   respawnManager: {fileID: 0}
   playerShader: {fileID: 1163885343}
   cpManager: {fileID: 0}
-  justTookDamage: 0
-  canTakeDmg: 1
-  justTookDamageTime: 4
 --- !u!114 &1163885343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,6 +1200,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 39acc21a-c486-4049-9d45-c0ce637ff845
     m_ActionName: Player/SwordDown[/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2681140007325390684}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+        m_MethodName: Parry
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 34e61d91-acb1-46b3-ba49-dbc4a116c671
+    m_ActionName: Player/Parry[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

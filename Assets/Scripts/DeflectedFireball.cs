@@ -24,6 +24,8 @@ public class DeflectedFireball : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+        // if fireball, destroy it
         print("collided");
     }
 }
