@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     public bool justTookDamage;
     public bool canTakeDmg = true;
     [SerializeField] float justTookDamageTime;
+    public bool isDead;
 
     [Space(20)]
     [Header("==========Scripts==========")]
@@ -29,6 +30,7 @@ public class Health : MonoBehaviour
     [SerializeField] PlayerShader playerShader;
     [SerializeField] CheckpointsManager cpManager;
     [SerializeField] Animator animator;
+    [SerializeField] PlayerMovement player;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -55,16 +57,18 @@ public class Health : MonoBehaviour
     private void Update()
     {
         invincibleTimer -= Time.deltaTime;
+        animator.SetBool("isDead", isDead);
     }
     public int TakeDamage(int damage)
     {
-        if (canTakeDmg)
+        if (canTakeDmg && !isDead)
         {
-            animator.SetTrigger("Hurt");
+            
             print(damage);
             // SoundManager.Instance.StopSound(); // needs to stop just flute
             justTookDamage = true;
             if (invincibleTimer > 0) { return playerHealth; }
+            animator.SetTrigger("Hurt");
             playerShader.PlayShaderDamage();
             playerHealth -= damage;
             print(damage);
@@ -78,7 +82,7 @@ public class Health : MonoBehaviour
     }
     public bool CheckIfAlive()
     {        
-        if(playerHealth <= 0) { respawnManager.RespawnPlayer();cpManager.lastCheckPointPos = null;  return false; } // temp solution , need to stop it from being called again
+        if(playerHealth <= 0) { respawnManager.RespawnPlayer(); cpManager.lastCheckPointPos = null; StartCoroutine(Die()); return false; } // temp solution , need to stop it from being called again
 
         if (fallDamage && playerHealth < amountOfLives){ StartCoroutine(deathManager.InitiateRespawn()); fallDamage = false;  return true; }    
         else { fallDamage = false; return true; }         
@@ -89,4 +93,15 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(justTookDamageTime);
         justTookDamage= false;
     }
+    private IEnumerator Die()
+    {
+        isDead= true;
+        animator.SetTrigger("Death");
+     
+        yield return new WaitForSeconds(3);
+        
+        isDead = false;
+
+    }
+   
 }
