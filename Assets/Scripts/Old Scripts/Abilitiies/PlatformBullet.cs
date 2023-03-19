@@ -7,7 +7,7 @@ public class PlatformBullet : MonoBehaviour
 {
     [SerializeField] public GameObject bullet, wallFloor;
     bool bulletPlatformJustSpawned;
-
+    PlayerMovement playerMovement;
     ProgressionManager progressionManager;
 
     
@@ -17,6 +17,7 @@ public class PlatformBullet : MonoBehaviour
 
     private void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         progressionManager = FindObjectOfType<ProgressionManager>();
     }
 
@@ -25,7 +26,7 @@ public class PlatformBullet : MonoBehaviour
 
         
         if (!progressionManager.progression[3]) { return; }
-        if (!bulletPlatformJustSpawned)
+        if (!bulletPlatformJustSpawned && !playerMovement.isCrouching)
         {
             StartCoroutine(ResetPlatformBullet());
 

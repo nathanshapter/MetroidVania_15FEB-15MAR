@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime); tr.emitting = false;
-      
+        if (SomethingAbove()) { animator.SetBool("Crouching", true); }
         health.canTakeDmg = true;
         rb.gravityScale = originalGravity;
         isDashing = false;
