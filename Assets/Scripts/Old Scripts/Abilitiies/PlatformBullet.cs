@@ -23,7 +23,10 @@ public class PlatformBullet : MonoBehaviour
 
     public void FirePlatform(InputAction.CallbackContext context)
     {
-        if (playerMovement.isFrozen) { return; }
+        if (playerMovement.IsGrounded())
+        {
+            playerMovement.DisableMovement(0.6f);
+        }
 
         if (!progressionManager.progression[3]) { return; }
         if (!bulletPlatformJustSpawned && !playerMovement.isCrouching)

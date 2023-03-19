@@ -51,7 +51,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         m_audioManager.PlaySound("RunStop");
         float dustXOffset = 0.6f;
-        float dustYOffset = 0.078125f;
+        float dustYOffset = -.378125f;
         player.SpawnDustEffect(RunStopDust, dustXOffset, dustYOffset);
     }
 
@@ -79,7 +79,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     void Landing()
     {
         m_audioManager.PlaySound("Landing");
-        float dustYOffset = 0.078125f;
+        float dustYOffset = -.378125f;
         player.SpawnDustEffect(LandingDust, 0.0f, dustYOffset);
         
     }
@@ -142,7 +142,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     void AE_Dodge()
     {
         m_audioManager.PlaySound("Dodge");
-        float dustYOffset = 0.078125f;
+        float dustYOffset = -.378125f;
         player.SpawnDustEffect(DodgeDust, 0.0f, dustYOffset);
     }
 

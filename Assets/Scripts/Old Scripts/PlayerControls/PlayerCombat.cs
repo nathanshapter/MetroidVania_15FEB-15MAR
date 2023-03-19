@@ -123,7 +123,7 @@ public class PlayerCombat : MonoBehaviour
             }
            
         }
-        else if(canAttackInAir && swordDown)
+        else if(canAttackInAir || swordDown) // allows to do an air attack, and then a slam attack
         {
             animator.SetTrigger("AttackAirSlam");
         }

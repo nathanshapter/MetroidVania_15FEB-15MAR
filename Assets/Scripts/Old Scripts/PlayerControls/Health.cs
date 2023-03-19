@@ -28,6 +28,7 @@ public class Health : MonoBehaviour
     [SerializeField] RespawnManager respawnManager;
     [SerializeField] PlayerShader playerShader;
     [SerializeField] CheckpointsManager cpManager;
+    [SerializeField] Animator animator;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -43,6 +44,7 @@ public class Health : MonoBehaviour
     public static Health instance;
     private void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         if (instance == null)
         {
             instance = this;
@@ -58,6 +60,7 @@ public class Health : MonoBehaviour
     {
         if (canTakeDmg)
         {
+            animator.SetTrigger("Hurt");
             print(damage);
             // SoundManager.Instance.StopSound(); // needs to stop just flute
             justTookDamage = true;
