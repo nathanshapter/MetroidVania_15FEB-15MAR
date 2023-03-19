@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathManager : MonoBehaviour
 {
-    [SerializeField] int totalDeaths;
+    public int totalDeaths;
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] GameObject player;
    [HideInInspector] public bool fallRespawn;
@@ -20,8 +20,13 @@ public class DeathManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
-
+       
     }
+    private void Update()
+    {
+        RespawnManager = FindObjectOfType<RespawnManager>(); // this needs to not be in update lol, just call one time when scene changes
+    }
+
     public void ProcessDeath()
     {
         totalDeaths++;     
