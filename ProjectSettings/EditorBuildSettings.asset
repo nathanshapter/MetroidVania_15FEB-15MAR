@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level Selection Menu.unity
+    path: Assets/Scenes/Every Level/Level Selection Menu.unity
     guid: 2df600f22ea560a4e8b00fc40281ba25
   - enabled: 1
-    path: Assets/Scenes/Level 1/BuilderLevel.unity
+    path: Assets/Scenes/Every Level/BuilderLevel.unity
     guid: c06d0a87af988bd4aa0715f7a812e69f
   - enabled: 1
     path: Assets/Scenes/Level 1/DeathScene.unity
@@ -75,6 +75,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 1/Level 1r.unity
     guid: 867d227b38931554591cdbde97cc67fa
   - enabled: 1
-    path: Assets/Scenes/BossFight 1.unity
+    path: Assets/Scenes/Level 1/BossFight 1.unity
     guid: c9a6b440afa6ae34080e19a58256ea20
   m_configObjects: {}
