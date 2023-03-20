@@ -294,6 +294,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &760758119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 760758120}
+  m_Layer: 8
+  m_Name: DeflectedFireballPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &760758120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760758119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6, y: -0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8760662009401395709}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &935487294
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +866,7 @@ Transform:
   - {fileID: 228534313}
   - {fileID: 1869748266}
   - {fileID: 1436350887}
+  - {fileID: 760758120}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -877,6 +909,8 @@ MonoBehaviour:
   flute: {fileID: 8300000, guid: c221bca5223256243903c4241b8f7266, type: 3}
   playerVirtualCamera: {fileID: 0}
   levelSizeCamera: 19.78
+  isFrozen: 0
+  freezeTimer: 0
 --- !u!114 &2681140007325390684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,8 +940,8 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 512
-  fireball: {fileID: 0}
-  InstantiatePos: {fileID: 0}
+  fireball: {fileID: 8976950158448476323, guid: e89df931f7de6f64aa44d64e8b29abab, type: 3}
+  InstantiatePos: {fileID: 760758119}
   isParrying: 0
 --- !u!114 &848974692
 MonoBehaviour:
@@ -947,11 +981,14 @@ MonoBehaviour:
   justTookDamage: 0
   canTakeDmg: 1
   justTookDamageTime: 4
+  isDead: 0
   playerPrefab: {fileID: 2812504885943489405}
   deathManager: {fileID: 0}
   respawnManager: {fileID: 0}
   playerShader: {fileID: 1163885343}
   cpManager: {fileID: 0}
+  animator: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &1163885343
 MonoBehaviour:
   m_ObjectHideFlags: 0
