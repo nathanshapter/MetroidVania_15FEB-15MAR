@@ -140,7 +140,14 @@ public class PlayerMovement : MonoBehaviour
         }
         if (IsGrounded()) { animator.SetBool("Grounded", true); } else { animator.SetBool("Grounded", false); }
 
+        if (!wallGrab.wallSlide)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
        
+        
+     
+
     }
     public bool isFrozen;
    public float freezeTimer;
@@ -274,8 +281,27 @@ public class PlayerMovement : MonoBehaviour
 
     }
     // movement methods
+    float yPosition;
+    float fallMultiplier = 0.0001f;
+    bool holdingOntoWall = false;
+    public void HoldOntoWall(InputAction.CallbackContext context)
+    {
+        yPosition = transform.position.y;
+        if (wallGrab.wallSlide && context.performed)
+        {
+            holdingOntoWall = true;
+            transform.position = new Vector2(transform.position.x, yPosition );
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
 
-  
+        }
+        if(context.canceled )
+        {
+            holdingOntoWall= false;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            transform.position = new Vector2(transform.position.x, transform.position.y) ;
+        }
+       
+    }
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
         if (isFrozen) { return; }
