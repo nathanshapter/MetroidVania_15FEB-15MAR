@@ -56,6 +56,7 @@ public class PrototypeHero : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        
         // Decrease death respawn timer 
         respawnTimer -= Time.deltaTime;
 

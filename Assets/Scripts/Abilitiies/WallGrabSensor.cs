@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class WallGrabSensor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private int colliderCount = 0;
+    private float disableTimer;
+
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        colliderCount++;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit2D(Collider2D other)
     {
+        colliderCount--;
+    }
+    private void Update()
+    {
+        disableTimer -= Time.deltaTime;
         
+    }
+    public bool State()
+    {
+        if (disableTimer > 0)
+            return false;
+        return colliderCount > 0;
+    }
+    public void Disable(float duration)
+    {
+        disableTimer = duration;
     }
 }

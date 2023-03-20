@@ -32,6 +32,7 @@ public class Sensor_Prototype : MonoBehaviour {
     void Update()
     {
         m_DisableTimer -= Time.deltaTime;
+      
     }
 
     public void Disable(float duration)

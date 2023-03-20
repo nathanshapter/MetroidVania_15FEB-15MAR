@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider2D capsuleCollider;
     BoxCollider2D boxCollider2D;
     PlayerInput playerInput;
+    WallGrabPlayer wallGrab;
     
 
     Animator animator;
@@ -96,9 +97,19 @@ public class PlayerMovement : MonoBehaviour
         boxCollider2D= GetComponentInChildren<BoxCollider2D>();
         boxCollider2D.enabled = false;
         playerInput =GetComponent<PlayerInput>();   
+        wallGrab = GetComponent<WallGrabPlayer>();
     }
     private void Update()
     {
+        if (wallGrab.wallSlide)
+        {
+            bool facingDirection;
+            facingDirection = isFacingRight;
+            if (facingDirection != isFacingRight) { animator.SetBool("WallSlide", false); } else { animator.SetBool("WallSlide", true); }
+
+            
+           
+        }
         freezeTimer -= Time.deltaTime;
         if (freezeTimer < 0) { isFrozen = false; playerInput.enabled = true ; }
         if (isFrozen) { this.transform.position = frozenPosition; return; }
