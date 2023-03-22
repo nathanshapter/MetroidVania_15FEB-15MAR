@@ -10,12 +10,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject loadercanvas;
     [SerializeField] private Image progressBar;
     [SerializeField] int waitBeforeLoad;
-    CanvasFade canvasFade;
+    PlayerMovement player;
 
     public static LevelManager Instance { get; private set; }
     private void Awake()
     {
-        canvasFade = FindObjectOfType<CanvasFade>();
+      player = FindObjectOfType<PlayerMovement>(); // play animation of running into next scene
         print("Level Manager loaded");
         if(Instance == null)
         {
@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
 
     public async void LoadScene(string sceneName)
     {
-       // canvasFade.FadeIn();
+        player.DisableMovement(1); // animation to play when leaving
 
         var scene = SceneManager.LoadSceneAsync(sceneName);
         

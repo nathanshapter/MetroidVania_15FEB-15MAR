@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CanvasFade : MonoBehaviour
 {
-    [SerializeField] Image fadeImage;
+    [SerializeField] public Image fadeImage;
     [SerializeField] float  fadeOutDuration, fadeInDuration;
     const int fadeOutValue = 0, fadeInValue = 255;
   
