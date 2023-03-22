@@ -10,7 +10,7 @@ public class CanvasFade : MonoBehaviour
     [SerializeField] Image fadeImage;
     [SerializeField] float  fadeOutDuration, fadeInDuration;
     const int fadeOutValue = 0, fadeInValue = 255;
-    bool isFading = false;
+  
     [SerializeField] GameObject player;
 
 
@@ -18,17 +18,22 @@ public class CanvasFade : MonoBehaviour
     {
         FadeOut();
     }
+    
     public void FadeOut()
     {
         fadeImage.DOFade(fadeOutValue, fadeOutDuration).SetEase(Ease.InSine);
         
     }
-
-  
-  public  IEnumerator FadeIn()
+    private void Update()
     {
-        fadeImage.DOFade(fadeInValue, fadeInDuration);
-        yield return new WaitForSeconds(fadeInDuration);
-        FadeOut();
+        if(Input.GetKeyUp(KeyCode.Escape)) { ;  FadeIn(); }
     }
+    public void FadeIn()
+    {
+        fadeImage.DOFade(fadeInValue, fadeInDuration + 15);
+
+        
+    }
+  
+
 }

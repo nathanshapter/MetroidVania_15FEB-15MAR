@@ -9,10 +9,11 @@ public class LevelChanger : MonoBehaviour
 
     [SerializeField] string targetSceneName;
     [SerializeField] Transform spawnPoint;
-
+    LevelManager levelManager;
 
     private void Start()
     {
+        levelManager= FindObjectOfType<LevelManager>();
         if(connection == LevelConnection.ActiveConnection) {
             FindObjectOfType<PlayerMovement>().transform.position = spawnPoint.position;
         }
@@ -21,8 +22,10 @@ public class LevelChanger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            
             LevelConnection.ActiveConnection = connection;
-            SceneManager.LoadScene(targetSceneName);
+            levelManager.LoadScene(targetSceneName);
+            //   SceneManager.LoadScene(targetSceneName);
         }
             
         }

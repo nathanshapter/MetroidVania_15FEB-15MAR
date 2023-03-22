@@ -9,10 +9,14 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject loadercanvas;
     [SerializeField] private Image progressBar;
+    [SerializeField] int waitBeforeLoad;
+    CanvasFade canvasFade;
 
     public static LevelManager Instance { get; private set; }
     private void Awake()
     {
+        canvasFade = FindObjectOfType<CanvasFade>();
+        print("Level Manager loaded");
         if(Instance == null)
         {
             Instance = this;
@@ -20,23 +24,38 @@ public class LevelManager : MonoBehaviour
         }
         else { Destroy(gameObject); }
     }
+  
 
     public async void LoadScene(string sceneName)
     {
+       // canvasFade.FadeIn();
+
         var scene = SceneManager.LoadSceneAsync(sceneName);
+        
         scene.allowSceneActivation = false;
 
-     //   loadercanvas.SetActive(true);
-     //   do {
-            await Task.Delay(0);
+        loadercanvas.SetActive(true);
+       
+        do {
+            await Task.Delay(10);
        //     progressBar.fillAmount = scene.progress;
-                
-                
-                
-           //     } while (scene.progress < 0.9f);
 
+           
+
+        } while (scene.progress < 0.9f);
+
+
+        await Task.Delay (waitBeforeLoad * 1000);
         scene.allowSceneActivation = true;
-      //  loadercanvas.SetActive(false);
+        loadercanvas.SetActive(false);
+
+
+
+
+
     }
+
+
+   
    // commented out things need to be added into the in between levels, so that we can fade in/out 
 }
