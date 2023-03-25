@@ -27,7 +27,7 @@ public class VerticalPlatformManager : MonoBehaviour
         {
             for (int i = 0; i < amountOfPlatformsToSpawn; i++)
             {
-                Instantiate(platform, topYPosition, false);
+                Instantiate(platform, ReturnSpawnPosition(), false);
 
                 verticalPlatform.Add(platform);
 
@@ -58,6 +58,17 @@ public class VerticalPlatformManager : MonoBehaviour
        
 
     
+    }
+    private Transform ReturnSpawnPosition()
+    {
+        if(isFlipped)
+        {
+            return topYPosition;
+        }
+        else
+        {
+            return bottomYPosition;
+        }
     }
  
 }
