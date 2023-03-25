@@ -8,7 +8,7 @@ public class VerticalPlatformManager : MonoBehaviour
 {
     [SerializeField] GameObject platform;
     [SerializeField] List<GameObject> verticalPlatform;
-    [SerializeField] int amountOfPlatformsToSpawn;
+    [SerializeField] int amountOfPlatformsToSpawn; // this needs to be the same for all of them in the scene or does not work correctly
     public Transform topYPosition, bottomYPosition;
     float yDistanceBetweenTopBottom;
 
@@ -17,7 +17,7 @@ public class VerticalPlatformManager : MonoBehaviour
     public bool isFlipped;
 
 
-    private void Start()
+    private void Start() 
     {
         yDistanceBetweenTopBottom = topYPosition.transform.position.y - bottomYPosition.transform.position.y;
 

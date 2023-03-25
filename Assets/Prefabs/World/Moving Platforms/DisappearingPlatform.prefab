@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1275098258954718103, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_Name
-      value: DisappearingPlatform
+      value: DisappearingPlatform (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_RootOrder
@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.297182
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9.386518
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -75,5 +75,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4004f64f7854f5489156576796c5996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeUntilDestroy: 3
+  timeUntilDestroy: 1.5
   timeUntilRespawn: 3

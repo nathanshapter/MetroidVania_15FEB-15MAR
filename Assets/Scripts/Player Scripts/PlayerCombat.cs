@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float slowDownAfterAttack = 0.75f;
    
     [Space(20)]
-    public LayerMask whatIsEnemies;
+    public LayerMask whatIsEnemies, tiles;
     
    
     // sets in code  
@@ -185,6 +186,7 @@ public class PlayerCombat : MonoBehaviour
     {
         
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
+        Collider2D[] tilesToDestroy = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange,tiles);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             if (enemiesToDamage[i].GetComponent<EnemyHealth>() == null) // for cerberus heards // body
@@ -195,6 +197,14 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage(damage);
             }
+        }
+        for(int i =0; i < tilesToDestroy.Length; i++)
+        {       
+          tilesToDestroy[i].GetComponent<TilemapRenderer>().enabled = false;
+          Destroy(tilesToDestroy[i]);
+            
+
+            
         }
 
         if (!playerMovement.IsGrounded() && currentAttack != 0)

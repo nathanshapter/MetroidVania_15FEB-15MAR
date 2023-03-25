@@ -5,7 +5,7 @@ using UnityEngine;
 public class DisappearingPlatform : MonoBehaviour
 {
     PlayerMovement playerMovement;
-    [SerializeField] int timeUntilDestroy =3;
+    [SerializeField] float timeUntilDestroy =3;
     [SerializeField] int timeUntilRespawn = 3;
     BoxCollider2D boxCollider2D;
     SpriteRenderer sprite;
