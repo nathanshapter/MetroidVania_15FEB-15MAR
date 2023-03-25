@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1275098258954718185}
   - component: {fileID: 1275098258954718184}
   m_Layer: 6
-  m_Name: Oscillating platform
+  m_Name: ReturningPlatform
   m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
