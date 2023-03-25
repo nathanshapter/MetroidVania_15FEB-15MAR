@@ -14,6 +14,7 @@ TagManager:
   - Bridge
   - MovingPlatform
   - Upgrade
+  - DestroyableWall
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - StaticFloor
   - Background
   - Vfx
-  - 
+  - DestroyableTile
   - 
   - 
   - 
