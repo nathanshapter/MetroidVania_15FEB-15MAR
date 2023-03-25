@@ -80,6 +80,15 @@ public class PlayerCombat : MonoBehaviour
         {
             animator.ResetTrigger("Parry");
         }
+        if (downAttack == true)
+        {
+            playerMovement.enabled= false;
+        }
+        if (playerMovement.IsGrounded())
+        {
+            playerMovement.enabled= true;
+            downAttack= false;
+        }
     }
  
     public void Attack(InputAction.CallbackContext context)
@@ -107,7 +116,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(slowDownAfterAttack);
         isGroundAttacking = false;
     }
-
+    bool downAttack;
     private void AirAttack()
     {
         if(canAttackInAir && swordUp)
@@ -126,6 +135,7 @@ public class PlayerCombat : MonoBehaviour
         else if(canAttackInAir || swordDown) // allows to do an air attack, and then a slam attack
         {
             animator.SetTrigger("AttackAirSlam");
+            downAttack= true;
         }
         AllSwordAttack();
         currentAttack++;
