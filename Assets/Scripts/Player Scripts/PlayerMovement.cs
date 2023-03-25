@@ -430,10 +430,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-    void ResetSpeed()
-    {
-        
-    }
+  
 
    
     private void OnCollisionEnter2D(Collision2D collision)
