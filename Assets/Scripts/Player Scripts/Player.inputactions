@@ -123,7 +123,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HoldOntoWall",
+                    "name": "HoldOntoWall_Interact",
                     "type": "Button",
                     "id": "e79ae9b9-f624-48e7-83f8-3feb83da706e",
                     "expectedControlType": "Button",
@@ -382,7 +382,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HoldOntoWall",
+                    "action": "HoldOntoWall_Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

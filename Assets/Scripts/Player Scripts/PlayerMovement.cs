@@ -284,7 +284,8 @@ public class PlayerMovement : MonoBehaviour
     float yPosition;
     float fallMultiplier = 0.0001f;
     bool holdingOntoWall = false;
-    public void HoldOntoWall(InputAction.CallbackContext context)
+   public bool lookingToInteract = false;
+    public void HoldOntoWall_Interact(InputAction.CallbackContext context)
     {
         yPosition = transform.position.y;
         if (wallGrab.wallSlide && context.performed)
@@ -294,13 +295,17 @@ public class PlayerMovement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezePositionY;
 
         }
-        if(context.canceled )
+        if(context.canceled && holdingOntoWall)
         {
             holdingOntoWall= false;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             transform.position = new Vector2(transform.position.x, transform.position.y) ;
         }
-       
+       if(IsGrounded() && !holdingOntoWall && context.performed)
+        {
+            lookingToInteract= true;
+        }
+        else { lookingToInteract = false; }
     }
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {

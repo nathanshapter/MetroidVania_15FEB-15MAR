@@ -186,7 +186,7 @@ public class PlayerCombat : MonoBehaviour
     {
         
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
-        Collider2D[] tilesToDestroy = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange,tiles);
+        Collider2D[] tilesToDestroy = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, tiles);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             if (enemiesToDamage[i].GetComponent<EnemyHealth>() == null) // for cerberus heards // body
