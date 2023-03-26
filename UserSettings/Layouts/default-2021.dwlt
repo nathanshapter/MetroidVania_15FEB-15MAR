@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357.3334
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 23
+  controlID: 317
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 29
+  controlID: 143
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 30
+  controlID: 144
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,8 +242,8 @@ MonoBehaviour:
     y: 0
     width: 532.6666
     height: 934.6667
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 260
+  controlID: 25
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 24
+  controlID: 318
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -535,9 +535,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 866e0000
-      m_LastClickedID: 28294
-      m_ExpandedIDs: ba38ffff0239fffffaf9ffff5efaffff0afbffff
+      m_SelectedIDs: de6e0000
+      m_LastClickedID: 28382
+      m_ExpandedIDs: 02fbffffde6e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1006,18 +1006,18 @@ MonoBehaviour:
       y: 21
       width: 530.6666
       height: 892.6667
-    m_Scale: {x: 0.7637212, y: 0.7637212}
-    m_Translation: {x: 323.42035, y: 446.33334}
+    m_Scale: {x: 0.8102318, y: 0.8102318}
+    m_Translation: {x: 312.30145, y: 446.33334}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -423.47958
-      y: -584.4192
-      width: 694.8434
-      height: 1168.8384
+      x: -385.44705
+      y: -550.87115
+      width: 654.95654
+      height: 1101.7423
     m_MinimalGUI: 1
   m_defaultScale: 0.4145833
   m_LastWindowPixelSize: {x: 795.99994, y: 1370.5}
@@ -1102,22 +1102,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UnityProjects\MetroidVania_15FEB-15MAR
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 552.3333}
-    m_SelectedIDs: ae750000
-    m_LastClickedID: 30126
-    m_ExpandedIDs: 00000000927500009475000096750000987500009a7500009c7500009e750000a0750000a2750000a4750000a6750000a8750000aa750000ac750000ae750000928f0000948f0000ae8f00000e90000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 02760000
+    m_LastClickedID: 30210
+    m_ExpandedIDs: 00000000027600000476000006760000087600000a7600000c7600000e76000010760000127600001476000016760000187600001a7600001c7600001e760000207600002276000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1145,7 +1145,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000927500009475000096750000987500009a7500009c7500009e750000a0750000a2750000a4750000a6750000a8750000aa750000ac750000ae750000
+    m_ExpandedIDs: 00000000027600000476000006760000087600000a7600000c7600000e76000010760000127600001476000016760000187600001a7600001c7600001e7600002076000022760000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1231,7 +1231,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 28294
+  m_LastSelectedObjectID: 28382
 --- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 52
