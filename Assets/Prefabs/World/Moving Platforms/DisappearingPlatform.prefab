@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1275098258954718103, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_Name
-      value: DisappearingPlatform (1)
+      value: DisappearingPlatform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275098258954718186, guid: 161481ac59c43654d98e6498a616151b, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_RootOrder
@@ -17,11 +21,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.297182
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.386518
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57,12 +61,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1275098258954718184, guid: 161481ac59c43654d98e6498a616151b, type: 3}
+    - {fileID: 6006164598600873046, guid: 161481ac59c43654d98e6498a616151b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 161481ac59c43654d98e6498a616151b, type: 3}
 --- !u!1 &8442654359438712881 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1275098258954718103, guid: 161481ac59c43654d98e6498a616151b, type: 3}
   m_PrefabInstance: {fileID: 7248643058760706982}
   m_PrefabAsset: {fileID: 0}
+--- !u!251 &4847918655721874244
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442654359438712881}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &-1925830744377037394
 MonoBehaviour:
   m_ObjectHideFlags: 0

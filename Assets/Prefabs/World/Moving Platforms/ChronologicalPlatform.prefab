@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1275098258954718103, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_Name
-      value: ChronologicalPlatform
+      value: ChronologicalPlatform (8)
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_RootOrder
@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.95
+      value: -65.01
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.04
+      value: 24.69
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718187, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57,6 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1275098258954718184, guid: 161481ac59c43654d98e6498a616151b, type: 3}
+    - {fileID: 6006164598600873046, guid: 161481ac59c43654d98e6498a616151b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 161481ac59c43654d98e6498a616151b, type: 3}
 --- !u!1 &140942309271644405 stripped
 GameObject:
@@ -75,3 +76,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0295479202ae5498f91ff15fd08cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFirstPlatform: 0
