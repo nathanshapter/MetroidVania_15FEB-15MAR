@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Sound
+public class Sound 
 {
     public string m_name;
     public AudioClip[] m_clips;
@@ -17,6 +17,7 @@ public class Sound
     public bool m_loop = false;
 
     private AudioSource m_source;
+    public static Sound instance;
 
     public void SetSource(AudioSource source)
     {
@@ -25,6 +26,7 @@ public class Sound
         m_source.clip = m_clips[randomClip];
         m_source.loop = m_loop;
     }
+   
 
     public void Play()
     {
