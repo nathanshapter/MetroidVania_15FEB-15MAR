@@ -123,8 +123,8 @@ public class PlayerMovement : MonoBehaviour
             if (IsGrounded() || OnWall()) { coyoteTimeCounter = coyoteTime; hasDoubleJumped = false; }
             else { coyoteTimeCounter -= Time.deltaTime; }
             if (isDashing) { return; }
-            FlipPlayer();
-            CheckForDash();
+        FlipPlayer();
+        CheckForDash();
             if (health.playerHealth <= 0)
             {
                 isDead = true;
@@ -236,7 +236,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FlipPlayer()
     {
-        rb.velocity = new Vector2(horizontal * speedActuel, rb.velocity.y);
+        if (!health.canBeknocked) { rb.velocity = new Vector2(horizontal * speedActuel, rb.velocity.y); }
+       
+        
         if (!isFacingRight && horizontal > 0f)
         {
             Flip();
@@ -259,6 +261,7 @@ public class PlayerMovement : MonoBehaviour
     {
      
        if(isFrozen) { return; }
+       
         isMoving = true;
         horizontal = context.ReadValue<Vector2>().x;
         if (context.performed) { transform.SetParent(null); }

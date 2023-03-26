@@ -32,6 +32,9 @@ public class Health : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] PlayerMovement player;
 
+    [SerializeField] float knockbackForce = 4f; // to be added into enemy values later
+    Rigidbody2D rb;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
@@ -46,6 +49,7 @@ public class Health : MonoBehaviour
     public static Health instance;
     private void Awake()
     {
+        rb= GetComponent<Rigidbody2D>();    
         animator = GetComponentInChildren<Animator>();
         if (instance == null)
         {
@@ -59,12 +63,14 @@ public class Health : MonoBehaviour
         invincibleTimer -= Time.deltaTime;
         animator.SetBool("isDead", isDead);
     }
+  public bool canBeknocked = false;
     public int TakeDamage(int damage)
     {
         if (canTakeDmg && !isDead)
         {
             
             print(damage);
+           canBeknocked= true;
             // SoundManager.Instance.StopSound(); // needs to stop just flute
             justTookDamage = true;
             if (invincibleTimer > 0) { return playerHealth; }
@@ -75,6 +81,9 @@ public class Health : MonoBehaviour
 
             invincibleTimer = invincibleTimerOriginal;
             CheckIfAlive();
+            rb.AddForce(new Vector2(5, 5), ForceMode2D.Impulse);
+            
+           
             StartCoroutine(resetDamageBool());
         }
       
@@ -90,6 +99,9 @@ public class Health : MonoBehaviour
     }
     private IEnumerator resetDamageBool()
     {
+        yield return new WaitForSeconds(0.15f);
+        canBeknocked= false;
+
         yield return new WaitForSeconds(justTookDamageTime);
         justTookDamage= false;
     }
