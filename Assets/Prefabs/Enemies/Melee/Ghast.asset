@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48301287a81220d4895ac22e281c060f, type: 3}
   m_Name: Ghast
   m_EditorClassIdentifier: 
-  gameObjectName: 
-  description: 
-  health: 0
-  contactDamage: 0
+  gameObjectName: Ghast
+  description: This is a Ghast
+  health: 15
+  contactDamage: 5
   doesSimplePatrol: 0
   doesChasePlayer: 0
