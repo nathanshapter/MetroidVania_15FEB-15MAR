@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] float slowDownAfterAttack = 0.75f;
    
     [Space(20)]
-    public LayerMask whatIsEnemies, tiles;
+    public LayerMask whatIsEnemies, tiles, levers;
     
    
     // sets in code  
@@ -47,12 +47,15 @@ public class PlayerCombat : MonoBehaviour
     bool hasSpawnedFireBall = false;
 
 
+
+    Lever leverScript;
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         audioManager = AudioManager_PrototypeHero.instance;
         health = GetComponent<Health>();
+        leverScript = FindObjectOfType<Lever>();
     }
 
     private void Update()
@@ -187,6 +190,7 @@ public class PlayerCombat : MonoBehaviour
         
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, whatIsEnemies);
         Collider2D[] tilesToDestroy = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, tiles);
+        Collider2D[] lever = Physics2D.OverlapCircleAll(ProcessAttack(), attackRange, levers);
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {
             if (enemiesToDamage[i].GetComponent<EnemyHealth>() == null) // for cerberus heards // body
@@ -205,6 +209,13 @@ public class PlayerCombat : MonoBehaviour
             
 
             
+        }
+        for (int i = 0; i < lever.Length; i++)
+        {
+
+            leverScript.leverPressed = !leverScript.leverPressed;
+            print("hi");
+
         }
 
         if (!playerMovement.IsGrounded() && currentAttack != 0)

@@ -82,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
 
     GameObject lastParent;
 
+   
+
     private void Start()
     {
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -98,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         boxCollider2D.enabled = false;
         playerInput =GetComponent<PlayerInput>();   
         wallGrab = GetComponent<WallGrabPlayer>();
+        
     }
     private void Update()
     {
@@ -284,7 +287,8 @@ public class PlayerMovement : MonoBehaviour
     float yPosition;
     float fallMultiplier = 0.0001f;
     bool holdingOntoWall = false;
-   public bool lookingToInteract = false;
+   
+
     public void HoldOntoWall_Interact(InputAction.CallbackContext context)
     {
         yPosition = transform.position.y;
@@ -301,11 +305,7 @@ public class PlayerMovement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             transform.position = new Vector2(transform.position.x, transform.position.y) ;
         }
-       if(IsGrounded() && !holdingOntoWall && context.performed)
-        {
-            lookingToInteract= true;
-        }
-        else { lookingToInteract = false; }
+      
     }
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
