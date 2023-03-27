@@ -18,7 +18,7 @@ public class EnemyGodController : MonoBehaviour
         knockbackXOriginal = knockbackX;
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
       
