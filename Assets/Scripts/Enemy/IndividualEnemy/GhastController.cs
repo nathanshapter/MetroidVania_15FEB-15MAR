@@ -17,12 +17,20 @@ public class GhastController : MonoBehaviour
     bool awake = false;
 
     Vector2 startPos;
+
+
+    float xSize;
+    float ySize;
     private void Start()
     {
         animator= GetComponent<Animator>();
         player = FindObjectOfType<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
        startPos= transform.position;
+
+
+        xSize = transform.localScale.x;
+         ySize = transform.localScale.y;
     }
 
     private void Update()
@@ -54,18 +62,19 @@ public class GhastController : MonoBehaviour
         rb.velocity = Vector2.zero;
         transform.position = startPos;
     }
-
+    
     private void ChasePlayer()
     {
-        float xSize = transform.localScale.x;
-        float ySize = transform.localScale.y;
+       
         if (transform.position.x < player.transform.position.x)
         {
+           
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             transform.localScale = new Vector2(xSize, ySize);
         }
-        else
+        else if(transform.position.x > player.transform.position.x)
         {
+            
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             transform.localScale = new Vector2(-xSize, ySize);
         }
@@ -79,5 +88,7 @@ public class GhastController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, returnHomeRange);
     }
+
+ 
 
 }

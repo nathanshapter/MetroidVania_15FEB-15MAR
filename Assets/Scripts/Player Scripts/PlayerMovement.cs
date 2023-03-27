@@ -458,7 +458,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
-                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage,10,0);
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyGodController>().contactDamage,10,0);
                 if (collision.transform.position.x < this.transform.position.x)
                 {
 
@@ -471,9 +471,9 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 float knockbackY, knockbackX;
-                knockbackY = collision.gameObject.GetComponent<EnemyHealth>().knockbackY;
-                knockbackX = collision.gameObject.GetComponent<EnemyHealth>().knockbackX;
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage,knockbackX,knockbackY);
+                knockbackY = collision.gameObject.GetComponent<EnemyGodController>().knockbackY;
+                knockbackX = collision.gameObject.GetComponent<EnemyGodController>().knockbackX;
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyGodController>().contactDamage,knockbackX,knockbackY);
                 
             }
 
@@ -484,12 +484,12 @@ public class PlayerMovement : MonoBehaviour
             if (collision.gameObject.GetComponent<EnemyHealth>() == null) 
             {
                 if(collision.gameObject.GetComponent<DeflectedFireball>() != null) { return; } // if this is a deflected fireball, then do not applay contact damage
-                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage, 0, 0);
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyGodController>().contactDamage, 0, 0);
               
             }
             else
             {
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage, 0, 0);
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyGodController>().contactDamage, 0, 0);
 
             }
 

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3299536992779237722}
+  - component: {fileID: 2680326925297282887}
   - component: {fileID: 1370529610}
   - component: {fileID: 1370529609}
   - component: {fileID: 3299536992779237721}
@@ -37,6 +38,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2680326925297282887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3299536992779237727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8103e1ed902e47b49bc74f85e8573701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyValues: {fileID: 11400000, guid: a9f692110d7b2cf47923a9597e0d0060, type: 2}
+  contactDamage: 0
+  knockbackY: 0
+  knockbackX: 0
 --- !u!114 &1370529610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +85,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyValues: {fileID: 11400000, guid: a9f692110d7b2cf47923a9597e0d0060, type: 2}
   health: 0
-  contactDamage: 0
 --- !u!212 &3299536992779237721
 SpriteRenderer:
   m_ObjectHideFlags: 0

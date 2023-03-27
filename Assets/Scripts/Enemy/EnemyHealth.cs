@@ -6,14 +6,12 @@ public class EnemyHealth : MonoBehaviour
 {
     public EnemyValues enemyValues;
    public int health;
-    public int contactDamage;
-    public float knockbackY, knockbackX;
+    
+    
     private void Start()
     {
         health = enemyValues.health;
-        contactDamage = enemyValues.contactDamage;
-        knockbackY= enemyValues.knockbackY;
-        knockbackX= enemyValues.knockbackX;
+        
     }
 
     public void TakeDamage(int damage)
