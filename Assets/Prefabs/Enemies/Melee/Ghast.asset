@@ -18,3 +18,5 @@ MonoBehaviour:
   contactDamage: 5
   doesSimplePatrol: 0
   doesChasePlayer: 0
+  knockbackY: 15
+  knockbackX: 15
