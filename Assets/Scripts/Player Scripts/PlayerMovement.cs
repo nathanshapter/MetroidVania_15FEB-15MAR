@@ -458,7 +458,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
-                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage);
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage,10,0);
                 if (collision.transform.position.x < this.transform.position.x)
                 {
 
@@ -470,7 +470,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage);
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage,10,10);
                 
             }
 
@@ -481,12 +481,12 @@ public class PlayerMovement : MonoBehaviour
             if (collision.gameObject.GetComponent<EnemyHealth>() == null) 
             {
                 if(collision.gameObject.GetComponent<DeflectedFireball>() != null) { return; } // if this is a deflected fireball, then do not applay contact damage
-                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage);
+                health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyHealth>().contactDamage, 0, 0);
               
             }
             else
             {
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage);
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage, 0, 0);
 
             }
 

@@ -40,7 +40,7 @@ public class Health : MonoBehaviour
         if (collision.gameObject.CompareTag("Spike"))
         {
              fallDamage = true;
-            TakeDamage(spikeDamage);
+            TakeDamage(spikeDamage,0,0);
             deathManager.fallRespawn = true;
             if (!CheckIfAlive()) { deathManager.ProcessDeath();  } // add death screen            
         }
@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
         animator.SetBool("isDead", isDead);
     }
   public bool canBeknocked = false;
-    public int TakeDamage(int damage)
+    public int TakeDamage(int damage, int knockbackX, int knockbackY) // needs to be negative or positive depending on enemies positions
     {
         if (canTakeDmg && !isDead)
         {
@@ -77,11 +77,10 @@ public class Health : MonoBehaviour
             animator.SetTrigger("Hurt");
             playerShader.PlayShaderDamage();
             playerHealth -= damage;
-            print(damage);
-
+           
             invincibleTimer = invincibleTimerOriginal;
             CheckIfAlive();
-            rb.AddForce(new Vector2(5, 5), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(knockbackX, knockbackY), ForceMode2D.Impulse);
             
            
             StartCoroutine(resetDamageBool());
