@@ -79,4 +79,5 @@ public class GhastController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, returnHomeRange);
     }
+
 }

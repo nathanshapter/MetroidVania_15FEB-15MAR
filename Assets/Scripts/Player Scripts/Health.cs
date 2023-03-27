@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+
 
 public class Health : MonoBehaviour
 {
@@ -64,7 +66,7 @@ public class Health : MonoBehaviour
         animator.SetBool("isDead", isDead);
     }
   public bool canBeknocked = false;
-    public int TakeDamage(int damage, int knockbackX, int knockbackY) // needs to be negative or positive depending on enemies positions
+    public int TakeDamage(int damage, float knockbackX, float knockbackY) // needs to be negative or positive depending on enemies positions
     {
         if (canTakeDmg && !isDead)
         {
@@ -80,6 +82,7 @@ public class Health : MonoBehaviour
            
             invincibleTimer = invincibleTimerOriginal;
             CheckIfAlive();
+
             rb.AddForce(new Vector2(knockbackX, knockbackY), ForceMode2D.Impulse);
             
            

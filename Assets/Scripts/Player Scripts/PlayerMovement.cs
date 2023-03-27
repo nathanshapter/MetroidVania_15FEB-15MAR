@@ -470,7 +470,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage,10,10);
+                float knockbackY, knockbackX;
+                knockbackY = collision.gameObject.GetComponent<EnemyHealth>().knockbackY;
+                knockbackX = collision.gameObject.GetComponent<EnemyHealth>().knockbackX;
+                health.TakeDamage(collision.gameObject.GetComponent<EnemyHealth>().contactDamage,knockbackX,knockbackY);
                 
             }
 
