@@ -514,6 +514,12 @@ public class PlayerMovement : MonoBehaviour
             isTouchingBridge = true;
             StartCoroutine(StopBridge());
         }
+        if (collision.gameObject.CompareTag("Electricity"))
+        {
+            
+            hasDoubleJumped = true;
+        }
+
         else { isTouchingBridge = false; }
     }
     private void OnCollisionExit2D(Collision2D collision)
