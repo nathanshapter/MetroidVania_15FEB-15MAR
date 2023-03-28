@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1275098258954718103, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_Name
-      value: DisappearingPlatform (2)
+      value: DisappearingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 1275098258954718186, guid: 161481ac59c43654d98e6498a616151b, type: 3}
       propertyPath: m_UsedByEffector
@@ -62,6 +62,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1275098258954718184, guid: 161481ac59c43654d98e6498a616151b, type: 3}
     - {fileID: 6006164598600873046, guid: 161481ac59c43654d98e6498a616151b, type: 3}
+    - {fileID: 4333007168665432976, guid: 161481ac59c43654d98e6498a616151b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 161481ac59c43654d98e6498a616151b, type: 3}
 --- !u!1 &8442654359438712881 stripped
 GameObject:

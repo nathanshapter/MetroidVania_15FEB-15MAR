@@ -48,4 +48,10 @@ public class ChronologicalPlatform : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+    }
+
 }

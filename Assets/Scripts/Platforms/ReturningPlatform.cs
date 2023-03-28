@@ -6,15 +6,15 @@ using UnityEngine;
 public class ReturningPlatform: MonoBehaviour
 {
 
-    
+
 
 
     [Header("Straight Movement")]
-    Vector2 startingPosition;
+    Vector3 startingPosition;
     public Vector2 movementVector;
     [SerializeField][Range(0, 1)] float movementFactor;
     [SerializeField] float period = 2f;
-
+    bool inScene;
 
 
    
@@ -24,6 +24,7 @@ public class ReturningPlatform: MonoBehaviour
     private void Start()
     {
         startingPosition= transform.position;
+        inScene= true;
     }
     private void Update()
     {
@@ -36,12 +37,32 @@ public class ReturningPlatform: MonoBehaviour
 
             movementFactor = (rawSinWave + 1f) / 2;
 
-            Vector2 offset = movementVector * movementFactor;
+            Vector3 offset = movementVector * movementFactor;
             transform.position = startingPosition + offset;
         
     
        
        
     }
-  
+    private void OnDrawGizmosSelected()
+    {
+       if(inScene)
+        {
+            InGameGizmo();
+            return;
+        }
+
+        OutOfSceneGizmo();
+    }
+    private void OutOfSceneGizmo()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(movementVector.x, movementVector.y, 0));
+    }
+    private void InGameGizmo()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(startingPosition, startingPosition + new Vector3(movementVector.x, movementVector.y, 0));
+    }
+
 }   

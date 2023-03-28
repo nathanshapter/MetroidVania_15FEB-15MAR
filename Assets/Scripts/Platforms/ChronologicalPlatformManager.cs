@@ -60,4 +60,22 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
 
     }
+
+    int currentPlatform = 0;
+    private void OnDrawGizmosSelected()
+    {
+        
+
+        Gizmos.color = Color.green;
+
+        foreach (var item in platform)
+        {           
+            Gizmos.DrawLine(platform[currentPlatform].transform.position, platform[currentPlatform +1].transform.position);
+            Debug.Log(currentPlatform);
+        }
+
+        
+        
+
+    }
 }
