@@ -44,7 +44,7 @@ public class ReturningPlatform: MonoBehaviour
        
        
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
        if(inScene)
         {

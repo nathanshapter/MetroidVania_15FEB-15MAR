@@ -10,7 +10,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
     [SerializeField] int totalPlatforms;
     public bool isTimed;
   public  float timeUntilCrumble;
-
+ 
 
     private void Start()
     {
@@ -20,6 +20,8 @@ public class ChronologicalPlatformManager : MonoBehaviour
         }
         platform[0].gameObject.SetActive(true);
         totalPlatforms = platform.Length;
+
+        
     }
 
     private void Update()
@@ -61,21 +63,22 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
     }
 
-    int currentPlatform = 0;
-    private void OnDrawGizmosSelected()
-    {
-        
-
+    int gizmoNumber=0;
+    private void OnDrawGizmos()
+    {       
+       
         Gizmos.color = Color.green;
 
         foreach (var item in platform)
-        {           
-            Gizmos.DrawLine(platform[currentPlatform].transform.position, platform[currentPlatform +1].transform.position);
-            Debug.Log(currentPlatform);
-        }
+        {          
+            if(gizmoNumber +1 >= platform.Length) { gizmoNumber = 0; }
+            Gizmos.DrawLine(platform[gizmoNumber].transform.position, platform[gizmoNumber +1].transform.position);
+            gizmoNumber++;
 
-        
+
+        }       
         
 
     }
+   
 }

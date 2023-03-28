@@ -51,5 +51,9 @@ public class CircularPlatform : MonoBehaviour
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + rotationOffset;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(rotationCentre.transform.position, rotationRadius);
+    }
 }

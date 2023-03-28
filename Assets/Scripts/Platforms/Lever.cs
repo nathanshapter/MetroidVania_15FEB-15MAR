@@ -35,5 +35,10 @@ public class Lever : MonoBehaviour
     }
 
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(topYPosition.transform.position, door.transform.position);
+    }
 
 }

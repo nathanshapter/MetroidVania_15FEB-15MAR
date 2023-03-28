@@ -70,5 +70,15 @@ public class VerticalPlatformManager : MonoBehaviour
             return bottomYPosition;
         }
     }
- 
+    private void OnDrawGizmos()
+    {
+        if (isFlipped)
+        {
+            Gizmos.color= Color.blue;
+        }
+        else { Gizmos.color= Color.red;}
+
+        Gizmos.DrawLine(bottomYPosition.transform.position, topYPosition.transform.position);
+    }
+
 }
