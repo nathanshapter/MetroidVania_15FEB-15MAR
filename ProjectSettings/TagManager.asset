@@ -15,6 +15,7 @@ TagManager:
   - MovingPlatform
   - Upgrade
   - DestroyableWall
+  - Electricity
   layers:
   - Default
   - TransparentFX
