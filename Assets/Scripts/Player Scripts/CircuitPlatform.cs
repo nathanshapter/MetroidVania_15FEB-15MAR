@@ -7,12 +7,19 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] Transform[] waypoints;
     Vector2 startPosition;
     [SerializeField] float movementSpeed = 10f;
-   
+    float startingSpeed;
     [SerializeField] float dockTimer;
+  
+
+
+    [SerializeField] float dockStoppingDistance = 1f;
+    [SerializeField] float dockDecelerationSpeed = 10f;
+    [SerializeField] float dockAccelerationSpeed = 5f;
+    
     private void Start()
     {
         startPosition= transform.position;
-       
+        startingSpeed = movementSpeed;
     
     }
     int index = 0;
@@ -35,11 +42,27 @@ public class CircuitPlatform : MonoBehaviour
 
      
 
-        if (distance <= 1f &&!coroutineStarted)
+        if (distance <= dockStoppingDistance )
         {
-            StartCoroutine(IncreaseIndex());
+            if(dockTimer >= dockStoppingDistance)
+            {
+                movementSpeed = distance *dockDecelerationSpeed;
+                
+
+            }
+            if(!coroutineStarted)
+                StartCoroutine(IncreaseIndex());
 
 
+        }
+        else if(distance > dockStoppingDistance)
+        {
+            movementSpeed += dockAccelerationSpeed * Time.deltaTime;
+
+            if(movementSpeed >= startingSpeed)
+            {
+                movementSpeed = startingSpeed;
+            }
         }
         
       

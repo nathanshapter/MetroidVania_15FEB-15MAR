@@ -27,8 +27,7 @@ public class ReturningPlatform: MonoBehaviour
         inScene= true;
     }
     private void Update()
-    {
-        
+    {       
         
             float cycles = Time.time / period;
 
@@ -38,8 +37,7 @@ public class ReturningPlatform: MonoBehaviour
             movementFactor = (rawSinWave + 1f) / 2;
 
             Vector3 offset = movementVector * movementFactor;
-            transform.position = startingPosition + offset;
-        
+            transform.position = startingPosition + offset;       
     
        
        
