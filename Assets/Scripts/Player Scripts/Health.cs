@@ -70,7 +70,7 @@ public class Health : MonoBehaviour
     {
         if (canTakeDmg && !isDead)
         {
-            
+            transform.SetParent(null);
             print(damage);
            canBeknocked= true;
             // SoundManager.Instance.StopSound(); // needs to stop just flute

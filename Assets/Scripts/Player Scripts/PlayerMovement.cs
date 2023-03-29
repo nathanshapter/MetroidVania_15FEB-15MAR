@@ -458,7 +458,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            transform.SetParent(null);
+         //   transform.SetParent(null);
             if (collision.gameObject.GetComponent<EnemyHealth>() == null) // this will add fireball hits in cerberus script
             {
                 health.TakeDamage(collision.gameObject.GetComponentInParent<EnemyGodController>().contactDamage,10,0);
