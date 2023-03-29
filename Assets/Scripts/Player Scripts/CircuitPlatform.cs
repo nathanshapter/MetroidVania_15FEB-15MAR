@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CircuitPlatform : MonoBehaviour
+{
+    [SerializeField] Transform[] waypoints;
+    Vector2 startPosition;
+    [SerializeField] float movementSpeed = 10f;
+   
+    [SerializeField] float dockTimer;
+    private void Start()
+    {
+        startPosition= transform.position;
+       
+    
+    }
+    int index = 0;
+    private void Update()
+    {
+       
+        if (index >= waypoints.Length)
+        {
+            index =0;
+        }
+        else
+        {
+            Vector2 newPos = Vector2.MoveTowards(transform.position, waypoints[index].transform.position, movementSpeed * Time.deltaTime);
+            transform.position = newPos;
+        }
+
+
+     float distance =  Vector2.Distance(waypoints[index].position, transform.position);
+
+
+     
+
+        if (distance <= 1f &&!coroutineStarted)
+        {
+            StartCoroutine(IncreaseIndex());
+
+
+        }
+        
+      
+    }
+    int gizmoNumber = 0;
+    bool coroutineStarted = false;
+    IEnumerator IncreaseIndex()
+    {
+        
+        
+            coroutineStarted = true;
+            yield return new WaitForSeconds(dockTimer);
+            index++;
+            coroutineStarted = false;
+        
+      
+    }
+    private void OnDrawGizmos()
+    {
+        if(index == 0)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, waypoints[0].transform.position);
+        }
+        
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(waypoints[waypoints.Length-1].transform.position, waypoints[0].transform.position);
+
+        foreach (var item in waypoints)
+        {
+            
+            if (gizmoNumber +1 >= waypoints.Length) 
+            { 
+
+                gizmoNumber = 0;
+              
+            }
+            Gizmos.DrawLine(waypoints[gizmoNumber].position, waypoints[gizmoNumber+1].transform.position);
+            gizmoNumber++;
+        }
+
+       
+    }
+  
+}

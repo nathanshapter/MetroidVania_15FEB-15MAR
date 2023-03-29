@@ -71,12 +71,15 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
         foreach (var item in platform)
         {          
-            if(gizmoNumber +1 >= platform.Length) { gizmoNumber = 0; }
+            if(gizmoNumber +1  >= platform.Length)
+            {
+                gizmoNumber = 0;
+            }
             Gizmos.DrawLine(platform[gizmoNumber].transform.position, platform[gizmoNumber +1].transform.position);
             gizmoNumber++;
 
 
-        }       
+        }      
         
 
     }
