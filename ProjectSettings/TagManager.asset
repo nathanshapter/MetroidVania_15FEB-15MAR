@@ -16,6 +16,7 @@ TagManager:
   - Upgrade
   - DestroyableWall
   - Electricity
+  - Bounce
   layers:
   - Default
   - TransparentFX

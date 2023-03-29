@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
       player = FindObjectOfType<PlayerMovement>(); // play animation of running into next scene
-        print("Level Manager loaded");
+       // print("Level Manager loaded");
         if(Instance == null)
         {
             Instance = this;

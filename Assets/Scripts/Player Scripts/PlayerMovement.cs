@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("=========== Movement Floats ==========")]
     [Space(20)]
     
-    public float speedActuel;
+    public float speedActuel; // need to add something to this so that when on a platform, and parent is not null, to add the the speed of the object to that of the player so that when moving the speed of the platform does not push him off
     public float walkingSpeed;
     [HideInInspector] public float originalSpeed;
     [HideInInspector] public float horizontal;
@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-       
+     
         
      
 
