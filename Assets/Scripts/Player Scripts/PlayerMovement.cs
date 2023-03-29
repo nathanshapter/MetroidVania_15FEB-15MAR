@@ -104,6 +104,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+
+        
         if (wallGrab.wallSlide)
         {
             bool facingDirection;
@@ -526,7 +528,7 @@ public class PlayerMovement : MonoBehaviour
     {
         
         
-        transform.SetParent(null);
+       transform.SetParent(null);
 
     }
     private IEnumerator AllowDoubleWallJump()

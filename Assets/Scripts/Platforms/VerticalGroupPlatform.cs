@@ -9,6 +9,7 @@ public class VerticalGroupPlatform : MonoBehaviour
     [HideInInspector] public float movementSpeed = 5;
     Transform topYPosition, bottomYPosition;
     PlayerMovement player;
+    bool playerTouchingPlatform = false;
 
   [SerializeField]  bool isFlipped;
     private void Start()
@@ -20,6 +21,14 @@ public class VerticalGroupPlatform : MonoBehaviour
         bottomYPosition = GetComponentInParent<VerticalPlatformManager>().bottomYPosition;
        isFlipped = GetComponentInParent<VerticalPlatformManager>().isFlipped;
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        playerTouchingPlatform = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        playerTouchingPlatform = false;
+    }
     private void Update()
     {
        
@@ -28,19 +37,29 @@ public class VerticalGroupPlatform : MonoBehaviour
        
         if(transform.position.y < bottomYPosition.position.y && !isFlipped)
         {
-            player.transform.SetParent(null);
+
+            ResetPlayerParent(playerTouchingPlatform);
+
+          
             transform.position = topYPosition.position;
         }
 
         if (transform.position.y > topYPosition.position.y && isFlipped)
         {
-            player.transform.SetParent(null);
+            ResetPlayerParent(playerTouchingPlatform);
 
             transform.position = bottomYPosition.position;
         }
 
 
 
+    } 
+    private void ResetPlayerParent(bool isTouching)
+    {
+        if (isTouching)
+        {
+            player.transform.SetParent(null);
+        }
     }
 
 }
