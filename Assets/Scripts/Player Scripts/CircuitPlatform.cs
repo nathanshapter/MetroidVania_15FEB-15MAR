@@ -15,6 +15,8 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] float dockStoppingDistance = 1f;
     [SerializeField] float dockDecelerationSpeed = 10f;
     [SerializeField] float dockAccelerationSpeed = 5f;
+
+    
     
     private void Start()
     {
