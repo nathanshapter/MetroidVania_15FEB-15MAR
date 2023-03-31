@@ -8,12 +8,24 @@ public class ChronologicalPlatformManager : MonoBehaviour
     GameObject[] platform;
   [SerializeField]  int previousPlatform = 0;
     [SerializeField] int totalPlatforms;
-    public bool isTimed;
+    public bool isCrumbleTimed;
   public  float timeUntilCrumble;
- 
+    public bool spawnAsTimer = false;
+    [SerializeField] float timeBetweenPlatformSpawn;
+    [SerializeField] float timeInBetweenWaves;
 
+   
     private void Start()
     {
+       
+        if (spawnAsTimer)
+        {
+            StartCoroutine(SpawnWaves());
+
+        }
+
+
+
         foreach (var item in platform)
         {
             item.gameObject.SetActive(false);
@@ -22,6 +34,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
         totalPlatforms = platform.Length;
 
         
+
     }
 
     private void Update()
@@ -83,5 +96,32 @@ public class ChronologicalPlatformManager : MonoBehaviour
         
 
     }
-   
+    IEnumerator SpawnWaves()
+    {
+        int currentPlatform = 0;
+
+        foreach (var item in platform)
+        {
+            platform[currentPlatform].SetActive(true);
+            
+            currentPlatform++;
+            yield return new WaitForSeconds(timeBetweenPlatformSpawn);
+        }
+
+        currentPlatform = 0;
+        
+
+        yield return new WaitForSeconds(timeInBetweenWaves);
+        foreach (var item in platform)
+        {
+            platform[currentPlatform].SetActive(false);
+
+            currentPlatform++;
+            yield return new WaitForSeconds(timeBetweenPlatformSpawn);
+        }
+        yield return new WaitForSeconds(timeInBetweenWaves);
+        
+        StartCoroutine(SpawnWaves());
+    }
+
 }

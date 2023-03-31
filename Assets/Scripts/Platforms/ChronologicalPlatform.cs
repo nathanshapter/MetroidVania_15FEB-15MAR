@@ -7,47 +7,79 @@ public class ChronologicalPlatform : MonoBehaviour
     ChronologicalPlatformManager manager;
     bool hasSpawnedNextPlatform = false;
    [SerializeField] bool isFirstPlatform = false;
-    bool isTimed;
+
+    bool isCrumbleTimed;
      float timeUntilCrumble;
+
+
+
+   
+   
 
     private void Start()
     {
-        manager = GetComponentInParent<ChronologicalPlatformManager>();
-        isTimed = GetComponentInParent<ChronologicalPlatformManager>().isTimed;
-        timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
+        manager = GetComponentInParent<ChronologicalPlatformManager>();       
+            isCrumbleTimed = GetComponentInParent<ChronologicalPlatformManager>().isCrumbleTimed;
+            timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
+           
+         
+       
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !hasSpawnedNextPlatform)
+
+        if (other.gameObject.CompareTag("Player") && !hasSpawnedNextPlatform && !manager.spawnAsTimer)
         {
             manager.ProcessPlatforms();
             
             hasSpawnedNextPlatform = true;
-            if(isTimed && !isFirstPlatform)
+            if(isCrumbleTimed && !isFirstPlatform)
             {
                 StartCoroutine(DisableTimer());
+                
             }
            
         }
+        
     }
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !isFirstPlatform)
+        if (other.gameObject.CompareTag("Player") && !isFirstPlatform && !manager.spawnAsTimer && !manager.isCrumbleTimed)
         {
-            Disable();
+          StartCoroutine(  Disable());
         }
+        
+
+        
+        
     }
     private IEnumerator DisableTimer()
     {
         yield return new WaitForSeconds(timeUntilCrumble);
-        Disable();
+       
+       StartCoroutine( Disable());
     }
-    private void Disable()
+    IEnumerator Disable()
     {
-        GetComponentInChildren<Renderer>().enabled = false;
-        GetComponent<BoxCollider2D>().enabled = false;
+
+     
+        
+            print("hello");
+            yield return new WaitForSeconds(0);
+
+            GetComponentInChildren<Renderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+
+        
+
+
+
+
+
+
+
     }
 
-  
+   
 
 }
