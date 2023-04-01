@@ -18,20 +18,36 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] float dockAccelerationSpeed = 5f;
 
 
+    
+    bool delay;
+    [SerializeField] float delayTime;
 
+    [SerializeField] bool reverseDirection;
+    /// <summary>
+    /// ////////////////////////////////// ADD AN OPTION TO REVERSE THE PATH
+    /// </summary>
    
     
     private void Start()
     {
         startPosition= transform.position;
         startingSpeed = movementSpeed;
+
+       
         
-    
+        StartCoroutine(PausePlatform(delayTime));
+
+        if (reverseDirection)
+        {
+            System.Array.Reverse(waypoints);
+        }
     }
     int index = 0;
     private void Update()
     {
-       
+        
+        if (delay) { return; }
+      
         if (index >= waypoints.Length)
         {
             index =0;
@@ -86,6 +102,15 @@ public class CircuitPlatform : MonoBehaviour
         
       
     }
+
+    IEnumerator PausePlatform(float delayTime)
+    {
+        delay = true;
+        yield return new WaitForSeconds(delayTime);
+        delay = false;
+    }
+
+
     private void OnDrawGizmos()
     {
         if(index == 0)
@@ -112,5 +137,6 @@ public class CircuitPlatform : MonoBehaviour
 
        
     }
+
   
 }
