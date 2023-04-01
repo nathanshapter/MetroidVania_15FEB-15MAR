@@ -1,6 +1,9 @@
+using Language.Lua;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 
 public class CircuitPlatform : MonoBehaviour
 {
@@ -9,19 +12,22 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] float movementSpeed = 10f;
     float startingSpeed;
     [SerializeField] float dockTimer;
-  
+
 
 
     [SerializeField] float dockStoppingDistance = 1f;
     [SerializeField] float dockDecelerationSpeed = 10f;
     [SerializeField] float dockAccelerationSpeed = 5f;
 
-    
+
+
+   
     
     private void Start()
     {
         startPosition= transform.position;
         startingSpeed = movementSpeed;
+        
     
     }
     int index = 0;

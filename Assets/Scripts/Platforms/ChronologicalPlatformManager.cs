@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
+
 
 public class ChronologicalPlatformManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject[] platform;
-  [SerializeField]  int previousPlatform = 0;
-    [SerializeField] int totalPlatforms;
-    public bool isCrumbleTimed;
-  public  float timeUntilCrumble;
-    public bool spawnAsTimer = false;
+    [Tooltip("You need to add every platform in here manually, and chronologically, there is no limit of platforms.")] 
+    [SerializeField]    GameObject[] platform; 
+
+
+   int previousPlatform = 0;
+    int totalPlatforms;
+
+
+
+    // variables to set
+   
+  
+    [Tooltip("This sets the platforms to spawn using using a timer, rather than stepping on them")]
+    public bool spawnAsTimer = false; // this is public to pass down into the individual scripts on each platform
     [SerializeField] float timeBetweenPlatformSpawn;
     [SerializeField] float timeInBetweenWaves;
+    
+
+
+
+    
+    
+    [Tooltip("When Landing on the platform, the timer decides how long until it crumbles")]
+
+    public bool isCrumbleTimed;
+
+
+
+  public  float timeUntilCrumble;
+  
 
    
     private void Start()
