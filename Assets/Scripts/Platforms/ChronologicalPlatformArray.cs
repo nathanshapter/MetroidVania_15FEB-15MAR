@@ -8,10 +8,7 @@ public class ChronologicalPlatformArray : MonoBehaviour
 
 
     int gizmoNumber = 0;
-    private void Start()
-    {
-        
-    }
+   
     private void OnDrawGizmos()
     {
 

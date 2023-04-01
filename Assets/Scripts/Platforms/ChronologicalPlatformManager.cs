@@ -14,19 +14,20 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
     public bool       startAllSpawned = false;
     public bool       spawnAsTimer = false;
-    [SerializeField]  float             timeBetweenPlatformSpawn;         // timer in which the next platform is spawned, if spawned as timer
-    [SerializeField]  float             timeInBetweenWaves;               // time that it will wait before respawning/despawning all platform
+
+    [SerializeField]  float timeBetweenPlatformSpawn;                    // timer in which the next platform is spawned, if spawned as timer
+    [SerializeField]  float timeInBetweenWaves;                          // time that it will wait before respawning/despawning all platform
  
     
     public bool       isCrumbleTimed;                                      
     public float      timeUntilCrumble;                                   // while in contact with an object of tag "Player" this will countdown and then disable the object
 
 
-    public bool disablePlatformOnJump = false;
-    public bool spawnAll = false;
+    public bool       disablePlatformOnJump = false;                    // disable platform OncollisionExit
+    public bool       spawnAll = false;                                 // spawn back all platforms that have been activated, after they crumbled, and after having jumped on the first platform
 
-    public bool letPlatformsRespawn;
-    public float platformRespawnTime;
+    public bool       letPlatformsRespawn;                              // if crumble is enabled, these two allows platforms to respawn
+    public float      platformRespawnTime;
 
     ChronologicalPlatformArray cpa;
     private void Start()
@@ -39,8 +40,8 @@ public class ChronologicalPlatformManager : MonoBehaviour
             isCrumbleTimed = false;
             letPlatformsRespawn= false;
         }
-
-        if(!startAllSpawned)
+        #region bool resets
+        if (!startAllSpawned)
         {
             foreach (var item in cpa.platform) // turns of all platforms, and then the first back on
             {
@@ -68,17 +69,12 @@ public class ChronologicalPlatformManager : MonoBehaviour
             spawnAsTimer = false;
            
         }
-        print(isCrumbleTimed);
+        #endregion
     }
 
-    private void Update() // debugging method to reenable all platform
-    {
-         Renable();
-        
-    }
+     // spawn all of the platforms chronologically 
     public void ProcessPlatforms()
     {
-
 
         if (previousPlatform +1 >= totalPlatforms) { previousPlatform = 0; previousPlatform--; }
 
@@ -86,32 +82,18 @@ public class ChronologicalPlatformManager : MonoBehaviour
         cpa.platform[previousPlatform + 1].gameObject.SetActive(true);
      
 
-        previousPlatform++;
-     
+        previousPlatform++;    
+              
+    }   
 
-      
-    }
-
-  
-    void Renable()
-    {
-        if(Input.GetKeyUp(KeyCode.Escape))
-        {
-            foreach (var item in cpa.platform)
-            {
-               
-            }
-        }     
-    }
-
-  
+    // used to spawn the platforms as a wave set by timeBetweenPlatformSpawn and timeInBetweenWaves
     IEnumerator SpawnWaves()
     {
         if (!startAllSpawned)
         {
             int currentPlatform = 0;
 
-            foreach (var item in cpa.platform)
+            foreach (var item in cpa.platform) // setting them all to true, and their components 
             {
                 cpa.platform[currentPlatform].SetActive(true);
                 cpa.platform[currentPlatform].gameObject.GetComponent<BoxCollider2D>().enabled = true;
@@ -124,7 +106,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
 
             yield return new WaitForSeconds(timeInBetweenWaves);
-            foreach (var item in cpa.platform)
+            foreach (var item in cpa.platform) // setting to false
             {
                 cpa.platform[currentPlatform].SetActive(false);
 
@@ -137,12 +119,10 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
         }
 
-
-        }
+    }
 
     public void SpawnAll()
-    {
-        
+    {        
         foreach (var item in cpa.platform)
         {
             item.GetComponentInChildren<Renderer>().enabled = true;

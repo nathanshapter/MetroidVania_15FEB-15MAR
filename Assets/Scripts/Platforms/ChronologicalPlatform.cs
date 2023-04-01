@@ -5,40 +5,39 @@ using UnityEngine;
 public class ChronologicalPlatform : MonoBehaviour
 {
     ChronologicalPlatformManager manager;
+
+
     bool hasSpawnedNextPlatform = false;
-   [SerializeField] bool isFirstPlatform = false;
+    [SerializeField] bool isFirstPlatform = false;
 
     bool isCrumbleTimed;
-     float timeUntilCrumble;
-    float timeUntilCrumbleTimer;
+    float timeUntilCrumble;  
 
 
     bool disablePlatformOnJump = false;
     bool spawnAll = false;
 
 
-   bool letPlatformsRespawn;
+    bool letPlatformsRespawn;
     float platformRespawnTime;
 
     bool spawnAsTimer;
     private void Start()
     {
-        manager = GetComponentInParent<ChronologicalPlatformManager>();       
-            isCrumbleTimed = GetComponentInParent<ChronologicalPlatformManager>().isCrumbleTimed;
-            timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
+        #region gets from manager
+        manager = GetComponentInParent<ChronologicalPlatformManager>();
+        isCrumbleTimed = GetComponentInParent<ChronologicalPlatformManager>().isCrumbleTimed;
+        timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
         disablePlatformOnJump = GetComponentInParent<ChronologicalPlatformManager>().disablePlatformOnJump;
         spawnAll = GetComponentInParent<ChronologicalPlatformManager>().spawnAll;
         letPlatformsRespawn = GetComponentInParent<ChronologicalPlatformManager>().letPlatformsRespawn;
         platformRespawnTime = GetComponentInParent<ChronologicalPlatformManager>().platformRespawnTime;
         spawnAsTimer = GetComponentInParent<ChronologicalPlatformManager>().spawnAsTimer;
+        #endregion
     }
-    private void Update()
-    {
-        timeUntilCrumbleTimer += Time.deltaTime;
-    }
+  
     private void OnCollisionEnter2D(Collision2D other)
     {
-
         if (other.gameObject.CompareTag("Player") && !hasSpawnedNextPlatform && !manager.spawnAsTimer)
         {
             manager.ProcessPlatforms();
@@ -51,74 +50,51 @@ public class ChronologicalPlatform : MonoBehaviour
             }
            
         }
-        if(isCrumbleTimed && !spawnAsTimer)
+        if (isCrumbleTimed && !spawnAsTimer && other.gameObject.CompareTag("Player"))
         {
-           StartCoroutine( ProcessCrumble());
-           
+            StartCoroutine(ProcessCrumble());
+
         }
-        if(isFirstPlatform&& spawnAll)
+        if (isFirstPlatform && spawnAll && other.gameObject.CompareTag("Player"))
         {
             manager.SpawnAll();
         }
-        
+
     }
     private void OnCollisionExit2D(Collision2D other)
-    {
-        
+    {        
         if (other.gameObject.CompareTag("Player") && !isFirstPlatform &&  !manager.isCrumbleTimed &&disablePlatformOnJump && !manager.spawnAsTimer)
-        {
-            
-            StartCoroutine(  Disable());
-        }
-        
-
-        
-        
+        {            
+            Disable();
+        }       
+  
     }
     private IEnumerator DisableTimer()
     {
         yield return new WaitForSeconds(timeUntilCrumble);
        
-       StartCoroutine( Disable());
+        Disable();
     }
-    IEnumerator Disable()
+    void Disable()
     {
-
-     
-        
-            
-            yield return new WaitForSeconds(0);
-      //  this.gameObject.SetActive(false);
-           GetComponentInChildren<Renderer>().enabled = false;
-           GetComponent<BoxCollider2D>().enabled = false;
-
-        
-
-
-
-
-
-
-
+        ComponentEnable(false);
     }
     IEnumerator ProcessCrumble()
-    {
-        timeUntilCrumbleTimer = 0;
-        print(timeUntilCrumbleTimer);
+    {      
         yield return new WaitForSeconds(timeUntilCrumble);
-        GetComponentInChildren<Renderer>().enabled = false;
-        GetComponent<BoxCollider2D>().enabled = false;
-       
-        if(letPlatformsRespawn)
+        ComponentEnable(false);
+        if (letPlatformsRespawn)
         {
             yield return new WaitForSeconds(platformRespawnTime);
-            GetComponentInChildren<Renderer>().enabled = true;
-            GetComponent<BoxCollider2D>().enabled = true;
-        }
-           
+            ComponentEnable(true);
+        }          
         
     }
 
-   
+   void ComponentEnable(bool enable)
+    {
+        GetComponentInChildren<Renderer>().enabled = enable;
+        GetComponent<BoxCollider2D>().enabled = enable;
+    }
 
 }
