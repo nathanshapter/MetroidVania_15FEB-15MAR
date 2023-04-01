@@ -15,8 +15,10 @@ public class ChronologicalPlatform : MonoBehaviour
 
     bool disablePlatformOnJump = false;
     bool spawnAll = false;
-   
 
+
+   bool letPlatformsRespawn;
+    float platformRespawnTime;
     private void Start()
     {
         manager = GetComponentInParent<ChronologicalPlatformManager>();       
@@ -24,7 +26,8 @@ public class ChronologicalPlatform : MonoBehaviour
             timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
         disablePlatformOnJump = GetComponentInParent<ChronologicalPlatformManager>().disablePlatformOnJump;
         spawnAll = GetComponentInParent<ChronologicalPlatformManager>().spawnAll;
-     
+        letPlatformsRespawn = GetComponentInParent<ChronologicalPlatformManager>().letPlatformsRespawn;
+        platformRespawnTime = GetComponentInParent<ChronologicalPlatformManager>().platformRespawnTime;
 
     }
     private void Update()
@@ -103,10 +106,13 @@ public class ChronologicalPlatform : MonoBehaviour
         GetComponentInChildren<Renderer>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
        
-        
-            yield return new WaitForSeconds(timeUntilCrumble);
+        if(letPlatformsRespawn)
+        {
+            yield return new WaitForSeconds(platformRespawnTime);
             GetComponentInChildren<Renderer>().enabled = true;
             GetComponent<BoxCollider2D>().enabled = true;
+        }
+           
         
     }
 

@@ -24,12 +24,18 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
     public bool disablePlatformOnJump = false;
     public bool spawnAll = false;
+
+    public bool letPlatformsRespawn;
+    public float platformRespawnTime;
     private void Start()
     {
-       
+     
+
         if (spawnAsTimer)
         {
             StartCoroutine(SpawnWaves());
+            isCrumbleTimed = false;
+            letPlatformsRespawn= false;
         }
 
         if(!startAllSpawned)
@@ -42,15 +48,23 @@ public class ChronologicalPlatformManager : MonoBehaviour
             platform[0].gameObject.SetActive(true);
             totalPlatforms = platform.Length;
         }
-
+        if(spawnAll)
+        {
+            spawnAsTimer = false;
+        }
         if (startAllSpawned)
         {
             spawnAsTimer = false;
         }
-
+       
         if(disablePlatformOnJump)
         {
             isCrumbleTimed = false;
+        }
+        if(isCrumbleTimed)
+        {
+            spawnAsTimer = false;
+           
         }
         print(spawnAsTimer);
     }
@@ -126,7 +140,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
     public void SpawnAll()
     {
-        int currentPlatform = 0;
+        
         foreach (var item in platform)
         {
             item.GetComponentInChildren<Renderer>().enabled = true;
