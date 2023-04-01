@@ -17,6 +17,7 @@ public class ChronologicalPlatformManagerEditor : Editor
 
     bool spawnAsTimerEnabled = false;
     bool isCrumbleTimedEnabled = false;
+    bool allOptions = false;
 
     Rect rect;
 
@@ -49,19 +50,30 @@ public class ChronologicalPlatformManagerEditor : Editor
         EditorGUILayout.PropertyField(platform);
         
         GenerateToolTip("You need to add every platform in here manually, and chronologically, there is no limit of platforms.");
-       
+        allOptions = EditorGUILayout.BeginFoldoutHeaderGroup(allOptions, "All Option");
+        GenerateToolTip("These enable/disable other options further down");
         serializedObject.Update();
-       
-        spawnAsTimerEnabled = EditorGUILayout.BeginFoldoutHeaderGroup(spawnAsTimerEnabled, "Spawn As Timer");
-        GenerateToolTip("This sets the platforms to spawn using a timer, rather than stepping on them");
-        if (spawnAsTimerEnabled)
+       if(allOptions)
         {
-            EditorGUILayout.PropertyField(disablePlatformOnJump);
-            EditorGUILayout.PropertyField(spawnAll);
             EditorGUILayout.Space(20);
             EditorGUILayout.PropertyField(startAllSpawned);
-            if(!startAllSpawned.boolValue)
+            EditorGUILayout.PropertyField(disablePlatformOnJump);
+            GenerateToolTip("Spawn all when jumping on the first platform, to reset the course");
+            EditorGUILayout.PropertyField(spawnAll);
+           
+            EditorGUILayout.Space(20);
+        }
+        EditorGUILayout.EndFoldoutHeaderGroup();
+        spawnAsTimerEnabled = EditorGUILayout.BeginFoldoutHeaderGroup(spawnAsTimerEnabled, "Spawn As Timer");
+        GenerateToolTip("This sets the platforms to spawn using a timer, rather than stepping on them");
+        if (spawnAsTimerEnabled )
+        {
+            
+           
+            
+            if(!startAllSpawned.boolValue && !spawnAll.boolValue)
             {
+                EditorGUILayout.Space(20);
                 EditorGUILayout.PropertyField(spawnAsTimer);
                 EditorGUILayout.PropertyField(timeBetweenPlatformSpawn);
                 EditorGUILayout.PropertyField(timeInBetweenWaves);
@@ -75,9 +87,13 @@ public class ChronologicalPlatformManagerEditor : Editor
         GenerateToolTip("When landing on the platform, the timer decides how long until it crumbles");
         if (isCrumbleTimedEnabled)
         {
-            EditorGUILayout.Space(20);
-            EditorGUILayout.PropertyField(isCrumbleTimed);
-            EditorGUILayout.PropertyField(timeUntilCrumble);
+            if(!disablePlatformOnJump.boolValue)
+            {
+                EditorGUILayout.Space(20);
+                EditorGUILayout.PropertyField(isCrumbleTimed);
+                EditorGUILayout.PropertyField(timeUntilCrumble);
+            }
+           
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
 

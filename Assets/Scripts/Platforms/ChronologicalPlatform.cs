@@ -24,7 +24,7 @@ public class ChronologicalPlatform : MonoBehaviour
             timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
         disablePlatformOnJump = GetComponentInParent<ChronologicalPlatformManager>().disablePlatformOnJump;
         spawnAll = GetComponentInParent<ChronologicalPlatformManager>().spawnAll;
-
+     
 
     }
     private void Update()
@@ -58,9 +58,11 @@ public class ChronologicalPlatform : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !isFirstPlatform && !manager.spawnAsTimer && !manager.isCrumbleTimed &&disablePlatformOnJump)
+        print("hello");
+        if (other.gameObject.CompareTag("Player") && !isFirstPlatform &&  !manager.isCrumbleTimed &&disablePlatformOnJump && !manager.spawnAsTimer)
         {
-          StartCoroutine(  Disable());
+            print("hello2");
+            StartCoroutine(  Disable());
         }
         
 
@@ -78,11 +80,11 @@ public class ChronologicalPlatform : MonoBehaviour
 
      
         
-            print("hello");
+            
             yield return new WaitForSeconds(0);
-
-            GetComponentInChildren<Renderer>().enabled = false;
-            GetComponent<BoxCollider2D>().enabled = false;
+      //  this.gameObject.SetActive(false);
+           GetComponentInChildren<Renderer>().enabled = false;
+           GetComponent<BoxCollider2D>().enabled = false;
 
         
 

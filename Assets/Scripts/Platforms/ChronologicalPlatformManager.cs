@@ -47,6 +47,12 @@ public class ChronologicalPlatformManager : MonoBehaviour
         {
             spawnAsTimer = false;
         }
+
+        if(disablePlatformOnJump)
+        {
+            isCrumbleTimed = false;
+        }
+        print(spawnAsTimer);
     }
 
     private void Update() // debugging method to reenable all platform
@@ -85,31 +91,38 @@ public class ChronologicalPlatformManager : MonoBehaviour
   
     IEnumerator SpawnWaves()
     {
-        int currentPlatform = 0;
-
-        foreach (var item in platform)
+        if (!startAllSpawned)
         {
-            platform[currentPlatform].SetActive(true);
-            
-            currentPlatform++;
-            yield return new WaitForSeconds(timeBetweenPlatformSpawn);
+            int currentPlatform = 0;
+
+            foreach (var item in platform)
+            {
+                platform[currentPlatform].SetActive(true);
+                platform[currentPlatform].gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                platform[currentPlatform].gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
+                currentPlatform++;
+                yield return new WaitForSeconds(timeBetweenPlatformSpawn);
+            }
+
+            currentPlatform = 0;
+
+
+            yield return new WaitForSeconds(timeInBetweenWaves);
+            foreach (var item in platform)
+            {
+                platform[currentPlatform].SetActive(false);
+
+                currentPlatform++;
+                yield return new WaitForSeconds(timeBetweenPlatformSpawn);
+            }
+            yield return new WaitForSeconds(timeInBetweenWaves);
+
+            StartCoroutine(SpawnWaves()); // used to go on forever 
+
         }
 
-        currentPlatform = 0;
-        
 
-        yield return new WaitForSeconds(timeInBetweenWaves);
-        foreach (var item in platform)
-        {
-            platform[currentPlatform].SetActive(false);
-
-            currentPlatform++;
-            yield return new WaitForSeconds(timeBetweenPlatformSpawn);
         }
-        yield return new WaitForSeconds(timeInBetweenWaves);
-        
-        StartCoroutine(SpawnWaves()); // used to go on forever
-    }
 
     public void SpawnAll()
     {
