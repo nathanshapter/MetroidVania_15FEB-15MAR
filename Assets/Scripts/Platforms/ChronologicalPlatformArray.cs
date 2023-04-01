@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class ChronologicalPlatformArray : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] platform;
+
+
+    int gizmoNumber = 0;
+    private void Start()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnDrawGizmos()
     {
-        
+
+        Gizmos.color = Color.green;
+
+        foreach (var item in platform)
+        {
+            if (gizmoNumber + 1 >= platform.Length)
+            {
+                gizmoNumber = 0;
+            }
+            Gizmos.DrawLine(platform[gizmoNumber].transform.position, platform[gizmoNumber + 1].transform.position);
+            gizmoNumber++;
+
+        }
     }
 }

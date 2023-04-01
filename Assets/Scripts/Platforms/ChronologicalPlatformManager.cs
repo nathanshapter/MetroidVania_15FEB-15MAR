@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class ChronologicalPlatformManager : MonoBehaviour
 {
-    [SerializeField]  GameObject[]       platform;
+   
 
     int               previousPlatform = 0;                                // tracks platforms in the foreach 
     int               totalPlatforms;                                      // is set automatically, used to reset previous platform
@@ -27,9 +27,11 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
     public bool letPlatformsRespawn;
     public float platformRespawnTime;
+
+    ChronologicalPlatformArray cpa;
     private void Start()
     {
-     
+     cpa = GetComponent<ChronologicalPlatformArray>();
 
         if (spawnAsTimer)
         {
@@ -40,13 +42,13 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
         if(!startAllSpawned)
         {
-            foreach (var item in platform) // turns of all platforms, and then the first back on
+            foreach (var item in cpa.platform) // turns of all platforms, and then the first back on
             {
                 item.gameObject.SetActive(false);
             }
 
-            platform[0].gameObject.SetActive(true);
-            totalPlatforms = platform.Length;
+            cpa.platform[0].gameObject.SetActive(true);
+            totalPlatforms = cpa.platform.Length;
         }
         if(spawnAll)
         {
@@ -66,7 +68,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
             spawnAsTimer = false;
            
         }
-        print(spawnAsTimer);
+        print(isCrumbleTimed);
     }
 
     private void Update() // debugging method to reenable all platform
@@ -81,7 +83,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
         if (previousPlatform +1 >= totalPlatforms) { previousPlatform = 0; previousPlatform--; }
 
 
-        platform[previousPlatform + 1].gameObject.SetActive(true);
+        cpa.platform[previousPlatform + 1].gameObject.SetActive(true);
      
 
         previousPlatform++;
@@ -95,7 +97,7 @@ public class ChronologicalPlatformManager : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Escape))
         {
-            foreach (var item in platform)
+            foreach (var item in cpa.platform)
             {
                
             }
@@ -109,11 +111,11 @@ public class ChronologicalPlatformManager : MonoBehaviour
         {
             int currentPlatform = 0;
 
-            foreach (var item in platform)
+            foreach (var item in cpa.platform)
             {
-                platform[currentPlatform].SetActive(true);
-                platform[currentPlatform].gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                platform[currentPlatform].gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
+                cpa.platform[currentPlatform].SetActive(true);
+                cpa.platform[currentPlatform].gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                cpa.platform[currentPlatform].gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
                 currentPlatform++;
                 yield return new WaitForSeconds(timeBetweenPlatformSpawn);
             }
@@ -122,9 +124,9 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
 
             yield return new WaitForSeconds(timeInBetweenWaves);
-            foreach (var item in platform)
+            foreach (var item in cpa.platform)
             {
-                platform[currentPlatform].SetActive(false);
+                cpa.platform[currentPlatform].SetActive(false);
 
                 currentPlatform++;
                 yield return new WaitForSeconds(timeBetweenPlatformSpawn);
@@ -141,27 +143,12 @@ public class ChronologicalPlatformManager : MonoBehaviour
     public void SpawnAll()
     {
         
-        foreach (var item in platform)
+        foreach (var item in cpa.platform)
         {
             item.GetComponentInChildren<Renderer>().enabled = true;
             item.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
-    int gizmoNumber = 0;
-    private void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.green;
-
-        foreach (var item in platform)
-        {
-            if (gizmoNumber + 1 >= platform.Length)
-            {
-                gizmoNumber = 0;
-            }
-            Gizmos.DrawLine(platform[gizmoNumber].transform.position, platform[gizmoNumber + 1].transform.position);
-            gizmoNumber++;
-
-        }
-    }
+    
+   
 }

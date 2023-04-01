@@ -10,7 +10,7 @@ public class ChronologicalPlatformManagerEditor : Editor
     SerializedProperty timeInBetweenWaves;
     SerializedProperty isCrumbleTimed;
     SerializedProperty timeUntilCrumble;
-    SerializedProperty platform;
+
     SerializedProperty startAllSpawned;
     SerializedProperty disablePlatformOnJump;
     SerializedProperty spawnAll;
@@ -30,7 +30,7 @@ public class ChronologicalPlatformManagerEditor : Editor
         timeInBetweenWaves = serializedObject.FindProperty("timeInBetweenWaves");
         isCrumbleTimed = serializedObject.FindProperty("isCrumbleTimed");
         timeUntilCrumble = serializedObject.FindProperty("timeUntilCrumble");
-        platform = serializedObject.FindProperty("platform");
+      
         startAllSpawned = serializedObject.FindProperty("startAllSpawned");
         disablePlatformOnJump = serializedObject.FindProperty("disablePlatformOnJump");
         spawnAll = serializedObject.FindProperty("spawnAll");
@@ -51,7 +51,7 @@ public class ChronologicalPlatformManagerEditor : Editor
         EditorGUILayout.LabelField("These all need to be changed when the game is not in session");
            
         
-        EditorGUILayout.PropertyField(platform);
+       
         
         GenerateToolTip("You need to add every platform in here manually, and chronologically, there is no limit of platforms.");
         allOptions = EditorGUILayout.BeginFoldoutHeaderGroup(allOptions, "All Option");

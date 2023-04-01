@@ -19,6 +19,8 @@ public class ChronologicalPlatform : MonoBehaviour
 
    bool letPlatformsRespawn;
     float platformRespawnTime;
+
+    bool spawnAsTimer;
     private void Start()
     {
         manager = GetComponentInParent<ChronologicalPlatformManager>();       
@@ -28,7 +30,7 @@ public class ChronologicalPlatform : MonoBehaviour
         spawnAll = GetComponentInParent<ChronologicalPlatformManager>().spawnAll;
         letPlatformsRespawn = GetComponentInParent<ChronologicalPlatformManager>().letPlatformsRespawn;
         platformRespawnTime = GetComponentInParent<ChronologicalPlatformManager>().platformRespawnTime;
-
+        spawnAsTimer = GetComponentInParent<ChronologicalPlatformManager>().spawnAsTimer;
     }
     private void Update()
     {
@@ -49,9 +51,10 @@ public class ChronologicalPlatform : MonoBehaviour
             }
            
         }
-        if(isCrumbleTimed)
+        if(isCrumbleTimed && !spawnAsTimer)
         {
            StartCoroutine( ProcessCrumble());
+           
         }
         if(isFirstPlatform&& spawnAll)
         {
@@ -61,10 +64,10 @@ public class ChronologicalPlatform : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D other)
     {
-        print("hello");
+        
         if (other.gameObject.CompareTag("Player") && !isFirstPlatform &&  !manager.isCrumbleTimed &&disablePlatformOnJump && !manager.spawnAsTimer)
         {
-            print("hello2");
+            
             StartCoroutine(  Disable());
         }
         
