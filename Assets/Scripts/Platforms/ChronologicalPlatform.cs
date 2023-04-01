@@ -10,10 +10,11 @@ public class ChronologicalPlatform : MonoBehaviour
 
     bool isCrumbleTimed;
      float timeUntilCrumble;
+    float timeUntilCrumbleTimer;
 
 
-
-   
+    bool disablePlatformOnJump = false;
+    bool spawnAll = false;
    
 
     private void Start()
@@ -21,9 +22,14 @@ public class ChronologicalPlatform : MonoBehaviour
         manager = GetComponentInParent<ChronologicalPlatformManager>();       
             isCrumbleTimed = GetComponentInParent<ChronologicalPlatformManager>().isCrumbleTimed;
             timeUntilCrumble = GetComponentInParent<ChronologicalPlatformManager>().timeUntilCrumble;
-           
-         
-       
+        disablePlatformOnJump = GetComponentInParent<ChronologicalPlatformManager>().disablePlatformOnJump;
+        spawnAll = GetComponentInParent<ChronologicalPlatformManager>().spawnAll;
+
+
+    }
+    private void Update()
+    {
+        timeUntilCrumbleTimer += Time.deltaTime;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -40,11 +46,19 @@ public class ChronologicalPlatform : MonoBehaviour
             }
            
         }
+        if(isCrumbleTimed)
+        {
+           StartCoroutine( ProcessCrumble());
+        }
+        if(isFirstPlatform&& spawnAll)
+        {
+            manager.SpawnAll();
+        }
         
     }
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && !isFirstPlatform && !manager.spawnAsTimer && !manager.isCrumbleTimed)
+        if (other.gameObject.CompareTag("Player") && !isFirstPlatform && !manager.spawnAsTimer && !manager.isCrumbleTimed &&disablePlatformOnJump)
         {
           StartCoroutine(  Disable());
         }
@@ -78,6 +92,20 @@ public class ChronologicalPlatform : MonoBehaviour
 
 
 
+    }
+    IEnumerator ProcessCrumble()
+    {
+        timeUntilCrumbleTimer = 0;
+        print(timeUntilCrumbleTimer);
+        yield return new WaitForSeconds(timeUntilCrumble);
+        GetComponentInChildren<Renderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+       
+        
+            yield return new WaitForSeconds(timeUntilCrumble);
+            GetComponentInChildren<Renderer>().enabled = true;
+            GetComponent<BoxCollider2D>().enabled = true;
+        
     }
 
    

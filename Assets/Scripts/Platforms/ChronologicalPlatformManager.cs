@@ -7,75 +7,61 @@ using UnityEditor;
 
 public class ChronologicalPlatformManager : MonoBehaviour
 {
-    [Tooltip("You need to add every platform in here manually, and chronologically, there is no limit of platforms.")] 
-    [SerializeField]    GameObject[] platform; 
+    [SerializeField]  GameObject[]       platform;
 
+    int               previousPlatform = 0;                                // tracks platforms in the foreach 
+    int               totalPlatforms;                                      // is set automatically, used to reset previous platform
 
-   int previousPlatform = 0;
-    int totalPlatforms;
-
-
-
-    // variables to set
-   
-  
-    [Tooltip("This sets the platforms to spawn using using a timer, rather than stepping on them")]
-    public bool spawnAsTimer = false; // this is public to pass down into the individual scripts on each platform
-    [SerializeField] float timeBetweenPlatformSpawn;
-    [SerializeField] float timeInBetweenWaves;
+    public bool       startAllSpawned = false;
+    public bool       spawnAsTimer = false;
+    [SerializeField]  float             timeBetweenPlatformSpawn;         // timer in which the next platform is spawned, if spawned as timer
+    [SerializeField]  float             timeInBetweenWaves;               // time that it will wait before respawning/despawning all platform
+ 
     
+    public bool       isCrumbleTimed;                                      
+    public float      timeUntilCrumble;                                   // while in contact with an object of tag "Player" this will countdown and then disable the object
 
 
-
-    
-    
-    [Tooltip("When Landing on the platform, the timer decides how long until it crumbles")]
-
-    public bool isCrumbleTimed;
-
-
-
-  public  float timeUntilCrumble;
-  
-
-   
+    public bool disablePlatformOnJump = false;
+    public bool spawnAll = false;
     private void Start()
     {
        
         if (spawnAsTimer)
         {
             StartCoroutine(SpawnWaves());
-
         }
 
-
-
-        foreach (var item in platform)
+        if(!startAllSpawned)
         {
-            item.gameObject.SetActive(false);
+            foreach (var item in platform) // turns of all platforms, and then the first back on
+            {
+                item.gameObject.SetActive(false);
+            }
+
+            platform[0].gameObject.SetActive(true);
+            totalPlatforms = platform.Length;
         }
-        platform[0].gameObject.SetActive(true);
-        totalPlatforms = platform.Length;
 
-        
-
+        if (startAllSpawned)
+        {
+            spawnAsTimer = false;
+        }
     }
 
-    private void Update()
+    private void Update() // debugging method to reenable all platform
     {
          Renable();
+        
     }
     public void ProcessPlatforms()
     {
-
-
 
 
         if (previousPlatform +1 >= totalPlatforms) { previousPlatform = 0; previousPlatform--; }
 
 
         platform[previousPlatform + 1].gameObject.SetActive(true);
-
      
 
         previousPlatform++;
@@ -83,43 +69,20 @@ public class ChronologicalPlatformManager : MonoBehaviour
 
       
     }
+
+  
     void Renable()
     {
         if(Input.GetKeyUp(KeyCode.Escape))
         {
             foreach (var item in platform)
             {
-                item.GetComponentInChildren<Renderer>().enabled = true;
-                item.GetComponent<BoxCollider2D>().enabled = true;
+               
             }
-        }
-        
-      
-
-
-
+        }     
     }
 
-    int gizmoNumber=0;
-    private void OnDrawGizmos()
-    {       
-       
-        Gizmos.color = Color.green;
-
-        foreach (var item in platform)
-        {          
-            if(gizmoNumber +1  >= platform.Length)
-            {
-                gizmoNumber = 0;
-            }
-            Gizmos.DrawLine(platform[gizmoNumber].transform.position, platform[gizmoNumber +1].transform.position);
-            gizmoNumber++;
-
-
-        }      
-        
-
-    }
+  
     IEnumerator SpawnWaves()
     {
         int currentPlatform = 0;
@@ -145,7 +108,33 @@ public class ChronologicalPlatformManager : MonoBehaviour
         }
         yield return new WaitForSeconds(timeInBetweenWaves);
         
-        StartCoroutine(SpawnWaves());
+        StartCoroutine(SpawnWaves()); // used to go on forever
     }
 
+    public void SpawnAll()
+    {
+        int currentPlatform = 0;
+        foreach (var item in platform)
+        {
+            item.GetComponentInChildren<Renderer>().enabled = true;
+            item.GetComponent<BoxCollider2D>().enabled = true;
+        }
+    }
+    int gizmoNumber = 0;
+    private void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.green;
+
+        foreach (var item in platform)
+        {
+            if (gizmoNumber + 1 >= platform.Length)
+            {
+                gizmoNumber = 0;
+            }
+            Gizmos.DrawLine(platform[gizmoNumber].transform.position, platform[gizmoNumber + 1].transform.position);
+            gizmoNumber++;
+
+        }
+    }
 }
