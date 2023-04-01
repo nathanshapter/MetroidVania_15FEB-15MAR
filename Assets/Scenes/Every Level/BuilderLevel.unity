@@ -13038,7 +13038,7 @@ MonoBehaviour:
   - {fileID: 82282332}
   - {fileID: 1184129326}
   - {fileID: 170054046}
-  startAllSpawned: 1
+  startAllSpawned: 0
   spawnAsTimer: 1
   timeBetweenPlatformSpawn: 0.25
   timeInBetweenWaves: 1
