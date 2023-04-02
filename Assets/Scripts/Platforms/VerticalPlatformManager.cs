@@ -12,13 +12,14 @@ public class VerticalPlatformManager : MonoBehaviour
     public Transform topYPosition, bottomYPosition;
     float yDistanceBetweenTopBottom;
 
-    public float yValue;
+    public float movementSpeed;
 
     public bool isFlipped;
-
+    
 
     private void Start() 
     {
+        if(isFlipped) { movementSpeed = -movementSpeed; }
         yDistanceBetweenTopBottom = topYPosition.transform.position.y - bottomYPosition.transform.position.y;
 
         float platformSpawnGap = yDistanceBetweenTopBottom / amountOfPlatformsToSpawn;

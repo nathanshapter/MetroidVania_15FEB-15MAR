@@ -16,7 +16,7 @@ public class VerticalGroupPlatform : MonoBehaviour
     {
         player = FindObjectOfType <PlayerMovement>();   
         startingPosition = GetComponentInParent<VerticalPlatformManager>().transform.position;
-        movementSpeed = GetComponentInParent<VerticalPlatformManager>().yValue;
+        movementSpeed = GetComponentInParent<VerticalPlatformManager>().movementSpeed;
         topYPosition = GetComponentInParent<VerticalPlatformManager>().topYPosition;
         bottomYPosition = GetComponentInParent<VerticalPlatformManager>().bottomYPosition;
        isFlipped = GetComponentInParent<VerticalPlatformManager>().isFlipped;
