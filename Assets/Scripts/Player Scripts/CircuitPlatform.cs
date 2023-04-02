@@ -34,8 +34,20 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] bool activatedByTouch;
     bool canMove;
     [SerializeField] bool stopsMovingWhenNotTouched;
+
+
+    public LayerMask waypointLayer;
+
+    [SerializeField] GameObject roofCheck;
+    [SerializeField] float roofDistanceCheck;
    
 
+    public bool SomethingAbove()
+    {
+
+        return Physics2D.OverlapCircle(roofCheck.transform.position, roofDistanceCheck, waypointLayer); // needs to be changed to waypoint layer
+
+    }
     private void Start()
     {
         canMove = true;
@@ -69,8 +81,9 @@ public class CircuitPlatform : MonoBehaviour
 
     private void Update()
     {
-
-        if (delay || !canMove) { return; }
+      
+        if (delay || !canMove)  { return; }
+        if(SomethingAbove()) {StartCoroutine( SomethingIsAbove()); }
 
         CalculateNextWaypoint();
 
@@ -78,6 +91,17 @@ public class CircuitPlatform : MonoBehaviour
 
         CalculateSpeed(distance);
 
+    }
+    IEnumerator SomethingIsAbove()
+    {
+        Vector2 currentPosition = transform.position;
+
+        canMove = false;
+       
+        yield return new WaitForSeconds(2);
+       
+
+        canMove= true;
     }
 
     private void CalculateSpeed(float distance)
@@ -161,6 +185,8 @@ public class CircuitPlatform : MonoBehaviour
             Gizmos.DrawLine(waypoints[gizmoNumber].position, waypoints[gizmoNumber+1].transform.position);
             gizmoNumber++;
         }
+
+        Gizmos.DrawWireSphere(roofCheck.transform.position, roofDistanceCheck);
 
     }
 
