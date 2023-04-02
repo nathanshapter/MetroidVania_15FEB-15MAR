@@ -40,6 +40,8 @@ public class CircuitPlatform : MonoBehaviour
 
     [SerializeField] GameObject roofCheck;
     [SerializeField] float roofDistanceCheck;
+
+    [SerializeField] Vector3 moveOutTheWay;
    
 
     public bool SomethingAbove()
@@ -85,23 +87,25 @@ public class CircuitPlatform : MonoBehaviour
         if (delay || !canMove)  { return; }
         if(SomethingAbove()) {StartCoroutine( SomethingIsAbove()); }
 
-        CalculateNextWaypoint();
+        if (!SomethingAbove() && !calculatingMove)
+        {
+            CalculateNextWaypoint();
 
-        float distance = Vector2.Distance(waypoints[index].position, transform.position);
+            float distance = Vector2.Distance(waypoints[index].position, transform.position);
 
-        CalculateSpeed(distance);
+            CalculateSpeed(distance);
+        }
+        if (calculatingMove) { }
+           
 
     }
+    bool calculatingMove = false;
     IEnumerator SomethingIsAbove()
     {
-        Vector2 currentPosition = transform.position;
-
-        canMove = false;
-       
-        yield return new WaitForSeconds(2);
-       
-
+        canMove= false;
+        yield return new WaitForSeconds(1);
         canMove= true;
+       
     }
 
     private void CalculateSpeed(float distance)
@@ -188,6 +192,8 @@ public class CircuitPlatform : MonoBehaviour
 
         Gizmos.DrawWireSphere(roofCheck.transform.position, roofDistanceCheck);
 
+
+       
     }
 
    
