@@ -31,7 +31,9 @@ public class CircuitPlatform : MonoBehaviour
     bool coroutineStarted = false;
 
 
-
+    [SerializeField] bool activatedByTouch;
+    bool canMove;
+    [SerializeField] bool stopsMovingWhenNotTouched;
    
 
     private void Start()
@@ -46,13 +48,25 @@ public class CircuitPlatform : MonoBehaviour
             System.Array.Reverse(waypoints);
         }
 
+        if(activatedByTouch) { canMove= false; }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            canMove= true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
         
     }
-   
+
     private void Update()
     {
 
-        if (delay) { return; }
+        if (delay || !canMove) { return; }
 
         CalculateNextWaypoint();
 

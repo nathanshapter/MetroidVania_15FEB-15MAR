@@ -51,10 +51,7 @@ public class VerticalPlatformManager : MonoBehaviour
             }
         }
        
-        foreach (var item in verticalPlatform)
-        {
-         
-        }
+      
 
        
 
@@ -80,6 +77,11 @@ public class VerticalPlatformManager : MonoBehaviour
         else { Gizmos.color= Color.red;}
 
         Gizmos.DrawLine(bottomYPosition.transform.position, topYPosition.transform.position);
+
+
+
+       
+
     }
 
 }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1275098258954718187}
   - component: {fileID: 1275098258954718186}
   - component: {fileID: 1275098258954718185}
-  - component: {fileID: -2400071598497947005}
   - component: {fileID: 4333007168665432976}
+  - component: {fileID: -2400071598497947005}
   m_Layer: 6
   m_Name: ReturningPlatform
   m_TagString: Floor
@@ -83,6 +83,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4333007168665432976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275098258954718103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dacfd5f52dbc424c977a6807af85e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementVector: {x: 5, y: 0}
+  movementFactor: 0
+  period: 2
 --- !u!251 &-2400071598497947005
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -102,21 +117,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &4333007168665432976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275098258954718103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dacfd5f52dbc424c977a6807af85e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementVector: {x: 5, y: 0}
-  movementFactor: 0
-  period: 2
 --- !u!1 &1275098259344216444
 GameObject:
   m_ObjectHideFlags: 0

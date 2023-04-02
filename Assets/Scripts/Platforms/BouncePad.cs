@@ -8,7 +8,7 @@ public class BouncePad : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") )
+        if(collision.gameObject.CompareTag("Player")  )
             {
             collision.gameObject.GetComponentInChildren<Rigidbody2D>().AddForce(Vector2.up * bounce, ForceMode2D.Impulse);
             }
