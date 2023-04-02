@@ -214,7 +214,7 @@ public class PlayerCombat : MonoBehaviour
         {
 
             leverScript.leverPressed = !leverScript.leverPressed;
-            print("hi");
+            
 
         }
 

@@ -41,7 +41,7 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] GameObject roofCheck;
     [SerializeField] float roofDistanceCheck;
 
-    [SerializeField] Vector3 moveOutTheWay;
+    [SerializeField] bool stopIfWaypointAbove;
    
 
     public bool SomethingAbove()
@@ -83,11 +83,9 @@ public class CircuitPlatform : MonoBehaviour
 
     private void Update()
     {
-      
+        print(stopIfWaypointAbove);
         if (delay || !canMove)  { return; }
-        if(SomethingAbove()) {StartCoroutine( SomethingIsAbove()); }
-
-        if (!SomethingAbove() && !calculatingMove)
+        if(SomethingAbove() && stopIfWaypointAbove)  {StartCoroutine( SomethingIsAbove()); } else
         {
             CalculateNextWaypoint();
 
@@ -95,11 +93,15 @@ public class CircuitPlatform : MonoBehaviour
 
             CalculateSpeed(distance);
         }
-        if (calculatingMove) { }
+
+       
+           
+        
+        
            
 
     }
-    bool calculatingMove = false;
+   
     IEnumerator SomethingIsAbove()
     {
         canMove= false;
