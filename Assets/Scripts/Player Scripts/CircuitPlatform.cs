@@ -31,6 +31,9 @@ public class CircuitPlatform : MonoBehaviour
     bool coroutineStarted = false;
 
 
+
+   
+
     private void Start()
     {
         startPosition= transform.position;
@@ -42,6 +45,8 @@ public class CircuitPlatform : MonoBehaviour
         {
             System.Array.Reverse(waypoints);
         }
+
+        
     }
    
     private void Update()
@@ -138,8 +143,9 @@ public class CircuitPlatform : MonoBehaviour
             Gizmos.DrawLine(waypoints[gizmoNumber].position, waypoints[gizmoNumber+1].transform.position);
             gizmoNumber++;
         }
-     
-     }  
 
-    
+    }
+
+   
+
 }
