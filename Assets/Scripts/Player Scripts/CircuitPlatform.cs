@@ -6,34 +6,35 @@ using UnityEngine;
 public class CircuitPlatform : MonoBehaviour
 {
     [SerializeField] Transform[] waypoints;
-    Vector2 startPosition;
+  
+   
+
+    [Header("Mandatory")]
+    [Space(20)]
     [SerializeField] float movementSpeed = 10f;
-    float startingSpeed;
     [SerializeField] float dockTimer;
-
-
-
-    [SerializeField] float dockStoppingDistance = 1f;
     [SerializeField] float dockDecelerationSpeed = 10f;
     [SerializeField] float dockAccelerationSpeed = 5f;
-
-
-    
-    bool delay;
+    [Space(20)]
+    [Header("Optional")]
+    [SerializeField] float dockStoppingDistance = 1f;
     [SerializeField] float delayTime;
-
     [SerializeField] bool reverseDirection;
-    /// <summary>
-    /// ////////////////////////////////// ADD AN OPTION TO REVERSE THE PATH
-    /// </summary>
    
-    
+
+    // used as counters
+    bool delay;
+    Vector2 startPosition;
+    float startingSpeed;
+    int index = 0;
+    int gizmoNumber = 0;
+    bool coroutineStarted = false;
+
+
     private void Start()
     {
         startPosition= transform.position;
-        startingSpeed = movementSpeed;
-
-       
+        startingSpeed = movementSpeed;       
         
         StartCoroutine(PausePlatform(delayTime));
 
@@ -42,64 +43,67 @@ public class CircuitPlatform : MonoBehaviour
             System.Array.Reverse(waypoints);
         }
     }
-    int index = 0;
+   
     private void Update()
     {
-        
+
         if (delay) { return; }
-      
+
+        CalculateNextWaypoint();
+
+        float distance = Vector2.Distance(waypoints[index].position, transform.position);
+
+        CalculateSpeed(distance);
+
+    }
+
+    private void CalculateSpeed(float distance)
+    {
+        if (distance <= dockStoppingDistance)
+        {
+            if (dockTimer >= dockStoppingDistance)
+            {
+                movementSpeed = distance * dockDecelerationSpeed;
+
+
+            }
+            if (!coroutineStarted)
+                StartCoroutine(IncreaseIndex());
+
+
+        }
+        else if (distance > dockStoppingDistance)
+        {
+            movementSpeed += dockAccelerationSpeed * Time.deltaTime;
+
+            if (movementSpeed >= startingSpeed)
+            {
+                movementSpeed = startingSpeed;
+            }
+        }
+    }
+
+    private void CalculateNextWaypoint()
+    {
         if (index >= waypoints.Length)
         {
-            index =0;
+            index = 0;
         }
         else
         {
             Vector2 newPos = Vector2.MoveTowards(transform.position, waypoints[index].transform.position, movementSpeed * Time.deltaTime);
             transform.position = newPos;
         }
-
-
-     float distance =  Vector2.Distance(waypoints[index].position, transform.position);
-
-
-     
-
-        if (distance <= dockStoppingDistance )
-        {
-            if(dockTimer >= dockStoppingDistance)
-            {
-                movementSpeed = distance *dockDecelerationSpeed;
-                
-
-            }
-            if(!coroutineStarted)
-                StartCoroutine(IncreaseIndex());
-
-
-        }
-        else if(distance > dockStoppingDistance)
-        {
-            movementSpeed += dockAccelerationSpeed * Time.deltaTime;
-
-            if(movementSpeed >= startingSpeed)
-            {
-                movementSpeed = startingSpeed;
-            }
-        }
-        
-      
     }
-    int gizmoNumber = 0;
-    bool coroutineStarted = false;
+
+   
     IEnumerator IncreaseIndex()
-    {
-        
+    {       
         
             coroutineStarted = true;
             yield return new WaitForSeconds(dockTimer);
             index++;
-            coroutineStarted = false;
-        
+            coroutineStarted = false;    
       
     }
 
@@ -134,9 +138,8 @@ public class CircuitPlatform : MonoBehaviour
             Gizmos.DrawLine(waypoints[gizmoNumber].position, waypoints[gizmoNumber+1].transform.position);
             gizmoNumber++;
         }
+     
+     }  
 
-       
-    }
-
-  
+    
 }
