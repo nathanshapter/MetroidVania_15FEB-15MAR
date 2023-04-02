@@ -38,6 +38,7 @@ public class CircuitPlatform : MonoBehaviour
 
     private void Start()
     {
+        canMove = true;
         startPosition= transform.position;
         startingSpeed = movementSpeed;       
         
@@ -60,7 +61,10 @@ public class CircuitPlatform : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        
+        if(stopsMovingWhenNotTouched)
+        {
+            canMove= false;
+        }
     }
 
     private void Update()
