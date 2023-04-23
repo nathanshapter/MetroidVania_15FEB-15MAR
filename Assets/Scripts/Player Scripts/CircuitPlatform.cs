@@ -15,11 +15,14 @@ public class CircuitPlatform : MonoBehaviour
     [SerializeField] float dockTimer;
     [SerializeField] float dockDecelerationSpeed = 10f;
     [SerializeField] float dockAccelerationSpeed = 5f;
+    [SerializeField] Transform evadeDirection;
     [Space(20)]
     [Header("Optional")]
     [SerializeField] float dockStoppingDistance = 1f;
     [SerializeField] float delayTime;
     [SerializeField] bool reverseDirection;
+
+   
    
 
     // used as counters
@@ -83,32 +86,26 @@ public class CircuitPlatform : MonoBehaviour
 
     private void Update()
     {
-        print(stopIfWaypointAbove);
+       
+
+
         if (delay || !canMove)  { return; }
-        if(SomethingAbove() && stopIfWaypointAbove)  {StartCoroutine( SomethingIsAbove()); } else
-        {
+       
             CalculateNextWaypoint();
 
             float distance = Vector2.Distance(waypoints[index].position, transform.position);
 
             CalculateSpeed(distance);
-        }
+        
+
+
 
        
-           
-        
         
            
 
     }
    
-    IEnumerator SomethingIsAbove()
-    {
-        canMove= false;
-        yield return new WaitForSeconds(1);
-        canMove= true;
-       
-    }
 
     private void CalculateSpeed(float distance)
     {
