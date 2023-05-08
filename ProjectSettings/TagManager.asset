@@ -51,6 +51,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: backlight
+    uniqueID: 335047907
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
