@@ -13,7 +13,7 @@ public class ProgressionManager : MonoBehaviour
     // 4 = ledge climb      // not yet implemented
     // 5 = wall jump
     // 6 play the flute    // coding done, music and item to be added
-    // 7 place a torch to see dark areas     // not yet implemented
+    // 7 open hidden areas
     // 8 wall vision to see through certain tiles // not yet implement
     // 9 bow and arrow weapon // to be implemented for lvl 2
     //10 double jump off wall

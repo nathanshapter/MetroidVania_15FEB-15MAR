@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
     PlayerMovement playerMovement;    
     bool canAttackInAir = true;
     private AudioManager_PrototypeHero audioManager;
+    ProgressionManager pm;
 
     Health health;
     float ballTimer;
@@ -56,6 +57,7 @@ public class PlayerCombat : MonoBehaviour
         audioManager = AudioManager_PrototypeHero.instance;
         health = GetComponent<Health>();
         leverScript = FindObjectOfType<Lever>();
+        pm = FindObjectOfType<ProgressionManager>();
     }
 
     private void Update()
@@ -203,7 +205,8 @@ public class PlayerCombat : MonoBehaviour
             }
         }
         for(int i =0; i < tilesToDestroy.Length; i++)
-        {       
+        {
+            if (!pm.progression[7]) { return; }
           tilesToDestroy[i].GetComponent<TilemapRenderer>().enabled = false;
           Destroy(tilesToDestroy[i]);
             

@@ -33,11 +33,14 @@ public class Health : MonoBehaviour
     [SerializeField] CheckpointsManager cpManager;
     [SerializeField] Animator animator;
     [SerializeField] PlayerMovement player;
+    
 
     [SerializeField] float knockbackForce = 4f; // to be added into enemy values later
     Rigidbody2D rb;
 
     CheckpointsManager cp;
+
+   [SerializeField] ParticleSystem blood;
 
     private void Start()
     {
@@ -53,9 +56,20 @@ public class Health : MonoBehaviour
             deathManager.fallRespawn = true;
             if (!CheckIfAlive()) { deathManager.ProcessDeath(); } else
             {
-               deathManager.RespawnPlayer(cp.lastCheckPointPos); // this needs to be changed to work with last palce
+
+                StartCoroutine(RespawnPlayerNotDead());
+             
             }
         }
+    }
+    private IEnumerator RespawnPlayerNotDead()
+    {
+        player.DisableMovement(2);
+        blood.Play();
+        yield return new WaitForSeconds(1);
+        blood.Stop();
+        yield return new WaitForSeconds(1);
+        deathManager.RespawnPlayer(cp.lastCheckPointPos);
     }
 
     public static Health instance;
