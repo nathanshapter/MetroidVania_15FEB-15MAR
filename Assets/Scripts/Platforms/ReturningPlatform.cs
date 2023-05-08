@@ -12,7 +12,7 @@ public class ReturningPlatform: MonoBehaviour
     [Header("Straight Movement")]
     Vector3 startingPosition;
     public Vector2 movementVector;
-    [SerializeField][Range(0, 1)] float movementFactor;
+    [Range(0, 1)] float movementFactor;
     [SerializeField] float period = 2f;
     bool inScene;
 

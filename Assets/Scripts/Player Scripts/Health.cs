@@ -37,6 +37,13 @@ public class Health : MonoBehaviour
     [SerializeField] float knockbackForce = 4f; // to be added into enemy values later
     Rigidbody2D rb;
 
+    CheckpointsManager cp;
+
+    private void Start()
+    {
+        cp = FindObjectOfType<CheckpointsManager>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
@@ -44,7 +51,10 @@ public class Health : MonoBehaviour
              fallDamage = true;
             TakeDamage(spikeDamage,0,0);
             deathManager.fallRespawn = true;
-            if (!CheckIfAlive()) { deathManager.ProcessDeath();  } // add death screen            
+            if (!CheckIfAlive()) { deathManager.ProcessDeath(); } else
+            {
+               deathManager.RespawnPlayer(cp.lastCheckPointPos); // this needs to be changed to work with last palce
+            }
         }
     }
 

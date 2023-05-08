@@ -24,7 +24,7 @@ public class DeathManager : MonoBehaviour
     }
     private void Update()
     {
-        RespawnManager = FindObjectOfType<RespawnManager>(); // this needs to not be in update lol, just call one time when scene changes
+       
     }
 
     public void ProcessDeath()
@@ -32,7 +32,7 @@ public class DeathManager : MonoBehaviour
         totalDeaths++;     
        
     }
-    private void RespawnPlayer(Transform respawnPosition)
+    public void RespawnPlayer(Transform respawnPosition)
     {
         if (respawnPosition == null)
         {
