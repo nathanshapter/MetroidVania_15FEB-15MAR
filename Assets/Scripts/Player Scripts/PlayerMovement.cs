@@ -204,6 +204,25 @@ public class PlayerMovement : MonoBehaviour
 
     }
     // wasd methods
+    public LayerMask interactions;
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Collider2D[] interact = Physics2D.OverlapCircleAll(bean, 5, interactions);
+            if(interact != null)
+            {
+                print("nothing to interact with");
+            }
+        }
+       
+    }
+   Vector2 bean = new Vector2(5,5);
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(bean, 5);
+    }
     public void Walk(InputAction.CallbackContext context)
     {
         if (context.performed && IsGrounded() && !isFrozen)

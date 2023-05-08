@@ -11,7 +11,7 @@ public class GlobalLightSwitch : MonoBehaviour
     private void Start()
     {
         gls = GetComponentInParent<GlobalLightScript>();
-        Invoke("turnOn", 3);
+       
     }
     void turnOn()
     {
