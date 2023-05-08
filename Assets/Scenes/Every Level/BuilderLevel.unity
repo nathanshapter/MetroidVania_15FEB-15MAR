@@ -961,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4a7a0a497bddbfd4093941e255407dd0, type: 2}
     - target: {fileID: 1029845293921198240, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: targetSceneName
-      value: Level 1ab
+      value: Level 1a
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198241, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalScale.x
@@ -981,7 +981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198241, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.75
+      value: -0.94
       objectReference: {fileID: 0}
     - target: {fileID: 1029845293921198243, guid: ac976da8b9e5fe140b61c310a6594927, type: 3}
       propertyPath: m_Name
@@ -1738,53 +1738,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8760662009401395709, guid: 8b714075d2b3c354e9ecd4a372ebe68e, type: 3}
   m_PrefabInstance: {fileID: 592024997}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1053518407
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1053518409}
-  - component: {fileID: 1053518408}
-  m_Layer: 0
-  m_Name: LevelManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1053518408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053518407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa355d687d906946b90e7d2858034b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadercanvas: {fileID: 1165285368}
-  progressBar: {fileID: 1815634839}
-  waitBeforeLoad: 1
---- !u!4 &1053518409
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053518407}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.857028, y: 8.369756, z: -2.0300086}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1084063840
 GameObject:
   m_ObjectHideFlags: 0
@@ -14699,6 +14652,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c438ae16541f1544bb1bdb7b570225ef, type: 3}
+--- !u!1001 &3546275365466536973
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.857028
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.369756
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.0300086
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147716, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546275365101147717, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: progressBar
+      value: 
+      objectReference: {fileID: 1815634839}
+    - target: {fileID: 3546275365101147717, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: loadercanvas
+      value: 
+      objectReference: {fileID: 1165285368}
+    - target: {fileID: 3546275365101147722, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
+      propertyPath: m_Name
+      value: LevelManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6845587e61ec38549a777a3019eeede0, type: 3}
 --- !u!1001 &3855045236442599844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15477,6 +15495,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1815634838, guid: a5667f39bad593e4fba331a52950973e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8729465345941215274, guid: a5667f39bad593e4fba331a52950973e, type: 3}
       propertyPath: m_Pivot.x
       value: 0

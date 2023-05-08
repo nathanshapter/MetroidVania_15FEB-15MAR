@@ -25,7 +25,7 @@ public class LevelChanger : MonoBehaviour
             
             LevelConnection.ActiveConnection = connection;
             levelManager.LoadScene(targetSceneName);
-            //   SceneManager.LoadScene(targetSceneName);
+           //   SceneManager.LoadScene(targetSceneName);
         }
             
         }
