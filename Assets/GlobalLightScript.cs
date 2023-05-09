@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class GlobalLightScript : MonoBehaviour
 {
     [SerializeField] bool startOff;
     Light2D globalLight;
-    [SerializeField] GlobalLightSwitch[] switches;
+  public  GlobalLightSwitch[] switches;
     int totalSwitches;
 
     void Start()
@@ -19,20 +20,33 @@ public class GlobalLightScript : MonoBehaviour
         }
         switches = FindObjectsOfType<GlobalLightSwitch>();
         totalSwitches= switches.Length;
-    }
-    int numberRef =-1;
-    int numberOfSwitchesOn = 0;
-    public void CheckSwitches()
-    {
-       if( switches[numberRef +1].isOn== true)
-        {
-            numberOfSwitchesOn++;
-        };
-        if(numberOfSwitchesOn >= totalSwitches)
-        {
-            globalLight.intensity = .4f;
-        }
+        numberOfSwitchesOn = totalSwitches;
         
     }
+  
+
+
+    int numberOfSwitchesOn;
+
+   
+    public void CheckSwitches()
+    {
+     
+        if(switches.Length == 0)
+        {
+            LightFadeIn();
+        }
+        else
+        {
+            print($" There are still {switches.Length} switches to destroy!");
+        }
+        
+    } // DONT MAKE IT A SWITCH THATS BORING, MAKE IT A BLOCK THAT YOU MUST DESTROY
+
+    private void LightFadeIn() 
+    {
+        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.4f, 6);
+    }
+
 
 }

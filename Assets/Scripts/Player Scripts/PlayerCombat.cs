@@ -213,7 +213,7 @@ public class PlayerCombat : MonoBehaviour
 
             
         }
-        for (int i = 0; i < lever.Length; i++)
+        for (int i = 0; i < lever.Length; i++) 
         {
 
             leverScript.leverPressed = !leverScript.leverPressed;
