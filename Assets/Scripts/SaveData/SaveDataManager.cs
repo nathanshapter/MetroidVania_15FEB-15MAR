@@ -55,7 +55,8 @@ public class SaveDataManager : MonoBehaviour
 
     public void NewGame() 
     {
-        this.gameData = new GameData();
+        gameData = new GameData();
+        print(" hello5");
     }
 
     public void LoadGame()

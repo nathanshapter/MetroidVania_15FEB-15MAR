@@ -23,17 +23,19 @@ public class MainMenu : MonoBehaviour
     {
         DisableMenuButtons();
         // create a new game - which will initialize our game data
-      
+        
        
         // load the gameplay scene - which will in turn save the game because of
         // OnSceneUnloaded() in the DataPersistenceManager
         SceneManager.LoadSceneAsync("Level 1a");
+        SaveDataManager.instance.NewGame();
+        SaveDataManager.instance.SaveGame();
     }
 
     public void OnContinueGameClicked()
     {
        print("hello");
-        SaveDataManager.instance.SaveGame();
+        
         SaveDataManager.instance.LoadGame();
        DisableMenuButtons();
        

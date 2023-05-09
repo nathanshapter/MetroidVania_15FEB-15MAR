@@ -44,5 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de76541c5d46be43904cc2ea4bc4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: databalls.game
+  initializeDataIfNull: 0
+  fileName: databalls.games
   useEncryption: 1
+  gameData:
+    deathCount: 0
+    playerPosition: {x: 0, y: 0, z: 0}
+    switchesPressed:
+      keys: []
+      values: 
