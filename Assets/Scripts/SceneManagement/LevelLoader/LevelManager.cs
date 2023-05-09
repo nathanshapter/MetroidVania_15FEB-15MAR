@@ -28,13 +28,21 @@ public class LevelManager : MonoBehaviour
 
     public async void LoadScene(string sceneName)
     {
-        player.DisableMovement(1); // animation to play when leaving
+        if(player!=null)
+        {
+            player.DisableMovement(1); // animation to play when leaving
+        }
+       
 
         var scene = SceneManager.LoadSceneAsync(sceneName);
         
         scene.allowSceneActivation = false;
 
-        loadercanvas.SetActive(true);
+        if(loadercanvas!= null)
+        {
+            loadercanvas.SetActive(true);
+        }
+        
        
         do {
             await Task.Delay(10);
@@ -47,7 +55,8 @@ public class LevelManager : MonoBehaviour
 
         await Task.Delay (waitBeforeLoad * 1000);
         scene.allowSceneActivation = true;
-        loadercanvas.SetActive(false);
+        if (loadercanvas != null)
+            loadercanvas.SetActive(false);
 
 
 

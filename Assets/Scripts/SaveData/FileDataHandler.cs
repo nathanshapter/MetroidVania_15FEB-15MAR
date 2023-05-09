@@ -4,88 +4,94 @@ using UnityEngine;
 using System;
 using System.IO;
 
-
-public class FileDataHandler 
+public class FileDataHandler
 {
     private string dataDirPath = "";
     private string dataFileName = "";
-
     private bool useEncryption = false;
-    private readonly string encryptionCodeWord = "potatoman239462983462398746";
+    private readonly string encryptionCodeWord = "word";
+
     public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption)
     {
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
         this.useEncryption = useEncryption;
-        
     }
 
     public GameData Load()
     {
-        string fullpath = Path.Combine(dataDirPath, dataFileName);
+        // use Path.Combine to account for different OS's having different path separators
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
         GameData loadedData = null;
-        if(File.Exists(fullpath))
+        if (File.Exists(fullPath))
         {
             try
             {
+                // load the serialized data from the file
                 string dataToLoad = "";
-                using (FileStream stream = new FileStream(fullpath, FileMode.Open))
+                using (FileStream stream = new FileStream(fullPath, FileMode.Open))
                 {
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         dataToLoad = reader.ReadToEnd();
                     }
                 }
+
+                // optionally decrypt the data
                 if (useEncryption)
                 {
                     dataToLoad = EncryptDecrypt(dataToLoad);
                 }
-                // deserialise the data from json back to c#
+
+                // deserialize the data from Json back into the C# object
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
             }
-            catch(Exception e)
-            { 
-                Debug.LogError($"Error occured when trying to load data from file:" + fullpath + e);
+            catch (Exception e)
+            {
+                Debug.LogError("Error occured when trying to load data from file: " + fullPath + "\n" + e);
             }
         }
         return loadedData;
     }
+
     public void Save(GameData data)
     {
-        string fullpath = Path.Combine(dataDirPath, dataFileName);
+        // use Path.Combine to account for different OS's having different path separators
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(fullpath));
+            // create the directory the file will be written to if it doesn't already exist
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
-            // serialises the game data object into json
-
+            // serialize the C# game data object into Json
             string dataToStore = JsonUtility.ToJson(data, true);
 
-            if(useEncryption)
+            // optionally encrypt the data
+            if (useEncryption)
             {
                 dataToStore = EncryptDecrypt(dataToStore);
             }
 
-            using (FileStream stream = new FileStream(fullpath, FileMode.Create))
+            // write the serialized data to the file
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
                     writer.Write(dataToStore);
                 }
-
             }
         }
-        catch
+        catch (Exception e)
         {
-            Debug.LogError($" Error occurwed when trying to save data to file : + {fullpath} + e");
+            Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
     }
 
-    // simple implementation of XOR encryption, kek
+    // the below is a simple implementation of XOR encryption
     private string EncryptDecrypt(string data)
     {
         string modifiedData = "";
-        for(int i=0; i< data.Length; i++) 
+        for (int i = 0; i < data.Length; i++)
         {
             modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
         }

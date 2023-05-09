@@ -2,91 +2,121 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class SaveDataManager : MonoBehaviour
 {
+    [Header("Debugging")]
+    [SerializeField] private bool initializeDataIfNull = false;
+
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
-   public static SaveDataManager instance { get; private set; }
-    private GameData gameData;
+    [SerializeField] private bool useEncryption;
+
+    public GameData gameData;
     private List<iSaveData> dataPersistenceObjects;
     private FileDataHandler dataHandler;
 
-    [SerializeField] private bool useEncryption;
+    public static SaveDataManager instance { get; private set; }
 
-  //  [ContextMenu("Erase all Data")]
-    private void Awake()
+    private void Awake() 
     {
-        DontDestroyOnLoad(gameObject);
-        if (instance != null)
+        if (instance != null) 
         {
-            Debug.LogError("Found more than one SaveDataManager in the scene");
+            Debug.Log("Found more than one Data Persistence Manager in the scene. Destroying the newest one.");
+            Destroy(this.gameObject);
+            return;
         }
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
 
-        instance = this; 
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
     }
 
-    private void Start()
+    private void OnEnable() 
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+       
+    }
+
+    private void OnDisable() 
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
+    {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
-        StartCoroutine(SaveGameCo());
     }
 
-    public void NewGame()
+  
+
+    public void NewGame() 
     {
         this.gameData = new GameData();
     }
+
     public void LoadGame()
     {
+        // load any saved data from a file using the data handler
         this.gameData = dataHandler.Load();
 
-        // need to load saved data from a file using data handler
-        //if no data can be loaded, initiliase to a new game
-
-        if(this.gameData == null)
+        // start a new game if the data is null and we're configured to initialize data for debugging purposes
+        if (this.gameData == null && initializeDataIfNull) 
         {
-            Debug.Log("No Data was found. Initialiing data to default");
             NewGame();
         }
-        // push loaded data to other scripts that need it
 
-        foreach(iSaveData dataPersistenceobj in dataPersistenceObjects)
+        // if no data can be loaded, don't continue
+        if (this.gameData == null) 
         {
-            dataPersistenceobj.LoadData(gameData);
+            Debug.Log("No data was found. A New Game needs to be started before data can be loaded.");
+            return;
         }
-        Debug.Log($"Loaded death count = {gameData.deathCount} ");
-    }
-  IEnumerator SaveGameCo()
-    {
-        yield return new WaitForSeconds(30);
-        SaveGame();
-        StartCoroutine(SaveGameCo());
 
+        // push the loaded data to all other scripts that need it
+        foreach (iSaveData dataPersistenceObj in dataPersistenceObjects) 
+        {
+            dataPersistenceObj.LoadData(gameData);
+        }
     }
 
     public void SaveGame()
     {
-        // first pass data to other scripts so they can update it
-        foreach (iSaveData dataPersistenceobj in dataPersistenceObjects)
+        // if we don't have any data to save, log a warning here
+        if (this.gameData == null) 
         {
-            dataPersistenceobj.SaveData(ref gameData);
+            Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
+            return;
         }
-        //save data to a file using data handler 
-        Debug.Log($"Saved death count = {gameData.deathCount} ");
 
+        // pass the data to other scripts so they can update it
+        foreach (iSaveData dataPersistenceObj in dataPersistenceObjects) 
+        {
+            dataPersistenceObj.SaveData(gameData);
+        }
+
+        // save that data to a file using the data handler
         dataHandler.Save(gameData);
     }
-    private void OnApplicationQuit()
+
+    private void OnApplicationQuit() 
     {
-        print("yes");
         SaveGame();
     }
-    private List<iSaveData> FindAllDataPersistenceObjects()
+
+    private List<iSaveData> FindAllDataPersistenceObjects() 
     {
-        IEnumerable<iSaveData> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<iSaveData>();
+        IEnumerable<iSaveData> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>()
+            .OfType<iSaveData>();
 
         return new List<iSaveData>(dataPersistenceObjects);
+    }
+
+    public bool HasGameData() 
+    {
+        return gameData != null;
     }
 }

@@ -19,7 +19,7 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
             gameObject.SetActive(false);
         }
     }
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         if (data.switchesPressed.ContainsKey(id))
         {

@@ -26,7 +26,7 @@ public class DeathManager : MonoBehaviour, iSaveData
     {
         this.totalDeaths = data.deathCount;
     }
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         data.deathCount = this.totalDeaths;
     }
