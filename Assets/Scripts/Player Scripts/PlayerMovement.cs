@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, iSaveData
 {
     // script Gets
     PlatformBullet platformBullet;
@@ -83,7 +83,14 @@ public class PlayerMovement : MonoBehaviour
     GameObject lastParent;
 
    
-
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
     private void Start()
     {
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();

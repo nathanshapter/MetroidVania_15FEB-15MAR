@@ -13,14 +13,15 @@ public class GlobalLightScript : MonoBehaviour
 
     void Start()
     {
+        switches = FindObjectsOfType<GlobalLightSwitch>();
+        totalSwitches = switches.Length;
+        numberOfSwitchesOn = totalSwitches;
         globalLight = GetComponent<Light2D>();
-        if(startOff)
+        if(startOff && switches.Length >0)
         {
             globalLight.intensity = 0;
         }
-        switches = FindObjectsOfType<GlobalLightSwitch>();
-        totalSwitches= switches.Length;
-        numberOfSwitchesOn = totalSwitches;
+       
         
     }
   

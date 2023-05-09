@@ -56,8 +56,11 @@ public class Health : MonoBehaviour
             deathManager.fallRespawn = true;
             if (!CheckIfAlive()) { deathManager.ProcessDeath(); } else
             {
-
-                StartCoroutine(RespawnPlayerNotDead());
+                if(fallDamage && playerHealth > 0)
+                {
+                    StartCoroutine(RespawnPlayerNotDead());
+                } 
+                
              
             }
         }
