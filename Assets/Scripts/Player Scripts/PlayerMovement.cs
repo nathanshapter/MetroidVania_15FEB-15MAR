@@ -82,33 +82,17 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     GameObject lastParent;
 
     string sceneName;
-    bool loaded= false;
+  
     public void LoadData(GameData data)
     {
         this.transform.position = data.playerPosition;
-        print(data.sceneName);
-        if(!loaded)
-        {
-            StartCoroutine(TestLoad());
-        }
-        sceneName= data.sceneName;
+      
     }
-    private IEnumerator TestLoad()
-    {
-        yield return new WaitForSeconds(3);
-       
-        
-            SceneManager.LoadScene(sceneName);
-            loaded= true;
-        
-        
-    }
+  
     public void SaveData(GameData data)
     {
         data.playerPosition = this.transform.position;
-        sceneName = SceneManager.GetActiveScene().name;
-      data.sceneName= this.sceneName;
-        print(data.sceneName);
+      
     }
     private void Start()
     {
@@ -531,7 +515,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
             }
             else
             {
-                health.TakeDamage(collision.gameObject.GetComponent<EnemyGodController>().contactDamage, 0, 0);
+              //  health.TakeDamage(collision.gameObject.GetComponent<EnemyGodController>().contactDamage, 0, 0);
 
             }
 

@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour, iSaveData
 {
     [Header("Menu Buttons")]
     [SerializeField] private Button newGameButton;
@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
             continueGameButton.interactable = false;
         }
     }
-
+    string scene;
     public void OnNewGameClicked()
     {
         DisableMenuButtons();
@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
        
         // load the gameplay scene - which will in turn save the game because of
         // OnSceneUnloaded() in the DataPersistenceManager
-        SceneManager.LoadSceneAsync("Level 1a");
+        SceneManager.LoadSceneAsync(scene);
         SaveDataManager.instance.NewGame();
         SaveDataManager.instance.SaveGame();
     }
@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
        
         // load the next scene - which will in turn load the game because of 
         // OnSceneLoaded() in the DataPersistenceManager
-       SceneManager.LoadSceneAsync("Level 1a");
+       SceneManager.LoadSceneAsync(scene);
         print("hello");
     } 
 
@@ -50,5 +50,16 @@ public class MainMenu : MonoBehaviour
         newGameButton.interactable = false;
         continueGameButton.interactable = false;
     }
-   
+    public void LoadData(GameData data)
+    {
+        scene = data.sceneName;
+
+    }
+
+    public void SaveData(GameData data)
+    {
+     scene = SceneManager.GetActiveScene().name;
+        data.sceneName= scene;
+
+    }
 }
