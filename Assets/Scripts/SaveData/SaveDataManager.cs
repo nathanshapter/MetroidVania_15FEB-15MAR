@@ -56,7 +56,7 @@ public class SaveDataManager : MonoBehaviour
     public void NewGame() 
     {
         gameData = new GameData();
-        print(" hello5");
+      
     }
 
     public void LoadGame()
