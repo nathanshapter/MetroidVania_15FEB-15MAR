@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressionManager : MonoBehaviour
+public class ProgressionManager : MonoBehaviour, iSaveData
 {
-    public bool[] progression = new bool[20];
+    public bool[] progression;
 
     // 0 == crouch
     // 1 = double jump
@@ -28,11 +28,27 @@ public class ProgressionManager : MonoBehaviour
     public static ProgressionManager instance;
     private void Awake()
     {
-        if(instance == null)
+        progression = new bool[20];
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
     }
+
+
+    public void LoadData(GameData data)
+    {
+        data.progression[0] = this.progression[0];
+        
+
+      
+    }
+    public void SaveData(GameData data)
+    {
+       this.progression[0] = data.progression[0];
+    }
+
+
 }

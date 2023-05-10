@@ -10,12 +10,17 @@ public class GameData
     
     public Vector3 playerPosition;
     public SerialisableDictionary<string, bool> switchesPressed;
-    
+
+    public bool[] progression;
+
+
 
     public GameData()
     {
         this.deathCount = 0;
         playerPosition= Vector3.zero;
         switchesPressed = new SerialisableDictionary<string, bool>();
+
+        progression = null;
     }
 }
