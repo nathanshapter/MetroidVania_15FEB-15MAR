@@ -11,7 +11,7 @@ public class GameData
     public Vector3 playerPosition;
     public SerialisableDictionary<string, bool> switchesPressed;
     public bool[] progression;
-
+    public string sceneName;
 
 
 
@@ -23,5 +23,6 @@ public class GameData
         switchesPressed = new SerialisableDictionary<string, bool>();
 
         progression = new bool[20];
+        sceneName= string.Empty;
     }
 }

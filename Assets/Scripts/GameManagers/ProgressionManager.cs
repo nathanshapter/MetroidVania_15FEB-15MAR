@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProgressionManager : MonoBehaviour, iSaveData
 {
@@ -51,7 +52,7 @@ public class ProgressionManager : MonoBehaviour, iSaveData
                 progression[i] = true;
             }
         }
-
+       
     }
 
    
@@ -64,13 +65,14 @@ public class ProgressionManager : MonoBehaviour, iSaveData
                 data.progression[i] = true;
             }
         }
+        data.sceneName = SceneManager.GetActiveScene().name;
+        
+       
 
-        //  if (progression[1]) 
-        //  {
-         //     data.progression[1] = true;
-         //     print(data.progression[1]);
-        //  }
     }
 
-   
+  
+
+
+
 }

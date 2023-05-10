@@ -64073,7 +64073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7615274273242361174, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: orthographic size
-      value: 19.78
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7615274273242361257, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64093,7 +64093,7 @@ PrefabInstance:
       objectReference: {fileID: 1163885335}
     - target: {fileID: 7615274274231118888, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 19.78
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7615274274231118891, guid: 0a5c2db68a8cdfe43b7fb6e9eb311ba8, type: 3}
       propertyPath: m_LocalPosition.x
