@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour, iSaveData
@@ -40,15 +41,36 @@ public class ProgressionManager : MonoBehaviour, iSaveData
 
     public void LoadData(GameData data)
     {
-        data.progression[0] = this.progression[0];
-        
 
-      
+     
+
+        for (int i = 0; i < data.progression.Length; i++)
+        {
+            if (data.progression[i])
+            {
+                progression[i] = true;
+            }
+        }
+
     }
+
+   
     public void SaveData(GameData data)
     {
-       this.progression[0] = data.progression[0];
+        for (int i = 0; i < progression.Length; i++)
+        {
+            if (progression[i])
+            {
+                data.progression[i] = true;
+            }
+        }
+
+        //  if (progression[1]) 
+        //  {
+         //     data.progression[1] = true;
+         //     print(data.progression[1]);
+        //  }
     }
 
-
+   
 }

@@ -10,8 +10,9 @@ public class GameData
     
     public Vector3 playerPosition;
     public SerialisableDictionary<string, bool> switchesPressed;
-
     public bool[] progression;
+
+
 
 
 
@@ -21,6 +22,6 @@ public class GameData
         playerPosition= Vector3.zero;
         switchesPressed = new SerialisableDictionary<string, bool>();
 
-        progression = null;
+        progression = new bool[20];
     }
 }
