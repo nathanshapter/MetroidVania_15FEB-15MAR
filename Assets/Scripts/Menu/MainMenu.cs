@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour, iSaveData
 
     public void OnContinueGameClicked()
     {
-       print("hello");
+     
         
         SaveDataManager.instance.LoadGame();
        DisableMenuButtons();
@@ -43,7 +43,7 @@ public class MainMenu : MonoBehaviour, iSaveData
         // load the next scene - which will in turn load the game because of 
         // OnSceneLoaded() in the DataPersistenceManager
        SceneManager.LoadSceneAsync(scene);
-        print("hello");
+  
     } 
 
     private void DisableMenuButtons()
