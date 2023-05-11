@@ -31,8 +31,14 @@ public class SaveDataManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+        
+        
     }
-    //
+    private void GenerateGuid()
+    {
+        fileName = System.Guid.NewGuid().ToString();
+    }
+
     private void OnEnable() 
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -55,8 +61,10 @@ public class SaveDataManager : MonoBehaviour
 
     public void NewGame() 
     {
+        GenerateGuid();
         gameData = new GameData();
         
+        print("new game " + fileName);
     }
 
     public void LoadGame()
