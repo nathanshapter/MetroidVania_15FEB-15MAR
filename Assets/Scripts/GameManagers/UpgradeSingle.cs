@@ -23,6 +23,8 @@ public class UpgradeSingle : MonoBehaviour
         }
        
     }
+
+    
     int ReturnNumber()
     {
         return upgradeNumber;

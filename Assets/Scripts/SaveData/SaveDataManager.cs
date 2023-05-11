@@ -61,7 +61,7 @@ public class SaveDataManager : MonoBehaviour
 
     public void NewGame() 
     {
-        GenerateGuid();
+        
         gameData = new GameData();
         
         print("new game " + fileName);

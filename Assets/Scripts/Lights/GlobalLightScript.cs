@@ -22,7 +22,7 @@ public class GlobalLightScript : MonoBehaviour
             globalLight.intensity = 0;
         }
        
-        
+       
     }
   
 
