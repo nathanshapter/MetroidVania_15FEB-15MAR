@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour, iSaveData
         {
             continueGameButton.interactable = false;
         }
+
     }
     string scene;
     public void OnNewGameClicked()
@@ -53,7 +54,7 @@ public class MainMenu : MonoBehaviour, iSaveData
     public void LoadData(GameData data)
     {
         scene = data.sceneName;
-
+       
     }
 
     public void SaveData(GameData data)
