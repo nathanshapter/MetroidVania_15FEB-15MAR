@@ -32,7 +32,7 @@ public class SaveDataManager : MonoBehaviour
 
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
     }
-
+    //
     private void OnEnable() 
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
