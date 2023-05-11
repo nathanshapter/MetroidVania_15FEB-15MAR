@@ -56,7 +56,7 @@ public class Sound
 
 public class AudioManager_PrototypeHero : MonoBehaviour
 {
-    // Make it a singleton class that can be accessible everywhere
+
     public static AudioManager_PrototypeHero instance;
 
     [SerializeField]
@@ -66,12 +66,16 @@ public class AudioManager_PrototypeHero : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogError("More than one AudioManger in scene");
+           
+            this.gameObject.SetActive(false);
+          
         }
         else
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
+       
     }
 
     private void Start()

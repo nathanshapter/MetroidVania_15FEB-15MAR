@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour, iSaveData
        
         // load the gameplay scene - which will in turn save the game because of
         // OnSceneUnloaded() in the DataPersistenceManager
-        SceneManager.LoadSceneAsync(scene);
+        SceneManager.LoadSceneAsync("Level 1a");
         SaveDataManager.instance.NewGame();
         SaveDataManager.instance.SaveGame();
     }
