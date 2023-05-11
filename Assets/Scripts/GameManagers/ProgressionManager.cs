@@ -37,9 +37,10 @@ public class ProgressionManager : MonoBehaviour, iSaveData
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
+       
     }
 
-
+  
     public void LoadData(GameData data)
     {
 
@@ -55,7 +56,7 @@ public class ProgressionManager : MonoBehaviour, iSaveData
        
     }
 
-   
+
     public void SaveData(GameData data)
     {
         for (int i = 0; i < progression.Length; i++)

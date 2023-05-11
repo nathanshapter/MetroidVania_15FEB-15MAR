@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : MonoBehaviour, iSaveData
 {
     [SerializeField] private GameObject loadercanvas;
     [SerializeField] private Image progressBar;
     [SerializeField] int waitBeforeLoad;
     PlayerMovement player;
+   
 
     public static LevelManager Instance { get; private set; }
     private void Awake()
@@ -23,11 +24,21 @@ public class LevelManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
+       
     }
   
+    public void SaveData(GameData gameData)
+    {
+       // this needs to save the progression, but does not need to load it
+    }
+    public void LoadData(GameData gameData)
+    {
+
+    }
 
     public async void LoadScene(string sceneName)
     {
+        
         if(player!=null)
         {
             player.DisableMovement(1); // animation to play when leaving

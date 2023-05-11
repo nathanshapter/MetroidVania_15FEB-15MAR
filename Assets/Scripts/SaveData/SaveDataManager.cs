@@ -34,6 +34,7 @@ public class SaveDataManager : MonoBehaviour
         
         
     }
+  
     private void GenerateGuid()
     {
         fileName = System.Guid.NewGuid().ToString();
