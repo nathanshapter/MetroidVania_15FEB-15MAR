@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         data.playerPosition = this.transform.position;
       
     }
+    float originalJumpingPower;
     private void Start()
     {
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -110,10 +111,21 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         boxCollider2D.enabled = false;
         playerInput =GetComponent<PlayerInput>();   
         wallGrab = GetComponent<WallGrabPlayer>();
-        
+        originalJumpingPower = jumpingPower;
     }
     private void Update()
     {
+
+
+        if (OnWall() && !progressionManager.progression[5])
+        {
+            jumpingPower= 0;
+        }
+        else
+        {
+            jumpingPower = originalJumpingPower;
+        }
+       
       if(conversationFreeze) { this.transform.position = frozenPosition; return; }
         
         if (wallGrab.wallSlide)
@@ -345,6 +357,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
         if (isFrozen) { return; }
+       
         speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
@@ -568,10 +581,15 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     }
     private IEnumerator AllowDoubleWallJump()
     {
-        allowDoubleWallJump = true;
+        
+        
+            allowDoubleWallJump = true;
 
-        yield return new WaitForSeconds(2);
-        allowDoubleWallJump = false;
+            yield return new WaitForSeconds(2);
+            allowDoubleWallJump = false;
+        
+
+       
 
 
 
