@@ -117,13 +117,13 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     {
 
 
-        if (OnWall() && !progressionManager.progression[5])
+     //   if (OnWall() && !progressionManager.progression[5])
         {
-            jumpingPower= 0;
+       //     jumpingPower= 0;
         }
-        else
+      //  else
         {
-            jumpingPower = originalJumpingPower;
+       //     jumpingPower = originalJumpingPower;
         }
        
       if(conversationFreeze) { this.transform.position = frozenPosition; return; }
