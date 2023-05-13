@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     }
     private void Update()
     {
-      
+      if(conversationFreeze) { this.transform.position = frozenPosition; return; }
         
         if (wallGrab.wallSlide)
         {
@@ -175,6 +175,13 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         playerInput.enabled = false;
         frozenPosition = this.transform.position;
        
+    }
+    bool conversationFreeze;
+  public void ConversationFreeze(bool freeze)
+    {
+        conversationFreeze= freeze;
+        frozenPosition = this.transform.position;
+        playerInput.enabled = false;
     }
   
     // Dash Methods
@@ -524,7 +531,11 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
-            if (!progressionManager.progression[5]) { return; }
+            if (!progressionManager.progression[5])
+            {
+                
+                return; 
+            }
             hasDoubleJumped = false;
             if (progressionManager.progression[10])
             {
