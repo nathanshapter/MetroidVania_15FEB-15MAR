@@ -129,6 +129,7 @@ MonoBehaviour:
   addedIntensity: 1
   turnOnProximity: 1
   turnOnDistance: 5
+  varyLights: 0
 --- !u!1 &9152993279506410212
 GameObject:
   m_ObjectHideFlags: 0
