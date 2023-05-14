@@ -24,12 +24,12 @@ public class GlobalLightScript : MonoBehaviour
         globalLight = GetComponent<Light2D>();
 
         
-        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.mainLight1a)
+        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.GetLight())
         {
             globalLight.intensity = 0;
             
         }
-        else if(GlobalVariableManager.instance.mainLight1a == true)
+        else if(GlobalVariableManager.instance.GetLight() == true)
         {
           LightFadeIn();
             print("checl");

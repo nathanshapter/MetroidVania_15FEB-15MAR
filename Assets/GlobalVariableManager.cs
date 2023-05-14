@@ -49,4 +49,8 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         gameData.mainLight1a= mainLight1a;
        
     }
+   public bool GetLight()
+    {
+        return mainLight1a; // i think we need to learn how to use dictionarys to do this
+    }
 }
