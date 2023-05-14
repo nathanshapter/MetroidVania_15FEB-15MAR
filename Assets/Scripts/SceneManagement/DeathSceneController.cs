@@ -13,5 +13,7 @@ public class DeathSceneController : MonoBehaviour
         deathManager = FindObjectOfType<DeathManager>();
         print(playerMovement.gameObject.transform.position);
         print($"You have died {deathManager.totalDeaths} times");
+
+        playerMovement.transform.position = FindObjectOfType<RespawnManager>().spawnPositions[0].transform.position;
     }
 }

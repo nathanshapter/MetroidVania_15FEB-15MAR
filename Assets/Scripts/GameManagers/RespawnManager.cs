@@ -53,7 +53,7 @@ public class RespawnManager : MonoBehaviour
     private void LoadDeathScene()
     {
         SceneManager.LoadScene("DeathScene");
-        health.transform.position = spawnPositions[0].transform.position;
+       
     }
     public Transform returnTransformPosition()
     {
