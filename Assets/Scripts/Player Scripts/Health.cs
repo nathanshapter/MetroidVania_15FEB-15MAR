@@ -138,7 +138,7 @@ public class Health : MonoBehaviour
     {
         isDead= true;
         animator.SetTrigger("Death");
-        deathManager.totalDeaths++;
+        
         yield return new WaitForSeconds(3);
         
         isDead = false;

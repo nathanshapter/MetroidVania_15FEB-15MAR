@@ -6,7 +6,7 @@ public class DeathManager : MonoBehaviour, iSaveData
 {
     public int totalDeaths;
    [SerializeField] RespawnManager RespawnManager;
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerMovement player;
    [HideInInspector] public bool fallRespawn;
 
 
@@ -20,6 +20,9 @@ public class DeathManager : MonoBehaviour, iSaveData
             DontDestroyOnLoad(gameObject);
         }
         else { Destroy(gameObject); }
+
+        RespawnManager = FindObjectOfType<RespawnManager>();
+        player= FindObjectOfType<PlayerMovement>();
        
     }
  public void LoadData(GameData data)
@@ -29,11 +32,14 @@ public class DeathManager : MonoBehaviour, iSaveData
     public void SaveData(GameData data)
     {
         data.deathCount = this.totalDeaths;
+       
     }
 
     public void ProcessDeath()
     {
-        totalDeaths++;     
+        totalDeaths++;
+        
+        
        
     }
     public void RespawnPlayer(Transform respawnPosition)

@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class RespawnManager : MonoBehaviour
 {
-    private static RespawnManager instance;
+   
   [SerializeField]  CheckpointsManager cpManager;
     [SerializeField] Health health;    
     [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0
     DeathCounter deathCounter;
+   
 
    
     // this script needs to identify the starting position and spawn them at the correct one, not just position [0]
@@ -33,23 +34,31 @@ public class RespawnManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        Invoke("LoadDeathScene", 3); 
-
         deathCounter.totalDeaths++;
+
+        DeathManager.Instance.totalDeaths++;
+        SaveDataManager.instance.SaveGame();
+        Invoke("LoadDeathScene", 3); 
+        
+        
         print(" hades brought you back");
         health.playerHealth = health.amountOfLives;
-     //   health.transform.position = spawnPositions[0].transform.position;
-        // restart zone to level 1
         
+       
+        //   health.transform.position = spawnPositions[0].transform.position;
+        // restart zone to level 1
+
 
     }
     private void LoadDeathScene()
     {
         SceneManager.LoadScene("DeathScene");
+        health.transform.position = spawnPositions[0].transform.position;
     }
     public Transform returnTransformPosition()
     {
 
         return cpManager.lastCheckPointPos; 
     }
+  
 }
