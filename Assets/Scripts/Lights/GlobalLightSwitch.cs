@@ -8,8 +8,8 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
     public bool isOn;
     GlobalLightScript gls;
     [SerializeField] private string id;
-    [ContextMenu(" Generate guid for ID")]
-
+   
+  
 
     public void LoadData(GameData data)
     {
@@ -35,6 +35,7 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
 
     private void Start()
     {
+        
         gls = GetComponentInParent<GlobalLightScript>();
         if (isOn)
         {

@@ -68,7 +68,7 @@ public class LightFlicker : MonoBehaviour
     IEnumerator TurnOffChance()
     {
         percentageToTurnOff = Random.Range(0, 100);
-        print(percentageToTurnOff);
+       
         isRunningCoroutine= true;
         yield return new WaitForSeconds(timeBetweenTicks + timeBetweenTicksVariance);
         if (percentageToTurnOff > chanceToTurnOffPercentage)
@@ -80,4 +80,6 @@ public class LightFlicker : MonoBehaviour
         }
         isRunningCoroutine= false;
     }
+
+    // have a global boolvariable list that acts as an instance, and classes use that information to base themselves on what to do
 }

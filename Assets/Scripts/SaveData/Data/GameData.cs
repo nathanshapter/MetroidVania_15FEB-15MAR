@@ -12,6 +12,7 @@ public class GameData
     public SerialisableDictionary<string, bool> switchesPressed;
     public bool[] progression;
     public string sceneName;
+    public bool mainLight1a;
 
 
 
@@ -24,5 +25,6 @@ public class GameData
 
         progression = new bool[20];
         sceneName= string.Empty;
+        mainLight1a = false;
     }
 }
