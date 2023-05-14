@@ -387,13 +387,33 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         }
         
     }
+
     public bool SomethingAbove()
+    {
+        if (GroundAbove() || WallAbove())
+        {
+            speedActuel = walkingSpeed;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+        
+    public bool GroundAbove()
     {
 
         return Physics2D.OverlapCircle(roofCheck.transform.position, 0.5f, groundLayer); // needs to be changed to roof layer
         
     }
-    
+    public bool WallAbove()
+    {
+
+        return Physics2D.OverlapCircle(roofCheck.transform.position, 0.5f, wallLayer); // needs to be changed to roof layer
+
+    }
+
     public bool IsGrounded()
     {
 

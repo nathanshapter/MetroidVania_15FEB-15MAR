@@ -13,6 +13,9 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
     [Header("Level 1a")]  
     [SerializeField] public bool mainLight1a;
 
+
+    [Header("Level 1j")]
+    [SerializeField] public bool placeHolderBool;
     private void Awake()
     {
         if(instance == null)
