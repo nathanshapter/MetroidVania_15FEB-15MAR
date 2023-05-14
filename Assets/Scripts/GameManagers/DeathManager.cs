@@ -32,9 +32,9 @@ public class DeathManager : MonoBehaviour, iSaveData
     {
         RespawnManager = FindObjectOfType<RespawnManager>();
         player = FindObjectOfType<PlayerMovement>();
-        this.totalDeaths = data.deathCount +1;
-     
+        this.totalDeaths = data.deathCount +1; // start with one death, but fuck it
 
+       
     }
     public void SaveData(GameData data)
     {
