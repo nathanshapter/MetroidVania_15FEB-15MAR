@@ -58,7 +58,11 @@ public class GlobalLightScript : MonoBehaviour
         lightOn= true;
         GlobalVariableManager.instance.mainLight1a = true;
         print(GlobalVariableManager.instance.mainLight1a);
-        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.4f, 6);
+        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.5f, 6);
+        foreach(GlobalLightSwitch i in switches)
+        {
+            i.gameObject.SetActive(false);
+        }
     }
 
 

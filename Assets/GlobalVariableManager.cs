@@ -6,8 +6,11 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 {
     public static GlobalVariableManager instance { get; private set; }
 
-    [Header("Level 1a")]
-  
+    [Header("All")]
+    [SerializeField] float numberTimer;
+
+
+    [Header("Level 1a")]  
     [SerializeField] public bool mainLight1a;
 
     private void Awake()
@@ -22,7 +25,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
             Destroy(this.gameObject);
         }
     }
-   [SerializeField] float numberTimer;
+   
     private void Update()
     {
         numberTimer += Time.deltaTime;
@@ -36,11 +39,11 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         }
         
         mainLight1a= gameData.mainLight1a;
-        print($"gvm loaded the main light as {mainLight1a}");
+       
     }
     public void SaveData(GameData gameData)
     {
         gameData.mainLight1a= mainLight1a;
-        print($"gvm saved the main light as {mainLight1a}");
+       
     }
 }
