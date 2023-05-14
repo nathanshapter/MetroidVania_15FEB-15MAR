@@ -10,17 +10,21 @@ public class GlobalLightScript : MonoBehaviour
     [SerializeField] bool lightOn;
     Light2D globalLight;
   public  GlobalLightSwitch[] switches;
+    public LightFlicker[] torches;
     int totalSwitches;
+    GlobalReverseSwitch grs;
 
     void Start()
     {
-
-        print("here");
+        grs = GetComponentInChildren<GlobalReverseSwitch>();
+        torches = FindObjectsOfType<LightFlicker>();
         switches = FindObjectsOfType<GlobalLightSwitch>();
         totalSwitches = switches.Length;
         numberOfSwitchesOn = totalSwitches;
         globalLight = GetComponent<Light2D>();
-        if(startOff && switches.Length >0 && !GlobalVariableManager.instance.mainLight1a)
+
+        
+        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.mainLight1a)
         {
             globalLight.intensity = 0;
             
@@ -28,10 +32,11 @@ public class GlobalLightScript : MonoBehaviour
         else if(GlobalVariableManager.instance.mainLight1a == true)
         {
           LightFadeIn();
+            print("checl");
            
         }
-       
-       
+
+      
     }
   
 
@@ -57,13 +62,19 @@ public class GlobalLightScript : MonoBehaviour
     {
         lightOn= true;
         GlobalVariableManager.instance.mainLight1a = true;
-        print(GlobalVariableManager.instance.mainLight1a);
+        
         DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.5f, 6);
         foreach(GlobalLightSwitch i in switches)
         {
             i.gameObject.SetActive(false);
         }
+        foreach(LightFlicker i in torches)
+        {
+            i.turnOffRandomly = false;
+            i.turnOnDistance= 100;
+        }
+       
     }
-
+  
 
 }

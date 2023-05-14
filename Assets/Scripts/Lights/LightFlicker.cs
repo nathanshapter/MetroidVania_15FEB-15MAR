@@ -10,9 +10,9 @@ public class LightFlicker : MonoBehaviour
     [SerializeField] float addedIntensity;
     [SerializeField] bool turnOnProximity = false;
     PlayerMovement player;
-    [SerializeField] int turnOnDistance = 5;
+    public int turnOnDistance = 5;
     [SerializeField] bool varyLights;
-    [SerializeField] bool turnOffRandomly;
+    public bool turnOffRandomly;
     [SerializeField]
     [Range(0f, 100f)] float chanceToTurnOffPercentage;
     float periodIncrease;

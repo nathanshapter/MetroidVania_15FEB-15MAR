@@ -51,12 +51,18 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Array.Resize(ref gls.switches, gls.switches.Length -1);
-        print(gls.switches.Length);
-        gls.CheckSwitches();
-        isOn = true;
-        gameObject.SetActive(false);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Array.Resize(ref gls.switches, gls.switches.Length - 1);
+            print(gls.switches.Length);
+            gls.CheckSwitches();
+            isOn = true;
+            gameObject.SetActive(false);
+        }
+
+      
     }
+    
 }
