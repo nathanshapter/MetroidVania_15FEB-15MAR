@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RespawnManager : MonoBehaviour
+public class RespawnManager : MonoBehaviour, iSaveData
 {
    
   [SerializeField]  CheckpointsManager cpManager;
@@ -31,27 +31,42 @@ public class RespawnManager : MonoBehaviour
             RespawnPlayer();
         }
     }
+    Scene deathSceneToReloadTo;
+    public void LoadData(GameData gameData)
+    {
 
+    }
+    public void SaveData(GameData gameData)
+    {
+        gameData.sceneToReloadTo = deathSceneToReloadTo.name;
+        print(deathSceneToReloadTo.name);
+        print(gameData.sceneToReloadTo);
+    }
     public void RespawnPlayer()
     {
         deathCounter.totalDeaths++;
 
         DeathManager.Instance.totalDeaths++;
-        SaveDataManager.instance.SaveGame();
+        
+       
+        deathSceneToReloadTo  = SceneManager.GetActiveScene();
+        print(deathSceneToReloadTo.name);
         Invoke("LoadDeathScene", 3); 
         
         
         print(" hades brought you back");
         health.playerHealth = health.amountOfLives;
-        
-       
+
+
         //   health.transform.position = spawnPositions[0].transform.position;
         // restart zone to level 1
 
-
+        SaveDataManager.instance.SaveGame();
     }
+   
     private void LoadDeathScene()
     {
+
         SceneManager.LoadScene("DeathScene");
        
     }

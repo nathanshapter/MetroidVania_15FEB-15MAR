@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathManager : MonoBehaviour, iSaveData
 {
@@ -8,9 +9,11 @@ public class DeathManager : MonoBehaviour, iSaveData
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] PlayerMovement player;
    [HideInInspector] public bool fallRespawn;
+    
 
 
     public static DeathManager Instance;
+ 
 
     private void Awake()
     {
@@ -27,12 +30,15 @@ public class DeathManager : MonoBehaviour, iSaveData
     }
  public void LoadData(GameData data)
     {
+        RespawnManager = FindObjectOfType<RespawnManager>();
+        player = FindObjectOfType<PlayerMovement>();
         this.totalDeaths = data.deathCount;
+        
     }
     public void SaveData(GameData data)
     {
         data.deathCount = this.totalDeaths;
-       
+      
     }
 
     public void ProcessDeath()
