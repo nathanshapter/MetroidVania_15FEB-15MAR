@@ -9,7 +9,7 @@ public class RespawnManager : MonoBehaviour, iSaveData
   [SerializeField]  CheckpointsManager cpManager;
     [SerializeField] Health health;    
     [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0
-    DeathCounter deathCounter;
+   
    
 
    
@@ -18,7 +18,7 @@ public class RespawnManager : MonoBehaviour, iSaveData
     {
 
        
-        deathCounter = FindObjectOfType<DeathCounter>();
+       
         health = FindObjectOfType<Health>();
         
     }
@@ -41,13 +41,14 @@ public class RespawnManager : MonoBehaviour, iSaveData
         gameData.sceneToReloadTo = deathSceneToReloadTo.name;
         print(deathSceneToReloadTo.name);
         print(gameData.sceneToReloadTo);
+        gameData.deathCount = DeathManager.Instance.totalDeaths;
     }
     public void RespawnPlayer()
     {
-        deathCounter.totalDeaths++;
+        
 
         DeathManager.Instance.totalDeaths++;
-        
+       
        
         deathSceneToReloadTo  = SceneManager.GetActiveScene();
         print(deathSceneToReloadTo.name);
@@ -62,6 +63,7 @@ public class RespawnManager : MonoBehaviour, iSaveData
         // restart zone to level 1
 
         SaveDataManager.instance.SaveGame();
+        print("amount of deaths saved" + DeathManager.Instance.totalDeaths );
     }
    
     private void LoadDeathScene()

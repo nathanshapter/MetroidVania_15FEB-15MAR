@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 public class DeathSceneController : MonoBehaviour, iSaveData
 {
     PlayerMovement playerMovement;
-    DeathManager deathManager;
+  
     string sceneToReloadTo;
 
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
-        deathManager = FindObjectOfType<DeathManager>();
+       
         print(playerMovement.gameObject.transform.position);
-        print($"You have died {deathManager.totalDeaths} times");
+        print($"You have died {DeathManager.Instance.totalDeaths} times");
 
         playerMovement.transform.position = FindObjectOfType<RespawnManager>().spawnPositions[0].transform.position;
 
