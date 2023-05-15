@@ -11,8 +11,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
     [SerializeField] float numberTimer;
 
 
-    [Header("Level 1a")]  
-    [SerializeField] public bool mainLight1a;
+
 
 
     [Header("Level 1j")]
@@ -26,8 +25,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
 
     string baseName = "Level 1";
-    public  Dictionary<string, bool> globalLights = new Dictionary<string, bool>() { 
-        { "sceneA", true }, { "sceneB", false }, { "sceneC", true }, };
+    public SerialisableDictionary<string, bool> globalLights = new SerialisableDictionary<string, bool>();
 
     bool testbool;
     private void Awake()
@@ -70,8 +68,9 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
             }
             
         }
+        globalLights["Level 1xy"] = true;
+       
 
-      
     }
    
     private void Update()
@@ -81,7 +80,24 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
     public void LoadData(GameData gameData)
     {
-        if(numberTimer> 5)
+        Debug.Log($"Level 1a was loaded as {gameData.switches["Level 1a"]}");
+
+        if (gameData.switches.Count == 0)
+        {
+            gameData.switches = globalLights;
+            Debug.Log($" Saved data of global lights was {0}, now it is {gameData.switches.Count}");
+        }
+        else
+        {
+            this.globalLights = gameData.switches;
+            Debug.Log($"Global lights were successfully loaded at count: {gameData.switches.Count} for debugging, the value of" +
+                $"Level 1xy = {gameData.switches["Level 1xy"]} ");
+
+        }
+
+
+
+        if (numberTimer> 5)
         {
             SaveData(gameData);
         }
@@ -99,8 +115,9 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
     }
     public void SaveData(GameData gameData)
     {
-    //    gameData.lightBool= mainLight1a;
-       
+        gameData.switches = this.globalLights;
+        Debug.Log("Saved switches in dictionary with count: "+gameData.switches.Count);
+        Debug.Log($"Level 1a was saved as {gameData.switches["Level 1a"]}");
     }
    
 }

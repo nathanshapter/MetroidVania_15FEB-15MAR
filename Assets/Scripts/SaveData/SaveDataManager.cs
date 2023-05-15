@@ -65,7 +65,7 @@ public class SaveDataManager : MonoBehaviour
         
         gameData = new GameData();
         
-        print("new game " + fileName);
+        print("New Game was created with name:  " + fileName);
     }
 
     public void LoadGame()

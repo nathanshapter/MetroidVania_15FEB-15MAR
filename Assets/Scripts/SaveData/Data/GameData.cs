@@ -14,7 +14,7 @@ public class GameData
     public string sceneName;
     public bool lightBool;
     public string sceneToReloadTo;
-
+    public SerialisableDictionary<string, bool> switches;
 
 
 
@@ -29,5 +29,6 @@ public class GameData
         // should create a debuggin tool that on click you can change to the new scene
         lightBool = false;
         sceneToReloadTo = string.Empty; 
+        switches= new SerialisableDictionary<string, bool>();
     }
 }

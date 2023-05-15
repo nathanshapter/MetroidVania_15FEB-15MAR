@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class GlobalLightScript : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class GlobalLightScript : MonoBehaviour
   public  GlobalLightSwitch[] switches;
     public LightFlicker[] torches;
     int totalSwitches;
-  
 
+    string sceneName; 
     void Start()
     {
-       
+        sceneName = SceneManager.GetActiveScene().name.ToString();
+        
         torches = FindObjectsOfType<LightFlicker>();
         switches = FindObjectsOfType<GlobalLightSwitch>();
         totalSwitches = switches.Length;
@@ -24,7 +26,7 @@ public class GlobalLightScript : MonoBehaviour
         globalLight = GetComponent<Light2D>();
 
         
-        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.mainLight1a)
+        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.globalLights[sceneName])
         {
             globalLight.intensity = 0;
             
@@ -32,11 +34,9 @@ public class GlobalLightScript : MonoBehaviour
         else 
         {
           LightFadeIn();
-            print("checl");
+         
            
-        }
-
-      
+        }      
     }
   
 
@@ -50,6 +50,7 @@ public class GlobalLightScript : MonoBehaviour
         if(switches.Length == 0)
         {
             LightFadeIn();
+            print("All switches have been destroyed");
         }
         else
         {
@@ -60,7 +61,15 @@ public class GlobalLightScript : MonoBehaviour
 
     public void LightFadeIn() 
     {
-        lightOn= true;
+    
+       
+        
+        GlobalVariableManager.instance.globalLights[sceneName] = true;
+       
+
+
+
+        lightOn = true;
        
         
         DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.5f, 6);

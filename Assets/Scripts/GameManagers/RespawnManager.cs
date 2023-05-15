@@ -39,8 +39,8 @@ public class RespawnManager : MonoBehaviour, iSaveData
     public void SaveData(GameData gameData)
     {
         gameData.sceneToReloadTo = deathSceneToReloadTo.name;
-        print(deathSceneToReloadTo.name);
-        print(gameData.sceneToReloadTo);
+     //   print(deathSceneToReloadTo.name);
+     //   print(gameData.sceneToReloadTo);
         gameData.deathCount = DeathManager.Instance.totalDeaths;
     }
     public void RespawnPlayer()
