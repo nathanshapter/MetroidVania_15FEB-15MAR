@@ -80,8 +80,9 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
     public void LoadData(GameData gameData)
     {
+        
         Debug.Log($"Level 1a was loaded as {gameData.switches["Level 1a"]}");
-
+        Debug.Log($"Level 1j was loaded as {gameData.switches["Level 1j"]}");
         if (gameData.switches.Count == 0)
         {
             gameData.switches = globalLights;
@@ -102,13 +103,13 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
             SaveData(gameData);
         }
 
-        if (globalLights[level1a] == true  && SceneManager.GetActiveScene().name == level1a)
+      //  if (globalLights[level1a] == true  && SceneManager.GetActiveScene().name == level1a)
         {            
-            FindObjectOfType<GlobalLightScript>().LightFadeIn();
+       //     FindObjectOfType<GlobalLightScript>().LightFadeIn();
         }
-        if (globalLights[level1b] == true && SceneManager.GetActiveScene().name == level1b)
+       // if (globalLights[level1b] == true && SceneManager.GetActiveScene().name == level1b)
         {
-            FindObjectOfType<GlobalLightScript>().LightFadeIn();
+      //      FindObjectOfType<GlobalLightScript>().LightFadeIn();
         }
       
        
@@ -118,6 +119,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         gameData.switches = this.globalLights;
         Debug.Log("Saved switches in dictionary with count: "+gameData.switches.Count);
         Debug.Log($"Level 1a was saved as {gameData.switches["Level 1a"]}");
+        Debug.Log($"Level 1j was saved as {gameData.switches["Level 1j"]}");
     }
    
 }

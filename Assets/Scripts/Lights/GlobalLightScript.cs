@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GlobalLightScript : MonoBehaviour
 {
     [SerializeField] bool startOff;
-    [SerializeField] bool lightOn;
+     bool lightOn;
     Light2D globalLight;
   public  GlobalLightSwitch[] switches;
     public LightFlicker[] torches;
@@ -17,18 +17,32 @@ public class GlobalLightScript : MonoBehaviour
     string sceneName; 
     void Start()
     {
-        sceneName = SceneManager.GetActiveScene().name.ToString();
-        
         torches = FindObjectsOfType<LightFlicker>();
+
+
         switches = FindObjectsOfType<GlobalLightSwitch>();
+
+        sceneName = SceneManager.GetActiveScene().name.ToString();
+        print($"sceneName being used is {sceneName}");
+        
         totalSwitches = switches.Length;
         numberOfSwitchesOn = totalSwitches;
         globalLight = GetComponent<Light2D>();
 
         
-        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.globalLights[sceneName])
+        if (startOff &&  !GlobalVariableManager.instance.globalLights[sceneName])
         {
             globalLight.intensity = 0;
+
+            if(switches.Length == 0)
+            {
+               
+                
+
+                switches = FindObjectsOfType<GlobalLightSwitch>();
+                Debug.Log(torches.Length);
+            }
+            
             
         }
         else 
@@ -63,8 +77,11 @@ public class GlobalLightScript : MonoBehaviour
     {
     
        
+        if(sceneName != null)
+        {
+            GlobalVariableManager.instance.globalLights[sceneName] = true;
+        }
         
-        GlobalVariableManager.instance.globalLights[sceneName] = true;
        
 
 
