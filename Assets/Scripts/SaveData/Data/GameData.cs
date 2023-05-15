@@ -12,7 +12,7 @@ public class GameData
     public SerialisableDictionary<string, bool> switchesPressed;
     public bool[] progression;
     public string sceneName;
-    public bool mainLight1a;
+    public bool lightBool;
     public string sceneToReloadTo;
 
 
@@ -27,7 +27,7 @@ public class GameData
         progression = new bool[20];
         sceneName= string.Empty; /// for when you panic in the future. this does not get used when playing from the scene, but only from continue button
         // should create a debuggin tool that on click you can change to the new scene
-        mainLight1a = false;
+        lightBool = false;
         sceneToReloadTo = string.Empty; 
     }
 }

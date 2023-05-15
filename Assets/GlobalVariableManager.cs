@@ -16,6 +16,14 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
     [Header("Level 1j")]
     [SerializeField] public bool placeHolderBool;
+
+
+    int test = -500;
+
+    Dictionary<string, bool> globalLights = new Dictionary<string, bool>() { 
+        { "sceneA", true }, { "sceneB", false }, { "sceneC", true }, };
+
+    bool testbool;
     private void Awake()
     {
         if(instance == null)
@@ -27,6 +35,16 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         {
             Destroy(this.gameObject);
         }
+
+        
+
+     //  Debug.Log($"sceneb is on?{globalLights["sceneB"]}" );
+     //   globalLights["sceneB"] = true;
+        
+
+
+
+
     }
    
     private void Update()
@@ -40,13 +58,18 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         {
             SaveData(gameData);
         }
-        
-        mainLight1a= gameData.mainLight1a;
+
+        if (globalLights["sceneA"] == true)
+        {
+          
+            mainLight1a= true;
+        }
+      
        
     }
     public void SaveData(GameData gameData)
     {
-        gameData.mainLight1a= mainLight1a;
+        gameData.lightBool= mainLight1a;
        
     }
    public bool GetLight()

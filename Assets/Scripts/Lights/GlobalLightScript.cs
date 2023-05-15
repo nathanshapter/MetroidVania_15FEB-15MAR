@@ -12,11 +12,11 @@ public class GlobalLightScript : MonoBehaviour
   public  GlobalLightSwitch[] switches;
     public LightFlicker[] torches;
     int totalSwitches;
-    GlobalReverseSwitch grs;
+  
 
     void Start()
     {
-        grs = GetComponentInChildren<GlobalReverseSwitch>();
+       
         torches = FindObjectsOfType<LightFlicker>();
         switches = FindObjectsOfType<GlobalLightSwitch>();
         totalSwitches = switches.Length;
