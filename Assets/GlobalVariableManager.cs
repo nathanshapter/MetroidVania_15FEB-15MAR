@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GlobalVariableManager : MonoBehaviour, iSaveData
 {
@@ -20,7 +21,12 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
     int test = -500;
 
-    Dictionary<string, bool> globalLights = new Dictionary<string, bool>() { 
+    string level1a = "Level 1a";
+    string level1b = "Level 1b";
+
+
+
+    public  Dictionary<string, bool> globalLights = new Dictionary<string, bool>() { 
         { "sceneA", true }, { "sceneB", false }, { "sceneC", true }, };
 
     bool testbool;
@@ -36,13 +42,14 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
             Destroy(this.gameObject);
         }
 
-        
-
-     //  Debug.Log($"sceneb is on?{globalLights["sceneB"]}" );
-     //   globalLights["sceneB"] = true;
-        
 
 
+        //  Debug.Log($"sceneb is on?{globalLights["sceneB"]}" );
+        //   globalLights["sceneB"] = true;
+
+
+        globalLights.Add(level1a, true);
+        globalLights.Add(level1b, true);
 
 
     }
@@ -59,21 +66,21 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
             SaveData(gameData);
         }
 
-        if (globalLights["sceneA"] == true)
+        if (globalLights[level1a] == true  && SceneManager.GetActiveScene().name == level1a)
+        {            
+            FindObjectOfType<GlobalLightScript>().LightFadeIn();
+        }
+        if (globalLights[level1b] == true && SceneManager.GetActiveScene().name == level1b)
         {
-          
-            mainLight1a= true;
+            FindObjectOfType<GlobalLightScript>().LightFadeIn();
         }
       
        
     }
     public void SaveData(GameData gameData)
     {
-        gameData.lightBool= mainLight1a;
+    //    gameData.lightBool= mainLight1a;
        
     }
-   public bool GetLight()
-    {
-        return mainLight1a; // i think we need to learn how to use dictionarys to do this
-    }
+   
 }

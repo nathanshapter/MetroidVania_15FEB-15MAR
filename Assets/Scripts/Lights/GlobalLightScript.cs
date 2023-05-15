@@ -24,12 +24,12 @@ public class GlobalLightScript : MonoBehaviour
         globalLight = GetComponent<Light2D>();
 
         
-        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.GetLight())
+        if (startOff && switches.Length >0 && !GlobalVariableManager.instance.mainLight1a)
         {
             globalLight.intensity = 0;
             
         }
-        else if(GlobalVariableManager.instance.GetLight() == true)
+        else 
         {
           LightFadeIn();
             print("checl");
@@ -58,10 +58,10 @@ public class GlobalLightScript : MonoBehaviour
         
     } 
 
-    private void LightFadeIn() 
+    public void LightFadeIn() 
     {
         lightOn= true;
-        GlobalVariableManager.instance.mainLight1a = true;
+       
         
         DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.5f, 6);
         foreach(GlobalLightSwitch i in switches)
