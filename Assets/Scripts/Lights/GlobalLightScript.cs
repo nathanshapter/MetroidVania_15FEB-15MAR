@@ -34,13 +34,13 @@ public class GlobalLightScript : MonoBehaviour
         {
             globalLight.intensity = 0;
 
-            if(switches.Length == 0)
+            if(switches.Length == 0) // try instantiating them, at a random spot if they should be spawning
             {
                
                 
 
                 switches = FindObjectsOfType<GlobalLightSwitch>();
-                Debug.Log(torches.Length);
+                Debug.Log(switches.Length);
             }
             
             
