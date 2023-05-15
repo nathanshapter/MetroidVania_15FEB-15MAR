@@ -25,7 +25,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
     string level1b = "Level 1b";
 
 
-
+    string baseName = "Level 1";
     public  Dictionary<string, bool> globalLights = new Dictionary<string, bool>() { 
         { "sceneA", true }, { "sceneB", false }, { "sceneC", true }, };
 
@@ -48,10 +48,30 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         //   globalLights["sceneB"] = true;
 
 
-        globalLights.Add(level1a, true);
-        globalLights.Add(level1b, true);
+      //  globalLights.Add(level1a, true);
+       // globalLights.Add(level1b, true);
+     
+        for (char c = 'a'; c <= 'z'; c++)
+        {
+            string sceneName = baseName + c;
+         //   Debug.Log(sceneName);
+            globalLights.Add(sceneName, false);
+          
+        }
+        for(char c = 'a'; c <= 'z'; c++)
+        {
+            for(char d = 'a'; d <='z'; d++)
+            {
+                string sceneName2 = baseName + c + d;
+               // Debug.Log(sceneName2);
 
+                globalLights.Add(sceneName2, false);
+             
+            }
+            
+        }
 
+      
     }
    
     private void Update()
