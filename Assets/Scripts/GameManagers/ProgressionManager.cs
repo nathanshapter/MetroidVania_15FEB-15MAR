@@ -12,12 +12,12 @@ public class ProgressionManager : MonoBehaviour, iSaveData
     // 1 = double jump
     // 2 = dash
     // 3 = platform bullet
-    // 4 = ledge climb      // not yet implemented
+    // 4 = attack     // not yet implemented
     // 5 = wall jump
     // 6 play the flute    // coding done, music and item to be added
     // 7 open hidden areas
-    // 8 wall vision to see through certain tiles // not yet implement
-    // 9 bow and arrow weapon // to be implemented for lvl 2
+    // 8 air attacks
+    // 9 down attack
     //10 double jump off wall
 
 

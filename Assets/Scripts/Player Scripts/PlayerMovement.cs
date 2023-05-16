@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     // script Gets
     PlatformBullet platformBullet;
     Health health;
-    ProgressionManager progressionManager;
+   
     RespawnManager respawnManager;
     PlayerCombat playerCombat;
 
@@ -82,6 +82,8 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     GameObject lastParent;
 
     string sceneName;
+
+   
   
     public void LoadData(GameData data)
     {
@@ -102,7 +104,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
-        progressionManager = FindObjectOfType<ProgressionManager>();
+     
         animator= GetComponentInChildren<Animator>();
         originalSpeed = speedActuel;
         playerCombat = GetComponent<PlayerCombat>();
@@ -199,7 +201,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     // Dash Methods
     private void CheckForDash()
     {
-        if (!progressionManager.progression[2]) { return; }
+        if (!ProgressionManager.instance.progression[2]) { return; }
         if (Input.GetKeyDown(KeyCode.C) && canDash)
         {
             StartCoroutine(Dash());
@@ -362,10 +364,14 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
-            if(!IsGrounded() && !progressionManager.progression[5])
+            if(!IsGrounded() && !ProgressionManager.instance.progression[5])
             {
-                Debug.Log("you cannot double jump");
-                return;
+                if (!isCrouching)
+                {
+                    Debug.Log("you cannot double jump");
+                    return;
+                }
+                
             }
 
             animator.SetBool("Grounded", false);
@@ -425,7 +431,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     {
 
         // if is moving play roll animation in correct direction
-        if (!progressionManager.progression[1]) { hasDoubleJumped = true; }
+        if (!ProgressionManager.instance.progression[1]) { hasDoubleJumped = true; }
         if (isTouchingBridge) { return true; }
        
         if (isMoving && speedActuel == originalSpeed)
@@ -443,14 +449,14 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     private bool OnWall()
     {
-        if (!progressionManager.progression[1]) { hasDoubleJumped = true; } // im not sure this does anything
+        if (!ProgressionManager.instance.progression[1]) { hasDoubleJumped = true; } // im not sure this does anything
         return Physics2D.OverlapCircle(groundCheck.transform.position, 0.5f, wallLayer);
     }
 
 
     public void PlayFlute(InputAction.CallbackContext context)
     {
-        if (!progressionManager.progression[6]) { return; }
+        if (!ProgressionManager.instance.progression[6]) { return; }
 
         if (fluteIsPlaying) { return; }
         SoundManager.Instance.PlaySound(flute);
@@ -474,7 +480,8 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     public void Crouch(InputAction.CallbackContext context)
     {
-        if (!progressionManager.progression[0] || !IsGrounded() || isFrozen)  { return; }
+        canJump= false;
+        if (!ProgressionManager.instance.progression[0] || !IsGrounded() || isFrozen)  { return; }
 
 
         
@@ -499,6 +506,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
   
    private void StandUp()
     {
+        canJump= true;
         capsuleCollider.enabled = true;
         boxCollider2D.enabled = false;
         playerCombat.swordCrouchPosition = false;  playerCombat.swordOriginal = true;
@@ -571,13 +579,13 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
         if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("WeakWall"))// allows walljump
         {
-            if (!progressionManager.progression[5])
+            if (!ProgressionManager.instance.progression[5])
             {
                 
                 return; 
             }
             hasDoubleJumped = false;
-            if (progressionManager.progression[10])
+            if (ProgressionManager.instance.progression[10])
             {
 
                 StartCoroutine(AllowDoubleWallJump());

@@ -33,7 +33,7 @@ public class PlayerCombat : MonoBehaviour
     PlayerMovement playerMovement;    
     bool canAttackInAir = true;
     private AudioManager_PrototypeHero audioManager;
-    ProgressionManager pm;
+   
 
     Health health;
     float ballTimer;
@@ -57,7 +57,7 @@ public class PlayerCombat : MonoBehaviour
         audioManager = AudioManager_PrototypeHero.instance;
         health = GetComponent<Health>();
         leverScript = FindObjectOfType<Lever>();
-        pm = FindObjectOfType<ProgressionManager>();
+     
     }
 
     private void Update()
@@ -99,7 +99,7 @@ public class PlayerCombat : MonoBehaviour
  
     public void Attack(InputAction.CallbackContext context)
     {
-        if (playerMovement.isFrozen) { return; }
+        if (playerMovement.isFrozen || !ProgressionManager.instance.progression[4]) { return; }
         if (!playerMovement.IsGrounded())
         {
             
@@ -125,6 +125,10 @@ public class PlayerCombat : MonoBehaviour
     bool downAttack;
     private void AirAttack()
     {
+        if (!ProgressionManager.instance.progression[8])
+        {
+            return;
+        }
         if(canAttackInAir && swordUp)
         {
             animator.SetTrigger("UpAttack");
@@ -140,8 +144,13 @@ public class PlayerCombat : MonoBehaviour
         }
         else if(canAttackInAir || swordDown) // allows to do an air attack, and then a slam attack
         {
-            animator.SetTrigger("AttackAirSlam");
-            downAttack= true;
+            if (ProgressionManager.instance.progression[9])
+            {
+                animator.SetTrigger("AttackAirSlam");
+                downAttack = true;
+                return;
+            }
+            
         }
         AllSwordAttack();
         currentAttack++;
@@ -206,7 +215,7 @@ public class PlayerCombat : MonoBehaviour
         }
         for(int i =0; i < tilesToDestroy.Length; i++)
         {
-            if (!pm.progression[7]) { return; }
+            if (!ProgressionManager.instance.progression[7]) { return; }
           tilesToDestroy[i].GetComponent<TilemapRenderer>().enabled = false;
           Destroy(tilesToDestroy[i]);
             
