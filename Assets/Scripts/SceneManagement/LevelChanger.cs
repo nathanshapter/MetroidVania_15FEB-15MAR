@@ -18,6 +18,8 @@ public class LevelChanger : MonoBehaviour
         if(connection == LevelConnection.ActiveConnection) {
             FindObjectOfType<PlayerMovement>().transform.position = spawnPoint.position;
         }
+
+        print("start the hack: target : Kc");
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

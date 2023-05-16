@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Every Level/BuilderLevel.unity
     guid: c06d0a87af988bd4aa0715f7a812e69f
   - enabled: 1
-    path: Assets/Scenes/Level 1/DeathScene.unity
+    path: Assets/Scenes/Every Level/DeathScene.unity
     guid: 0dab454c104561541ad48e946fd63f49
   - enabled: 1
     path: Assets/Scenes/Level 1/Level 1a.unity

@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
          
         wallGrab = GetComponent<WallGrabPlayer>();
         originalJumpingPower = jumpingPower;
-        
+    
     }
     private void Update()
     {
