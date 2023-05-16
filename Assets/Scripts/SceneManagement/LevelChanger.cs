@@ -8,7 +8,7 @@ public class LevelChanger : MonoBehaviour
 {
     [SerializeField] LevelConnection connection;
 
-    [SerializeField] string targetSceneName;
+    public string targetSceneName;
     [SerializeField] Transform spawnPoint;
     LevelManager levelManager;
 

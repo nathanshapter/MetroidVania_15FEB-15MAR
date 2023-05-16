@@ -95,10 +95,14 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     {
         data.playerPosition = this.transform.position;
       
+      
     }
     float originalJumpingPower;
     private void Start()
     {
+       
+        playerInput = GetComponent<PlayerInput>();
+        playerInput.enabled = true;
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         playerVirtualCamera.m_Lens.OrthographicSize = levelSizeCamera;
         rb = GetComponent<Rigidbody2D>();
@@ -111,13 +115,14 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     capsuleCollider = GetComponentInChildren<CapsuleCollider2D>();
         boxCollider2D= GetComponentInChildren<BoxCollider2D>();
         boxCollider2D.enabled = false;
-        playerInput =GetComponent<PlayerInput>();   
+         
         wallGrab = GetComponent<WallGrabPlayer>();
         originalJumpingPower = jumpingPower;
+        
     }
     private void Update()
     {
-
+      
 
      //   if (OnWall() && !progressionManager.progression[5])
         {
@@ -190,7 +195,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         frozenPosition = this.transform.position;
        
     }
-    bool conversationFreeze;
+   bool conversationFreeze;
   public void ConversationFreeze(bool freeze)
     {
         conversationFreeze= freeze;

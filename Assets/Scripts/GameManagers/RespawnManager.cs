@@ -51,7 +51,7 @@ public class RespawnManager : MonoBehaviour, iSaveData
        
        
         deathSceneToReloadTo  = SceneManager.GetActiveScene();
-        print(deathSceneToReloadTo.name);
+        print(" You will be returned to" + deathSceneToReloadTo.name);
         Invoke("LoadDeathScene", 3); 
         
         
@@ -59,8 +59,7 @@ public class RespawnManager : MonoBehaviour, iSaveData
         health.playerHealth = health.amountOfLives;
 
 
-        //   health.transform.position = spawnPositions[0].transform.position;
-        // restart zone to level 1
+       
 
         SaveDataManager.instance.SaveGame();
         print("amount of deaths saved" + DeathManager.Instance.totalDeaths );

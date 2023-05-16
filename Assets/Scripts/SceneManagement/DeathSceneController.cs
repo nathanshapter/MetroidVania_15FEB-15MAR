@@ -9,9 +9,12 @@ public class DeathSceneController : MonoBehaviour, iSaveData
   
     string sceneToReloadTo;
 
+
+    LevelChanger lc;
     private void Start()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
+        
        
         print(playerMovement.gameObject.transform.position);
         print($"You have died {DeathManager.Instance.totalDeaths} times");
@@ -19,15 +22,14 @@ public class DeathSceneController : MonoBehaviour, iSaveData
         playerMovement.transform.position = FindObjectOfType<RespawnManager>().spawnPositions[0].transform.position;
 
        
-        StartCoroutine(ReturnPlayerToScene());
+      //  StartCoroutine(ReturnPlayerToScene());
+
+        lc = FindObjectOfType<LevelChanger>();
+        lc.targetSceneName = sceneToReloadTo;
     }
 
 
-    IEnumerator ReturnPlayerToScene()
-    {
-        yield return new WaitForSeconds(4);
-        SceneManager.LoadScene(sceneToReloadTo);
-    }
+ 
 
     public void LoadData(GameData gameData)
     {

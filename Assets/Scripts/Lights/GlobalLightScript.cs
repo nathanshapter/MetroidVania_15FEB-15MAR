@@ -51,6 +51,8 @@ public class GlobalLightScript : MonoBehaviour
          
            
         }      
+
+      CheckSwitches();
     }
   
 
@@ -64,7 +66,7 @@ public class GlobalLightScript : MonoBehaviour
         if(switches.Length == 0)
         {
             LightFadeIn();
-            print("All switches have been destroyed");
+            print("There are no switches left");
         }
         else
         {
