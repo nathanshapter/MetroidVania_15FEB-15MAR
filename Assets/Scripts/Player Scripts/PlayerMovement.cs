@@ -354,6 +354,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         }
       
     }
+    private bool canJump = true;
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
         if (isFrozen) { return; }
@@ -361,6 +362,12 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         speedActuel = originalSpeed;
         if (context.performed && coyoteTimeCounter > 0 || context.performed && hasDoubleJumped == false || context.performed && allowDoubleWallJump)
         {
+            if(!IsGrounded() && !progressionManager.progression[5])
+            {
+                Debug.Log("you cannot double jump");
+                return;
+            }
+
             animator.SetBool("Grounded", false);
            
             animator.SetBool("walk", false);
