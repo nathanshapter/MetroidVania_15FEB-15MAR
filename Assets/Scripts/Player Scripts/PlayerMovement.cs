@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     private void Start()
     {
-
+         
         playerInput = GetComponent<PlayerInput>();
         playerInput.enabled = true;
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -130,7 +130,8 @@ public class PlayerMovement : MonoBehaviour, iSaveData
    
     private void Update()
     {
-
+        // to put player in correct scale
+        if (transform.position.z != 0) { this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0); }
       if(conversationFreeze) { this.transform.position = frozenPosition; return; }
         
         if (wallGrab.wallSlide)
