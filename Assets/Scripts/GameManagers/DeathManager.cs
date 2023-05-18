@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class DeathManager : MonoBehaviour, iSaveData
 {
+    
+    /// <summary>
+    /// this script handles what happens when the player dies
+    /// </summary>
+
+
     public int totalDeaths;
    [SerializeField] RespawnManager RespawnManager;
     [SerializeField] PlayerMovement player;
@@ -32,9 +38,7 @@ public class DeathManager : MonoBehaviour, iSaveData
     {
         RespawnManager = FindObjectOfType<RespawnManager>();
         player = FindObjectOfType<PlayerMovement>();
-        this.totalDeaths = data.deathCount +1; // start with one death, but fuck it
-
-       
+        this.totalDeaths = data.deathCount;   
     }
     public void SaveData(GameData data)
     {
@@ -42,13 +46,7 @@ public class DeathManager : MonoBehaviour, iSaveData
       
     }
 
-    public void ProcessDeath()
-    {
-        totalDeaths++;
-        
-        
-       
-    }
+  
     public void RespawnPlayer(Transform respawnPosition)
     {
         if (respawnPosition == null)
@@ -57,7 +55,10 @@ public class DeathManager : MonoBehaviour, iSaveData
            
             return;
         }  
-        if(fallRespawn) { player.transform.position = respawnPosition.transform.position; }
+        if(fallRespawn)  // this is for when the player lands on spikes
+        { 
+            player.transform.position = respawnPosition.transform.position; 
+        }
         
     }
 

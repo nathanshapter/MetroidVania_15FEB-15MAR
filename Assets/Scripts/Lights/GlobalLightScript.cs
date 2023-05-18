@@ -12,32 +12,29 @@ public class GlobalLightScript : MonoBehaviour
     Light2D globalLight;
   public  GlobalLightSwitch[] switches;
     public LightFlicker[] torches;
+    [SerializeField] float lightIntensityx = 0.5f;
+    [SerializeField] float lightIntensityFadeInx =6;
     int totalSwitches;
 
     string sceneName; 
     void Start()
     {
         torches = FindObjectsOfType<LightFlicker>();
-
-
         switches = FindObjectsOfType<GlobalLightSwitch>();
-
-        sceneName = SceneManager.GetActiveScene().name.ToString();
-        print($"sceneName being used is {sceneName}");
-        
-        totalSwitches = switches.Length;
-        numberOfSwitchesOn = totalSwitches;
+        sceneName = SceneManager.GetActiveScene().name.ToString();              
+        totalSwitches = switches.Length;    
         globalLight = GetComponent<Light2D>();
 
         
-        if (startOff &&  !GlobalVariableManager.instance.globalLights[sceneName])
+        if (startOff &&  !GlobalVariableManager.instance.globalLights[sceneName]) // if startoff is checked, and the saved value in gvm is false, turn the light off
         {
             globalLight.intensity = 0;
 
-            if(switches.Length == 0) // try instantiating them, at a random spot if they should be spawning
+            if(switches.Length == 0) // try instantiating them, at a random spot if they should be spawning // should probably use iSave
+                // iSaveData to load the amount, if it doesnt work correctly, then spawn them in the world
             {
                
-                
+                // this doesnt work correctly because they are not enabled. need to enable them if its 0, somehow
 
                 switches = FindObjectsOfType<GlobalLightSwitch>();
                 Debug.Log(switches.Length);
@@ -53,45 +50,33 @@ public class GlobalLightScript : MonoBehaviour
         }      
 
       CheckSwitches();
-    }
-  
-
-
-    int numberOfSwitchesOn;
-
+    } 
    
     public void CheckSwitches()
-    {
-     
+    {     
         if(switches.Length == 0)
         {
-            LightFadeIn();
-            print("There are no switches left");
+            LightFadeIn();            
         }
         else
         {
-            print($" There are still {switches.Length} switches to destroy!");
+            print($" There are still {switches.Length} switches to destroy!"); // keep this in until UI added
         }
         
     } 
 
     public void LightFadeIn() 
-    {
-    
+    {    
        
         if(sceneName != null)
         {
             GlobalVariableManager.instance.globalLights[sceneName] = true;
-        }
-        
+        }      
        
-
-
-
         lightOn = true;
        
         
-        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, 0.5f, 6);
+        DOTween.To(() => globalLight.intensity, x => globalLight.intensity = x, lightIntensityx, lightIntensityFadeInx);
         foreach(GlobalLightSwitch i in switches)
         {
             i.gameObject.SetActive(false);

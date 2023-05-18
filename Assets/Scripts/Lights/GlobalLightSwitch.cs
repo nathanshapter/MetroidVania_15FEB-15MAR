@@ -5,20 +5,27 @@ using UnityEngine;
 
 public class GlobalLightSwitch : MonoBehaviour, iSaveData
 {
-    public bool isOn;
-    GlobalLightScript gls;
-    [SerializeField] private string id;
-   
-  
-
-    public void LoadData(GameData data)
+    [ContextMenu("Generate guid for id")]
+    private void GenerateGUID()
     {
-        data.switchesPressed.TryGetValue(id, out isOn);
+        id = System.Guid.NewGuid().ToString();
+    }
+    // IF LIGHTS ARE TURNING ON WHEN THEY ARE SUPPOSED TO BE IT IS BECAUSE THEIR ID IS THE SAME AS ANOTHER
+    public bool isOn;
+    GlobalLightScript globalLightScript;
+    [SerializeField] private string id;
+
+    private void Start()
+    {
+
+        globalLightScript = GetComponentInParent<GlobalLightScript>();
         if (isOn)
         {
-            gameObject.SetActive(false);
+           gameObject.SetActive(false);
         }
+
     }
+
     public void SaveData(GameData data)
     {
         if (data.switchesPressed.ContainsKey(id))
@@ -27,27 +34,26 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
         }
         data.switchesPressed.Add(id, isOn);
     }
-    private void GenerateGuid()
-    {
-        id = System.Guid.NewGuid().ToString();
-    }
 
-
-    private void Start()
+    public void LoadData(GameData data)
     {
-        
-        gls = GetComponentInParent<GlobalLightScript>();
+        data.switchesPressed.TryGetValue(id, out isOn);
         if (isOn)
         {
-            gameObject.SetActive(false);
+               gameObject.SetActive(false);
+            Debug.Log($"My id is {id} if I am on when I shouldn't be, it is because I have the same ID as another light");
         }
-
     }
+  
+ 
+
+
+    
     void turnOn()
     {
 
         isOn= true;
-        gls.CheckSwitches();
+        globalLightScript.CheckSwitches();
     }
 
 
@@ -55,9 +61,9 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Array.Resize(ref gls.switches, gls.switches.Length - 1);
-            print(gls.switches.Length);
-            gls.CheckSwitches();
+            Array.Resize(ref globalLightScript.switches, globalLightScript.switches.Length - 1);
+            print(globalLightScript.switches.Length);
+            globalLightScript.CheckSwitches();
             isOn = true;
             gameObject.SetActive(false);
         }

@@ -54,7 +54,7 @@ public class Health : MonoBehaviour
              fallDamage = true;
             TakeDamage(spikeDamage,0,0);
             deathManager.fallRespawn = true;
-            if (!CheckIfAlive()) { deathManager.ProcessDeath(); } else
+            if (!CheckIfAlive()) { deathManager.totalDeaths++; } else
             {
                 if(fallDamage && playerHealth > 0)
                 {

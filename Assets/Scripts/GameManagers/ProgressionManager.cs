@@ -36,15 +36,26 @@ public class ProgressionManager : MonoBehaviour, iSaveData
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else { Destroy(gameObject); }
-       
+        else { Destroy(gameObject); }       
     }
 
-  
-    public void LoadData(GameData data)
-    {
 
-     
+    public void SaveData(GameData data) // saves progression manager to save file
+    {
+        for (int i = 0; i < progression.Length; i++)
+        {
+            if (progression[i])
+            {
+                data.progression[i] = true;
+            }
+        }
+        data.sceneName = SceneManager.GetActiveScene().name;
+
+
+    }
+
+    public void LoadData(GameData data)
+    {     
 
         for (int i = 0; i < data.progression.Length; i++)
         {
@@ -55,25 +66,5 @@ public class ProgressionManager : MonoBehaviour, iSaveData
         }
        
     }
-
-
-    public void SaveData(GameData data)
-    {
-        for (int i = 0; i < progression.Length; i++)
-        {
-            if (progression[i])
-            {
-                data.progression[i] = true;
-            }
-        }
-        data.sceneName = SceneManager.GetActiveScene().name;
-        
-       
-
-    }
-
-  
-
-
-
+ 
 }

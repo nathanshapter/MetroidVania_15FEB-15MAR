@@ -8,61 +8,44 @@ public class RespawnManager : MonoBehaviour, iSaveData
    
   [SerializeField]  CheckpointsManager cpManager;
     [SerializeField] Health health;    
-    [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0
-   
-   
+    [SerializeField] public Transform[] spawnPositions; // used for when lives go to 0  
+    Scene deathSceneToReloadTo;
 
-   
-    // this script needs to identify the starting position and spawn them at the correct one, not just position [0]
+
+
     private void Awake()
-    {
-
-       
-       
+    {              
         health = FindObjectOfType<Health>();
         
     }
-    private void Update()
-    {
-        // to remove once better checks are put in place
-
-        if(health.transform.position.y <= -100)
-        {
-            RespawnPlayer();
-        }
-    }
-    Scene deathSceneToReloadTo;
+ 
+    
     public void LoadData(GameData gameData)
     {
 
     }
     public void SaveData(GameData gameData)
     {
-        gameData.sceneToReloadTo = deathSceneToReloadTo.name;
-     //   print(deathSceneToReloadTo.name);
-     //   print(gameData.sceneToReloadTo);
+        gameData.sceneToReloadTo = deathSceneToReloadTo.name;    
         gameData.deathCount = DeathManager.Instance.totalDeaths;
     }
     public void RespawnPlayer()
     {
         
-
-        DeathManager.Instance.totalDeaths++;
+        DeathManager.Instance.totalDeaths++;     
        
-       
-        deathSceneToReloadTo  = SceneManager.GetActiveScene();
-        print(" You will be returned to" + deathSceneToReloadTo.name);
+        deathSceneToReloadTo  = SceneManager.GetActiveScene();  
         Invoke("LoadDeathScene", 3); 
         
         
-        print(" hades brought you back");
+    
         health.playerHealth = health.amountOfLives;
 
 
        
 
         SaveDataManager.instance.SaveGame();
-        print("amount of deaths saved" + DeathManager.Instance.totalDeaths );
+        print("amount of deaths saved" + DeathManager.Instance.totalDeaths ); // leave this print in until its fixed
     }
    
     private void LoadDeathScene()
@@ -71,7 +54,7 @@ public class RespawnManager : MonoBehaviour, iSaveData
         SceneManager.LoadScene("DeathScene");
        
     }
-    public Transform returnTransformPosition()
+    public Transform returnTransformPosition() // i dont remember what this does just let it be
     {
 
         return cpManager.lastCheckPointPos; 
