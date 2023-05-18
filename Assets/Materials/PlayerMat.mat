@@ -7,12 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DefaultBlackOutline
+  m_Name: PlayerMat
   m_Shader: {fileID: 4800000, guid: 15337b42027a4714aa61b63f9e98adf4, type: 3}
   m_ValidKeywords:
-  - _ENABLEFULLGLOWDISSOLVE_ON
+  - _ENABLEBURN_ON
+  - _ENABLEHOLOGRAM_ON
   - _ENABLEOUTEROUTLINE_ON
   - _ENABLEPIXELATE_ON
+  - _ENABLESATURATION_ON
   - _SHADERSPACE_UV
   - _TIMESETTINGS_LINEAR_DEFAULT
   - _UBERFADING_NONE
@@ -145,7 +147,7 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _AddColorContrast: 0.5
+    - _AddColorContrast: 0.59
     - _AddColorFade: 1
     - _AddHueBrightness: 2
     - _AddHueContrast: 1
@@ -164,14 +166,14 @@ Material:
     - _BurnFade: 1
     - _BurnInsideContrast: 2
     - _BurnInsideNoiseFactor: 0.05
-    - _BurnRadius: 5
+    - _BurnRadius: 401
     - _BurnSwirlFactor: 1
-    - _BurnWidth: 0.1
+    - _BurnWidth: 1
     - _CamouflageAnimated: 0
     - _CamouflageContrast: 1
     - _CamouflageDensityA: 0.4
     - _CamouflageDensityB: 0.4
-    - _CamouflageFade: 1
+    - _CamouflageFade: 0
     - _CamouflageSmoothnessA: 0.2
     - _CamouflageSmoothnessB: 0.2
     - _CheckerboardDarken: 0
@@ -211,7 +213,7 @@ Material:
     - _EnableAlphaTint: 0
     - _EnableBlackTint: 0
     - _EnableBrightness: 0
-    - _EnableBurn: 0
+    - _EnableBurn: 1
     - _EnableCamouflage: 0
     - _EnableCheckerboard: 0
     - _EnableColorReplace: 0
@@ -224,10 +226,10 @@ Material:
     - _EnableFrozen: 0
     - _EnableFullAlphaDissolve: 0
     - _EnableFullDistortion: 0
-    - _EnableFullGlowDissolve: 1
+    - _EnableFullGlowDissolve: 0
     - _EnableGlitch: 0
     - _EnableHalftone: 0
-    - _EnableHologram: 0
+    - _EnableHologram: 1
     - _EnableHue: 0
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
@@ -237,7 +239,7 @@ Material:
     - _EnablePoison: 0
     - _EnableRainbow: 0
     - _EnableRecolor: 0
-    - _EnableSaturation: 0
+    - _EnableSaturation: 1
     - _EnableShiftHue: 0
     - _EnableShine: 0
     - _EnableSineGlow: 0
@@ -262,7 +264,7 @@ Material:
     - _FlameRadius: 0.34
     - _FlameSmooth: 6.92
     - _FrozenContrast: 2
-    - _FrozenFade: 1
+    - _FrozenFade: 0
     - _FrozenHighlightContrast: 2
     - _FrozenHighlightDensity: 1
     - _FrozenSnowContrast: 1
@@ -274,7 +276,7 @@ Material:
     - _FullGlowDissolveFade: 1
     - _FullGlowDissolveWidth: 2
     - _GlitchBrightness: 4
-    - _GlitchFade: 1
+    - _GlitchFade: 0
     - _GlitchHueSpeed: 1
     - _GlitchMaskMin: 0.4
     - _GlossMapScale: 1
@@ -285,16 +287,16 @@ Material:
     - _HalftoneInvert: 0
     - _HalftoneTiling: 4
     - _HasEmission: 0
-    - _HologramContrast: 1
+    - _HologramContrast: 0
     - _HologramDistortionDensity: 0.5
-    - _HologramDistortionOffset: 0.5
+    - _HologramDistortionOffset: 1
     - _HologramDistortionScale: 10
     - _HologramDistortionSpeed: 2
-    - _HologramFade: 1
-    - _HologramLineFrequency: 500
-    - _HologramLineGap: 3
+    - _HologramFade: 0
+    - _HologramLineFrequency: 563.16
+    - _HologramLineGap: 0
     - _HologramLineSpeed: 0.01
-    - _HologramMinAlpha: 0.2
+    - _HologramMinAlpha: 0.544
     - _Hue: 0
     - _InkSpreadContrast: 2
     - _InkSpreadDistance: 3
@@ -328,20 +330,20 @@ Material:
     - _RainbowBrightness: 2
     - _RainbowContrast: 1
     - _RainbowDensity: 0.5
-    - _RainbowFade: 1
+    - _RainbowFade: 0.2
     - _RainbowNoiseFactor: 0.2
     - _RainbowSaturation: 1
     - _RainbowSpeed: 1
     - _RecolorFade: 1
     - _RectHeight: 100
     - _RectWidth: 100
-    - _Saturation: 1
+    - _Saturation: 4
     - _ScreenWidthUnits: 10
     - _ShaderSpace: 0
     - _ShiftHueFade: 1
     - _ShiftHueSpeed: 0.5
     - _ShineContrast: 2
-    - _ShineFade: 1
+    - _ShineFade: 0
     - _ShineRotation: 0
     - _ShineSaturation: 0.5
     - _ShineScale: 0.05
@@ -419,7 +421,7 @@ Material:
     - _WindXPosition: 0
     - _ZWrite: 1
     m_Colors:
-    - _AddColorColor: {r: 3.677763, g: 1.9660994, b: 1.9660994, a: 0}
+    - _AddColorColor: {r: 4.910102, g: 0.16984572, b: 0.16984572, a: 0}
     - _AlphaTintColor: {r: 23.96863, g: 1.254902, b: 23.96863, a: 0}
     - _BlackTintColor: {r: 0, g: 0, b: 0, a: 0}
     - _BurnEdgeColor: {r: 11.98431, g: 1.129412, b: 0.1254902, a: 0}
@@ -427,7 +429,7 @@ Material:
     - _BurnInsideColor: {r: 0.75, g: 0.5625, b: 0.525, a: 0}
     - _BurnInsideNoiseColor: {r: 3084.047, g: 257.0039, b: 0, a: 0}
     - _BurnInsideNoiseScale: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _BurnPosition: {r: 0, g: 5, b: 0, a: 0}
+    - _BurnPosition: {r: 0, g: 0, b: 0, a: 0}
     - _BurnSwirlNoiseScale: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _CamouflageAnimationSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _CamouflageBaseColor: {r: 0.7450981, g: 0.7254902, b: 0.5686275, a: 0}
@@ -495,7 +497,7 @@ Material:
     - _PoisonNoiseScale: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _PoisonNoiseSpeed: {r: 0, g: -0.2, b: 0, a: 0}
     - _RainbowCenter: {r: 0, g: 0, b: 0, a: 0}
-    - _RainbowNoiseScale: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _RainbowNoiseScale: {r: -54.58, g: -10.01, b: 0, a: 0}
     - _RecolorBlueTint: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _RecolorCyanTint: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _RecolorGreenTint: {r: 1, g: 1, b: 1, a: 0.5019608}
