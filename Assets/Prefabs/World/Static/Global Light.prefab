@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711769940484198591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.8, y: -13.43, z: 0}
+  m_LocalPosition: {x: 21.56, y: -5.06, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOn: 0
-  id: b7efe76a-406a-4778-ba38-566182ec57da
+  id: 4e57f1cc-f245-4cb6-bd84-749848c7f0ac
 --- !u!212 &1711769940484198576
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711769940545705163}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.068635, y: -0.2540288, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 91f4b77c91477da3694d80686759d74e00000000e36cf813
+  m_ApplyToSortingLayers: 91f4b77c91477da3694d80686759d74e00000000e36cf8136bf152d8
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -254,9 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startOff: 1
-  lightOn: 0
   switches: []
   torches: []
+  lightIntensityx: 0.5
+  lightIntensityFadeInx: 6
 --- !u!1 &1711769940567516038
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711769940567516038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.43, y: -3.11, z: 0}
+  m_LocalPosition: {x: 18.52, y: -5.05, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOn: 0
-  id: 2eabfb28-04a0-4b2c-86df-631e91b255a6
+  id: 4153e9e4-4367-42fd-b1b1-507ef83c2d07
 --- !u!212 &1711769940567516059
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -410,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711769942239484323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.25, y: -19.37, z: 0}
+  m_LocalPosition: {x: 22.98, y: -5.11, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -430,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOn: 0
-  id: a36cebca-3ca8-4ad6-b022-c1a9bef7a873
+  id: ee1aadbd-d806-4577-9a63-db2e39bbf1f7
 --- !u!212 &1711769942239484324
 SpriteRenderer:
   m_ObjectHideFlags: 0

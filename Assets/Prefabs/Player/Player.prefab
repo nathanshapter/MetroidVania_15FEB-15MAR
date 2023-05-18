@@ -115,7 +115,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ff8ad07cacb7b074bae374260f37a0c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -666,7 +666,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.798
   m_Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0.8352941}
-  m_Intensity: 2.05
+  m_Intensity: 0.02
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 6bf152d8
@@ -1593,17 +1593,14 @@ MonoBehaviour:
   isFacingRight: 1
   canDash: 1
   isDashing: 0
+  isFrozen: 0
+  freezeTimer: 0
   fluteIsPlaying: 0
   fluteCooldown: 20
   tr: {fileID: 1701115253}
   flute: {fileID: 8300000, guid: c221bca5223256243903c4241b8f7266, type: 3}
   playerVirtualCamera: {fileID: 0}
   levelSizeCamera: 19.78
-  isFrozen: 0
-  freezeTimer: 0
-  interactions:
-    serializedVersion: 2
-    m_Bits: 65536
 --- !u!114 &8190221500067508492
 MonoBehaviour:
   m_ObjectHideFlags: 0
