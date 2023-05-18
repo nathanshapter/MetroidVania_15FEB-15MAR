@@ -10,10 +10,8 @@ Material:
   m_Name: PlayerMat
   m_Shader: {fileID: 4800000, guid: 15337b42027a4714aa61b63f9e98adf4, type: 3}
   m_ValidKeywords:
-  - _ENABLEBURN_ON
-  - _ENABLEHOLOGRAM_ON
+  - _ENABLEGLITCH_ON
   - _ENABLEOUTEROUTLINE_ON
-  - _ENABLEPIXELATE_ON
   - _ENABLESATURATION_ON
   - _SHADERSPACE_UV
   - _TIMESETTINGS_LINEAR_DEFAULT
@@ -213,7 +211,7 @@ Material:
     - _EnableAlphaTint: 0
     - _EnableBlackTint: 0
     - _EnableBrightness: 0
-    - _EnableBurn: 1
+    - _EnableBurn: 0
     - _EnableCamouflage: 0
     - _EnableCheckerboard: 0
     - _EnableColorReplace: 0
@@ -227,15 +225,15 @@ Material:
     - _EnableFullAlphaDissolve: 0
     - _EnableFullDistortion: 0
     - _EnableFullGlowDissolve: 0
-    - _EnableGlitch: 0
+    - _EnableGlitch: 1
     - _EnableHalftone: 0
-    - _EnableHologram: 1
+    - _EnableHologram: 0
     - _EnableHue: 0
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
     - _EnableMetal: 0
     - _EnableOuterOutline: 1
-    - _EnablePixelate: 1
+    - _EnablePixelate: 0
     - _EnablePoison: 0
     - _EnableRainbow: 0
     - _EnableRecolor: 0
@@ -367,11 +365,11 @@ Material:
     - _SmokeVertexSeed: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SourceAlphaDissolveFade: 1
+    - _SourceAlphaDissolveFade: 0.02
     - _SourceAlphaDissolveInvert: 0
     - _SourceAlphaDissolveNoiseFactor: 0.2
     - _SourceAlphaDissolveWidth: 0.2
-    - _SourceGlowDissolveFade: 1
+    - _SourceGlowDissolveFade: 1.6
     - _SourceGlowDissolveInvert: 0
     - _SourceGlowDissolveNoiseFactor: 0.2
     - _SourceGlowDissolveWidth: 0.1
@@ -516,7 +514,7 @@ Material:
     - _SourceGlowDissolvePosition: {r: 0, g: 0, b: 0, a: 0}
     - _SplitToningHighlightsColor: {r: 1, g: 0.1, b: 0.1, a: 0}
     - _SplitToningShadowsColor: {r: 0.1, g: 0.4000002, b: 1, a: 0}
-    - _SqueezeCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _SqueezeCenter: {r: 0, g: 0, b: 0, a: 0}
     - _SqueezeScale: {r: 2, g: 0, b: 0, a: 0}
     - _StrongTintTint: {r: 1, g: 0.7421383, b: 0.7421383, a: 1}
     - _UVDistortFrom: {r: -0.02, g: -0.02, b: 0, a: 0}

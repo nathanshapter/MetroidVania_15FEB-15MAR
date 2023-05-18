@@ -21,7 +21,8 @@ public class GlobalLightScript : MonoBehaviour
     {
         torches = FindObjectsOfType<LightFlicker>();
         switches = FindObjectsOfType<GlobalLightSwitch>();
-        sceneName = SceneManager.GetActiveScene().name.ToString();              
+        sceneName = SceneManager.GetActiveScene().name.ToString();
+        
         totalSwitches = switches.Length;    
         globalLight = GetComponent<Light2D>();
 
