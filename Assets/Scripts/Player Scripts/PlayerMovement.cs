@@ -62,14 +62,21 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     bool isMoving = false;
     bool allowDoubleWallJump = false;
     bool isTouchingBridge;
-
+    public bool isFrozen;
+    public float freezeTimer;
+    Vector2 frozenPosition;
+    float yPosition;
+    float fallMultiplier = 0.0001f;
+    bool holdingOntoWall = false;
+    bool dodging = false;
+    bool wallSlide = false;
     [Header("=====Misc=====")]
     
     [Space(20)]
     
     [HideInInspector] public bool fluteIsPlaying;
     [SerializeField] float fluteCooldown;
-    
+    bool conversationFreeze;
     [SerializeField] TrailRenderer tr;
     [SerializeField] AudioClip flute;
 
@@ -83,24 +90,9 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     string sceneName;
 
-   
-  
-    public void LoadData(GameData data)
-    {
-        this.transform.position = data.playerPosition;
-      
-    }
-  
-    public void SaveData(GameData data)
-    {
-        data.playerPosition = this.transform.position;
-      
-      
-    }
-    float originalJumpingPower;
     private void Start()
     {
-       
+
         playerInput = GetComponent<PlayerInput>();
         playerInput.enabled = true;
         playerVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -108,31 +100,37 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         rb = GetComponent<Rigidbody2D>();
         platformBullet = GetComponent<PlatformBullet>();
         health = GetComponent<Health>();
-     
-        animator= GetComponentInChildren<Animator>();
+
+        animator = GetComponentInChildren<Animator>();
         originalSpeed = speedActuel;
         playerCombat = GetComponent<PlayerCombat>();
-    capsuleCollider = GetComponentInChildren<CapsuleCollider2D>();
-        boxCollider2D= GetComponentInChildren<BoxCollider2D>();
+        capsuleCollider = GetComponentInChildren<CapsuleCollider2D>();
+        boxCollider2D = GetComponentInChildren<BoxCollider2D>();
         boxCollider2D.enabled = false;
-         
+
         wallGrab = GetComponent<WallGrabPlayer>();
-        originalJumpingPower = jumpingPower;
-    
+       
+
     }
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = this.transform.position;
+
+
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+      
+    }
+  
+  
+  
+   
     private void Update()
     {
-      
 
-     //   if (OnWall() && !progressionManager.progression[5])
-        {
-       //     jumpingPower= 0;
-        }
-      //  else
-        {
-       //     jumpingPower = originalJumpingPower;
-        }
-       
       if(conversationFreeze) { this.transform.position = frozenPosition; return; }
         
         if (wallGrab.wallSlide)
@@ -183,9 +181,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
      
 
     }
-    public bool isFrozen;
-   public float freezeTimer;
-    Vector2 frozenPosition;
+ 
    public void DisableMovement(float freezeTime)
     {
        
@@ -195,7 +191,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         frozenPosition = this.transform.position;
        
     }
-   bool conversationFreeze;
+  
   public void ConversationFreeze(bool freeze)
     {
         conversationFreeze= freeze;
@@ -240,18 +236,8 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     }
     // wasd methods
-    public LayerMask interactions;
-    public void Interact(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-          
-           
 
-
-        }
-       
-    }
+ 
    
     public void Walk(InputAction.CallbackContext context)
     {
@@ -338,9 +324,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     }
     // movement methods
-    float yPosition;
-    float fallMultiplier = 0.0001f;
-    bool holdingOntoWall = false;
+  
    
 
     public void HoldOntoWall_Interact(InputAction.CallbackContext context)
@@ -361,7 +345,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         }
       
     }
-    private bool canJump = true;
+ 
     public void Jump(InputAction.CallbackContext context) // when jumping, save their Y , if the difference is a large fall, have them play a heavy landing animation
     {
         if (isFrozen) { return; }
@@ -485,7 +469,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     public void Crouch(InputAction.CallbackContext context)
     {
-        canJump= false;
+      
         if (!ProgressionManager.instance.progression[0] || !IsGrounded() || isFrozen)  { return; }
 
 
@@ -511,7 +495,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
   
    private void StandUp()
     {
-        canJump= true;
+        
         capsuleCollider.enabled = true;
         boxCollider2D.enabled = false;
         playerCombat.swordCrouchPosition = false;  playerCombat.swordOriginal = true;
@@ -641,18 +625,6 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         isTouchingBridge = false;
     }
 
-
-
-
-
-
-
-
-
-
-
-    bool dodging = false;
-    bool wallSlide = false;
 
     public void ResetDodging()
     {

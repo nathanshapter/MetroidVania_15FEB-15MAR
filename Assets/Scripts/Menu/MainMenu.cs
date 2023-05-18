@@ -10,7 +10,8 @@ public class MainMenu : MonoBehaviour, iSaveData
     [Header("Menu Buttons")]
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button continueGameButton;
-    
+    string scene;
+
     private void Start()
     {
         if (!SaveDataManager.instance.HasGameData())
@@ -19,23 +20,28 @@ public class MainMenu : MonoBehaviour, iSaveData
         }
 
     }
-    string scene;
+    public void SaveData(GameData data)
+    {
+        scene = SceneManager.GetActiveScene().name;
+        data.sceneName = scene;
+
+    }
+    public void LoadData(GameData data) // this just grabs the scene on OnContinue
+    {
+        scene = data.sceneName;
+    }
+ 
     public void OnNewGameClicked()
     {
         DisableMenuButtons();
-        // create a new game - which will initialize our game data
-        
        
-        // load the gameplay scene - which will in turn save the game because of
-        // OnSceneUnloaded() in the DataPersistenceManager
-        SceneManager.LoadSceneAsync("Level 1a");
+        SceneManager.LoadSceneAsync("Level 1a"); // this needs to be changed to deathscene, once it is running
         SaveDataManager.instance.NewGame();
         SaveDataManager.instance.SaveGame();
     }
 
     public void OnContinueGameClicked()
-    {
-     
+    {     
         
         SaveDataManager.instance.LoadGame();
        DisableMenuButtons();
@@ -51,16 +57,7 @@ public class MainMenu : MonoBehaviour, iSaveData
         newGameButton.interactable = false;
         continueGameButton.interactable = false;
     }
-    public void LoadData(GameData data)
-    {
-        scene = data.sceneName;
-       
-    }
+  
 
-    public void SaveData(GameData data)
-    {
-     scene = SceneManager.GetActiveScene().name;
-        data.sceneName= scene;
-
-    }
+  
 }
