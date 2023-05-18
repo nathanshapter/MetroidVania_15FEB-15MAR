@@ -32,7 +32,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
     public void SaveData(GameData gameData)
     {
-        gameData.switches = this.globalLights;
+        gameData.globalLights = this.globalLights;
 
     }
 
@@ -77,14 +77,14 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
 
     private void LoadGlobalLights(GameData gameData)
     {
-        if (gameData.switches.Count == 0)
+        if (gameData.globalLights.Count == 0)
         {
-            gameData.switches = globalLights;
+            gameData.globalLights = globalLights;
 
         }
         else
         {
-            this.globalLights = gameData.switches;
+            this.globalLights = gameData.globalLights;
 
         }
     }

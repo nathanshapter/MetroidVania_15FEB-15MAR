@@ -28,12 +28,18 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
 
     public void SaveData(GameData data)
     {
-        if (data.switchesPressed.ContainsKey(id))
+
+        
+       if (data.switchesPressed.ContainsKey(id))
         {
             data.switchesPressed.Remove(id);
         }
         data.switchesPressed.Add(id, isOn);
+
     }
+    
+
+ 
 
     public void LoadData(GameData data)
     {
@@ -43,6 +49,7 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
                gameObject.SetActive(false);
             Debug.Log($"My id is {id} if I am on when I shouldn't be, it is because I have the same ID as another light");
         }
+
     }
   
  
@@ -61,11 +68,13 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+       
             Array.Resize(ref globalLightScript.switches, globalLightScript.switches.Length - 1);
             print(globalLightScript.switches.Length);
             globalLightScript.CheckSwitches();
             isOn = true;
             gameObject.SetActive(false);
+            
         }
 
       
