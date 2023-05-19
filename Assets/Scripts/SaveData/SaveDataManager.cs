@@ -21,6 +21,8 @@ public class SaveDataManager : MonoBehaviour
 
     private Coroutine autoSaveCoroutine;
 
+    [SerializeField] int autoSaveTimer =5;
+
     private void Awake() 
     {
         if (instance != null) 
@@ -103,7 +105,7 @@ public class SaveDataManager : MonoBehaviour
 
     public void SaveGame()
     {
-        print("attempting save");
+        
         // if we don't have any data to save, log a warning here
         if (this.gameData == null) 
         {
@@ -144,9 +146,9 @@ public class SaveDataManager : MonoBehaviour
         
         while(true)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(autoSaveTimer);
             SaveGame();
-            Debug.Log("auto saved");
+           
         }
     }
 }

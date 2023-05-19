@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     public float freezeTimer;
     Vector2 frozenPosition;
     float yPosition;
-    float fallMultiplier = 0.0001f;
+    
     bool holdingOntoWall = false;
     bool dodging = false;
     bool wallSlide = false;

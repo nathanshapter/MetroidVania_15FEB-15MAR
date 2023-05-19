@@ -7,7 +7,7 @@ public class EnemyStaticShooter : MonoBehaviour
   [SerializeField]  Transform player;
 
     [SerializeField] float aggroRange, aggroAwakeRange;
-    bool awake = false;
+   
     [SerializeField] float rotationOffset;
 
 
