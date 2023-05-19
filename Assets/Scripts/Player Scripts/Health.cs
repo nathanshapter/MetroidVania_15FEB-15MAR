@@ -61,7 +61,7 @@ public class Health : MonoBehaviour, iSaveData
             else
             {
                 gameData.playerHealth = this.playerHealth;
-                print($"there was no saved playerhealth, player health is now {gameData.playerHealth}");
+               
                 SaveData(gameData);
             }
           
@@ -69,7 +69,7 @@ public class Health : MonoBehaviour, iSaveData
         else
         {
             this.playerHealth = gameData.playerHealth;
-            Debug.Log($"Player health loaded as {playerHealth}");
+            
             SaveData(gameData);
         }
     }
@@ -77,7 +77,7 @@ public class Health : MonoBehaviour, iSaveData
     public void SaveData(GameData gameData)
     {
         gameData.playerHealth = this.playerHealth;
-        Debug.Log($"player health saved as {playerHealth}");
+     
 
 
     }

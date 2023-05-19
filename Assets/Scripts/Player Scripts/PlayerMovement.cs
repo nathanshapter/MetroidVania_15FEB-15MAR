@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     float yPosition;
     
     bool holdingOntoWall = false;
-    bool dodging = false;
+   
     bool wallSlide = false;
     [Header("=====Misc=====")]
     
@@ -89,6 +89,9 @@ public class PlayerMovement : MonoBehaviour, iSaveData
     GameObject lastParent;
 
     string sceneName;
+
+    [SerializeField] float savedYPosition;
+    [SerializeField] int savedYPositionOffset = 40;
 
     private void Start()
     {
@@ -124,12 +127,46 @@ public class PlayerMovement : MonoBehaviour, iSaveData
         this.transform.position = data.playerPosition;
       
     }
+    bool falling = false;
+  void Falling()
+    {
+        if (IsGrounded() && falling)
+        {            
+            StartCoroutine(HeavyLand());
+        }
+
+        if(this.transform.position.y + savedYPositionOffset < savedYPosition)
+        {
+            Debug.Log("fall debuff");
+            falling = true;
+        }
+    }
   
+   private IEnumerator HeavyLand()
+    {
+        Debug.Log("heavy land called");
+        falling = false;
+        isCrouching= true;
+        animator.SetBool("Crouching", true);
+        DisableMovement(2);
+        yield return new WaitForSeconds(2);
+        isCrouching = false;
+        StandUp();
+    }
+
   
-  
-   
     private void Update()
     {
+
+   
+
+        
+
+        Falling();
+        if (IsGrounded())
+        {
+            savedYPosition = this.transform.position.y;
+        }
         // to put player in correct scale
         if (transform.position.z != 0) { this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0); }
       if(conversationFreeze) { this.transform.position = frozenPosition; return; }
@@ -629,7 +666,7 @@ public class PlayerMovement : MonoBehaviour, iSaveData
 
     public void ResetDodging()
     {
-        dodging = false;
+       
     }
 
     public void SpawnDustEffect(GameObject dust, float dustXOffset = 0, float dustYOffset = 0)
