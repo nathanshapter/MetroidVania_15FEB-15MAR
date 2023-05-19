@@ -47,7 +47,7 @@ public class GlobalLightSwitch : MonoBehaviour, iSaveData
         if (isOn)
         {
                gameObject.SetActive(false);
-            Debug.Log($"My id is {id} if I am on when I shouldn't be, it is because I have the same ID as another light");
+      
         }
 
     }
