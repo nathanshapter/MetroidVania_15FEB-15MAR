@@ -19,6 +19,8 @@ public class SaveDataManager : MonoBehaviour
 
     public static SaveDataManager instance { get; private set; }
 
+    private Coroutine autoSaveCoroutine;
+
     private void Awake() 
     {
         if (instance != null) 
@@ -41,21 +43,30 @@ public class SaveDataManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
        
+       
     }
 
     private void OnDisable() 
     {
-        SaveGame();
+       
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        
+     
+
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+
+        if(autoSaveCoroutine != null)
+        {
+            StopCoroutine(autoSaveCoroutine);
+        }
+        autoSaveCoroutine = StartCoroutine(AutoSave());
     }
-  
+ 
+
 
     public void NewGame() 
     {
@@ -126,5 +137,16 @@ public class SaveDataManager : MonoBehaviour
     public bool HasGameData() 
     {
         return gameData != null;
+    }
+
+    private IEnumerator AutoSave()
+    {
+        
+        while(true)
+        {
+            yield return new WaitForSeconds(5);
+            SaveGame();
+            Debug.Log("auto saved");
+        }
     }
 }
