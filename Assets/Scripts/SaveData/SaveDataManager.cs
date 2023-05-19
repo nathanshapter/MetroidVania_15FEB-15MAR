@@ -45,6 +45,7 @@ public class SaveDataManager : MonoBehaviour
 
     private void OnDisable() 
     {
+        SaveGame();
         SceneManager.sceneLoaded -= OnSceneLoaded;
         
     }
@@ -54,7 +55,6 @@ public class SaveDataManager : MonoBehaviour
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
-
   
 
     public void NewGame() 
@@ -92,6 +92,7 @@ public class SaveDataManager : MonoBehaviour
 
     public void SaveGame()
     {
+        print("attempting save");
         // if we don't have any data to save, log a warning here
         if (this.gameData == null) 
         {

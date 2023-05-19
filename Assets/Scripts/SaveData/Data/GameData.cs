@@ -15,6 +15,7 @@ public class GameData
     public bool lightBool;
     public string sceneToReloadTo;
     public SerialisableDictionary<string, bool> globalLights;
+    public int playerHealth;
 
 
 
@@ -30,5 +31,6 @@ public class GameData
         lightBool = false;
         sceneToReloadTo = string.Empty; 
         globalLights= new SerialisableDictionary<string, bool>();
+        playerHealth= 0;
     }
 }

@@ -42,6 +42,7 @@ public class GlobalVariableManager : MonoBehaviour, iSaveData
         if (numberTimer > 5)
         {
             SaveData(gameData);
+            
         }
     }
 

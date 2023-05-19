@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, iSaveData
 {
     [Header("==========Health Values==========")]
     [Space(20)]
@@ -46,7 +47,41 @@ public class Health : MonoBehaviour
     {
         cp = FindObjectOfType<CheckpointsManager>();
     }
+    
+    public void LoadData(GameData gameData) 
+    {
+        
 
+        if (gameData.playerHealth == 0)// this might cause an issue for when they spawn i ndeath zone and have 0 health
+        {
+            if(playerHealth== 0)
+            {
+                Debug.LogError("both player health and saved data = 0");
+            }
+            else
+            {
+                gameData.playerHealth = this.playerHealth;
+                print($"there was no saved playerhealth, player health is now {gameData.playerHealth}");
+                SaveData(gameData);
+            }
+          
+        }
+        else
+        {
+            this.playerHealth = gameData.playerHealth;
+            Debug.Log($"Player health loaded as {playerHealth}");
+            SaveData(gameData);
+        }
+    }
+
+    public void SaveData(GameData gameData)
+    {
+        gameData.playerHealth = this.playerHealth;
+        Debug.Log($"player health saved as {playerHealth}");
+
+
+    }
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spike"))
@@ -91,6 +126,8 @@ public class Health : MonoBehaviour
     {
         invincibleTimer -= Time.deltaTime;
         animator.SetBool("isDead", isDead);
+
+       
     }
   public bool canBeknocked = false;
     public int TakeDamage(int damage, float knockbackX, float knockbackY) // needs to be negative or positive depending on enemies positions
@@ -114,6 +151,7 @@ public class Health : MonoBehaviour
             
            
             StartCoroutine(resetDamageBool());
+           
         }
       
         return playerHealth;
